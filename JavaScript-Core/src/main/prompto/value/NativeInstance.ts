@@ -31,7 +31,7 @@ export default class NativeInstance extends Instance<any> {
     }
 
     getMemberValue(context, id) {
-        if("category" === id.name)
+        if("category" == id.name)
             return this.getCategory(context);
         const stacked = getActiveGetters()[id.name] || null;
         const first = stacked==null;

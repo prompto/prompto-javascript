@@ -43,7 +43,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
 
     getPageWidgetOf(): string | null {
         if(this.annotations) {
-            const filtered = this.annotations.filter(a => a.id.name==="@PageWidgetOf");
+            const filtered = this.annotations.filter(a => a.id.name=="@PageWidgetOf");
             if(filtered.length > 0) {
                 const expression = filtered[0].getDefaultArgument();
                 if (expression instanceof TextLiteral) {
@@ -127,7 +127,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
         if(this.derivedFrom)
             this.derivedFrom.forEach(id => {
                 const decl = context.getRegisteredCategoryDeclaration(id);
-                if(decl === null)
+                if(decl == null)
                     context.problemListener.reportInconsistentHierarchy(section, this.name, id.name);
                 else
                     decl.collectAllAttributes(context, section, result);
@@ -155,7 +155,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
         if(this.derivedFrom)
             this.derivedFrom.forEach(id => {
                 const decl = context.getRegisteredCategoryDeclaration(id);
-                if(decl === null)
+                if(decl == null)
                     context.problemListener.reportInconsistentHierarchy(section, this.name, id.name);
                 else
                     decl.collectAllMethods(context, section, maps);
@@ -211,14 +211,14 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
     }
 
     hasAttribute(context: Context, id: Identifier): boolean {
-        if ("dbId" === id.name)
+        if ("dbId" == id.name)
             return this.storable;
         else if (this.attributes == null)
             return false;
         else {
             const name = id.name;
             for (let i = 0; i < this.attributes.length; i++ ) {
-                if ( name === this.attributes[i].name)
+                if ( name == this.attributes[i].name)
                     return true;
             }
             return false;
@@ -274,7 +274,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
             writer.append("storable ");
         this.categoryTypeToEDialect(writer);
         if(hasAttributes) {
-            if(this.attributes!.length===1)
+            if(this.attributes!.length==1)
                 writer.append(" with attribute ");
             else
                 writer.append(" with attributes ");

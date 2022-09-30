@@ -77,7 +77,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
             context = context.newLocalContext();
             this.registerParameters(context);
         }
-        if(this.parameters!==null) {
+        if(this.parameters!=null) {
             this.parameters.check(context);
         }
         return this.checkStatements(context);
@@ -94,7 +94,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     }
 
     checkSingletonInitialize(context: Context): void {
-        if("initialize" === this.name) {
+        if("initialize" == this.name) {
             this.checkSingletonInitializeContext(context);
             this.checkSingletonInitializeParameters(context);
         }
@@ -141,9 +141,9 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     }
 
     isEligibleAsMain(): boolean {
-        if(this.parameters.length === 0)
+        if(this.parameters.length == 0)
             return true;
-        else if(this.parameters.length === 1) {
+        else if(this.parameters.length == 1) {
             const param = this.parameters[0];
             if( param instanceof CategoryParameter) {
                 const type = param.type;
@@ -160,7 +160,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         writer.append("def ").append(this.name).append(" (");
         this.parameters.toDialect(writer);
         writer.append(")");
-        if(this.returnType!=null && this.returnType !== VoidType.instance) {
+        if(this.returnType!=null && this.returnType != VoidType.instance) {
             writer.append("->");
             this.returnType.toDialect(writer);
         }
@@ -172,7 +172,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     toEDialect(writer: CodeWriter): void {
         writer.append("define ").append(this.name).append(" as method ");
         this.parameters.toDialect(writer);
-        if(this.returnType!=null && this.returnType !== VoidType.instance) {
+        if(this.returnType!=null && this.returnType != VoidType.instance) {
             writer.append("returning ");
             this.returnType.toDialect(writer);
             writer.append(" ");
@@ -183,7 +183,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     }
 
     toODialect(writer: CodeWriter): void {
-        if(this.returnType!=null && this.returnType !== VoidType.instance) {
+        if(this.returnType!=null && this.returnType != VoidType.instance) {
             this.returnType.toDialect(writer);
             writer.append(" ");
         }

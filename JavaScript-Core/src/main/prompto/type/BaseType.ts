@@ -24,6 +24,10 @@ export default abstract class BaseType extends Section implements IType {
         this.family = family;
     }
 
+    abstract checkExists(context: Context): void;
+    abstract isMoreSpecificThan(context: Context, other: IType): boolean;
+
+
     get name() {
         return this.id.name;
     }
@@ -54,7 +58,7 @@ export default abstract class BaseType extends Section implements IType {
         return false;
     }
 
-    getTranspiledName(): string {
+    getTranspiledName(context: Context): string {
         return this.name;
     }
 
@@ -67,10 +71,8 @@ export default abstract class BaseType extends Section implements IType {
     }
 
     isAssignableFrom(context: Context, other: IType): boolean {
-        return this == other || this.equals(other) || other === NullType.instance;
+        return this == other || this.equals(other) || other == NullType.instance;
     }
-
-    abstract isMoreSpecificThan(context: Context, other: IType): boolean;
 
     getMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration> {
         return new Set<IMethodDeclaration>();
@@ -84,8 +86,13 @@ export default abstract class BaseType extends Section implements IType {
         throw new SyntaxError("Cannot access static member value");
     }
 
-    abstract declare(transpiler: Transpiler): void;
-    abstract transpile(transpiler: Transpiler): void;
+    declare(transpiler: Transpiler): void {
+        throw new SyntaxError("Cannot declare from " + this.name);
+    }
+
+    transpile(transpiler: Transpiler): void {
+        throw new SyntaxError("Cannot transpile from " + this.name);
+    }
 
     transpileAssignMember(transpiler: Transpiler, member: Identifier) {
         throw new SyntaxError("Cannot transpile assign member from " + this.name);
@@ -98,8 +105,6 @@ export default abstract class BaseType extends Section implements IType {
     transpileAssignItemValue(transpiler: Transpiler, item: IExpression, expression: IExpression): void {
         throw new SyntaxError("Cannot transpile assign item value from " + this.name);
     }
-
-    abstract checkExists(context: Context): void;
 
     checkAdd(context: Context, section: Section, other: IType, tryReverse: boolean): IType {
         if(other instanceof EnumeratedNativeType)
@@ -133,9 +138,9 @@ export default abstract class BaseType extends Section implements IType {
             throw new SyntaxError("Cannot transpile add " + this.name + " to " + other.name);
     }
 
-    checkSubtract(context: Context, other: IType): IType {
+    checkSubtract(context: Context, section: Section, other: IType): IType {
         if(other instanceof EnumeratedNativeType)
-            return this.checkSubtract(context, other.derivedFrom);
+            return this.checkSubtract(context, section, other.derivedFrom);
         else
             throw new SyntaxError("Cannot substract " + this.name + " from " + other.name);
     }
@@ -154,9 +159,9 @@ export default abstract class BaseType extends Section implements IType {
             throw new SyntaxError("Cannot transpile substract " + this.name + " to " + other.name);
     }
 
-    checkDivide(context: Context, other: IType): IType {
+    checkDivide(context: Context, section: Section, other: IType): IType {
         if(other instanceof EnumeratedNativeType)
-            return this.checkDivide(context, other.derivedFrom);
+            return this.checkDivide(context, section, other.derivedFrom);
         else
             throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
     }
@@ -175,9 +180,9 @@ export default abstract class BaseType extends Section implements IType {
             throw new SyntaxError("Cannot transpile divide " + this.name + " to " + other.name);
     }
 
-    checkIntDivide(context: Context, other: IType): IType {
+    checkIntDivide(context: Context, section: Section, other: IType): IType {
         if(other instanceof EnumeratedNativeType)
-            return this.checkIntDivide(context, other.derivedFrom);
+            return this.checkIntDivide(context, section, other.derivedFrom);
         else
             throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
     }
@@ -244,9 +249,9 @@ export default abstract class BaseType extends Section implements IType {
             throw new SyntaxError("Cannot transpile multiply " + this.name + " to " + other.name);
     }
 
-    checkMinus(context: Context): IType {
+    checkMinus(context: Context, section: Section): IType {
         if(this instanceof EnumeratedNativeType)
-            return this.derivedFrom.checkMinus(context);
+            return this.derivedFrom.checkMinus(context, section);
         else
             throw new SyntaxError("Cannot negate " + this.name);
     }
@@ -377,9 +382,9 @@ export default abstract class BaseType extends Section implements IType {
     }
 
     checkMember(context: Context, section: Section, id: Identifier) : IType {
-        if("text" === id.name)
+        if("text" == id.name)
             return TextType.instance;
-        else if("json" === id.name)
+        else if("json" == id.name)
             return TextType.instance;
         else {
             context.problemListener.reportUnknownAttribute(section, id.name);
@@ -387,13 +392,21 @@ export default abstract class BaseType extends Section implements IType {
         }
     }
 
-    checkStaticMember(context: Context, section: Section, id: Identifier) : IType {
-        context.problemListener.reportUnknownAttribute(section, id.name);
+    checkStaticMember(context: Context, section: Section, member: Identifier) : IType {
+        context.problemListener.reportUnknownAttribute(section, member.name);
         return VoidType.instance;
     }
 
-    declareMember(transpiler: Transpiler, id: Identifier): void {
-        switch(id.name) {
+    declareStaticMember(transpiler: Transpiler, member: Identifier): void {
+        throw new SyntaxError("Cannot declare static member: " + member.name + " from " + this.name);
+    }
+
+    transpileStaticMember(transpiler: Transpiler, member: Identifier): void {
+        throw new SyntaxError("Cannot transpile static member: " + member.name + " from " + this.name);
+    }
+
+    declareMember(transpiler: Transpiler, member: Identifier): void {
+        switch(member.name) {
             case "text":
                 break;
             case "json":
@@ -401,7 +414,7 @@ export default abstract class BaseType extends Section implements IType {
                 transpiler.require(convertToJsonNode);
                 break;
             default:
-                throw new SyntaxError("Cannot declare member: " + id.name + " from " + this.name);
+                throw new SyntaxError("Cannot declare member: " + member.name + " from " + this.name);
         }
     }
 
@@ -418,7 +431,7 @@ export default abstract class BaseType extends Section implements IType {
         }
     }
 
-    checkSlice(context: Context): IType {
+    checkSlice(context: Context, section: Section): IType {
         throw new SyntaxError("Cannot slice " + this.name);
     }
 
@@ -476,11 +489,11 @@ export default abstract class BaseType extends Section implements IType {
         throw new SyntaxError("Cannot declare 'and' of " + this.name);
     }
 
-    checkOr(context: Context, other: IType): IType {
+    checkOr(context: Context, section: Section, other: IType): IType {
         throw new SyntaxError("Cannot logically combine " + this.name + " or " + other.name);
     }
 
-    checkNot(context: Context): IType {
+    checkNot(context: Context, section: Section): IType {
         throw new SyntaxError("Cannot logically negate " + this.name);
     }
 
@@ -500,7 +513,7 @@ export default abstract class BaseType extends Section implements IType {
         throw new Error("Unsupported for type " + this.name);
     }
 
-    convertJavaScriptValueToPromptoValue(context: Context, value: any, returnType: IType): IValue {
+    convertJavaScriptValueToPromptoValue(context: Context, value: any, returnType: IType | null): IValue {
         if(value == null) {
             const obj = NullValue;
             return obj[ "instance" as keyof typeof obj] as IValue;

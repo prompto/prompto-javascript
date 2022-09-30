@@ -25,7 +25,7 @@ export default class IfElement extends BaseStatement {
     locateSectionAtLine(line: number) {
         if(this.condition instanceof Section) {
             const section = this.condition.locateSectionAtLine(line);
-            if(section !== null)
+            if(section != null)
                 return section;
         }
         if(this.statements instanceof StatementList)
@@ -98,7 +98,7 @@ export default class IfElement extends BaseStatement {
             writer.append("if ");
             this.condition.toDialect(writer);
             context = this.downcast(context, false);
-            if (context !== writer.context)
+            if (context != writer.context)
                 writer = writer.newChildWriter(context);
         }
         writer.append(":").newLine().indent();
@@ -115,7 +115,7 @@ export default class IfElement extends BaseStatement {
             this.condition.toDialect(writer);
             writer.append(") ");
             context = this.downcast(context, false);
-            if (context !== writer.context)
+            if (context != writer.context)
                 writer = writer.newChildWriter(context);
         }
         const curly = this.needsCurlyBraces();
@@ -132,7 +132,7 @@ export default class IfElement extends BaseStatement {
     }
 
     needsCurlyBraces() {
-        if(!this.statements || this.statements.length === 0)
+        if(!this.statements || this.statements.length == 0)
             return false;
         if(this.statements.length > 1)
             return true;

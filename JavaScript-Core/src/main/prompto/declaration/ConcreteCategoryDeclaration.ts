@@ -27,7 +27,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     isWidget(context: Context): boolean {
-        if (this.derivedFrom == null || this.derivedFrom.length !== 1)
+        if (this.derivedFrom == null || this.derivedFrom.length != 1)
             return false;
         const derived = context.getRegisteredCategoryDeclaration(this.derivedFrom[0]);
         return derived ? derived.isWidget(context) : false;
@@ -81,7 +81,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
     methodsToMDialect(writer: CodeWriter): void {
         writer.indent();
-        if (this.methods == null || this.methods.length === 0)
+        if (this.methods == null || this.methods.length == 0)
             writer.append("pass").newLine();
         else {
             writer.newLine();
@@ -197,7 +197,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     static getMethodKey(name: string): string {
-        return name === "constructor" ? "$constructor" : name;
+        return name == "constructor" ? "$constructor" : name;
     }
 
     getLocalMethods() {
@@ -217,14 +217,14 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     collectInheritedMemberMethods(context: Context, result: MethodDeclarationMap, includeAbstract: boolean): void {
-        if(this.derivedFrom === null)
+        if(this.derivedFrom == null)
             return;
         this.derivedFrom.forEach(id => this.collectInheritedMemberMethod(context, id, result, includeAbstract), this);
     }
 
     collectInheritedMemberMethod(context: Context, ancestor: Identifier, result: MethodDeclarationMap, includeAbstract: boolean): void {
         const decl = context.getRegisteredCategoryDeclaration(ancestor);
-        if(decl === null || !(decl instanceof ConcreteCategoryDeclaration))
+        if(decl == null || !(decl instanceof ConcreteCategoryDeclaration))
             return;
         decl.registerMethods(context);
         decl.collectMemberMethods(context, result, includeAbstract);
@@ -255,7 +255,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         }
         for(let i=0;i<this.derivedFrom.length;i++) {
             const ancestor = this.derivedFrom[i];
-            if(ancestor.name === categoryType.name) {
+            if(ancestor.name == categoryType.name) {
                 return true;
             }
             if(ConcreteCategoryDeclaration.isAncestorDerivedFrom(context, ancestor, categoryType)) {
@@ -574,7 +574,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     locateSectionAtLine(line: number): Section | null {
         for(let i=0;i<this.methods.length;i++) {
             const section = this.methods[i].locateSectionAtLine(line);
-            if(section !== null)
+            if(section != null)
                 return section;
         }
         return null;

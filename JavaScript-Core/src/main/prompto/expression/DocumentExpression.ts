@@ -56,7 +56,7 @@ export default class DocumentExpression extends BaseExpression {
     }
 
     documentFromBlob(context: Context, blob: BlobValue): DocumentValue {
-        if("application/zip"!==blob.mimeType)
+        if("application/zip"!=blob.mimeType)
             throw new Error("documentFromBlob not supported for " + blob.mimeType);
         try {
             const parts = BlobRef.readParts(blob.data);

@@ -62,7 +62,7 @@ export default class VariableInstance extends Section implements IAssignableInst
             return VoidType.instance;
         }
         const thisType = actual.getType(context);
-        if(thisType === DocumentType.instance)
+        if(thisType == DocumentType.instance)
             return valueType;
         else {
             if(thisType instanceof CategoryType && !thisType.mutable)
@@ -102,7 +102,7 @@ export default class VariableInstance extends Section implements IAssignableInst
             const valueType = expression.check(transpiler.context);
             transpiler.context.registerInstance(new Variable(this.id, valueType), true);
             // Code expressions need to be interpreted as part of full check
-            if (valueType === CodeType.instance) {
+            if (valueType == CodeType.instance) {
                 transpiler.context.setValue(this.id, expression.interpret(transpiler.context));
             }
 

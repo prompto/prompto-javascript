@@ -15,7 +15,7 @@ export default class IdentifierList extends ObjectList<Identifier> {
 
     hasAttribute(name: string): boolean {
         for(let i = 0; i < this.length; i++) {
-            if(this[i].name===name)
+            if(this[i].name==name)
                 return true;
         }
         return false;
@@ -45,7 +45,7 @@ export default class IdentifierList extends ObjectList<Identifier> {
                 break;
             default:
                 for(let i=0;i<this.length;i++) {
-                    if(finalAnd && i === this.length-1)
+                    if(finalAnd && i == this.length-1)
                         break;
                     writer.append(this[i].name);
                     writer.append(", ");

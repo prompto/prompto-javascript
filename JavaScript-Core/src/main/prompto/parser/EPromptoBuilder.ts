@@ -721,7 +721,7 @@ export default class EPromptoBuilder extends EParserListener {
             return;
         const indexedNode = node as IndexedNode;
         let id = indexedNode.__id
-        if (id === undefined) {
+        if (id == undefined) {
             id = this.nextNodeId++;
             indexedNode.__id = id;
         }
@@ -734,7 +734,7 @@ export default class EPromptoBuilder extends EParserListener {
     getNodeValue<T>(node: antlr4.context.ParserRuleContext): T | null {
         const indexedNode = node as IndexedNode;
         const id = indexedNode == null ? undefined : indexedNode.__id;
-        if (id === undefined)
+        if (id == undefined)
             return null;
         else
             return this.nodeValues.get(id) as T || null;
@@ -755,7 +755,7 @@ export default class EPromptoBuilder extends EParserListener {
 
 
     getHiddenTokensText(hidden: Token[]): string | null {
-        if (hidden == null || hidden.length === 0)
+        if (hidden == null || hidden.length == 0)
             return null;
         else
             return hidden.map(token => token.text).join("");
@@ -769,7 +769,7 @@ export default class EPromptoBuilder extends EParserListener {
                 .map(child => child.getText(), this)
                 .join("");
         }
-        if (within == null || within.length === 0)
+        if (within == null || within.length == 0)
             return null;
         const before = this.getHiddenTokensBefore(ctx.start);
         if (before != null)
@@ -796,7 +796,7 @@ export default class EPromptoBuilder extends EParserListener {
 
     readComments(ctxs: antlr4.context.ParserRuleContext[]): CommentStatement[] | null {
         const comments = ctxs.map(csc => this.getNodeValue<CommentStatement>(csc)!, this);
-        return (comments.length === 0) ? null : comments;
+        return (comments.length == 0) ? null : comments;
     }
     
     exitIdentifierExpression = (ctx: IdentifierExpressionContext) => {
@@ -968,21 +968,21 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitList_literal = (ctx: List_literalContext) => {
-        const mutable = ctx.MUTABLE() !== null;
+        const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue<ExpressionList>(ctx.expression_list()) || null;
         const value = new ListLiteral(mutable, items);
         this.setNodeValue(ctx, value);
     }
 
     exitDict_literal = (ctx: Dict_literalContext) => {
-        const mutable = ctx.MUTABLE() !== null;
+        const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue<DictEntryList>(ctx.dict_entry_list()) || null;
         const value = new DictLiteral(mutable, items);
         this.setNodeValue(ctx, value);
     }
 
     exitTuple_literal = (ctx: Tuple_literalContext) => {
-        const mutable = ctx.MUTABLE() !== null;
+        const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue<ExpressionList>(ctx.expression_tuple()) || null;
         const value = new TupleLiteral(mutable, items);
         this.setNodeValue(ctx, value);
@@ -1492,7 +1492,7 @@ export default class EPromptoBuilder extends EParserListener {
     exitAddExpression = (ctx: AddExpressionContext) => {
         const left = this.getNodeValue<IExpression>(ctx._left);
         const right = this.getNodeValue<IExpression>(ctx._right);
-        const exp = ctx._op.type === EParser.PLUS ? new PlusExpression(left!, right!) : new SubtractExpression(left!, right!);
+        const exp = ctx._op.type == EParser.PLUS ? new PlusExpression(left!, right!) : new SubtractExpression(left!, right!);
         this.setNodeValue(ctx, exp);
     }
 
@@ -2864,7 +2864,7 @@ export default class EPromptoBuilder extends EParserListener {
             select = new MethodSelector(null, exp.id);
         else if(exp instanceof  MemberSelector)
             select = new MethodSelector(exp.parent, exp.id);
-        if(select !== null)
+        if(select != null)
             this.setNodeValue(ctx, new MethodCall(select, null));
     }
 
@@ -3283,7 +3283,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     findFirstValidToken(idx: number, allowWS: boolean): Token | null {
-        if (idx === -1) { // happens because input.index() is called before any other read operation (bug?)
+        if (idx == -1) { // happens because input.index() is called before any other read operation (bug?)
             idx = 0;
         }
         do {
@@ -3296,12 +3296,12 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     findLastValidToken(idx: number, allowWS: boolean): Token | null {
-        if (idx === -1) { // happens because input.index() is called before any other read operation (bug?)
+        if (idx == -1) { // happens because input.index() is called before any other read operation (bug?)
             idx = 0;
         }
         while (idx >= 0) {
             const token = this.readValidToken(idx--, allowWS);
-            if (token !== null) {
+            if (token != null) {
                 return token;
             }
         }
@@ -3312,7 +3312,7 @@ export default class EPromptoBuilder extends EParserListener {
         const token = this.input.get(idx);
         const text = token.text;
         // ignore trailing whitespace
-        if (text !== null && (allowWS || text.replace(/(\n|\r|\t| )/g, "").length > 0)) {
+        if (text != null && (allowWS || text.replace(/(\n|\r|\t| )/g, "").length > 0)) {
             return token;
         } else {
             return null;

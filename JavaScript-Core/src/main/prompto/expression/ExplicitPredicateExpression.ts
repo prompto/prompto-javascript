@@ -36,7 +36,7 @@ export default class ExplicitPredicateExpression extends PredicateExpression {
         const sourceType = source.check(writer.context);
         const itemType = (sourceType as unknown as ContainerType).itemType;
         writer.context.registerInstance(new Variable(this.itemId, itemType), true);
-        if (writer.dialect === Dialect.O) {
+        if (writer.dialect == Dialect.O) {
             writer.append("filtered (");
             source.toDialect(writer);
             writer.append(") with (")
@@ -55,7 +55,7 @@ export default class ExplicitPredicateExpression extends PredicateExpression {
 
 
     containsToDialect(writer: CodeWriter): void {
-        if(writer.dialect === Dialect.O) {
+        if(writer.dialect == Dialect.O) {
             writer.append(" (")
                 .append(this.itemId.name)
                 .append(") where (");

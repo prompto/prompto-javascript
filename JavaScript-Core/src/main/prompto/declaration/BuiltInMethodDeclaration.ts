@@ -4,7 +4,7 @@ import {BuiltInContext, Context, Transpiler} from '../runtime'
 import { InternalError } from '../error'
 import {ArgumentList, Identifier} from "../grammar";
 import {IValue} from "../value";
-import {IDeclarationInfo} from "../runtime/Catalog";
+import {IMethodInfo} from "../runtime/Catalog";
 import {IType} from "../type";
 import {CodeWriter} from "../utils";
 
@@ -18,7 +18,7 @@ export default abstract class BuiltInMethodDeclaration<T extends IValue> extends
                 params.add(args[i]);
             }
         }
-        super(new Identifier(name), params);
+        super(new Identifier(name), params, args[0].getType());
     }
 
     getValue(context: Context): T {
@@ -31,6 +31,15 @@ export default abstract class BuiltInMethodDeclaration<T extends IValue> extends
         throw new InternalError("Could not locate context for built-in value!");
     }
 
+    checkChild(context: Context): IType {
+        throw new Error("Should never get there!");
+    }
+
+
+    declare(transpiler: Transpiler): void {
+        throw new Error("Should never get there!");
+    }
+
     transpile(transpiler: Transpiler): void {
         throw new Error("Should never get there!");
     }
@@ -39,7 +48,7 @@ export default abstract class BuiltInMethodDeclaration<T extends IValue> extends
         throw new Error("Need to override transpileCall in " + this.constructor.name);
     }
 
-    toDeclarationInfo(): IDeclarationInfo {
+    toDeclarationInfo(context: Context): IMethodInfo {
         throw new Error("TBD!");
     }
 

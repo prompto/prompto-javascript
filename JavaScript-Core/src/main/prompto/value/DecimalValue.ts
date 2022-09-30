@@ -74,7 +74,7 @@ export default class DecimalValue extends BaseValue<number> {
 
     Divide(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
-            if (value.DecimalValue() === 0.0) {
+            if (value.DecimalValue() == 0.0) {
                 throw new DivideByZeroError();
             } else {
                 return new DecimalValue(this.DecimalValue() / value.DecimalValue());
@@ -86,7 +86,7 @@ export default class DecimalValue extends BaseValue<number> {
 
     IntDivide(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
-            if (value.IntegerValue() === 0) {
+            if (value.IntegerValue() == 0) {
                 throw new DivideByZeroError();
             } else {
                 return new IntegerValue(this.DecimalValue() / value.IntegerValue());
@@ -98,7 +98,7 @@ export default class DecimalValue extends BaseValue<number> {
 
     Modulo(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
-            if (value.DecimalValue() === 0.0) {
+            if (value.DecimalValue() == 0.0) {
                 throw new DivideByZeroError();
             } else {
                 return new DecimalValue(this.DecimalValue() % value.DecimalValue());
@@ -114,7 +114,7 @@ export default class DecimalValue extends BaseValue<number> {
 
     compareToValue(context: Context, value: IValue): number {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
-            return this.value > value.value ? 1 : this.value === value.value ? 0 : -1;
+            return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
         } else {
             throw new SyntaxError("Illegal comparison: IntegerValue and " + typeof(value));
         }
@@ -122,7 +122,7 @@ export default class DecimalValue extends BaseValue<number> {
 
    equals(obj: any): boolean {
         if (obj instanceof IntegerValue || obj instanceof DecimalValue) {
-            return this.value === obj.value;
+            return this.value == obj.value;
         } else {
             return false;
         }

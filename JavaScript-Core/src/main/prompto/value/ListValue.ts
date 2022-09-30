@@ -81,7 +81,7 @@ export default class ListValue extends BaseValueList<ListValue> {
     findIndex(value: IValue): number {
         for(let i=0;i<this.items.length;i++) {
             const item = this.items[i];
-            if(item===value || (item && item.equals && item.equals(value)))
+            if(item==value || (item && item.equals && item.equals(value)))
                 return i;
         }
         return -1;

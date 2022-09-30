@@ -127,9 +127,9 @@ export default class CompareExpression extends BaseExpression {
             value = value.getMemberValue(context, Identifier.DB_ID, false);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         let data = value ? value.getStorableData() : null;
-        if(info.family === TypeFamily.DATETIME && data instanceof LocalDate)
+        if(info.family == TypeFamily.DATETIME && data instanceof LocalDate)
             data = DateTime.fromDateAndTime(data, null);
-        else if(info.family === TypeFamily.DATE && data instanceof DateTime)
+        else if(info.family == TypeFamily.DATE && data instanceof DateTime)
             data = data.getDate();
         query.verify(info, this.getMatchOp(), data);
         if (this.operator == CmpOp.GTE || this.operator==CmpOp.LTE)

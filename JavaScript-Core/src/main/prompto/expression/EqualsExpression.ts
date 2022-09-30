@@ -45,7 +45,7 @@ export default class EqualsExpression extends BaseExpression implements IPredica
         writer.append(" ");
         this.operator.toDialect(writer);
         // make this a AN
-        if(this.operator === EqOp.IS_A || this.operator ===  EqOp.IS_NOT_A) {
+        if(this.operator == EqOp.IS_A || this.operator ==  EqOp.IS_NOT_A) {
             const name = this.right.toString();
             if(VOWELS.indexOf(name.charAt(0))>=0)
                 writer.append("n");
@@ -61,12 +61,12 @@ export default class EqualsExpression extends BaseExpression implements IPredica
     }
 
     checkOperator(context: Context, lt: IType, rt: IType): IType {
-        if(this.operator === EqOp.CONTAINS || this.operator === EqOp.NOT_CONTAINS) {
+        if(this.operator == EqOp.CONTAINS || this.operator == EqOp.NOT_CONTAINS) {
             if(lt instanceof ContainerType)
                 lt = lt.itemType;
             if(rt instanceof ContainerType)
                 rt = rt.itemType;
-            if(lt !== TextType.instance || !(rt === TextType.instance || rt === CharacterType.instance))
+            if(lt != TextType.instance || !(rt == TextType.instance || rt == CharacterType.instance))
                 throw new SyntaxError("'contains' only operates on textual value!");
         }
         return BooleanType.instance; // can compare all objects
@@ -129,9 +129,9 @@ export default class EqualsExpression extends BaseExpression implements IPredica
     }
 
     areEqual(context: Context, lval: IValue, rval: IValue): boolean {
-        if(lval === rval) {
+        if(lval == rval) {
             return true;
-        } else if(lval === NullValue.instance || rval === NullValue.instance) {
+        } else if(lval == NullValue.instance || rval == NullValue.instance) {
             return false;
         } else {
             return lval.equals(rval);
@@ -150,7 +150,7 @@ export default class EqualsExpression extends BaseExpression implements IPredica
     }
 
     downcast(context: Context, setValue: boolean): Context {
-        if(this.operator === EqOp.IS_A) {
+        if(this.operator == EqOp.IS_A) {
             const id = this.readLeftId();
             if(id) {
                 let targetType = (this.right as TypeExpression).value.resolve(context);
@@ -184,7 +184,7 @@ export default class EqualsExpression extends BaseExpression implements IPredica
         const lval = this.left.interpret(context) || NullValue.instance;
         const rval = this.right.interpret(context) || NullValue.instance;
         const result = this.interpretValues(context, lval, rval);
-        if(result === BooleanValue.TRUE)
+        if(result == BooleanValue.TRUE)
             return true;
         const expected = (this as unknown as IAssertion).getExpected(context, test.dialect, 0);
         const actual = lval.toString() + " " + this.operator.toString(test.dialect) + " " + rval.toString();
@@ -239,9 +239,9 @@ export default class EqualsExpression extends BaseExpression implements IPredica
     declare(transpiler: Transpiler): void {
         this.left.declare(transpiler);
         this.right.declare(transpiler);
-        if (this.operator === EqOp.ROUGHLY) {
+        if (this.operator == EqOp.ROUGHLY) {
             transpiler.require(removeAccents);
-        } else if (this.operator === EqOp.IS_A || this.operator === EqOp.IS_NOT_A) {
+        } else if (this.operator == EqOp.IS_A || this.operator == EqOp.IS_NOT_A) {
             transpiler.require(isAMethod);
             transpiler.require(isInstanceOf);
         }
@@ -299,28 +299,28 @@ export default class EqualsExpression extends BaseExpression implements IPredica
     transpileRoughly(transpiler: Transpiler): void {
         transpiler.append("removeAccents(");
         this.left.transpile(transpiler);
-        transpiler.append(").toLowerCase() === removeAccents(");
+        transpiler.append(").toLowerCase() == removeAccents(");
         this.right.transpile(transpiler);
         transpiler.append(").toLowerCase()");
     }
 
     transpileIs(transpiler: Transpiler): void {
         this.left.transpile(transpiler);
-        transpiler.append(" === ");
+        transpiler.append(" == ");
         this.right.transpile(transpiler);
     }
 
     transpileIsNot(transpiler: Transpiler): void {
         this.left.transpile(transpiler);
-        transpiler.append(" !== ");
+        transpiler.append(" != ");
         this.right.transpile(transpiler);
     }
 
     transpileEquals(transpiler: Transpiler): void {
         const lt = this.left.check(transpiler.context);
-        if(lt === BooleanType.instance || lt === IntegerType.instance || lt === DecimalType.instance || lt === CharacterType.instance || lt === TextType.instance) {
+        if(lt == BooleanType.instance || lt == IntegerType.instance || lt == DecimalType.instance || lt == CharacterType.instance || lt == TextType.instance) {
             this.left.transpile(transpiler);
-            transpiler.append(" === ");
+            transpiler.append(" == ");
             this.right.transpile(transpiler);
         } else {
             transpiler.append("equalObjects(");
@@ -333,9 +333,9 @@ export default class EqualsExpression extends BaseExpression implements IPredica
 
     transpileNotEquals(transpiler: Transpiler): void {
         const lt = this.left.check(transpiler.context);
-        if(lt === BooleanType.instance || lt === IntegerType.instance || lt === DecimalType.instance || lt === CharacterType.instance || lt === TextType.instance) {
+        if(lt == BooleanType.instance || lt == IntegerType.instance || lt == DecimalType.instance || lt == CharacterType.instance || lt == TextType.instance) {
             this.left.transpile(transpiler);
-            transpiler.append(" !== ");
+            transpiler.append(" != ");
             this.right.transpile(transpiler);
         } else {
             transpiler.append("!equalObjects(");
@@ -366,23 +366,23 @@ export default class EqualsExpression extends BaseExpression implements IPredica
 
     transpileIsA(transpiler: Transpiler): void {
         const right = (this.right as TypeExpression).value.resolve(transpiler.context);
-        if(right===BooleanType.instance) {
+        if(right==BooleanType.instance) {
             transpiler.append("isABoolean(");
             this.left.transpile(transpiler);
             transpiler.append(")");
-        } else if(right===IntegerType.instance) {
+        } else if(right==IntegerType.instance) {
             transpiler.append("isAnInteger(");
             this.left.transpile(transpiler);
             transpiler.append(")");
-        } else if(right===DecimalType.instance) {
+        } else if(right==DecimalType.instance) {
             transpiler.append("isADecimal(");
             this.left.transpile(transpiler);
             transpiler.append(")");
-        } else if(right===TextType.instance) {
+        } else if(right==TextType.instance) {
             transpiler.append("isAText(");
             this.left.transpile(transpiler);
             transpiler.append(")");
-        } else if(right===CharacterType.instance) {
+        } else if(right==CharacterType.instance) {
             transpiler.append("isACharacter(");
             this.left.transpile(transpiler);
             transpiler.append(")");
@@ -421,7 +421,7 @@ export default class EqualsExpression extends BaseExpression implements IPredica
         transpiler.append(builderName).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
         this.right.transpile(transpiler);
         transpiler.append(");").newLine();
-        if (this.operator === EqOp.NOT_EQUALS || this.operator === EqOp.IS_NOT || this.operator === EqOp.NOT_CONTAINS)
+        if (this.operator == EqOp.NOT_EQUALS || this.operator == EqOp.IS_NOT || this.operator == EqOp.NOT_CONTAINS)
             transpiler.append(builderName).append(".not();").newLine();
     }
 

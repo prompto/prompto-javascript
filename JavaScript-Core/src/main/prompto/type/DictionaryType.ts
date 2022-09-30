@@ -40,7 +40,7 @@ export default class DictionaryType extends ContainerType {
     equals(obj) {
         if (obj == null) {
             return false;
-        } else if (obj === this) {
+        } else if (obj == this) {
             return true;
         } else if (!(obj instanceof DictionaryType)) {
             return false;
@@ -77,21 +77,21 @@ export default class DictionaryType extends ContainerType {
         }
     }
 
-    checkContains(context, section, other) {
-        if (other === TextType.instance) {
+    checkContains(context: Context, section: Section, other: IType): IType {
+        if (other == TextType.instance) {
             return BooleanType.instance;
         } else {
             return super.checkContains(context, other);
         }
     }
 
-    declareContains(transpiler, other, container, item) {
+    declareContains(transpiler: Transpiler, other: IType, container: IExpression, item: IExpression): void {
         transpiler.require(StrictSet);
         container.declare(transpiler);
         item.declare(transpiler);
     }
 
-    transpileContains(transpiler, other, container, item) {
+    transpileContains(transpiler: Transpiler, other: IType, container: IExpression, item: IExpression): void {
         container.transpile(transpiler);
         transpiler.append(".has(");
         item.transpile(transpiler);
@@ -102,20 +102,20 @@ export default class DictionaryType extends ContainerType {
         return BooleanType.instance;
     }
 
-    declareHasAllOrAny(transpiler, other, container, items) {
+    declareHasAllOrAny(transpiler: Transpiler, other: IType, container: IExpression, items: IExpression): void {
         transpiler.require(StrictSet);
         container.declare(transpiler);
         items.declare(transpiler);
     }
 
-    transpileHasAllValue(transpiler, other, container, items) {
+    transpileHasAllValue(transpiler: Transpiler, other: IType, container: IExpression, items: IExpression): void {
         container.transpile(transpiler);
         transpiler.append(".hasAll(");
         items.transpile(transpiler);
         transpiler.append(")");
     }
 
-    transpileHasAnyValue(transpiler, other, container, items) {
+    transpileHasAnyValue(transpiler: Transpiler, other: IType, container: IExpression, items: IExpression): void {
         container.transpile(transpiler);
         transpiler.append(".hasAny(");
         items.transpile(transpiler);
@@ -123,7 +123,7 @@ export default class DictionaryType extends ContainerType {
     }
 
     checkItem(context, other, section) {
-        if (other === TextType.instance) {
+        if (other == TextType.instance) {
             return this.itemType;
         } else {
             context.problemListener.reportIllegalItemType(section, other, [TextType.instance]);
@@ -131,11 +131,11 @@ export default class DictionaryType extends ContainerType {
         }
     }
 
-    declareItem(transpiler, itemType, item) {
+    declareItem(transpiler: Transpiler, itemType: IType): void {
         // nothing to do
     }
 
-    transpileItem(transpiler, itemType, item) {
+    transpileItem(transpiler: Transpiler, itemType: IType, item: IExpression): void {
         transpiler.append(".getItem(");
         item.transpile(transpiler);
         transpiler.append(")");
@@ -149,7 +149,7 @@ export default class DictionaryType extends ContainerType {
         transpiler.append(")");
     }
 
-    checkIterator(context, source) {
+    checkIterator(context: Context, section: Section, source: IExpression): IType {
         return new EntryType(this.itemType);
     }
 
@@ -166,7 +166,7 @@ export default class DictionaryType extends ContainerType {
         }
     }
 
-    declareMember(transpiler, section, id) {
+    declareMember(transpiler: Transpiler, member: Identifier): void {
         switch (id.name) {
             case "keys":
                 transpiler.require(StrictSet);
@@ -203,7 +203,7 @@ export default class DictionaryType extends ContainerType {
         }
     }
 
-    getMemberMethods(context, id) {
+    getMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration> {
         switch (id.name) {
             case "swap" :
                 return [new SwapMethodDeclaration()];

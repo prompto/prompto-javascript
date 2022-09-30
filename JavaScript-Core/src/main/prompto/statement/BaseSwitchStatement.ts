@@ -45,7 +45,7 @@ export default abstract class BaseSwitchStatement extends BaseStatement implemen
         let section = this as Section;
         this.switchCases.forEach(switchCase => {
             const type = switchCase.checkReturnType(context);
-            if(type && type !== VoidType.instance) {
+            if(type && type != VoidType.instance) {
                 section = switchCase;
                 types.add(type);
             }

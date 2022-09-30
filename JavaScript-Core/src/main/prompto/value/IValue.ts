@@ -9,6 +9,7 @@ import {IIterator, IResource} from "./index";
 export default interface IValue {
     type: IType;
     mutable: boolean;
+    value: any; // should use generic but that's a lot of complexity for just 1 warning
     toDialect?: (writer: CodeWriter) => void;
 
     // use uppercase methods for direct prompto equivalents
@@ -33,7 +34,7 @@ export default interface IValue {
     isResource(): boolean;
     asResource(): IResource;
     isIterable(): boolean;
-    getIterator(): IIterator<IValue>;
+    getIterator(context: Context): IIterator<IValue>;
     isSliceable(): boolean;
     getStorableData(): any;
     collectStorables(storables: Set<IStorable>): void;
@@ -41,8 +42,6 @@ export default interface IValue {
     toDocumentValue(context: Context): IValue;
     toJsonStream(context: Context, values: JsonParent, instanceId: never | null, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void;
     toJsonNode(): JsonNode;
-
-
 
 }
 

@@ -67,7 +67,7 @@ export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
         writer.append(this.name);
         writer.append(" as abstract method ");
         this.parameters.toDialect(writer);
-        if(this.returnType!=null && this.returnType !== VoidType.instance) {
+        if(this.returnType!=null && this.returnType != VoidType.instance) {
             writer.append("returning ");
             this.returnType.toDialect(writer);
         }
@@ -75,7 +75,7 @@ export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
 
     toODialect(writer: CodeWriter): void {
         writer.append("abstract ");
-        if(this.returnType!=null && this.returnType !== VoidType.instance) {
+        if(this.returnType!=null && this.returnType != VoidType.instance) {
             this.returnType.toDialect(writer);
             writer.append(" ");
         }

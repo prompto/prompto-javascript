@@ -11,7 +11,7 @@ export default class FetchManyStatement extends FetchManyExpression {
     }
 
     locateSectionAtLine(line) {
-        if(line === this.start.line)
+        if(line == this.start.line)
             return this;
         else if(this.statements instanceof StatementList)
             return this.statements.locateSectionAtLine(line);

@@ -128,7 +128,7 @@ export default class NativeCategoryDeclaration extends ConcreteCategoryDeclarati
 
     declare(transpiler: Transpiler): void {
         transpiler.declare(this);
-        if(this.name==="Any")
+        if(this.name=="Any")
             transpiler.register(Any);
     }
 

@@ -50,7 +50,7 @@ export default class MethodSelector extends MemberSelector {
 
     checkSuperParent(context: Context): IType {
         const value = this.parent!.interpret(context);
-        if(!value || value === NullValue.instance)
+        if(!value || value == NullValue.instance)
             throw new NullReferenceError();
         if(this.parent instanceof SuperExpression)
             return value.type.getSuperType(context, this);
@@ -112,7 +112,7 @@ export default class MethodSelector extends MemberSelector {
 
     newInstanceContext(context: Context): Context {
         let value = this.parent!.interpret(context);
-        if(value === null || value === NullValue.instance) {
+        if(value == null || value == NullValue.instance) {
             throw new NullReferenceError();
         }
         if(value instanceof TypeValue) {

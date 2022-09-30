@@ -11,6 +11,7 @@ export default class TypeFamily {
     static TIME = new TypeFamily("TIME");
     static DATETIME = new TypeFamily("DATETIME");
     static PERIOD = new TypeFamily("PERIOD");
+    static VERSION = new TypeFamily("VERSION");
     static LIST = new TypeFamily("LIST");
     static SET = new TypeFamily("SET");
     static TUPLE = new TypeFamily("TUPLE");
@@ -29,6 +30,7 @@ export default class TypeFamily {
     static METHOD = new TypeFamily("METHOD");
     static CURSOR = new TypeFamily("CURSOR");
     static ITERATOR = new TypeFamily("ITERATOR");
+    static PROPERTIES = new TypeFamily("PROPERTIES");
     static CLASS = new TypeFamily("CLASS");
     static TYPE = new TypeFamily("TYPE");
     static CODE = new TypeFamily("CODE");

@@ -150,7 +150,7 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
                 if(idx>=0)
                     argsList.remove(idx);
             }
-            return argsList.length===0;
+            return argsList.length==0;
         } catch (e) {
             if(e instanceof SyntaxError) {
                 return false;
@@ -163,7 +163,7 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
     }
 
     isArgumentAssignableTo(context: Context, parameter: IParameter, argument: Argument, checkInstance: boolean, allowDerived: boolean): boolean {
-        return this.computeSpecificity(context, parameter, argument, checkInstance, allowDerived) !== Specificity.INCOMPATIBLE;
+        return this.computeSpecificity(context, parameter, argument, checkInstance, allowDerived) != Specificity.INCOMPATIBLE;
     }
 
     computeSpecificity(context: Context, parameter: IParameter, argument: Argument, checkInstance: boolean, allowDerived: boolean): Specificity {
@@ -213,7 +213,7 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
                 if(idx>=0)
                     argsList.remove(idx);
             }
-            return argsList.length===0;
+            return argsList.length==0;
         } catch (e) {
             if(e instanceof SyntaxError) {
                 return false;

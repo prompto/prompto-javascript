@@ -35,7 +35,7 @@ export default class MemStore extends Store {
     }
 
     isDbIdType(type: string) {
-        return type === typeof(this.nextDbId);
+        return type == typeof(this.nextDbId);
     }
 
     deleteAndStore(toDel: any[] | null, toAdd: StorableDocument[] | null, auditMeta: AuditMetadata | null) {
@@ -153,7 +153,7 @@ export default class MemStore extends Store {
     }
 
     slice(query: MemQuery, docs: StoredDocument[]): StoredDocument[] {
-        if(docs.length === 0 || (query.first==null && query.last==null))
+        if(docs.length == 0 || (query.first==null && query.last==null))
             return docs;
         let firstValue = query.first;
         if(firstValue==null || firstValue<1)
@@ -263,7 +263,7 @@ export default class MemStore extends Store {
 
     fetchLatestAuditRecordAsDocument(dbId: any): Document<string, any> | null {
         const record = this.fetchLatestAuditRecord(dbId);
-        return record === null ? null : record.asDocument();
+        return record == null ? null : record.asDocument();
     }
 
     fetchAllAuditRecords(dbId: any): List<AuditRecord> {
@@ -278,7 +278,7 @@ export default class MemStore extends Store {
     }
 
     fetchDbIdsAffectedByAuditMetadataId(dbId: any): List<any> {
-        const values = Array.from(this.auditRecords.values()).filter(a => a.metadataDbId === dbId).map(a => a.instanceDbId);
+        const values = Array.from(this.auditRecords.values()).filter(a => a.metadataDbId == dbId).map(a => a.instanceDbId);
         return new List<any>(false, values);
     }
 

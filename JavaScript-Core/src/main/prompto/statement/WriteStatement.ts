@@ -22,7 +22,7 @@ export default class WriteStatement extends BaseStatement {
     }
 
     locateSectionAtLine(line: number): Section | null {
-        if(line === this.startLocation.line)
+        if(line == this.startLocation.line)
             return this;
         else if(this.thenWith)
             return this.thenWith.statements.locateSectionAtLine(line);
@@ -70,7 +70,7 @@ export default class WriteStatement extends BaseStatement {
             }
             return null;
         } finally {
-            if(resContext!==context)
+            if(resContext!=context)
                 res.close();
         }
     }

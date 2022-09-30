@@ -18,6 +18,6 @@ export default class Identifier extends Section {
         if(!other || !(other instanceof Identifier))
             return false;
         else
-            return this.name === other.name;
+            return this.name == other.name;
     }
 }

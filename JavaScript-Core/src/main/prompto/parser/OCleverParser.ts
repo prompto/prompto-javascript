@@ -6,7 +6,7 @@ import {DocumentLiteral} from "../literal";
 const fs = importFsIfNode();
 
 function createInput(input) {
-	if(typeof(input)==='string' || input instanceof String) {
+	if(typeof(input)=='string' || input instanceof String) {
 		if(fs && fs.existsSync && fs.existsSync(input)) {
 			input = new antlr4.FileStream(input);
 		} else {

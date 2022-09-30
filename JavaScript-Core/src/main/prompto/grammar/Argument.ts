@@ -108,7 +108,7 @@ export default class Argument extends Section {
         if(!this._expression) {
             return this.parameter!.name;
         } else {
-            if (this.parameter === null) {
+            if (this.parameter == null) {
                 return this._expression.toString();
             } else {
                 return this.name! + " = " + this._expression.toString();
@@ -187,7 +187,7 @@ export default class Argument extends Section {
         let argument = this.parameter;
         // when 1st argument, can be unnamed
         if(!argument) {
-            if(methodDeclaration.parameters!.length === 0) {
+            if(methodDeclaration.parameters!.length == 0) {
                 throw new SyntaxError("Method has no argument");
             }
             argument = methodDeclaration.parameters![0];

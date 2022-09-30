@@ -184,27 +184,27 @@ export function decimalToString(d: number): string {
 }
 
 export function isABoolean(o: any): boolean {
-    return typeof(o) === "boolean";
+    return typeof(o) == "boolean";
 }
 
 export function isAnInteger(o: any): boolean {
-    return typeof(o) === "number" && Number.isInteger(o);
+    return typeof(o) == "number" && Number.isInteger(o);
 }
 
 export function isADecimal(o: any): boolean {
-    return typeof(o) === "number" && !Number.isInteger(o);
+    return typeof(o) == "number" && !Number.isInteger(o);
 }
 
 export function isANumber(o: any): boolean {
-    return typeof(o) === "number";
+    return typeof(o) == "number";
 }
 
 export function isAText(o: any): boolean {
-    return typeof(o) === 'string' || o instanceof String;
+    return typeof(o) == 'string' || o instanceof String;
 }
 
 export function isACharacter(o: any): boolean {
-    return isAText(o) && (o as string).length===1;
+    return isAText(o) && (o as string).length==1;
 }
 
 export function isASet(o: any): boolean {
@@ -215,7 +215,7 @@ export function isASet(o: any): boolean {
 }
 
 export function isAMethod(o: any, params: any[], result: any): boolean {
-    if(typeof o !== 'function')
+    if(typeof o != 'function')
         return false;
     // eslint-disable-next-line @typescript-eslint/ban-types
     function countParams(o: Function) {
@@ -233,11 +233,11 @@ export function isAMethod(o: any, params: any[], result: any): boolean {
         return args.length;
     }
     // eslint-disable-next-line @typescript-eslint/ban-types
-    return params.length === countParams(o as Function);
+    return params.length == countParams(o as Function);
 }
 
 export function isAnEnum(o: any): boolean {
-    if(typeof o !== 'object')
+    if(typeof o != 'object')
         return false;
     const proto = Object.getPrototypeOf(o) as object;
     if(!proto)
@@ -282,12 +282,12 @@ export function compareValues(value1: object | null, value2: object | null): num
         return -(value2[compareTo] as (obj: object | null) => number)(value1);
     const s1 = value1.toString();
     const s2 = value2.toString();
-    return s1 > s2 ? 1 : s1 === s2 ? 0 : -1;
+    return s1 > s2 ? 1 : s1 == s2 ? 0 : -1;
 }
 
 // borrowed from http://www.2ality.com/2011/11/improving-typeof.html
 export function getTypeName(value: any): string | null {
-    if (value === null)
+    if (value == null)
         return "null";
     const t = typeof(value);
     // noinspection FallThroughInSwitchStatementJS
@@ -358,7 +358,7 @@ export function integerRange(start: number, end: number): number[] {
     end = Math.floor(end);
 
     const diff = end - start;
-    if (diff === 0) {
+    if (diff == 0) {
         return [start];
     }
 

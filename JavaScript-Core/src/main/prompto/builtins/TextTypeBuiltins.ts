@@ -134,7 +134,7 @@ export class StartsWithMethodDeclaration extends BuiltInMethodDeclaration<TextVa
         const value = this.getValue(context).getStorableData();
         const findValue = context.getValue(new Identifier("value")) as TextValue;
         const findData = findValue.getStorableData();
-        const startsWith = value.indexOf(findData)===0;
+        const startsWith = value.indexOf(findData)==0;
         return BooleanValue.ValueOf(startsWith);
     }
 
@@ -162,7 +162,7 @@ export class EndsWithMethodDeclaration extends BuiltInMethodDeclaration<TextValu
         const value = this.getValue(context).getStorableData();
         const findValue = context.getValue(new Identifier("value")) as TextValue;
         const findData = findValue.getStorableData();
-        const endsWith = value.indexOf(findData)===value.length-findData.length;
+        const endsWith = value.indexOf(findData)==value.length-findData.length;
         return BooleanValue.ValueOf(endsWith);
     }
 

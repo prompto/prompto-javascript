@@ -25,7 +25,7 @@ export default class JavaScriptIdentifierExpression extends JavaScriptExpression
     }
 
     transpile(transpiler: Transpiler): void {
-        if ("$store" === this.id.name)
+        if ("$store" == this.id.name)
             transpiler.append("$DataStore.instance");
         else
             transpiler.append(this.id.name);
@@ -56,9 +56,9 @@ export default class JavaScriptIdentifierExpression extends JavaScriptExpression
     }
 
     interpret_prompto(context: Context): any | null {
-        if ("$context" === this.id.name)
+        if ("$context" == this.id.name)
             return context;
-        else if ("$store" === this.id.name)
+        else if ("$store" == this.id.name)
             return $DataStore.instance;
         else
             return null;
@@ -67,7 +67,7 @@ export default class JavaScriptIdentifierExpression extends JavaScriptExpression
     interpret_instance(context: Context): any | null {
         if (context == null) {
             return null;
-        } else if("null" === this.id.name) {
+        } else if("null" == this.id.name) {
             return null;
         } else {
             try {

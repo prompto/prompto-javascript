@@ -21,21 +21,21 @@ export default class RangeType extends ContainerType {
         }
     }
 
-    declareItem(transpiler, itemType, item) {
+    declareItem(transpiler: Transpiler, itemType: IType): void {
         // nothing to do
     }
 
-    transpileItem(transpiler, itemType, item) {
+    transpileItem(transpiler: Transpiler, itemType: IType, item: IExpression): void {
         transpiler.append(".item(");
         item.transpile(transpiler);
         transpiler.append(")");
     }
 
-    checkSlice(context) {
+    checkSlice(context: Context, section: Section): IType {
         return this;
     }
 
-    declareSlice(transpiler, first, last) {
+    declareSlice(transpiler: Transpiler, first: IExpression, last: IExpression): void {
         if(first) {
             first.declare(transpiler);
         }
@@ -44,7 +44,7 @@ export default class RangeType extends ContainerType {
         }
     }
 
-    transpileSlice(transpiler, first, last) {
+    transpileSlice(transpiler: Transpiler, first: IExpression, last: IExpression): void {
         transpiler.append(".slice1Based(");
         if(first) {
             first.transpile(transpiler);
@@ -57,7 +57,7 @@ export default class RangeType extends ContainerType {
         transpiler.append(")");
     }
 
-    checkIterator(context, source) {
+    checkIterator(context: Context, section: Section, source: IExpression): IType {
         return this.itemType;
     }
 
@@ -65,33 +65,33 @@ export default class RangeType extends ContainerType {
         return BooleanType.instance;
     }
 
-    declareContains(transpiler, other, container, item) {
+    declareContains(transpiler: Transpiler, other: IType, container: IExpression, item: IExpression): void {
         transpiler.require(StrictSet);
         container.declare(transpiler);
         item.declare(transpiler);
     }
 
-    transpileContains(transpiler, other, container, item) {
+    transpileContains(transpiler: Transpiler, other: IType, container: IExpression, item: IExpression): void {
         container.transpile(transpiler);
         transpiler.append(".has(");
         item.transpile(transpiler);
         transpiler.append(")");
     }
 
-    declareHasAllOrAny(transpiler, other, container, items) {
+    declareHasAllOrAny(transpiler: Transpiler, other: IType, container: IExpression, items: IExpression): void {
         transpiler.require(StrictSet);
         container.declare(transpiler);
         items.declare(transpiler);
     }
 
-    transpileHasAllValue(transpiler, other, container, items) {
+    transpileHasAllValue(transpiler: Transpiler, other: IType, container: IExpression, items: IExpression): void {
         container.transpile(transpiler);
         transpiler.append(".hasAll(");
         items.transpile(transpiler);
         transpiler.append(")");
     }
 
-    transpileHasAnyValue(transpiler, other, container, items) {
+    transpileHasAnyValue(transpiler: Transpiler, other: IType, container: IExpression, items: IExpression): void {
         container.transpile(transpiler);
         transpiler.append(".hasAny(");
         items.transpile(transpiler);

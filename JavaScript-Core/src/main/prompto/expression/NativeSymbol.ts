@@ -68,9 +68,9 @@ export default class NativeSymbol extends EnumSymbol<EnumeratedNativeType> {
     }
 
     GetMemberValue(context: Context, member: Identifier, autoCreate?: boolean) {
-        if("name" === member.name)
+        if("name" == member.name)
             return new TextValue(this.name);
-        else if("value" === member.name)
+        else if("value" == member.name)
             return this.expression.interpret(context);
         else
             return super.GetMemberValue(context, member, autoCreate);

@@ -43,7 +43,7 @@ export default class TextValue extends BaseValue<string> {
 
     compareToValue(context, value) {
         if(value instanceof TextValue || value instanceof CharacterValue) {
-            return this.value > value.value ? 1 : this.value === value.value ? 0 : -1;
+            return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
         } else {
             throw new SyntaxError("Illegal: Compare TextValue with " + typeof(value));
         }
@@ -58,7 +58,7 @@ export default class TextValue extends BaseValue<string> {
     }
 
     getMemberValue(context, id) {
-        if ("count" === id.name) {
+        if ("count" == id.name) {
             return new IntegerValue(this.value.length);
         } else {
             return super.getMemberValue(context, id);
@@ -121,9 +121,9 @@ export default class TextValue extends BaseValue<string> {
 
     equals(obj) {
         if (obj instanceof TextValue) {
-            return this.value === obj.value;
+            return this.value == obj.value;
         } else if (obj instanceof DbIdValue) {
-            return this.value === obj.value;
+            return this.value == obj.value;
         } else {
             return false;
         }
@@ -131,7 +131,7 @@ export default class TextValue extends BaseValue<string> {
 
     Roughly(context, obj) {
         if (obj instanceof TextValue || obj instanceof CharacterValue) {
-            return removeAccents(this.value.toLowerCase()) === removeAccents(obj.value.toLowerCase());
+            return removeAccents(this.value.toLowerCase()) == removeAccents(obj.value.toLowerCase());
         } else {
             return false;
         }

@@ -1,11 +1,10 @@
 import BaseValue from "./BaseValue";
-import {IValue, DocumentValue, ListValue} from '../value'
+import {IValue, DocumentValue, ListValue, IIterable, IIterator} from '../value'
 import {AnyType, ContainerType, IType} from '../type'
 import {Context} from "../runtime";
 import {JsonNode, JsonParent} from "../json";
-import {Iterator} from "../intrinsic";
 
-export default abstract class Container<T extends Iterable<IValue>> extends BaseValue<T> {
+export default abstract class Container<T extends Iterable<IValue>> extends BaseValue<T> implements IIterable<IValue> {
 
     constructor(type: ContainerType, value: T, mutable: boolean) {
         super(type, value, mutable);
@@ -16,7 +15,8 @@ export default abstract class Container<T extends Iterable<IValue>> extends Base
     }
 
     abstract get items(): IValue[];
-    abstract getIterator(context: Context): Iterator<IValue>;
+    abstract getIterator(context: Context): IIterator<IValue>;
+    abstract filter<ListValue>(filter: (value: IValue) => boolean): ListValue
 
     toJson(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: never[]): void {
         const values: JsonNode[] = [];

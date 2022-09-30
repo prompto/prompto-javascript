@@ -101,7 +101,7 @@ export default abstract class JsxElementBase extends Section implements IJsxExpr
                     actualNames.add(prop.id.name);
                 this.checkWidgetProperty(context, propertyMap, prop);
             }, this);
-        if(propertyMap!==null) {
+        if(propertyMap!=null) {
             propertyMap.forEach((prop, key) => {
                 if(prop.isRequired() && !actualNames.has(key))
                     context.problemListener.reportMissingProperty(this, key);
@@ -164,7 +164,7 @@ export default abstract class JsxElementBase extends Section implements IJsxExpr
         else
             transpiler.append('"').append(this.id.name).append('"');
         transpiler.append(", ");
-        if(this.properties==null || this.properties.length===0)
+        if(this.properties==null || this.properties.length==0)
             transpiler.append("null");
         else {
             const propertyMap = this.getPropertyMap(transpiler.context);

@@ -37,9 +37,9 @@ export default class ListLiteral extends ContainerLiteral<ListValue> {
     }
 
     interpretPromotion(item: IValue) {
-        if (DecimalType.instance === this.itemType && item instanceof IntegerValue)
+        if (DecimalType.instance == this.itemType && item instanceof IntegerValue)
             return new DecimalValue(item.DecimalValue());
-        else if (TextType.instance === this.itemType && item instanceof CharacterValue)
+        else if (TextType.instance == this.itemType && item instanceof CharacterValue)
             return new TextValue(item.value);
         else
             return item;

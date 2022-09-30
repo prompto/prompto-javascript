@@ -28,7 +28,7 @@ export default class EnumeratedNativeDeclaration extends BaseDeclaration {
     }
 
     getSymbolByName(name: string): NativeSymbol {
-        return this.symbols.filter(s => s.name === name)[0] || null;
+        return this.symbols.filter(s => s.name == name)[0] || null;
     }
 
     unregister(context: Context): void {

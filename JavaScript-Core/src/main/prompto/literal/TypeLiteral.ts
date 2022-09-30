@@ -21,7 +21,7 @@ export default class TypeLiteral extends Literal<TypeValue> {
     }
 
     toDialect(writer: CodeWriter): void {
-        if(writer.dialect===Dialect.E) {
+        if(writer.dialect==Dialect.E) {
             const decl = writer.context.getRegistered(this.value.value.id);
             if(decl instanceof MethodDeclarationMap)
                 writer.append("Method: ");

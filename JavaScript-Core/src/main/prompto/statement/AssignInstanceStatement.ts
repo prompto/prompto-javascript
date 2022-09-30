@@ -29,11 +29,11 @@ export default class AssignInstanceStatement extends SimpleStatement {
 
     check(context: Context): IType {
         const valueType = this.expression.check(context);
-        if(valueType === VoidType.instance)
+        if(valueType == VoidType.instance)
             context.problemListener.reportAssigningVoidType(this);
         this.instance.checkAssignValue(context, this, valueType);
         // Code expressions need to be interpreted as part of full check
-        if (valueType === CodeType.instance) {
+        if (valueType == CodeType.instance) {
             this.instance.assign(context, this.expression);
         }
         return VoidType.instance;
@@ -51,7 +51,7 @@ export default class AssignInstanceStatement extends SimpleStatement {
     transpile(transpiler: Transpiler): void {
         const valueType = this.expression.check(transpiler.context);
         // don't assign Code expressions
-        if (valueType === CodeType.instance) {
+        if (valueType == CodeType.instance) {
             this.instance.declareAssign(transpiler, this.expression);
         } else
             this.instance.transpileAssign(transpiler, this.expression);

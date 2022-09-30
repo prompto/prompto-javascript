@@ -45,7 +45,7 @@ export default class AssignVariableStatement extends SimpleStatement {
     }
 
     equals(obj: any) {
-        return obj == this || (obj instanceof AssignVariableStatement && this.name === obj.name && equalObjects(this.expression, obj.expression));
+        return obj == this || (obj instanceof AssignVariableStatement && this.name == obj.name && equalObjects(this.expression, obj.expression));
     }
 
     check(context: Context): IType {

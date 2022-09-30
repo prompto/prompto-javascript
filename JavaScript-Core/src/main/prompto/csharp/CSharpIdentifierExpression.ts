@@ -13,7 +13,7 @@ export default class CSharpIdentifierExpression extends CSharpExpression {
     }
 
     toString(): string {
-        if(this.parent===null) {
+        if(this.parent==null) {
             return this.identifier;
         } else {
             return this.parent.toString() + "." + this.identifier;

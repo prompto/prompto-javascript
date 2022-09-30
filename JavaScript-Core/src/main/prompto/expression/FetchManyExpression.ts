@@ -50,7 +50,7 @@ export default class FetchManyExpression extends FetchOneExpression {
         }
         if(this.include!=null) {
             writer.append(" include ");
-            if (this.include.length === 1)
+            if (this.include.length == 1)
                 writer.append(this.include[0].name);
             else {
                 for(let i = 0; i < this.include.length - 1; i++) {
@@ -198,7 +198,7 @@ export default class FetchManyExpression extends FetchOneExpression {
         if (exp == null)
             return null;
         const value = exp.interpret(context);
-        if(value.type!==IntegerType.instance)
+        if(value.type!=IntegerType.instance)
             throw new InvalidDataError("Expecting an Integer, got:" + value.type.name);
         return value.getStorableData();
     }

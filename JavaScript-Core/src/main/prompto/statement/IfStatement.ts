@@ -44,7 +44,7 @@ export default class IfStatement extends BaseStatement {
         let section = this as Section;
         this.elements.forEach(element => {
             const type = element.check(context);
-            if(type!==VoidType.instance) {
+            if(type!=VoidType.instance) {
                 section = element;
                 types.add(type);
             }

@@ -30,7 +30,7 @@ export default class MatchPredicate implements MemPredicate {
             case MatchOp.CONTAINS:
                 if(data==null)
                     return false;
-                else if(typeof(data)===typeof(""))
+                else if(typeof(data)==typeof(""))
                     return (data as string).indexOf(this.value as string)>=0;
                 else if(Array.isArray(data)) {
                     for(let i=0;i<data.length;i++) {

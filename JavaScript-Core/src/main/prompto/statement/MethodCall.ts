@@ -34,12 +34,12 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
         this.selector.toDialect(writer);
         if (this.args != null)
             this.args.toDialect(writer);
-        else if (writer.dialect !== Dialect.E)
+        else if (writer.dialect != Dialect.E)
             writer.append("()");
     }
 
     requiresInvoke(writer: CodeWriter) {
-        if (writer.dialect !== Dialect.E || (this.args != null && this.args.length > 0))
+        if (writer.dialect != Dialect.E || (this.args != null && this.args.length > 0))
             return false;
         try {
             const finder = new MethodFinder(writer.context, this);
@@ -53,7 +53,7 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
     }
 
     toString() {
-        return this.selector.toString() + "(" + (this.args!==null ? this.args.toString() : "") + ")";
+        return this.selector.toString() + "(" + (this.args!=null ? this.args.toString() : "") + ")";
     }
 
     check(context: Context, updateSelectorParent?: boolean) {
@@ -88,7 +88,7 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
         const finder = new MethodFinder(context, this);
         let potential = finder.findPotential();
         potential = [...potential].filter(m => !m.isAbstract());
-        if (potential.length === 0) {
+        if (potential.length == 0) {
             // raise error if direct call to pure abstract method
             context.problemListener.reportIllegalAbstractMethodCall(this, declaration.getSignature());
         }
@@ -104,7 +104,7 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
     }
 
     isLocalClosure(context: Context) {
-        if (this.selector.parent !== null) {
+        if (this.selector.parent != null) {
             return false;
         }
         const decl = context.getLocalDeclaration(this.selector.name);
@@ -153,15 +153,15 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
     dodeclare(transpiler: Transpiler): void {
         const finder = new MethodFinder(transpiler.context, this);
         const reference = finder.findBestReference(false, new Set());
-        if(reference !== null)
+        if(reference != null)
             return; // already declared
         const candidates = finder.findCandidates(false);
-        if(candidates.length === 0)
+        if(candidates.length == 0)
             transpiler.context.problemListener.reportUnknownMethod(this.selector.id, this.selector.name);
         else {
             const compatibles = finder.filterCompatible(candidates,false, true);
-            const first = compatibles.size === 1 ? compatibles.values().next().value : null;
-            if (compatibles.size === 1 && first instanceof BuiltInMethodDeclaration) {
+            const first = compatibles.size == 1 ? compatibles.values().next().value : null;
+            if (compatibles.size == 1 && first instanceof BuiltInMethodDeclaration) {
                 if (first.declareCall)
                     first.declareCall(transpiler);
             } else {
@@ -229,7 +229,7 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
             return;
         }
         const candidates = finder.findCandidates(false);
-        if(candidates.length === 0)
+        if(candidates.length == 0)
             transpiler.context.problemListener.reportUnknownMethod(this.selector.id, this.selector.name);
         else {
             const compatibles = finder.filterCompatible(candidates, false, true);
@@ -288,7 +288,7 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
             name = this.variableName;
         else if(this.fullSelector)
             name = this.fullSelector.name;
-        else if(selector.name !== declaration.name)
+        else if(selector.name != declaration.name)
             name = selector.name;
         else
             name = declaration.getTranspiledName(transpiler.context);
@@ -404,7 +404,7 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
             // if the closure comes from an accessible context that is not the instance context
             // then it is a local variable that needs the closure context to be interpreted
             const declaring = context.contextForValue(this.selector.name);
-            if (declaring === closure.context)
+            if (declaring == closure.context)
                 return decl;
         }
         return new ClosureDeclaration(closure);

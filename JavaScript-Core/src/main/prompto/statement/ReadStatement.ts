@@ -17,7 +17,7 @@ export default class ReadStatement extends ReadAllExpression {
     }
 
     locateSectionAtLine(line: number): Section | null {
-        if(line === this.startLocation.line)
+        if(line == this.startLocation.line)
             return this;
         else if(this.thenWith)
             return this.thenWith.statements.locateSectionAtLine(line);

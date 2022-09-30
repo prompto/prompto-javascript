@@ -26,7 +26,7 @@ export default class EIndentingLexer extends ELexer {
 
 	indentedNextToken(): Token {
 		const t = this.getNextToken();
-		this.wasLF = t.type === ELexer.LF;
+		this.wasLF = t.type == ELexer.LF;
 		return t;
 	}
 
@@ -72,10 +72,10 @@ export default class EIndentingLexer extends ELexer {
 		const indentCount = this.countIndents(lftab.text);
 		const next = this.nextLexerToken();
 		// if this was an empty line, simply skip it
-		if (next.type === ELexer.EOF || next.type === ELexer.LF_TAB) {
+		if (next.type == ELexer.EOF || next.type == ELexer.LF_TAB) {
 			this.tokens.push(this.deriveToken(lftab, ELexer.LF));
 			this.interpret(next);
-		} else if (indentCount === this.indents[this.indents.length - 1]) {
+		} else if (indentCount == this.indents[this.indents.length - 1]) {
 			this.tokens.push(this.deriveToken(lftab, ELexer.LF));
 			this.interpret(next);
 		} else if (indentCount > this.indents[this.indents.length - 1]) {

@@ -33,7 +33,7 @@ function getTargetAtomicType(context: Context, itype: IType): IType | null {
         context.problemListener.reportUnknownCategory(itype.id, itype.name);
         return null;
     } else if (decl instanceof MethodDeclarationMap) {
-        if (decl.size() === 1)
+        if (decl.size() == 1)
             return new MethodType(decl.getFirst()!);
         else {
             // TODO context.problemListener.reportAmbiguousIdentifier(itype.id, itype.name);
@@ -66,10 +66,10 @@ export default class CastExpression extends BaseExpression {
             return AnyType.instance;
         }
         const target = getTargetType(context, this.type, this.mutable);
-        if(target === null)
+        if(target == null)
             return VoidType.instance;
         // check Any
-        if(actual === AnyType.instance)
+        if(actual == AnyType.instance)
             return target;
         // check upcast
         if(target.isAssignableFrom(context, actual))
@@ -88,9 +88,9 @@ export default class CastExpression extends BaseExpression {
             if(!target)
                 context.problemListener.reportInvalidCast(this, this.type, value.type);
             if(!value.type.equals(target!)) {
-                if (value instanceof IntegerValue && target === DecimalType.instance) {
+                if (value instanceof IntegerValue && target == DecimalType.instance) {
                     value = new DecimalValue(value.DecimalValue());
-                } else if (value instanceof DecimalValue && target === IntegerType.instance) {
+                } else if (value instanceof DecimalValue && target == IntegerType.instance) {
                     value = new IntegerValue(value.IntegerValue());
                 } else if (value.type.isAssignableFrom(context, target!)) {
                     value.type = target!;
@@ -110,7 +110,7 @@ export default class CastExpression extends BaseExpression {
 
     transpile(transpiler: Transpiler): void {
         const expType = this.expression.check(transpiler.context);
-        if(expType===DecimalType.instance && this.type===IntegerType.instance) {
+        if(expType==DecimalType.instance && this.type==IntegerType.instance) {
             transpiler.append("Math.floor(");
             this.expression.transpile(transpiler);
             transpiler.append(")");

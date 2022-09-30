@@ -16,7 +16,7 @@ export default class CharacterValue extends BaseValue<string> {
     }
 
     getMemberValue(context, id) {
-        if ("codePoint" === id.name) {
+        if ("codePoint" == id.name) {
             return new IntegerValue(this.value.charCodeAt(0));
         } else {
             return super.getMemberValue(context, id);

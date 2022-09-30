@@ -3,13 +3,14 @@ import IType from "./IType";
 import {Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
 import {IExpression} from "../expression";
+import {TypeFamily} from "../store";
 
 export default abstract class IterableType extends NativeType {
 
     itemType: IType;
 
-    constructor(id: Identifier, itemType: IType) {
-        super(id);
+    constructor(id: Identifier, family: TypeFamily, itemType: IType) {
+        super(id, family);
         this.itemType = itemType;
     }
 

@@ -79,7 +79,7 @@ export default class MethodDeclarationMap implements IDeclaration {
     registerProto(method: IMethodDeclaration, problemListener: ProblemListener, override: boolean): void {
         const proto = method.getProto();
         const current = this.protos.get(proto) || null;
-        if (current !== null && !override)
+        if (current != null && !override)
             problemListener.reportDuplicate(method.id, method.id);
         this.protos.set(proto, method);
     }

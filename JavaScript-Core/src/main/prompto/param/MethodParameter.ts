@@ -85,7 +85,7 @@ export default class MethodParameter extends BaseParameter {
     }
 
     equals(other: IParameter): boolean {
-        return other == this || (other instanceof MethodParameter && this.name === other.name);
+        return other == this || (other instanceof MethodParameter && this.name == other.name);
     }
 
     toEDialect(writer: CodeWriter): void {

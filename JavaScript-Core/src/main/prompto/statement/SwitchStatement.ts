@@ -20,7 +20,7 @@ export default class SwitchStatement extends BaseSwitchStatement {
     }
 
     locateSectionAtLine(line: number): Section | null {
-        if(line === this.startLocation.line)
+        if(line == this.startLocation.line)
             return this;
         else {
             const section = this.switchCases.locateSectionAtLine(line, true);

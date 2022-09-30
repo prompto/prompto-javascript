@@ -42,7 +42,7 @@ export default class UnresolvedCall extends BaseStatement implements IAssertion 
             this.caller.toDialect(writer);
             if(this.args!=null)
                this.args.toDialect(writer);
-            else if(writer.dialect !== Dialect.E)
+            else if(writer.dialect != Dialect.E)
                 writer.append("()");
         }
     }
@@ -141,10 +141,10 @@ export default class UnresolvedCall extends BaseStatement implements IAssertion 
 
     resolveUnresolvedMethodReference(context: Context, id) {
         const named = context.getRegisteredValue(id);
-        if(named === null)
+        if(named == null)
             return null;
         let type = named.getType(context);
-        if(type !== null) {
+        if(type != null) {
             type = type.resolve(context);
             if(type instanceof MethodType) {
                 const call = new MethodCall(new MethodSelector(null, id), this.args);

@@ -18,7 +18,7 @@ export default class WithResourceStatement extends BaseStatement {
     }
 
     locateSectionAtLine(line: number): Section | null {
-        if(line === this.startLocation.line)
+        if(line == this.startLocation.line)
             return this;
         else if(this.statements)
             return this.statements.locateSectionAtLine(line);

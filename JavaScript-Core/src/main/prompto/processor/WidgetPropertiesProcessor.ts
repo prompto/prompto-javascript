@@ -58,7 +58,7 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
 
     findWidgetPropertiesFieldAnnotation(context: Context, widget: IWidgetDeclaration): Annotation | null {
         const found = widget.getAllAnnotations(context)!
-            .filter(a => a.name==="@WidgetField").filter(a => {
+            .filter(a => a.name=="@WidgetField").filter(a => {
                 const value = a.getArgument("isProperties");
                 return value instanceof BooleanLiteral && value.value.value;
             });
@@ -108,7 +108,7 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
             switch(name) {
                 case "required":
                     if(value instanceof BooleanLiteral) {
-                        prop.setRequired(value.interpret(context) === BooleanValue.TRUE);
+                        prop.setRequired(value.interpret(context) == BooleanValue.TRUE);
                         break;
                     }
                     context.problemListener.reportIllegalAnnotation(child.key!, "Expected a Boolean value for 'required'.");
@@ -171,9 +171,9 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
         const itemType = value.itemType || null;
         if(itemType instanceof TypeType)
             return this.newTypeSetValidator(context, annotation, value);
-        else if(itemType === TextType.instance || itemType === IntegerType.instance)
+        else if(itemType == TextType.instance || itemType == IntegerType.instance)
             return this.newValueSetValidator(context, annotation, value);
-        else if(itemType === AnyType.instance) {
+        else if(itemType == AnyType.instance) {
             if(this.setContainsType(context, value))
                 return this.newValidatorSetValidator(context, annotation, value);
             else
@@ -191,7 +191,7 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
 
     newValidatorSetValidator(context: Context, annotation: Annotation | null, value: SetValue): PropertyValidator | null {
         const validators = value.items
-            .filter(l => l !== NullValue.instance)
+            .filter(l => l != NullValue.instance)
             .map(l => this.newValidatorFromValue(context, annotation, l), this)
             .filter(v => v != null)
             .map(v => v.optional());
@@ -216,20 +216,20 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
 
     newValueSetValidator(context: Context, annotation: Annotation | null, value: SetValue): PropertyValidator | null {
         const texts = value.items
-            .filter(l => l !== NullValue.instance)
+            .filter(l => l != NullValue.instance)
             .map(l => l.toString());
         let validator = new ValueSetValidator(new Set<string>(texts));
-        if(texts.length === value.items.length) // no null
+        if(texts.length == value.items.length) // no null
             validator = validator.required();
         return validator;
     }
 
     newTypeSetValidator(context: Context, annotation: Annotation | null, value: SetValue): PropertyValidator | null {
         const types = value.items
-            .filter(l => l !== NullValue.instance)
+            .filter(l => l != NullValue.instance)
             .map(l => (l as TypeValue).value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation!, "Unkown type: " + t.name) ), this);
         let validator = new TypeSetValidator(new Set<IType>(types));
-        if(types.length === value.items.length)
+        if(types.length == value.items.length)
             validator = validator.required();
         return validator;
     }

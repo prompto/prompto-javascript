@@ -25,7 +25,7 @@ export default class BooleanValue extends BaseValue<boolean> {
     }
 
     static Parse(text: string): BooleanValue {
-        const bool = text==="true";
+        const bool = text=="true";
         return BooleanValue.ValueOf(bool);
     }
 

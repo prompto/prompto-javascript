@@ -677,7 +677,7 @@ export default class MParser extends AbstractParser {
 				this.state = 530;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===18) {
+				if (_la==18) {
 					{
 					this.state = 528;
 					this.match(MParser.COMMA);
@@ -810,7 +810,7 @@ export default class MParser extends AbstractParser {
 			this.state = 558;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 27271189) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 71301119) !== 0) || ((((_la - 91)) & ~0x1F) === 0 && ((1 << (_la - 91)) & 294913) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 1150369805) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 1047679) !== 0)) {
+			if (((((_la - 21)) & ~0x1F) == 0 && ((1 << (_la - 21)) & 27271189) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 71301119) != 0) || ((((_la - 91)) & ~0x1F) == 0 && ((1 << (_la - 91)) & 294913) != 0) || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 1150369805) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 1047679) != 0)) {
 				{
 				this.state = 557;
 				localctx._args = this.argument_assignment_list(0);
@@ -846,7 +846,7 @@ export default class MParser extends AbstractParser {
 			this.state = 563;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===151) {
+			if (_la==151) {
 				{
 				this.state = 562;
 				this.match(MParser.STORABLE);
@@ -866,7 +866,7 @@ export default class MParser extends AbstractParser {
 			this.state = 591;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===16) {
+			if (_la==16) {
 				{
 				this.state = 570;
 				this.match(MParser.COLON);
@@ -969,7 +969,7 @@ export default class MParser extends AbstractParser {
 			this.state = 596;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===91 || _la===143 || _la===174) {
+			if (_la==91 || _la==143 || _la==174) {
 				{
 				this.state = 595;
 				localctx._indices = this.variable_identifier_list();
@@ -1011,7 +1011,7 @@ export default class MParser extends AbstractParser {
 			this.state = 604;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===173) {
+			if (_la==173) {
 				{
 				this.state = 603;
 				localctx._derived = this.type_identifier();
@@ -1120,7 +1120,7 @@ export default class MParser extends AbstractParser {
 			this.state = 628;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===151) {
+			if (_la==151) {
 				{
 				this.state = 627;
 				this.match(MParser.STORABLE);
@@ -1129,7 +1129,7 @@ export default class MParser extends AbstractParser {
 
 			this.state = 630;
 			_la = this._input.LA(1);
-			if(!(_la===91 || _la===92)) {
+			if(!(_la==91 || _la==92)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -1171,7 +1171,7 @@ export default class MParser extends AbstractParser {
 			this.state = 650;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===16) {
+			if (_la==16) {
 				{
 				this.state = 642;
 				this.match(MParser.COLON);
@@ -1329,7 +1329,7 @@ export default class MParser extends AbstractParser {
 			this.state = 675;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===52) {
+			if (_la==52) {
 				{
 				this.state = 673;
 				this.match(MParser.RARROW);
@@ -1418,7 +1418,7 @@ export default class MParser extends AbstractParser {
 			this.state = 695;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===128) {
+			if (_la==128) {
 				{
 				this.state = 694;
 				this.match(MParser.NATIVE);
@@ -1511,7 +1511,7 @@ export default class MParser extends AbstractParser {
 			this.state = 718;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===128) {
+			if (_la==128) {
 				{
 				this.state = 717;
 				this.match(MParser.NATIVE);
@@ -1559,7 +1559,7 @@ export default class MParser extends AbstractParser {
 			this.state = 729;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===151) {
+			if (_la==151) {
 				{
 				this.state = 728;
 				this.match(MParser.STORABLE);
@@ -1570,7 +1570,7 @@ export default class MParser extends AbstractParser {
 			this.match(MParser.NATIVE);
 			this.state = 732;
 			_la = this._input.LA(1);
-			if(!(_la===91 || _la===92)) {
+			if(!(_la==91 || _la==92)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -1584,7 +1584,7 @@ export default class MParser extends AbstractParser {
 			this.state = 736;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 143)) & ~0x1F) === 0 && ((1 << (_la - 143)) & 2147483905) !== 0)) {
+			if (((((_la - 143)) & ~0x1F) == 0 && ((1 << (_la - 143)) & 2147483905) != 0)) {
 				{
 				this.state = 735;
 				localctx._attrs = this.attribute_identifier_list();
@@ -1640,7 +1640,7 @@ export default class MParser extends AbstractParser {
 			this.state = 750;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===151) {
+			if (_la==151) {
 				{
 				this.state = 749;
 				this.match(MParser.STORABLE);
@@ -1658,7 +1658,7 @@ export default class MParser extends AbstractParser {
 			this.state = 757;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 143)) & ~0x1F) === 0 && ((1 << (_la - 143)) & 2147483905) !== 0)) {
+			if (((((_la - 143)) & ~0x1F) == 0 && ((1 << (_la - 143)) & 2147483905) != 0)) {
 				{
 				this.state = 756;
 				localctx._attrs = this.attribute_identifier_list();
@@ -1715,7 +1715,7 @@ export default class MParser extends AbstractParser {
 			this.match(MParser.DEF);
 			this.state = 771;
 			_la = this._input.LA(1);
-			if(!(_la===91 || _la===92)) {
+			if(!(_la==91 || _la==92)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -1753,7 +1753,7 @@ export default class MParser extends AbstractParser {
 	public native_category_binding_list(_p: number): Native_category_binding_listContext;
 	// @RuleVersion(0)
 	public native_category_binding_list(_p?: number): Native_category_binding_listContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -1779,8 +1779,8 @@ export default class MParser extends AbstractParser {
 			this.state = 787;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 26, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -1840,7 +1840,7 @@ export default class MParser extends AbstractParser {
 			this.state = 795;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===66 || _la===91 || _la===127 || _la===143 || _la===174) {
+			if (_la==66 || _la==91 || _la==127 || _la==143 || _la==174) {
 				{
 				this.state = 794;
 				localctx._args = this.argument_list();
@@ -1852,14 +1852,14 @@ export default class MParser extends AbstractParser {
 			this.state = 803;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===52) {
+			if (_la==52) {
 				{
 				this.state = 798;
 				this.match(MParser.RARROW);
 				this.state = 800;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===127) {
+				if (_la==127) {
 					{
 					this.state = 799;
 					this.match(MParser.MUTABLE);
@@ -1906,7 +1906,7 @@ export default class MParser extends AbstractParser {
 			this.state = 810;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===66 || _la===91 || _la===127 || _la===143 || _la===174) {
+			if (_la==66 || _la==91 || _la==127 || _la==143 || _la==174) {
 				{
 				this.state = 809;
 				localctx._args = this.argument_list();
@@ -1918,14 +1918,14 @@ export default class MParser extends AbstractParser {
 			this.state = 818;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===52) {
+			if (_la==52) {
 				{
 				this.state = 813;
 				this.match(MParser.RARROW);
 				this.state = 815;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===127) {
+				if (_la==127) {
 					{
 					this.state = 814;
 					this.match(MParser.MUTABLE);
@@ -1970,7 +1970,7 @@ export default class MParser extends AbstractParser {
 			this.state = 824;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===66 || _la===91 || _la===127 || _la===143 || _la===174) {
+			if (_la==66 || _la==91 || _la==127 || _la==143 || _la==174) {
 				{
 				this.state = 823;
 				localctx._args = this.argument_list();
@@ -1982,14 +1982,14 @@ export default class MParser extends AbstractParser {
 			this.state = 832;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===52) {
+			if (_la==52) {
 				{
 				this.state = 827;
 				this.match(MParser.RARROW);
 				this.state = 829;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===127) {
+				if (_la==127) {
 					{
 					this.state = 828;
 					this.match(MParser.MUTABLE);
@@ -2125,7 +2125,7 @@ export default class MParser extends AbstractParser {
 			this.state = 844;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===128) {
+			if (_la==128) {
 				{
 				this.state = 843;
 				this.match(MParser.NATIVE);
@@ -2139,7 +2139,7 @@ export default class MParser extends AbstractParser {
 			this.state = 849;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===66 || _la===91 || _la===127 || _la===143 || _la===174) {
+			if (_la==66 || _la==91 || _la==127 || _la==143 || _la==174) {
 				{
 				this.state = 848;
 				localctx._args = this.argument_list();
@@ -2151,7 +2151,7 @@ export default class MParser extends AbstractParser {
 			this.state = 854;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===52) {
+			if (_la==52) {
 				{
 				this.state = 852;
 				this.match(MParser.RARROW);
@@ -2299,7 +2299,7 @@ export default class MParser extends AbstractParser {
 			this.state = 889;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===21) {
+			if (_la==21) {
 				{
 				this.state = 885;
 				this.match(MParser.LPAR);
@@ -2313,7 +2313,7 @@ export default class MParser extends AbstractParser {
 			this.state = 893;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===46) {
+			if (_la==46) {
 				{
 				this.state = 891;
 				this.match(MParser.EQ);
@@ -2583,7 +2583,7 @@ export default class MParser extends AbstractParser {
 				this.state = 932;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===79) {
+				if (_la==79) {
 					{
 					this.state = 926;
 					this.match(MParser.AND);
@@ -2618,7 +2618,7 @@ export default class MParser extends AbstractParser {
 			this.state = 947;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===163) {
+			if (_la==163) {
 				{
 				this.state = 941;
 				this.match(MParser.WITH);
@@ -2636,7 +2636,7 @@ export default class MParser extends AbstractParser {
 			this.state = 955;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===156) {
+			if (_la==156) {
 				{
 				this.state = 949;
 				this.match(MParser.THEN);
@@ -2682,7 +2682,7 @@ export default class MParser extends AbstractParser {
 			this.state = 960;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 27271189) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 71301119) !== 0) || ((((_la - 91)) & ~0x1F) === 0 && ((1 << (_la - 91)) & 294913) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 1150369805) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 1047679) !== 0)) {
+			if (((((_la - 21)) & ~0x1F) == 0 && ((1 << (_la - 21)) & 27271189) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 71301119) != 0) || ((((_la - 91)) & ~0x1F) == 0 && ((1 << (_la - 91)) & 294913) != 0) || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 1150369805) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 1047679) != 0)) {
 				{
 				this.state = 959;
 				localctx._args = this.argument_assignment_list(0);
@@ -2732,14 +2732,14 @@ export default class MParser extends AbstractParser {
 			this.state = 980;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===156) {
+			if (_la==156) {
 				{
 				this.state = 970;
 				this.match(MParser.THEN);
 				this.state = 973;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===163) {
+				if (_la==163) {
 					{
 					this.state = 971;
 					this.match(MParser.WITH);
@@ -2979,7 +2979,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1034;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===18) {
+			if (_la==18) {
 				{
 				this.state = 1032;
 				this.match(MParser.COMMA);
@@ -3162,7 +3162,7 @@ export default class MParser extends AbstractParser {
 	public else_if_statement_list(_p: number): Else_if_statement_listContext;
 	// @RuleVersion(0)
 	public else_if_statement_list(_p?: number): Else_if_statement_listContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -3200,8 +3200,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1100;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 57, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -3316,7 +3316,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1123;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===105) {
+			if (_la==105) {
 				{
 				this.state = 1116;
 				this.match(MParser.EXCEPT);
@@ -3336,7 +3336,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1132;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===111) {
+			if (_la==111) {
 				{
 				this.state = 1125;
 				this.match(MParser.FINALLY);
@@ -3479,7 +3479,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1161;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 27271189) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 71301119) !== 0) || ((((_la - 91)) & ~0x1F) === 0 && ((1 << (_la - 91)) & 294913) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 1150369805) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 1047679) !== 0)) {
+			if (((((_la - 21)) & ~0x1F) == 0 && ((1 << (_la - 21)) & 27271189) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 71301119) != 0) || ((((_la - 91)) & ~0x1F) == 0 && ((1 << (_la - 91)) & 294913) != 0) || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 1150369805) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 1047679) != 0)) {
 				{
 				this.state = 1160;
 				localctx._exp = this.expression(0);
@@ -3507,7 +3507,7 @@ export default class MParser extends AbstractParser {
 	public expression(_p: number): ExpressionContext;
 	// @RuleVersion(0)
 	public expression(_p?: number): ExpressionContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -3637,8 +3637,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1278;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 72, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -3719,7 +3719,7 @@ export default class MParser extends AbstractParser {
 						this.state = 1203;
 						(localctx as AddExpressionContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
-						if(!(_la===33 || _la===34)) {
+						if(!(_la==33 || _la==34)) {
 						    (localctx as AddExpressionContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
@@ -3742,7 +3742,7 @@ export default class MParser extends AbstractParser {
 						this.state = 1206;
 						(localctx as CompareExpressionContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
-						if(!(((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 15) !== 0))) {
+						if(!(((((_la - 40)) & ~0x1F) == 0 && ((1 << (_la - 40)) & 15) != 0))) {
 						    (localctx as CompareExpressionContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
@@ -3765,7 +3765,7 @@ export default class MParser extends AbstractParser {
 						this.state = 1209;
 						(localctx as EqualsExpressionContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
-						if(!(((((_la - 47)) & ~0x1F) === 0 && ((1 << (_la - 47)) & 7) !== 0))) {
+						if(!(((((_la - 47)) & ~0x1F) == 0 && ((1 << (_la - 47)) & 7) != 0))) {
 						    (localctx as EqualsExpressionContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
@@ -3788,7 +3788,7 @@ export default class MParser extends AbstractParser {
 						this.state = 1213;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la===130) {
+						if (_la==130) {
 							{
 							this.state = 1212;
 							this.match(MParser.NOT);
@@ -3813,7 +3813,7 @@ export default class MParser extends AbstractParser {
 						this.state = 1219;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la===130) {
+						if (_la==130) {
 							{
 							this.state = 1218;
 							this.match(MParser.NOT);
@@ -3838,7 +3838,7 @@ export default class MParser extends AbstractParser {
 						this.state = 1225;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la===130) {
+						if (_la==130) {
 							{
 							this.state = 1224;
 							this.match(MParser.NOT);
@@ -3948,7 +3948,7 @@ export default class MParser extends AbstractParser {
 						this.state = 1253;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la===127) {
+						if (_la==127) {
 							{
 							this.state = 1252;
 							this.match(MParser.MUTABLE);
@@ -3996,7 +3996,7 @@ export default class MParser extends AbstractParser {
 						this.state = 1264;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la===130) {
+						if (_la==130) {
 							{
 							this.state = 1263;
 							this.match(MParser.NOT);
@@ -4023,7 +4023,7 @@ export default class MParser extends AbstractParser {
 						this.state = 1271;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la===130) {
+						if (_la==130) {
 							{
 							this.state = 1270;
 							this.match(MParser.NOT);
@@ -4217,7 +4217,7 @@ export default class MParser extends AbstractParser {
 	public instance_expression(_p: number): Instance_expressionContext;
 	// @RuleVersion(0)
 	public instance_expression(_p?: number): Instance_expressionContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -4243,8 +4243,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1307;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 75, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -4288,7 +4288,7 @@ export default class MParser extends AbstractParser {
 	public mutable_instance_expression(_p: number): Mutable_instance_expressionContext;
 	// @RuleVersion(0)
 	public mutable_instance_expression(_p?: number): Mutable_instance_expressionContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -4316,8 +4316,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1318;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 76, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -4526,7 +4526,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1349;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 27271189) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 71301119) !== 0) || ((((_la - 91)) & ~0x1F) === 0 && ((1 << (_la - 91)) & 294913) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 1150369805) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 1047679) !== 0)) {
+			if (((((_la - 21)) & ~0x1F) == 0 && ((1 << (_la - 21)) & 27271189) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 71301119) != 0) || ((((_la - 91)) & ~0x1F) == 0 && ((1 << (_la - 91)) & 294913) != 0) || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 1150369805) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 1047679) != 0)) {
 				{
 				this.state = 1348;
 				this.expression(0);
@@ -4566,7 +4566,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1358;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===114) {
+			if (_la==114) {
 				{
 				this.state = 1355;
 				this.match(MParser.FROM);
@@ -4617,7 +4617,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1367;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===18) {
+				if (_la==18) {
 					{
 					this.state = 1365;
 					this.match(MParser.COMMA);
@@ -4641,7 +4641,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1374;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 27271189) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 71301119) !== 0) || ((((_la - 91)) & ~0x1F) === 0 && ((1 << (_la - 91)) & 294913) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 1150369805) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 1047679) !== 0)) {
+				if (((((_la - 21)) & ~0x1F) == 0 && ((1 << (_la - 21)) & 27271189) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 71301119) != 0) || ((((_la - 91)) & ~0x1F) == 0 && ((1 << (_la - 91)) & 294913) != 0) || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 1150369805) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 1047679) != 0)) {
 					{
 					this.state = 1373;
 					(localctx as ConstructorNoFromContext)._args = this.argument_assignment_list(0);
@@ -4706,7 +4706,7 @@ export default class MParser extends AbstractParser {
 	public argument_assignment_list(_p: number): Argument_assignment_listContext;
 	// @RuleVersion(0)
 	public argument_assignment_list(_p?: number): Argument_assignment_listContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -4751,8 +4751,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1397;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 85, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -4849,7 +4849,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1411;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===156) {
+			if (_la==156) {
 				{
 				this.state = 1410;
 				this.then();
@@ -4885,7 +4885,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1416;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===163) {
+			if (_la==163) {
 				{
 				this.state = 1414;
 				this.match(MParser.WITH);
@@ -4934,7 +4934,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1424;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===127 || _la===173) {
+				if (_la==127 || _la==173) {
 					{
 					this.state = 1423;
 					(localctx as FetchOneContext)._typ = this.mutable_category_type();
@@ -4994,7 +4994,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1443;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===127 || _la===173) {
+				if (_la==127 || _la==173) {
 					{
 					this.state = 1442;
 					(localctx as FetchManyContext)._typ = this.mutable_category_type();
@@ -5079,7 +5079,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1464;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===127 || _la===173) {
+				if (_la==127 || _la==173) {
 					{
 					this.state = 1463;
 					(localctx as FetchOneAsyncContext)._typ = this.mutable_category_type();
@@ -5093,7 +5093,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1470;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===119) {
+				if (_la==119) {
 					{
 					this.state = 1468;
 					this.match(MParser.INCLUDE);
@@ -5141,7 +5141,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1485;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===127 || _la===173) {
+				if (_la==127 || _la==173) {
 					{
 					this.state = 1484;
 					(localctx as FetchManyAsyncContext)._typ = this.mutable_category_type();
@@ -5153,7 +5153,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1490;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===165) {
+				if (_la==165) {
 					{
 					this.state = 1488;
 					this.match(MParser.WHERE);
@@ -5165,7 +5165,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1494;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===119) {
+				if (_la==119) {
 					{
 					this.state = 1492;
 					this.match(MParser.INCLUDE);
@@ -5177,7 +5177,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1499;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===137) {
+				if (_la==137) {
 					{
 					this.state = 1496;
 					this.match(MParser.ORDER);
@@ -5291,7 +5291,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1520;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===98) {
+			if (_la==98) {
 				{
 				this.state = 1519;
 				this.match(MParser.DESC);
@@ -5305,7 +5305,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1529;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===18) {
+			if (_la==18) {
 				{
 				this.state = 1524;
 				this.match(MParser.COMMA);
@@ -5459,8 +5459,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1554;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 108, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 1551;
@@ -5509,7 +5509,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1560;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while (_la===5);
+			} while (_la==5);
 			}
 		}
 		catch (re) {
@@ -5538,13 +5538,13 @@ export default class MParser extends AbstractParser {
 			this.state = 1565;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 110, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 1562;
 					_la = this._input.LA(1);
-					if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 226) !== 0))) {
+					if(!((((_la) & ~0x1F) == 0 && ((1 << _la) & 226) != 0))) {
 					this._errHandler.recoverInline(this);
 					}
 					else {
@@ -5595,7 +5595,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1571;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while (_la===5);
+			} while (_la==5);
 			this.state = 1573;
 			this.match(MParser.INDENT);
 			}
@@ -5625,7 +5625,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1578;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===5) {
+			while (_la==5) {
 				{
 				{
 				this.state = 1575;
@@ -5715,7 +5715,7 @@ export default class MParser extends AbstractParser {
 			{
 			this.state = 1587;
 			_la = this._input.LA(1);
-			if(!(_la===8 || _la===9)) {
+			if(!(_la==8 || _la==9)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -5741,7 +5741,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1591;
 				this._errHandler.sync(this);
 				_alt = this._interp.adaptivePredict(this._input, 113, this._ctx);
-			} while (_alt !== 1 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER);
+			} while (_alt != 1 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
 			}
 		}
 		catch (re) {
@@ -5817,7 +5817,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1600;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===8 || _la===9 || ((((_la - 76)) & ~0x1F) === 0 && ((1 << (_la - 76)) & 134578305) !== 0) || ((((_la - 128)) & ~0x1F) === 0 && ((1 << (_la - 128)) & 10485761) !== 0) || _la===162 || _la===177) {
+			if (_la==8 || _la==9 || ((((_la - 76)) & ~0x1F) == 0 && ((1 << (_la - 76)) & 134578305) != 0) || ((((_la - 128)) & ~0x1F) == 0 && ((1 << (_la - 128)) & 10485761) != 0) || _la==162 || _la==177) {
 				{
 				this.state = 1599;
 				this.declarations();
@@ -5857,8 +5857,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1611;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 116, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 1606;
@@ -5899,7 +5899,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1619;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===8 || _la===9) {
+			while (_la==8 || _la==9) {
 				{
 				{
 				this.state = 1614;
@@ -5915,7 +5915,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1627;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===177) {
+			while (_la==177) {
 				{
 				{
 				this.state = 1622;
@@ -5997,7 +5997,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1653;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===21) {
+			if (_la==21) {
 				{
 				this.state = 1639;
 				this.match(MParser.LPAR);
@@ -6065,7 +6065,7 @@ export default class MParser extends AbstractParser {
 					this.state = 1646;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					while (_la===18) {
+					while (_la==18) {
 						{
 						{
 						this.state = 1642;
@@ -6169,7 +6169,7 @@ export default class MParser extends AbstractParser {
 			{
 			this.state = 1661;
 			_la = this._input.LA(1);
-			if(!(_la===115 || _la===148 || _la===174)) {
+			if(!(_la==115 || _la==148 || _la==174)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -6308,8 +6308,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1679;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 125, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 1674;
@@ -6352,8 +6352,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1688;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 126, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 1683;
@@ -6396,7 +6396,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1696;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===18) {
+			while (_la==18) {
 				{
 				{
 				this.state = 1692;
@@ -6510,7 +6510,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1712;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===127) {
+			if (_la==127) {
 				{
 				this.state = 1711;
 				this.match(MParser.MUTABLE);
@@ -6522,7 +6522,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1716;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 27271189) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 71301119) !== 0) || ((((_la - 91)) & ~0x1F) === 0 && ((1 << (_la - 91)) & 294913) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 1150369805) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 1047679) !== 0)) {
+			if (((((_la - 21)) & ~0x1F) == 0 && ((1 << (_la - 21)) & 27271189) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 71301119) != 0) || ((((_la - 91)) & ~0x1F) == 0 && ((1 << (_la - 91)) & 294913) != 0) || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 1150369805) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 1047679) != 0)) {
 				{
 				this.state = 1715;
 				this.expression_list();
@@ -6558,7 +6558,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1721;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===127) {
+			if (_la==127) {
 				{
 				this.state = 1720;
 				this.match(MParser.MUTABLE);
@@ -6570,7 +6570,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1725;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 27271189) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 71301119) !== 0) || ((((_la - 91)) & ~0x1F) === 0 && ((1 << (_la - 91)) & 294913) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 1150369805) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 1047679) !== 0)) {
+			if (((((_la - 21)) & ~0x1F) == 0 && ((1 << (_la - 21)) & 27271189) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 71301119) != 0) || ((((_la - 91)) & ~0x1F) == 0 && ((1 << (_la - 91)) & 294913) != 0) || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 1150369805) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 1047679) != 0)) {
 				{
 				this.state = 1724;
 				this.expression_list();
@@ -6608,7 +6608,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1734;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===18) {
+			while (_la==18) {
 				{
 				{
 				this.state = 1730;
@@ -6675,7 +6675,7 @@ export default class MParser extends AbstractParser {
 	public typedef(_p: number): TypedefContext;
 	// @RuleVersion(0)
 	public typedef(_p?: number): TypedefContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -6772,8 +6772,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1771;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 136, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -7111,7 +7111,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1801;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===127) {
+			if (_la==127) {
 				{
 				this.state = 1800;
 				this.match(MParser.MUTABLE);
@@ -7264,8 +7264,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1821;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 142, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 1817;
@@ -7497,7 +7497,7 @@ export default class MParser extends AbstractParser {
 			{
 			this.state = 1844;
 			_la = this._input.LA(1);
-			if(!(_la===91 || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 16842753) !== 0) || _la===174)) {
+			if(!(_la==91 || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 16842753) != 0) || _la==174)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -7530,7 +7530,7 @@ export default class MParser extends AbstractParser {
 			{
 			this.state = 1846;
 			_la = this._input.LA(1);
-			if(!(_la===91 || _la===143 || _la===174)) {
+			if(!(_la==91 || _la==143 || _la==174)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -7563,7 +7563,7 @@ export default class MParser extends AbstractParser {
 			{
 			this.state = 1848;
 			_la = this._input.LA(1);
-			if(!(((((_la - 143)) & ~0x1F) === 0 && ((1 << (_la - 143)) & 2147483905) !== 0))) {
+			if(!(((((_la - 143)) & ~0x1F) == 0 && ((1 << (_la - 143)) & 2147483905) != 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -7649,7 +7649,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1859;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===18) {
+			while (_la==18) {
 				{
 				{
 				this.state = 1855;
@@ -7705,7 +7705,7 @@ export default class MParser extends AbstractParser {
 				this.state = 1864;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===127) {
+				if (_la==127) {
 					{
 					this.state = 1863;
 					this.match(MParser.MUTABLE);
@@ -7785,7 +7785,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1876;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===46) {
+			if (_la==46) {
 				{
 				this.state = 1874;
 				this.match(MParser.EQ);
@@ -7903,7 +7903,7 @@ export default class MParser extends AbstractParser {
 	public any_type(_p: number): Any_typeContext;
 	// @RuleVersion(0)
 	public any_type(_p?: number): Any_typeContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -7929,8 +7929,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1896;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 153, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -8003,8 +8003,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1905;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 154, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 1900;
@@ -8045,7 +8045,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1913;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===8 || _la===9) {
+			while (_la==8 || _la==9) {
 				{
 				{
 				this.state = 1908;
@@ -8061,7 +8061,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1921;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===177) {
+			while (_la==177) {
 				{
 				{
 				this.state = 1916;
@@ -8137,8 +8137,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1937;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 158, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 1932;
@@ -8179,7 +8179,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1945;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===8 || _la===9) {
+			while (_la==8 || _la==9) {
 				{
 				{
 				this.state = 1940;
@@ -8195,7 +8195,7 @@ export default class MParser extends AbstractParser {
 			this.state = 1953;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===177) {
+			while (_la==177) {
 				{
 				{
 				this.state = 1948;
@@ -8376,8 +8376,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1985;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 164, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 1981;
@@ -8420,8 +8420,8 @@ export default class MParser extends AbstractParser {
 			this.state = 1993;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 165, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 1989;
@@ -8479,7 +8479,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2003;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===36) {
+			if (_la==36) {
 				{
 				this.state = 2002;
 				this.match(MParser.SLASH);
@@ -8491,8 +8491,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2010;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 168, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 2006;
@@ -8547,7 +8547,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2022;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===18) {
+			while (_la==18) {
 				{
 				{
 				this.state = 2018;
@@ -8589,7 +8589,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2030;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===18) {
+			while (_la==18) {
 				{
 				{
 				this.state = 2026;
@@ -8683,8 +8683,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2045;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 173, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 2040;
@@ -8803,7 +8803,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2062;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===17) {
+			if (_la==17) {
 				{
 				this.state = 2061;
 				this.match(MParser.SEMI);
@@ -8813,7 +8813,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2065;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===114) {
+			if (_la==114) {
 				{
 				this.state = 2064;
 				this.python_module();
@@ -8849,7 +8849,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2069;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===17) {
+			if (_la==17) {
 				{
 				this.state = 2068;
 				this.match(MParser.SEMI);
@@ -8859,7 +8859,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2072;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===114) {
+			if (_la==114) {
 				{
 				this.state = 2071;
 				this.javascript_module();
@@ -8895,8 +8895,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2080;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 179, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 2075;
@@ -8939,8 +8939,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2089;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 180, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 2084;
@@ -8983,8 +8983,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2098;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 181, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 2093;
@@ -9027,8 +9027,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2107;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 182, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 2102;
@@ -9154,7 +9154,7 @@ export default class MParser extends AbstractParser {
 				this.state = 2129;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===34) {
+				if (_la==34) {
 					{
 					this.state = 2128;
 					this.match(MParser.MINUS);
@@ -9212,7 +9212,7 @@ export default class MParser extends AbstractParser {
 				this.state = 2138;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===34) {
+				if (_la==34) {
 					{
 					this.state = 2137;
 					this.match(MParser.MINUS);
@@ -9316,7 +9316,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2156;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===18) {
+			while (_la==18) {
 				{
 				{
 				this.state = 2152;
@@ -9355,7 +9355,7 @@ export default class MParser extends AbstractParser {
 			{
 			this.state = 2159;
 			_la = this._input.LA(1);
-			if(!(_la===147 || _la===157)) {
+			if(!(_la==147 || _la==157)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -9389,7 +9389,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2164;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===173) {
+			if (_la==173) {
 				{
 				this.state = 2161;
 				this.category_type();
@@ -9606,7 +9606,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2185;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===127) {
+			if (_la==127) {
 				{
 				this.state = 2184;
 				this.match(MParser.MUTABLE);
@@ -9618,7 +9618,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2189;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 27271189) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 71301119) !== 0) || ((((_la - 91)) & ~0x1F) === 0 && ((1 << (_la - 91)) & 294913) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 1150369805) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 1047679) !== 0)) {
+			if (((((_la - 21)) & ~0x1F) == 0 && ((1 << (_la - 21)) & 27271189) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 71301119) != 0) || ((((_la - 91)) & ~0x1F) == 0 && ((1 << (_la - 91)) & 294913) != 0) || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 1150369805) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 1047679) != 0)) {
 				{
 				this.state = 2188;
 				this.expression_tuple();
@@ -9654,7 +9654,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2194;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===127) {
+			if (_la==127) {
 				{
 				this.state = 2193;
 				this.match(MParser.MUTABLE);
@@ -9724,7 +9724,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2208;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 64512) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 4292868093) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 4294967295) !== 0) || ((((_la - 118)) & ~0x1F) === 0 && ((1 << (_la - 118)) & 4294967285) !== 0) || ((((_la - 150)) & ~0x1F) === 0 && ((1 << (_la - 150)) & 298057663) !== 0)) {
+			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 64512) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 4292868093) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 4294967295) != 0) || ((((_la - 118)) & ~0x1F) == 0 && ((1 << (_la - 118)) & 4294967285) != 0) || ((((_la - 150)) & ~0x1F) == 0 && ((1 << (_la - 150)) & 298057663) != 0)) {
 				{
 				this.state = 2207;
 				this.doc_entry_list();
@@ -9764,14 +9764,14 @@ export default class MParser extends AbstractParser {
 			this.state = 2222;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 27271189) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 71301119) !== 0) || ((((_la - 91)) & ~0x1F) === 0 && ((1 << (_la - 91)) & 294913) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 1150369805) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 1047679) !== 0)) {
+			if (((((_la - 21)) & ~0x1F) == 0 && ((1 << (_la - 21)) & 27271189) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 71301119) != 0) || ((((_la - 91)) & ~0x1F) == 0 && ((1 << (_la - 91)) & 294913) != 0) || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 1150369805) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 1047679) != 0)) {
 				{
 				this.state = 2214;
 				this.expression(0);
 				this.state = 2219;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===18) {
+				while (_la==18) {
 					{
 					{
 					this.state = 2215;
@@ -9816,7 +9816,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2229;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===18) {
+			while (_la==18) {
 				{
 				{
 				this.state = 2225;
@@ -10045,7 +10045,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2245;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===18) {
+			while (_la==18) {
 				{
 				{
 				this.state = 2241;
@@ -10351,7 +10351,7 @@ export default class MParser extends AbstractParser {
 	public assignable_instance(_p: number): Assignable_instanceContext;
 	// @RuleVersion(0)
 	public assignable_instance(_p?: number): Assignable_instanceContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -10377,8 +10377,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2278;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 203, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -10598,7 +10598,7 @@ export default class MParser extends AbstractParser {
 				this.state = 2308;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===91 || _la===143 || _la===174) {
+				if (_la==91 || _la==143 || _la==174) {
 					{
 					this.state = 2307;
 					this.variable_identifier_list();
@@ -10771,8 +10771,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2337;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 209, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 2333;
@@ -10816,8 +10816,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2345;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 210, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 2341;
@@ -10838,7 +10838,7 @@ export default class MParser extends AbstractParser {
 				{
 				this.state = 2348;
 				_la = this._input.LA(1);
-				if(!(_la===82 || _la===98)) {
+				if(!(_la==82 || _la==98)) {
 				this._errHandler.recoverInline(this);
 				}
 				else {
@@ -10877,8 +10877,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2356;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 212, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 2352;
@@ -10993,7 +10993,7 @@ export default class MParser extends AbstractParser {
 			{
 			this.state = 2367;
 			_la = this._input.LA(1);
-			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 64512) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 4292868093) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 4294967295) !== 0) || ((((_la - 118)) & ~0x1F) === 0 && ((1 << (_la - 118)) & 4294967285) !== 0) || ((((_la - 150)) & ~0x1F) === 0 && ((1 << (_la - 150)) & 262079) !== 0))) {
+			if(!((((_la) & ~0x1F) == 0 && ((1 << _la) & 64512) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 4292868093) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 4294967295) != 0) || ((((_la - 118)) & ~0x1F) == 0 && ((1 << (_la - 118)) & 4294967285) != 0) || ((((_la - 150)) & ~0x1F) == 0 && ((1 << (_la - 150)) & 262079) != 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -11271,7 +11271,7 @@ export default class MParser extends AbstractParser {
 			{
 			this.state = 2392;
 			_la = this._input.LA(1);
-			if(!(_la===38 || _la===126)) {
+			if(!(_la==38 || _la==126)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -11345,7 +11345,7 @@ export default class MParser extends AbstractParser {
 	public javascript_expression(_p: number): Javascript_expressionContext;
 	// @RuleVersion(0)
 	public javascript_expression(_p?: number): Javascript_expressionContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -11371,8 +11371,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2410;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 215, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -11603,7 +11603,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2437;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 10550272) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 4292868093) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 4294967295) !== 0) || ((((_la - 118)) & ~0x1F) === 0 && ((1 << (_la - 118)) & 4294967285) !== 0) || ((((_la - 150)) & ~0x1F) === 0 && ((1 << (_la - 150)) & 2513436607) !== 0) || _la===183) {
+			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 10550272) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 4292868093) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 4294967295) != 0) || ((((_la - 118)) & ~0x1F) == 0 && ((1 << (_la - 118)) & 4294967285) != 0) || ((((_la - 150)) & ~0x1F) == 0 && ((1 << (_la - 150)) & 2513436607) != 0) || _la==183) {
 				{
 				this.state = 2436;
 				localctx._args = this.javascript_arguments(0);
@@ -11633,7 +11633,7 @@ export default class MParser extends AbstractParser {
 	public javascript_arguments(_p: number): Javascript_argumentsContext;
 	// @RuleVersion(0)
 	public javascript_arguments(_p?: number): Javascript_argumentsContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -11659,8 +11659,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2449;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 219, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -12071,7 +12071,7 @@ export default class MParser extends AbstractParser {
 	public python_expression(_p: number): Python_expressionContext;
 	// @RuleVersion(0)
 	public python_expression(_p?: number): Python_expressionContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -12097,8 +12097,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2488;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 223, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -12289,7 +12289,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2511;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 2161664) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 4292868093) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 4294967295) !== 0) || ((((_la - 118)) & ~0x1F) === 0 && ((1 << (_la - 118)) & 4294967285) !== 0) || ((((_la - 150)) & ~0x1F) === 0 && ((1 << (_la - 150)) & 2513436607) !== 0) || _la===183) {
+			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 2161664) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 4292868093) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 4294967295) != 0) || ((((_la - 118)) & ~0x1F) == 0 && ((1 << (_la - 118)) & 4294967285) != 0) || ((((_la - 150)) & ~0x1F) == 0 && ((1 << (_la - 150)) & 2513436607) != 0) || _la==183) {
 				{
 				this.state = 2510;
 				localctx._args = this.python_argument_list();
@@ -12371,7 +12371,7 @@ export default class MParser extends AbstractParser {
 	public python_ordinal_argument_list(_p: number): Python_ordinal_argument_listContext;
 	// @RuleVersion(0)
 	public python_ordinal_argument_list(_p?: number): Python_ordinal_argument_listContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -12397,8 +12397,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2531;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 228, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -12444,7 +12444,7 @@ export default class MParser extends AbstractParser {
 	public python_named_argument_list(_p: number): Python_named_argument_listContext;
 	// @RuleVersion(0)
 	public python_named_argument_list(_p?: number): Python_named_argument_listContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -12474,8 +12474,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2547;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 229, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -12554,7 +12554,7 @@ export default class MParser extends AbstractParser {
 	public python_identifier_expression(_p: number): Python_identifier_expressionContext;
 	// @RuleVersion(0)
 	public python_identifier_expression(_p?: number): Python_identifier_expressionContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -12595,8 +12595,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2564;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 231, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -12928,7 +12928,7 @@ export default class MParser extends AbstractParser {
 	public java_expression(_p: number): Java_expressionContext;
 	// @RuleVersion(0)
 	public java_expression(_p?: number): Java_expressionContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -12954,8 +12954,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2597;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 235, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -13164,7 +13164,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2620;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 2161664) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 4292868093) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 4294967295) !== 0) || ((((_la - 118)) & ~0x1F) === 0 && ((1 << (_la - 118)) & 4294967285) !== 0) || ((((_la - 150)) & ~0x1F) === 0 && ((1 << (_la - 150)) & 2513436607) !== 0) || _la===183) {
+			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 2161664) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 4292868093) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 4294967295) != 0) || ((((_la - 118)) & ~0x1F) == 0 && ((1 << (_la - 118)) & 4294967285) != 0) || ((((_la - 150)) & ~0x1F) == 0 && ((1 << (_la - 150)) & 2513436607) != 0) || _la==183) {
 				{
 				this.state = 2619;
 				localctx._args = this.java_arguments(0);
@@ -13194,7 +13194,7 @@ export default class MParser extends AbstractParser {
 	public java_arguments(_p: number): Java_argumentsContext;
 	// @RuleVersion(0)
 	public java_arguments(_p?: number): Java_argumentsContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -13220,8 +13220,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2632;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 239, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -13325,7 +13325,7 @@ export default class MParser extends AbstractParser {
 	public java_identifier_expression(_p: number): Java_identifier_expressionContext;
 	// @RuleVersion(0)
 	public java_identifier_expression(_p?: number): Java_identifier_expressionContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -13351,8 +13351,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2651;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 240, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -13398,7 +13398,7 @@ export default class MParser extends AbstractParser {
 	public java_class_identifier_expression(_p: number): Java_class_identifier_expressionContext;
 	// @RuleVersion(0)
 	public java_class_identifier_expression(_p?: number): Java_class_identifier_expressionContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -13424,8 +13424,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2661;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 241, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -13755,7 +13755,7 @@ export default class MParser extends AbstractParser {
 	public csharp_expression(_p: number): Csharp_expressionContext;
 	// @RuleVersion(0)
 	public csharp_expression(_p?: number): Csharp_expressionContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -13781,8 +13781,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2694;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 245, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -13991,7 +13991,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2717;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 2161664) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 4292868093) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 4294967295) !== 0) || ((((_la - 118)) & ~0x1F) === 0 && ((1 << (_la - 118)) & 4294967285) !== 0) || ((((_la - 150)) & ~0x1F) === 0 && ((1 << (_la - 150)) & 2513436607) !== 0) || _la===183) {
+			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 2161664) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 4292868093) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 4294967295) != 0) || ((((_la - 118)) & ~0x1F) == 0 && ((1 << (_la - 118)) & 4294967285) != 0) || ((((_la - 150)) & ~0x1F) == 0 && ((1 << (_la - 150)) & 2513436607) != 0) || _la==183) {
 				{
 				this.state = 2716;
 				localctx._args = this.csharp_arguments(0);
@@ -14021,7 +14021,7 @@ export default class MParser extends AbstractParser {
 	public csharp_arguments(_p: number): Csharp_argumentsContext;
 	// @RuleVersion(0)
 	public csharp_arguments(_p?: number): Csharp_argumentsContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -14047,8 +14047,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2729;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 249, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -14152,7 +14152,7 @@ export default class MParser extends AbstractParser {
 	public csharp_identifier_expression(_p: number): Csharp_identifier_expressionContext;
 	// @RuleVersion(0)
 	public csharp_identifier_expression(_p?: number): Csharp_identifier_expressionContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -14193,8 +14193,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2750;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 251, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -14694,7 +14694,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2803;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 64512) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 4292868093) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 4294967295) !== 0) || ((((_la - 118)) & ~0x1F) === 0 && ((1 << (_la - 118)) & 4294967285) !== 0) || ((((_la - 150)) & ~0x1F) === 0 && ((1 << (_la - 150)) & 29622207) !== 0)) {
+			while ((((_la) & ~0x1F) == 0 && ((1 << _la) & 64512) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 4292868093) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 4294967295) != 0) || ((((_la - 118)) & ~0x1F) == 0 && ((1 << (_la - 118)) & 4294967285) != 0) || ((((_la - 150)) & ~0x1F) == 0 && ((1 << (_la - 150)) & 29622207) != 0)) {
 				{
 				{
 				this.state = 2800;
@@ -14742,7 +14742,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2815;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 64512) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 4292868093) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 4294967295) !== 0) || ((((_la - 118)) & ~0x1F) === 0 && ((1 << (_la - 118)) & 4294967285) !== 0) || ((((_la - 150)) & ~0x1F) === 0 && ((1 << (_la - 150)) & 29622207) !== 0)) {
+			while ((((_la) & ~0x1F) == 0 && ((1 << _la) & 64512) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 4292868093) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 4294967295) != 0) || ((((_la - 118)) & ~0x1F) == 0 && ((1 << (_la - 118)) & 4294967285) != 0) || ((((_la - 150)) & ~0x1F) == 0 && ((1 << (_la - 150)) & 29622207) != 0)) {
 				{
 				{
 				this.state = 2812;
@@ -14815,7 +14815,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2830;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===20) {
+			while (_la==20) {
 				{
 				{
 				this.state = 2826;
@@ -14857,8 +14857,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2837;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 262, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					{
 					{
 					this.state = 2834;
@@ -14899,7 +14899,7 @@ export default class MParser extends AbstractParser {
 			this.state = 2843;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===46) {
+			if (_la==46) {
 				{
 				this.state = 2841;
 				this.match(MParser.EQ);
@@ -14952,7 +14952,7 @@ export default class MParser extends AbstractParser {
 				this.state = 2850;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 27271189) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 71301119) !== 0) || ((((_la - 91)) & ~0x1F) === 0 && ((1 << (_la - 91)) & 294913) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 1150369805) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 1047679) !== 0)) {
+				if (((((_la - 21)) & ~0x1F) == 0 && ((1 << (_la - 21)) & 27271189) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 71301119) != 0) || ((((_la - 91)) & ~0x1F) == 0 && ((1 << (_la - 91)) & 294913) != 0) || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 1150369805) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 1047679) != 0)) {
 					{
 					this.state = 2849;
 					(localctx as JsxValueContext)._exp = this.expression(0);
@@ -15008,7 +15008,7 @@ export default class MParser extends AbstractParser {
 				this.state = 2858;
 				this._errHandler.sync(this);
 				_alt = this._interp.adaptivePredict(this._input, 266, this._ctx);
-			} while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER);
+			} while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
 			}
 		}
 		catch (re) {
@@ -15242,7 +15242,7 @@ export default class MParser extends AbstractParser {
 				this.state = 2864;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 27271189) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 71301119) !== 0) || ((((_la - 91)) & ~0x1F) === 0 && ((1 << (_la - 91)) & 294913) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 1150369805) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 1047679) !== 0)) {
+				if (((((_la - 21)) & ~0x1F) == 0 && ((1 << (_la - 21)) & 27271189) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 71301119) != 0) || ((((_la - 91)) & ~0x1F) == 0 && ((1 << (_la - 91)) & 294913) != 0) || ((((_la - 127)) & ~0x1F) == 0 && ((1 << (_la - 127)) & 1150369805) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 1047679) != 0)) {
 					{
 					this.state = 2863;
 					(localctx as JsxCodeContext)._exp = this.expression(0);
@@ -15298,7 +15298,7 @@ export default class MParser extends AbstractParser {
 				this.state = 2872;
 				this._errHandler.sync(this);
 				_alt = this._interp.adaptivePredict(this._input, 269, this._ctx);
-			} while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER);
+			} while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
 			}
 		}
 		catch (re) {
@@ -15329,7 +15329,7 @@ export default class MParser extends AbstractParser {
 				{
 				this.state = 2874;
 				_la = this._input.LA(1);
-				if(_la<=0 || ((((_la - 25)) & ~0x1F) === 0 && ((1 << (_la - 25)) & 163843) !== 0)) {
+				if(_la<=0 || ((((_la - 25)) & ~0x1F) == 0 && ((1 << (_la - 25)) & 163843) != 0)) {
 				this._errHandler.recoverInline(this);
 				}
 				else {
@@ -15384,7 +15384,7 @@ export default class MParser extends AbstractParser {
 				this.state = 2882;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while (((((_la - 10)) & ~0x1F) === 0 && ((1 << (_la - 10)) & 16777279) !== 0) || ((((_la - 54)) & ~0x1F) === 0 && ((1 << (_la - 54)) & 4292868093) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 4294967295) !== 0) || ((((_la - 118)) & ~0x1F) === 0 && ((1 << (_la - 118)) & 4294967285) !== 0) || ((((_la - 150)) & ~0x1F) === 0 && ((1 << (_la - 150)) & 29622207) !== 0));
+			} while (((((_la - 10)) & ~0x1F) == 0 && ((1 << (_la - 10)) & 16777279) != 0) || ((((_la - 54)) & ~0x1F) == 0 && ((1 << (_la - 54)) & 4292868093) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 4294967295) != 0) || ((((_la - 118)) & ~0x1F) == 0 && ((1 << (_la - 118)) & 4294967285) != 0) || ((((_la - 150)) & ~0x1F) == 0 && ((1 << (_la - 150)) & 29622207) != 0));
 			this.state = 2884;
 			this.match(MParser.RCURL);
 			}
@@ -15428,7 +15428,7 @@ export default class MParser extends AbstractParser {
 				this.state = 2891;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4227727358) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 4294967295) !== 0) || ((((_la - 128)) & ~0x1F) === 0 && ((1 << (_la - 128)) & 4294967295) !== 0) || ((((_la - 160)) & ~0x1F) === 0 && ((1 << (_la - 160)) & 536870911) !== 0));
+			} while ((((_la) & ~0x1F) == 0 && ((1 << _la) & 4227727358) != 0) || ((((_la - 32)) & ~0x1F) == 0 && ((1 << (_la - 32)) & 4294967295) != 0) || ((((_la - 64)) & ~0x1F) == 0 && ((1 << (_la - 64)) & 4294967295) != 0) || ((((_la - 96)) & ~0x1F) == 0 && ((1 << (_la - 96)) & 4294967295) != 0) || ((((_la - 128)) & ~0x1F) == 0 && ((1 << (_la - 128)) & 4294967295) != 0) || ((((_la - 160)) & ~0x1F) == 0 && ((1 << (_la - 160)) & 536870911) != 0));
 			this.state = 2893;
 			this.match(MParser.SEMI);
 			}
@@ -15452,7 +15452,7 @@ export default class MParser extends AbstractParser {
 	public css_identifier(_p: number): Css_identifierContext;
 	// @RuleVersion(0)
 	public css_identifier(_p?: number): Css_identifierContext {
-		if (_p === undefined) {
+		if (_p == undefined) {
 			_p = 0;
 		}
 
@@ -15606,8 +15606,8 @@ export default class MParser extends AbstractParser {
 			this.state = 2909;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 275, this._ctx);
-			while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
+			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+				if (_alt == 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -15639,7 +15639,7 @@ export default class MParser extends AbstractParser {
 						this.state = 2905;
 						this._errHandler.sync(this);
 						_alt = this._interp.adaptivePredict(this._input, 274, this._ctx);
-					} while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER);
+					} while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
 					}
 					}
 				}
@@ -15912,7 +15912,7 @@ export default class MParser extends AbstractParser {
 					{
 					this.state = 2919;
 					_la = this._input.LA(1);
-					if(_la<=0 || (((_la) & ~0x1F) === 0 && ((1 << _la) & 100794368) !== 0)) {
+					if(_la<=0 || (((_la) & ~0x1F) == 0 && ((1 << _la) & 100794368) != 0)) {
 					this._errHandler.recoverInline(this);
 					}
 					else {
@@ -15928,7 +15928,7 @@ export default class MParser extends AbstractParser {
 				this.state = 2922;
 				this._errHandler.sync(this);
 				_alt = this._interp.adaptivePredict(this._input, 277, this._ctx);
-			} while (_alt !== 2 && _alt !== antlr4.atn.ATN.INVALID_ALT_NUMBER);
+			} while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
 			}
 		}
 		catch (re) {

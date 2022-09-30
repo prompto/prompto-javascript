@@ -18,8 +18,8 @@ export default abstract class PropertyValidator {
         return new RequiredValidator(this);
     }
 
-    getMethodDeclarations(context: Context): IMethodDeclaration[] {
-        return [];
+    getMethodDeclarations(context: Context): Set<IMethodDeclaration> {
+        return new Set<IMethodDeclaration>();
     }
 
     abstract getType(context: Context): IType;

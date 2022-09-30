@@ -27,15 +27,15 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         let section;
         if(this.statements instanceof StatementList) {
             section = this.statements.locateSectionAtLine(line);
-            if(section !== null)
+            if(section != null)
                 return section;
         }
         section = this.switchCases.locateSectionAtLine(line, false);
-        if(section !== null)
+        if(section != null)
             return section;
         if(this.defaultCase instanceof StatementList) {
             section = this.defaultCase.locateSectionAtLine(line);
-            if(section !== null)
+            if(section != null)
                 return section;
         }
         if(this.alwaysInstructions instanceof StatementList)
@@ -64,7 +64,7 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         const section = super.collectReturnTypes(child, types);
         if(this.alwaysInstructions!=null) {
             type = this.alwaysInstructions.check(context, null);
-            if(type !== VoidType.instance) {
+            if(type != VoidType.instance) {
                 types.add(type);
             }
         }

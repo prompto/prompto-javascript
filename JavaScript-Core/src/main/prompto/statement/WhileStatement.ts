@@ -22,7 +22,7 @@ export default class WhileStatement extends BaseStatement {
     locateSectionAtLine(line: number) {
         if(this.condition instanceof Section) {
             const section = this.condition.locateSectionAtLine(line);
-            if(section !== null)
+            if(section != null)
                 return section;
         }
         if(this.statements)
@@ -50,7 +50,7 @@ export default class WhileStatement extends BaseStatement {
 
     check(context: Context): IType {
         const cond = this.condition.check(context);
-        if(cond !== BooleanType.instance) {
+        if(cond != BooleanType.instance) {
             context.problemListener.reportError(this, "Expected a Boolean condition!");
         }
         const child = context.newChildContext();
@@ -61,7 +61,7 @@ export default class WhileStatement extends BaseStatement {
         while(this.interpretCondition(context)) {
             const child = context.newChildContext();
             const value = this.statements ? this.statements.interpret(child) : null;
-            if(value === BreakResult.instance)
+            if(value == BreakResult.instance)
                 break;
             if(value!=null)
                 return value;

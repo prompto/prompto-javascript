@@ -72,7 +72,7 @@ export default class IntegerValue extends BaseValue<number> {
 
     Divide(context, value) {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
-            if (value.DecimalValue() === 0.0) {
+            if (value.DecimalValue() == 0.0) {
                 throw new DivideByZeroError();
             } else {
                 return new DecimalValue(this.DecimalValue() / value.DecimalValue());
@@ -84,7 +84,7 @@ export default class IntegerValue extends BaseValue<number> {
 
     IntDivide(context, value) {
         if (value instanceof IntegerValue) {
-            if (value.IntegerValue() === 0) {
+            if (value.IntegerValue() == 0) {
                 throw new DivideByZeroError();
             } else {
                 return new IntegerValue(this.IntegerValue() / value.IntegerValue());
@@ -96,7 +96,7 @@ export default class IntegerValue extends BaseValue<number> {
 
     Modulo(context, value) {
         if (value instanceof IntegerValue) {
-            if (value.IntegerValue() === 0) {
+            if (value.IntegerValue() == 0) {
                 throw new DivideByZeroError();
             } else {
                 return new IntegerValue(this.IntegerValue() % value.IntegerValue());
@@ -111,12 +111,12 @@ export default class IntegerValue extends BaseValue<number> {
     }
 
     cmp(obj) {
-        return this.value > obj.IntegerValue() ? 1 : this.value === obj.IntegerValue() ? 0 : -1 ;
+        return this.value > obj.IntegerValue() ? 1 : this.value == obj.IntegerValue() ? 0 : -1 ;
     }
 
     compareToValue(context, value) {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
-            return this.value > value.value ? 1 : this.value === value.value ? 0 : -1;
+            return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
         } else {
             throw new SyntaxError("Illegal comparison: IntegerValue and " + typeof(value));
         }
@@ -124,11 +124,11 @@ export default class IntegerValue extends BaseValue<number> {
 
     equals(obj) {
         if (obj instanceof IntegerValue) {
-            return this.value === obj.value;
+            return this.value == obj.value;
         } else if (obj instanceof DecimalValue) {
-            return this.value === obj.value;
+            return this.value == obj.value;
         } else if (obj instanceof DbIdValue) {
-            return this.value === obj.value;
+            return this.value == obj.value;
         } else {
             return false;
         }

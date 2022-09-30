@@ -35,7 +35,7 @@ export default class ExtendedParameter extends CategoryParameter {
 
     check(context: Context): IType {
         this.type.checkExists(context);
-        if(this.attributes!==null) {
+        if(this.attributes!=null) {
             this.attributes.forEach(id => {
                 const actual = context.getRegisteredDeclaration(AttributeDeclaration, id);
                 if (!actual && id.name != "text") {

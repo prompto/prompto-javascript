@@ -29,7 +29,7 @@ export default class OPromptoBuilder extends OParserListener {
 
 
     setNodeValue(node, value) {
-        if (node["%id"] === undefined)
+        if (node["%id"] == undefined)
             node["%id"] = this.nextNodeId++;
         this.nodeValues[node["%id"]] = value;
         if (value instanceof parser.Section) {
@@ -39,7 +39,7 @@ export default class OPromptoBuilder extends OParserListener {
 
 
     getNodeValue(node) {
-        if (node == null || node === undefined || node["%id"] === null || node["%id"] === undefined)
+        if (node == null || node == undefined || node["%id"] == null || node["%id"] == undefined)
             return null;
         else
             return this.nodeValues[node["%id"]];
@@ -71,7 +71,7 @@ export default class OPromptoBuilder extends OParserListener {
             return null;
         fetcher = fetcher.bind(this.input);
         const hidden = fetcher(token.tokenIndex);
-        if (hidden == null || hidden.length === 0)
+        if (hidden == null || hidden.length == 0)
             return null;
         else
             return hidden.map(token => token.text).join("");
@@ -81,14 +81,14 @@ export default class OPromptoBuilder extends OParserListener {
         const annotations = ctxs.map(function (csc) {
             return this.getNodeValue(csc);
         }, this);
-        return (annotations.length === 0) ? null : annotations;
+        return (annotations.length == 0) ? null : annotations;
     }
 
     readComments(ctxs) {
         const comments = ctxs.map(function (csc) {
             return this.getNodeValue(csc);
         }, this);
-        return (comments.length === 0) ? null : comments;
+        return (comments.length == 0) ? null : comments;
     }
 
     exitSelectableExpression = (ctx: contexts.SelectableExpressionContext) => {
@@ -266,7 +266,7 @@ export default class OPromptoBuilder extends OParserListener {
 
 
     exitList_literal = (ctx: contexts.List_literalContext) => {
-        const mutable = ctx.MUTABLE() !== null;
+        const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue(ctx.expression_list()) || null;
         const value = new literal.ListLiteral(mutable, items);
         this.setNodeValue(ctx, value);
@@ -274,7 +274,7 @@ export default class OPromptoBuilder extends OParserListener {
 
 
     exitDict_literal = (ctx: contexts.Dict_literalContext) => {
-        const mutable = ctx.MUTABLE() !== null;
+        const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue(ctx.dict_entry_list()) || null;
         const value = new literal.DictLiteral(mutable, items);
         this.setNodeValue(ctx, value);
@@ -282,7 +282,7 @@ export default class OPromptoBuilder extends OParserListener {
 
 
     exitTuple_literal = (ctx: contexts.Tuple_literalContext) => {
-        const mutable = ctx.MUTABLE() !== null;
+        const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue(ctx.expression_tuple()) || null;
         const value = new literal.TupleLiteral(mutable, items);
         this.setNodeValue(ctx, value);
@@ -2923,12 +2923,12 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     findFirstValidToken(idx) {
-        if (idx === -1) { // happens because input.index() is called before any other read operation (bug?)
+        if (idx == -1) { // happens because input.index() is called before any other read operation (bug?)
             idx = 0;
         }
         do {
             const token = this.readValidToken(idx++);
-            if (token !== null) {
+            if (token != null) {
                 return token;
             }
         } while (idx < this.input.tokenSource.size);
@@ -2936,12 +2936,12 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     findLastValidToken(idx) {
-        if (idx === -1) { // happens because input.index() is called before any other read operation (bug?)
+        if (idx == -1) { // happens because input.index() is called before any other read operation (bug?)
             idx = 0;
         }
         while (idx >= 0) {
             const token = this.readValidToken(idx--);
-            if (token !== null) {
+            if (token != null) {
                 return token;
             }
         }
@@ -2952,7 +2952,7 @@ export default class OPromptoBuilder extends OParserListener {
         const token = this.input.get(idx);
         const text = token.text;
         // ignore trailing whitespace
-        if (text !== null && text.replace(/(\n|\r|\t| )/g, "").length > 0) {
+        if (text != null && text.replace(/(\n|\r|\t| )/g, "").length > 0) {
             return token;
         } else {
             return null;

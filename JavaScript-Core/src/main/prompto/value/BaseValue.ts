@@ -31,7 +31,7 @@ export default abstract class BaseValue<T> implements IValue {
         return false;
     }
 
-    getIterator(): IIterator<IValue> {
+    getIterator(context: Context): IIterator<IValue> {
         throw new Error("Method not implemented.");
     }
 
@@ -56,9 +56,9 @@ export default abstract class BaseValue<T> implements IValue {
     }
 
     GetMemberValue(context: Context, member: Identifier, autoCreate?: boolean): IValue {
-        if("text" === member.name)
+        if("text" == member.name)
             return new TextValue(this.toString());
-        else if("json" === member.name) {
+        else if("json" == member.name) {
             const node = this.toJsonNode();
             return new TextValue(JSON.stringify(node));
         } else

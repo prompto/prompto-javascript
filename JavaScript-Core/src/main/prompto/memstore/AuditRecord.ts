@@ -33,7 +33,7 @@ export default class AuditRecord extends Map<string, any> implements IAuditRecor
     }
 
     matches(auditPredicates: Map<string, any> | null, instancePredicates: Map<string, any> | null) {
-        if ((auditPredicates ? auditPredicates.size : 0) + (instancePredicates ? instancePredicates.size : 0) === 0)
+        if ((auditPredicates ? auditPredicates.size : 0) + (instancePredicates ? instancePredicates.size : 0) == 0)
             return false;
         else
             return (auditPredicates ? this.auditMatchesAll(auditPredicates) : true) && (instancePredicates ? this.instanceMatchesAll(instancePredicates) : true);

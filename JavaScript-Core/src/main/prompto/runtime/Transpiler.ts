@@ -125,7 +125,7 @@ export default class Transpiler {
         const transpiler = this.newLocalTranspiler();
         decl.transpile(transpiler);
         transpiler.flush();
-        if(this.line!==this.indents) {
+        if(this.line!=this.indents) {
             this.lines.push(this.line);
             this.line = this.indents;
         }
@@ -159,7 +159,7 @@ export default class Transpiler {
     }
 
     getTranspiled(obj: object): string {
-        if(obj===null)
+        if(obj==null)
             return "null";
         if("toTranspiled" in obj) {
             const toTranspiled = obj["toTranspiled" as keyof typeof obj] as ()=>string;
@@ -203,7 +203,7 @@ export default class Transpiler {
 
     appendOneRequired_methods(fn: Function): void {
         const prototype = fn.prototype as object;
-        Object.keys(prototype).filter(key => key !== "toTranspiled")
+        Object.keys(prototype).filter(key => key != "toTranspiled")
             .forEach(key => {
                 let value = "";
                 if(key == "constructor")
@@ -253,7 +253,7 @@ export default class Transpiler {
     resolveChildImport(body: string, parent: string): string {
         const pattern = new RegExp("_" + parent + "\\.[a-z]*", 'g');
         let matches = body.match(pattern);
-        while(matches !== null) {
+        while(matches != null) {
             const match = matches[0];
             const replaceBy = match.substring(match.indexOf(".") + 1);
             body = body.replaceAll(match, replaceBy);
@@ -266,7 +266,7 @@ export default class Transpiler {
     resolveDefaultImports(body: string): string  {
         const pattern = /_[^.]*\.default/g;
         let matches = body.match(pattern);
-        while(matches !== null) {
+        while(matches != null) {
             const match = matches[0];
             const replaceBy = match.substring(1, match.length - 8);
             body = body.replaceAll(match, replaceBy);
@@ -314,9 +314,9 @@ export default class Transpiler {
     }
 
     dedent(): Transpiler {
-        if(this.line!==this.indents)
+        if(this.line!=this.indents)
             this.lines.push(this.line);
-        if(this.indents.length === 0) {
+        if(this.indents.length == 0) {
             throw new Error("Illegal dedent!");
         }
         this.indents = this.indents.slice(1);
@@ -356,12 +356,12 @@ function newTranspiler(context: Context): Transpiler {
     transpiler.lines.push("if(!Object.values) { Object.values = " + transpiler.resolveImports(ObjectUtils.values.toString() + "; }"));
     transpiler.lines.push("Boolean.prototype.getText = Boolean.prototype.toString;");
     transpiler.lines.push("Boolean.prototype.toJson = function() { return JSON.stringify(this); };");
-    transpiler.lines.push("Boolean.prototype.equals = function(value) { return this === value; };");
+    transpiler.lines.push("Boolean.prototype.equals = function(value) { return this == value; };");
     transpiler.lines.push("Number.prototype.formatInteger = " + transpiler.resolveImports(ObjectUtils.formatInteger.toString() + ";"));
     transpiler.lines.push("Number.prototype.toDecimalString = " + transpiler.resolveImports(ObjectUtils.decimalToString.toString() + ";"));
     transpiler.lines.push("Number.prototype.getText = Number.prototype.toString;");
     transpiler.lines.push("Number.prototype.toJson = function() { return JSON.stringify(this); };");
-    transpiler.lines.push("Number.prototype.equals = function(value) { return this === value; };");
+    transpiler.lines.push("Number.prototype.equals = function(value) { return this == value; };");
     transpiler.lines.push("String.prototype.hasAll = " + transpiler.resolveImports(ObjectUtils.stringHasAll.toString() + ";"));
     transpiler.lines.push("String.prototype.hasAny = " + transpiler.resolveImports(ObjectUtils.stringHasAny.toString() + ";"));
     transpiler.lines.push("String.prototype.splitToList = " + transpiler.resolveImports(ObjectUtils.stringSplitToList.toString() + ";"));
@@ -370,7 +370,7 @@ function newTranspiler(context: Context): Transpiler {
     transpiler.lines.push("String.prototype.toJson = function() { return JSON.stringify(this); };");
     transpiler.lines.push("String.prototype.indexOf1Based = function(value, fromIndex) { return 1 + this.indexOf(value, fromIndex); };");
     transpiler.lines.push("String.prototype.contains = function(value) { return this.indexOf(value) >= 0; };");
-    transpiler.lines.push("String.prototype.equals = function(value) { return this === value; };");
+    transpiler.lines.push("String.prototype.equals = function(value) { return this == value; };");
     transpiler.lines.push("String.prototype.iterator = function() { var s = this; return { idx: 0, hasNext: function() { return this.idx < s.length; }, next: function() { return s[this.idx++]; } }; };");
     transpiler.lines.push("var intrinsic = global.intrinsic = {};");
     return transpiler;
@@ -419,7 +419,7 @@ const ObjectUtils = {
     },
 
     stringHasAll: function(items: any): boolean {
-        if (typeof (StrictSet) !== 'undefined') {
+        if (typeof (StrictSet) != 'undefined') {
             if (items instanceof StrictSet)
                 items = items.toArray();
         }
@@ -433,7 +433,7 @@ const ObjectUtils = {
 
 
     stringHasAny: function(items: any): boolean {
-        if (typeof (StrictSet) !== 'undefined') {
+        if (typeof (StrictSet) != 'undefined') {
             if (items instanceof StrictSet)
                 items = items.toArray();
         }
@@ -487,7 +487,7 @@ const ObjectUtils = {
 }
 
 function print(msg: string): void {
-    const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+    const isNodeJs = typeof window == 'undefined' && typeof importScripts == 'undefined';
     if(isNodeJs)
         process.stdout.write(msg);
     else
@@ -533,7 +533,7 @@ class DivideByZeroError extends PromptoError {
 }
 
 function divide(a: number, b: number ): number {
-    if(b===0)
+    if(b==0)
         throw new DivideByZeroError();
     else
         return a / b;

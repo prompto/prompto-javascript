@@ -59,7 +59,7 @@ export default class DocumentValue extends BaseValue<Document> {
             default:
                 if (this.values.hasOwnProperty(id.name))
                     return this.values[id.name] || null;
-                else if ("text" === id.name)
+                else if ("text" == id.name)
                     return new TextValue(this.toString());
                 else if (autoCreate) {
                     const result = new DocumentValue();
@@ -100,7 +100,7 @@ export default class DocumentValue extends BaseValue<Document> {
     }
 
     equals(other) {
-        if(this===other)
+        if(this==other)
             return true;
         if(!(other instanceof DocumentValue))
             return false;
@@ -119,9 +119,9 @@ export default class DocumentValue extends BaseValue<Document> {
         const values = {}; // need a temporary parent
         for (const key in this.values) {
             const value = this.values[key];
-            if(typeof(value) === 'function')
+            if(typeof(value) == 'function')
                 continue;
-            if (value === null || value === undefined)
+            if (value == null || value == undefined)
                 values[key] = null;
             else {
                 const id = this; // TODO create identifier
@@ -135,7 +135,7 @@ export default class DocumentValue extends BaseValue<Document> {
         const values = {};
         Object.getOwnPropertyNames(this.values).forEach(function(key) {
             const value = this.values[key];
-            if (value === null || value === undefined)
+            if (value == null || value == undefined)
                 values[key] = null;
             else {
                 const id = this; // TODO create identifier

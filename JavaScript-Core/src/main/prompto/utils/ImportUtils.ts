@@ -1,5 +1,5 @@
 function isNodeJs() {
-    return typeof window === 'undefined' && typeof importScripts === 'undefined';
+    return typeof window == 'undefined' && typeof importScripts == 'undefined';
 }
 
 function importPathIfNode(): typeof import("path") | null {

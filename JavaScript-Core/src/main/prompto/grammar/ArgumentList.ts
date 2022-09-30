@@ -23,7 +23,7 @@ export default class ArgumentList extends ObjectList<Argument> {
             if(and.left instanceof UnresolvedIdentifier) {
                 const id = and.left.id;
                 const leading = id.name.charAt(0);
-                if(leading !== leading.toUpperCase()) {
+                if(leading != leading.toUpperCase()) {
                     this.pop();
                     // add AttributeParameter
                     const parameter = new AttributeParameter(id);

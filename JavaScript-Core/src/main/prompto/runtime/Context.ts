@@ -79,7 +79,7 @@ export class Context {
     }
 
     getParentMostContext(): Context {
-        if(this.parent === null) {
+        if(this.parent == null) {
             return this;
         } else {
             return this.parent.getParentMostContext();
@@ -87,7 +87,7 @@ export class Context {
     }
 
     getClosestInstanceContext(): InstanceContext | null {
-        if(this.parent === null) {
+        if(this.parent == null) {
             return null;
         } else {
             return this.parent.getClosestInstanceContext();
@@ -326,9 +326,9 @@ export class Context {
 
     checkDuplicate(declaration: IDeclaration): boolean {
         const actual = this.getRegistered(declaration.id) || null;
-        if (actual !== null && actual != declaration)
+        if (actual != null && actual != declaration)
             this.problemListener.reportDuplicate(declaration.id, declaration.id);
-        return actual === null;
+        return actual == null;
     }
 
     unregisterDeclaration(declaration: IDeclaration): void {
@@ -368,7 +368,7 @@ export class Context {
 
     registerTestDeclaration(declaration: TestMethodDeclaration): void {
         const actual = this.tests.get(declaration.name) || null;
-        if(actual!==null)
+        if(actual!=null)
             this.problemListener.reportDuplicate(declaration.id, declaration.id);
         this.tests.set(declaration.name, declaration);
     }
@@ -376,11 +376,11 @@ export class Context {
     getRegisteredTest(name: string): TestMethodDeclaration | null {
         // resolve upwards, since local names override global ones
         const actual = this.tests.get(name) || null;
-        if(actual!==null) {
+        if(actual!=null) {
             return actual;
-        } else if(this.parent!==null) {
+        } else if(this.parent!=null) {
             return this.parent.getRegisteredTest(name);
-        } else if(this.globals && this.globals!==this) {
+        } else if(this.globals && this.globals!=this) {
             return this.globals.getRegisteredTest(name);
         } else {
             return null;
@@ -392,18 +392,18 @@ export class Context {
     }
 
     registerNativeBinding(name: string, declaration: NativeCategoryDeclaration): void {
-        if(this === this.globals)
+        if(this == this.globals)
             this.nativeBindings.set(name, declaration);
         else
             this.globals?.registerNativeBinding(name, declaration);
     }
 
     getNativeBinding(name: string): NativeCategoryDeclaration | null {
-        if(this===this.globals) {
+        if(this==this.globals) {
             const binding = this.nativeBindings.get(name) || null;
             if (binding != null)
                 return binding;
-            else if (this.parent !== null)
+            else if (this.parent != null)
                 return this.parent.getNativeBinding(name);
             else
                 return null;
@@ -423,12 +423,12 @@ export class Context {
     }
 
     registerInstance(variable: NamedInstance, checkDuplicate: boolean): void {
-        if(checkDuplicate === undefined)
+        if(checkDuplicate == undefined)
             checkDuplicate = true;
         if(checkDuplicate) {
             // only explore current context
             const actual = this.instances.get(variable.name) || null;
-            if(actual!==null)
+            if(actual!=null)
                 this.problemListener.reportDuplicate(variable.id, variable.id);
         }
         this.instances.set(variable.name, variable);
@@ -445,7 +445,7 @@ export class Context {
 
 
     hasValue(id: Identifier): boolean {
-        return this.contextForValue(id) !== null;
+        return this.contextForValue(id) != null;
     }
 
     getValue(id: Identifier): IValue | null {
@@ -458,7 +458,7 @@ export class Context {
 
     readValue(id: Identifier): IValue | null {
         const value = this.values.get(id.name) || null;
-        if(value===null)
+        if(value==null)
             this.problemListener.reportEmptyVariable(id);
         if(value instanceof LinkedValue)
             return value.context.getValue(id);
@@ -631,7 +631,7 @@ export class InstanceContext extends Context {
         const widgetField = this.widgetFields.get(id.name) ||null;
         if(widgetField) {
             // we control reentrance by registering which processor created the widgetField
-            if(widgetField.createdBy === createdBy)
+            if(widgetField.createdBy == createdBy)
                 return;
             this.problemListener.reportDuplicate(id, id);
         } else
@@ -675,14 +675,14 @@ export class InstanceContext extends Context {
     }
 
     contextForValue(id: Identifier): Context | null {
-        if("this" === id.name)
+        if("this" == id.name)
             return this;
         else if(this.widgetFields!=null && this.widgetFields.has(id.name))
             return this;
         // params and variables have precedence over members
         // so first look in context values
         const context = super.contextForValue(id);
-        if(context !== null) {
+        if(context != null) {
             return context;
         }
         const decl = this.getDeclaration();
@@ -694,7 +694,7 @@ export class InstanceContext extends Context {
     }
 
     getDeclaration(): CategoryDeclaration | null {
-        if(this.instance !== null)
+        if(this.instance != null)
             return this.instance.declaration;
         else
             return this.getRegisteredCategoryDeclaration(this.instanceType.id);

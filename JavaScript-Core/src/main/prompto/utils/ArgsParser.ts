@@ -48,7 +48,7 @@ export default class ArgsParser extends antlr4.Parser {
 			this.state = 11;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===3 || _la===5) {
+			while (_la==3 || _la==5) {
 				{
 				{
 				this.state = 8;
@@ -86,7 +86,7 @@ export default class ArgsParser extends antlr4.Parser {
 			this.state = 15;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===3) {
+			if (_la==3) {
 				{
 				this.state = 14;
 				this.match(ArgsParser.DASH);

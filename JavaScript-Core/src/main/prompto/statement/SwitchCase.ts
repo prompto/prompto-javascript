@@ -20,7 +20,7 @@ export default abstract class SwitchCase extends Section {
     locateSectionAtLine(line: number, checkExpression?: boolean): Section | null {
         if(checkExpression && this.expression instanceof Section) {
             const section = this.expression.locateSectionAtLine(line);
-            if(section !== null)
+            if(section != null)
                 return section;
         }
         if(this.statements instanceof StatementList)

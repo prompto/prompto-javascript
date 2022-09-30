@@ -20,7 +20,7 @@ export default class NativeMethodDeclaration extends ConcreteMethodDeclaration {
             context = context.newLocalContext();
             this.registerParameters(context);
         }
-        if(this.parameters!==null)
+        if(this.parameters!=null)
             this.parameters.check(context);
         const checked = this.statements.checkNative(context, this.returnType).anyfy();
         return this.returnType==null ? checked : this.returnType;

@@ -37,7 +37,7 @@ export default class FetchOneExpression extends BaseExpression {
         this.predicate.toDialect(writer);
         if(this.include!=null) {
             writer.append(" include ");
-            if (this.include.length === 1)
+            if (this.include.length == 1)
                 writer.append(this.include[0].name);
             else {
                 for(let i = 0; i < this.include.length - 1; i++) {

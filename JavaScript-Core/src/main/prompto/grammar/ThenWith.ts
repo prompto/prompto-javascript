@@ -36,7 +36,7 @@ export default class ThenWith {
 
     toDialect(writer: CodeWriter, type: IType) {
         writer.append(" then with ").append(this.id.name);
-        if (writer.dialect === Dialect.O)
+        if (writer.dialect == Dialect.O)
             writer.append(" {");
         else
             writer.append(":");
@@ -45,7 +45,7 @@ export default class ThenWith {
         writer.newLine().indent();
         this.statements.toDialect(writer);
         writer.dedent();
-        if (writer.dialect === Dialect.O)
+        if (writer.dialect == Dialect.O)
             writer.append("}").newLine();
     }
 

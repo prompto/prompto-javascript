@@ -34,7 +34,7 @@ export default class CategoryParameter extends BaseParameter {
     }
 
     equals(other: IParameter): boolean {
-        return other === this || (other instanceof CategoryParameter && equalObjects(this.type, other.type));
+        return other == this || (other instanceof CategoryParameter && equalObjects(this.type, other.type));
     }
 
     checkValue(context: Context, expression: IExpression) {
@@ -88,7 +88,7 @@ export default class CategoryParameter extends BaseParameter {
 
     register(context: Context): void {
         const actual = context.contextForValue(this.id);
-        if (actual === context) {
+        if (actual == context) {
             throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
         }
         this.resolve(context);
@@ -133,7 +133,7 @@ export default class CategoryParameter extends BaseParameter {
     }
 
     toEDialect(writer: CodeWriter): void {
-        const anonymous = "any" === this.type.name;
+        const anonymous = "any" == this.type.name;
         this.type.toDialect(writer);
         if (anonymous) {
             writer.append(' ');

@@ -20,7 +20,7 @@ export default class TernaryExpression extends BaseExpression {
     }
 
     toDialect(writer: CodeWriter): void {
-        if(writer.dialect === Dialect.O) {
+        if(writer.dialect == Dialect.O) {
             this.condition.toDialect(writer);
             writer.append(" ? ");
             this.ifTrue.toDialect(writer);
@@ -51,7 +51,7 @@ export default class TernaryExpression extends BaseExpression {
         const test = this.condition.interpret(context);
         if(this.condition instanceof EqualsExpression)
             context = this.condition.downcast(context, true);
-        if(test === BooleanValue.TRUE)
+        if(test == BooleanValue.TRUE)
             return this.ifTrue.interpret(context);
         else
             return this.ifFalse.interpret(context);

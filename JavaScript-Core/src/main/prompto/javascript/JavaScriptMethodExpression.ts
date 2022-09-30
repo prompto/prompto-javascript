@@ -25,7 +25,7 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
     }
 
     toString() {
-        return (this.parent === null ? "" : (this.parent.toString() + ".")) + this.id.name + "(" + this.args.toString() + ")";
+        return (this.parent == null ? "" : (this.parent.toString() + ".")) + this.id.name + "(" + this.args.toString() + ")";
     }
 
     interpret(context: Context, module: JavaScriptModule) {
@@ -37,7 +37,7 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
     }
 
     transpile(transpiler: Transpiler): void {
-        if (this.parent !== null) {
+        if (this.parent != null) {
             this.parent.transpile(transpiler);
             transpiler.append(".");
         }
@@ -54,7 +54,7 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
     }
 
     findInstanceAndMethod(context: Context, module: JavaScriptModule): InstanceAndMethod {
-        if (this.parent === null) {
+        if (this.parent == null) {
             return this.findGlobal(context, module);
         } else {
             return this.findMember(context, module);
@@ -94,7 +94,7 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
 
     findMember(context: Context, module: JavaScriptModule): InstanceAndMethod {
         let i = this.parent!.interpret(context, module);
-        if(i===null) {
+        if(i==null) {
             throw "Null reference";
         }
         if(i instanceof NativeInstance) {

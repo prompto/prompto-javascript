@@ -22,7 +22,7 @@ export default class MethodExpression extends BaseExpression {
     }
 
     toDialect(writer: CodeWriter): void {
-        if(writer.dialect === Dialect.E)
+        if(writer.dialect == Dialect.E)
             writer.append("Method: ");
         if(this.expression instanceof UnresolvedSelector) {
             writer.append(this.expression.toString());

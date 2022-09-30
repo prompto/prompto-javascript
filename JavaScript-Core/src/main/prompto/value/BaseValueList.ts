@@ -59,7 +59,7 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
     }
 
     isEmpty(): boolean {
-        return this.value.length===0;
+        return this.value.length==0;
     }
 
     slice(fi: IntegerValue, li: IntegerValue): T  {
@@ -155,7 +155,7 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
     }
 
     getMemberValue(context: Context, id: Identifier): IValue {
-        if ("count" === id.name) {
+        if ("count" == id.name) {
             return new IntegerValue(this.value.length);
         } else {
             return super.getMemberValue(context, id);

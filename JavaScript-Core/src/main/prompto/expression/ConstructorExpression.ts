@@ -116,7 +116,7 @@ export default class ConstructorExpression extends BaseExpression {
     checkCopyFrom(context: Context) : void{
         if(this.copyFrom) {
             const cft = this.copyFrom.check(context);
-            if(!(cft instanceof CategoryType) && cft !== DocumentType.instance)
+            if(!(cft instanceof CategoryType) && cft != DocumentType.instance)
                 context.problemListener.reportInvalidCopySource(this.copyFrom instanceof Section ? this.copyFrom : this);
         }
     }
@@ -131,7 +131,7 @@ export default class ConstructorExpression extends BaseExpression {
     // noinspection JSMethodCanBeStatic
     checkArgument(context: Context, declaration: CategoryDeclaration, argument: Argument): void {
         const id = argument.id;
-        if(id === null)
+        if(id == null)
             context.problemListener.reportMissingAttribute(argument, argument.toString());
         else if(declaration.hasAttribute(context, id)) {
             context = context.newChildContext();
@@ -170,7 +170,7 @@ export default class ConstructorExpression extends BaseExpression {
     copyFromInstance(context: Context, decl: CategoryDeclaration, instance: Instance<unknown>, copyFrom: Instance<unknown>): void {
         const names = copyFrom.getMemberNames();
         names.forEach(name => {
-            if(name !== "dbId") {
+            if(name != "dbId") {
                 const id = new Identifier(name);
                 if (decl.hasAttribute(context, id)) {
                     const value = copyFrom.GetMemberValue(context, id);

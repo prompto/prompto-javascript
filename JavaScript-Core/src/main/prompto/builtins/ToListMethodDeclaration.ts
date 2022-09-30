@@ -3,6 +3,7 @@ import {ListType, IType} from '../type';
 import { List } from "../intrinsic";
 import { IValue, ListValue } from "../value";
 import {Context, Transpiler} from "../runtime";
+import {ArgumentList} from "../grammar";
 
 export default class ToListMethodDeclaration<T extends IValue> extends BuiltInMethodDeclaration<T> {
 

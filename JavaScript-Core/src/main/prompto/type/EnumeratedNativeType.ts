@@ -1,13 +1,15 @@
 import BaseType from './BaseType'
 import { TextType, ListType } from './index'
 import { List } from '../intrinsic'
-import { SymbolOfMethodDeclaration } from '../../../main/prompto/builtins/EnumeratedNativeTypeBuiltins'
+import { SymbolOfMethodDeclaration } from '../builtins/EnumeratedNativeTypeBuiltins'
 import { SyntaxError } from '../error'
 import {Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
 import {Section} from "../parser";
 import IType from "./IType";
 import {TypeFamily} from "../store";
+import {EnumeratedNativeDeclaration, IMethodDeclaration} from "../declaration";
+import {IValue} from "../value";
 
 export default class EnumeratedNativeType extends BaseType {
 
@@ -22,21 +24,21 @@ export default class EnumeratedNativeType extends BaseType {
         // TODO
     }
 
-    checkMember(context: Context, section: Section, id: Identifier): IType {
-        if ("value" === id.name) {
+    checkMember(context: Context, section: Section, member: Identifier): IType {
+        if ("value" == member.name) {
             return this.derivedFrom;
-        } else if ("name" === id.name) {
+        } else if ("name" == member.name) {
             return TextType.instance;
         } else {
-            return super.checkMember(context, section, id.name);
+            return super.checkMember(context, section, member);
         }
     }
 
-    checkStaticMember(context: Context, section: Section, id: Identifier): IType {
-        if ("symbols" === id.name) {
+    checkStaticMember(context: Context, section: Section, member: Identifier): IType {
+        if ("symbols" == member.name) {
             return new ListType(this);
         } else {
-            return super.checkStaticMember(context, section, id.name);
+            return super.checkStaticMember(context, section, member);
         }
     }
 
@@ -45,63 +47,62 @@ export default class EnumeratedNativeType extends BaseType {
     }
 
     declare(transpiler: Transpiler): void {
-        const decl = transpiler.context.getRegisteredDeclaration(this.id);
-        transpiler.declare(decl);
-        transpiler.require(List);
+        const decl = transpiler.context.getRegistered(this.id);
+        if(decl instanceof EnumeratedNativeDeclaration) {
+            transpiler.declare(decl);
+            transpiler.require(List);
+        }
     }
 
     transpile(transpiler: Transpiler): void {
         transpiler.append(this.name);
     }
 
-    declareMember(transpiler: Transpiler, id: Identifier) {
-        if("value" === id.name || "name" === id.name) {
-            const decl = transpiler.context.getRegisteredDeclaration(this.id);
-            transpiler.declare(decl);
+    declareMember(transpiler: Transpiler, member: Identifier) {
+        if("value" == member.name || "name" == member.name)
+            this.declare(transpiler);
+        else
+            super.declareMember(transpiler, member);
+    }
+
+    transpileMember(transpiler: Transpiler, member: Identifier): void {
+        if ("value" == member.name || "name" == member.name) {
+            transpiler.append(member.name);
+        } else {
+            return super.transpileMember(transpiler, member);
+        }
+    }
+
+    declareStaticMember(transpiler: Transpiler, member: Identifier): void {
+        if("symbols" == member.name)
+            this.declare(transpiler);
+        else
+            super.declareStaticMember(transpiler, member);
+    }
+
+    transpileStaticMember(transpiler: Transpiler, member: Identifier) {
+        if ("symbols" == member.name) {
+            transpiler.append(member.name);
+        } else {
+            return super.transpileStaticMember(transpiler, member);
+        }
+    }
+
+    getStaticMemberValue(context: Context, member: Identifier): IValue {
+        const decl = context.getRegistered(this.id);
+        if(decl instanceof EnumeratedNativeDeclaration) {
+            if ("symbols" == member.name)
+                return decl.symbols;
+            else
+                throw new SyntaxError("Unknown member:" + member.name);
         } else
-            super.declareMember(transpiler, id.name);
-    }
+            throw new SyntaxError(this.id.name + " is not an enumerated type!");
+     }
 
-    transpileMember(transpiler: Transpiler, id: Identifier): void {
-        if ("value" === id.name || "name" === id.name) {
-            transpiler.append(id.name);
-        } else {
-            return super.transpileMember(transpiler, id);
-        }
-    }
-
-    declareStaticMember(context: Context, id: Identifier): void {
-        if("symbols" === id.name) {
-            const decl = transpiler.context.getRegisteredDeclaration(this.id);
-            transpiler.declare(decl);
-        } else
-            super.declareStaticMember(transpiler, section, id);
-    }
-
-    transpileStaticMember(transpiler, id) {
-        if ("symbols" === id.name) {
-            transpiler.append(id.name);
-        } else {
-            return super.transpileStaticMember(transpiler, id);
-        }
-    }
-
-    getStaticMemberValue(context, id) {
-        const decl = context.getRegisteredDeclaration(this.id);
-        if(!decl || !decl.symbols) {
-            throw new SyntaxError(id.name + " is not an enumerated type!");
-        }
-        if ("symbols" === id.name) {
-            return decl.symbols;
-        } else {
-            throw new SyntaxError("Unknown member:" + id.name);
-        }
-    }
-
-    getStaticMemberMethods(context: Context, id) {
+    getStaticMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration> {
         switch (id.name) {
             case "symbolOf":
-                return [new SymbolOfMethodDeclaration(this)];
+                return new Set<IMethodDeclaration>([new SymbolOfMethodDeclaration(this)]);
             default:
                 return super.getStaticMemberMethods(context, id);
         }

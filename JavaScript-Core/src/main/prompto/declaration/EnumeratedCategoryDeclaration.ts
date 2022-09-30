@@ -30,7 +30,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
     }
 
     getSymbolByName(name: string): CategorySymbol | null {
-        return this.symbols.filter(s => s.name === name)[0] || null;
+        return this.symbols.filter(s => s.name == name)[0] || null;
     }
 
     unregister(context: Context): void {
@@ -48,7 +48,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
     }
 
     hasAttribute(context: Context, id: Identifier): boolean {
-        return "name" === id.name || super.hasAttribute(context, id);
+        return "name" == id.name || super.hasAttribute(context, id);
     }
 
     setSymbols(symbols: CategorySymbolList | null): void {
@@ -104,7 +104,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
         else
             writer.append("category");
         if(this.attributes!=null && this.attributes.length>0) {
-            if(this.attributes.length === 1)
+            if(this.attributes.length == 1)
                 writer.append(" with attribute ");
             else
                 writer.append(" with attributes ");
@@ -154,7 +154,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
     }
 
     declare(transpiler: Transpiler): void {
-        if(this.name==="Error")
+        if(this.name=="Error")
             return;
         transpiler.require(List);
         super.declare(transpiler);

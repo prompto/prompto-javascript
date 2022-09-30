@@ -59,7 +59,7 @@ export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
             else {
                 const current = new StrictSet<IParameter>(declaration.parameters);
                 common = common!.intersect(current);
-                if(common.length===0)
+                if(common.length==0)
                     break;
             }
         }

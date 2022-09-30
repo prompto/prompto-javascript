@@ -24,7 +24,7 @@ export default class MemberSelector extends SelectorBase {
     }
 
     toDialect(writer: CodeWriter): void {
-        if (writer.dialect === Dialect.E)
+        if (writer.dialect == Dialect.E)
             this.toEDialect(writer);
         else
             this.toOMDialect(writer);
@@ -53,7 +53,7 @@ export default class MemberSelector extends SelectorBase {
         } catch(e) {
             // ignore
         }
-        if (writer.dialect === Dialect.E)
+        if (writer.dialect == Dialect.E)
             this.parentToEDialect(writer);
         else
             this.parentToOMDialect(writer);
@@ -105,7 +105,7 @@ export default class MemberSelector extends SelectorBase {
 
     check(context: Context): IType {
         const parentType = this.checkParent(context);
-        if(parentType && parentType !== NullType.instance)
+        if(parentType && parentType != NullType.instance)
             return parentType.checkMember(context, this.id, this.id);
         else
             return VoidType.instance;
@@ -115,7 +115,7 @@ export default class MemberSelector extends SelectorBase {
         // resolve parent to keep clarity
         const parent = this.resolveParent(context);
         const instance = parent.interpret(context);
-        if (instance == null || instance === NullValue.instance)
+        if (instance == null || instance == NullValue.instance)
             throw new NullReferenceError();
         else
             return instance.GetMemberValue(context, this.id, false);
@@ -133,7 +133,7 @@ export default class MemberSelector extends SelectorBase {
         // resolve parent to keep clarity
         const parent = this.resolveParent(context);
         const instance = parent.interpret(context);
-        if (!instance || instance === NullValue.instance)
+        if (!instance || instance == NullValue.instance)
             throw new NullReferenceError();
         else if (instance instanceof Instance<never>) {
             const category = instance.declaration;

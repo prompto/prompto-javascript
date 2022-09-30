@@ -1,9 +1,9 @@
 import ObjectList from '../utils/ObjectList'
 import EnumSymbol from "../expression/EnumSymbol";
 import {Context} from "../runtime";
-import {IIterator} from "../value";
+import {IIterator, IValue} from "../value";
 
-export default abstract class SymbolList<T extends EnumSymbol<never>> extends ObjectList<T> {
+export default abstract class SymbolList<T extends EnumSymbol<never>> extends ObjectList<T> implements IValue {
 
     constructor(symbols?: T[], symbol?: T) {
         super(symbols, symbol);

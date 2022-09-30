@@ -26,7 +26,7 @@ export default abstract class RangeValue<T extends IValue> extends BaseValue<Lim
     }
 
     GetMemberValue(context: Context, id: Identifier): IValue {
-        if("count" === id.name)
+        if("count" == id.name)
             return new IntegerValue(this.size());
         else
             return super.GetMemberValue(context, id);

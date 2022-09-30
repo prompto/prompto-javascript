@@ -39,7 +39,7 @@ export default class StatementList extends ObjectList<IStatement> {
     locateSectionAtLine(line: number): Section | null {
         for(let i = 0;i < this.length; i++) {
             const section = this[i].locateSectionAtLine(line);
-            if(section !== null)
+            if(section != null)
                 return section;
         }
         return null;
@@ -96,7 +96,7 @@ export default class StatementList extends ObjectList<IStatement> {
         } else {
             let section: Section;
             const types = new TypeMap();
-            if(returnType !== null)
+            if(returnType != null)
                 types.add(returnType);
             this.forEach(stmt => {
                 let type = this.checkStatement(context, stmt);
@@ -188,7 +188,7 @@ export default class StatementList extends ObjectList<IStatement> {
     }
 
     toDialect(writer: CodeWriter): void {
-        if (this.length === 0) {
+        if (this.length == 0) {
             switch (writer.dialect) {
                 case Dialect.E:
                 case Dialect.M:
@@ -200,7 +200,7 @@ export default class StatementList extends ObjectList<IStatement> {
             this.forEach(stmt => {
                 stmt.toDialect(writer);
                 if (stmt.isSimple()) {
-                    if (writer.dialect === Dialect.O && !(stmt instanceof NativeCall))
+                    if (writer.dialect == Dialect.O && !(stmt instanceof NativeCall))
                         writer.append(';');
                     writer.newLine();
                 }

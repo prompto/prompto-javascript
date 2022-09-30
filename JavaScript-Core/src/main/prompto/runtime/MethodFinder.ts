@@ -22,7 +22,7 @@ export default class MethodFinder {
 
    findMemberCandidates(checkInstance: boolean): Set<IMethodDeclaration> {
        const selector = this.methodCall.selector;
-       if(selector.parent === null) {
+       if(selector.parent == null) {
            // if called from a member method, could be a member method called without this/self
            const instance = this.context.getClosestInstanceContext();
            if(instance) {
@@ -30,7 +30,7 @@ export default class MethodFinder {
                const decl = this.context.getRegistered(type.id);
                if(decl instanceof ConcreteCategoryDeclaration) {
                    const members = decl.getMemberMethods(this.context, selector.id, true);
-                   if(members !== null)
+                   if(members != null)
                        return new Set<IMethodDeclaration>([...members.getAll()]);
                }
            }
@@ -43,7 +43,7 @@ export default class MethodFinder {
 
     findGlobalCandidates(): Set<IMethodDeclaration> {
         const selector = this.methodCall.selector;
-        if(selector.parent !== null)
+        if(selector.parent != null)
             return new Set<IMethodDeclaration>();
         const globals = this.context.getRegistered(selector.id);
         const methods = globals instanceof MethodDeclarationMap ? globals.getAll() : [];
@@ -59,7 +59,7 @@ export default class MethodFinder {
        decl = this.findBestMethod(checkInstance, allCandidates);
        if (decl)
            return decl;
-       if (allCandidates.size === 0)
+       if (allCandidates.size == 0)
            this.context.problemListener.reportUnknownMethod(this.methodCall.selector.id, this.methodCall.selector.name);
        else
            this.context.problemListener.reportNoMatchingPrototype(this.methodCall, this.methodCall.toString(), [...allCandidates].map(m => m.getSignature()));
@@ -77,7 +77,7 @@ export default class MethodFinder {
 
     findCandidateReference(checkInstance: boolean): IMethodDeclaration | null {
         const selector = this.methodCall.selector;
-        if(selector.parent !== null)
+        if(selector.parent != null)
             return null;
         if(checkInstance) {
             if(this.context.hasValue(selector.id)) {
@@ -104,7 +104,7 @@ export default class MethodFinder {
 
     getClosureDeclaration(context: Context, closure: ClosureValue) {
         const decl = closure.type.method;
-        if(decl.memberOf !== null) {
+        if(decl.memberOf != null) {
             // the closure references a member method (useful when a method reference is needed)
             // in which case we may simply want to return that method to avoid spilling context into method body
             // this is only true if the closure comes straight from the method's instance context
@@ -112,7 +112,7 @@ export default class MethodFinder {
             // then it is a local variable that needs the closure context to be interpreted
             const selector = this.methodCall.selector;
             const declaring = this.context.contextForValue(selector.id);
-            if( declaring === closure.context)
+            if( declaring == closure.context)
                 return decl;
         }
         return new ClosureDeclaration(closure);
@@ -187,7 +187,7 @@ export default class MethodFinder {
                 const as2 = ass2[i];
                 const arg1 = decl1.parameters.find(as1.name);
                 const arg2 = decl2.parameters.find(as2.name);
-                if(as1.name===as2.name) {
+                if(as1.name==as2.name) {
                     // the general case with named arguments
                     const typ1 = arg1.getType(ctx1);
                     const typ2 = arg2.getType(ctx2);
@@ -197,7 +197,7 @@ export default class MethodFinder {
                         if(value.getType) {
                             const actual = value.getType();
                             const score = actual.compareSpecifity(this.context, typ1, typ2);
-                            if(score!==Score.SIMILAR) {
+                            if(score!=Score.SIMILAR) {
                                 return score;
                             }
                         }
@@ -257,7 +257,7 @@ export default class MethodFinder {
 
     findPotential(checkInstance: boolean): Set<IMethodDeclaration> {
         const candidates = this.findCandidates(false);
-        if(candidates.length === 0)
+        if(candidates.length == 0)
             this.context.problemListener.reportUnknownMethod(this.methodCall.selector.id, this.methodCall.selector.name);
         return this.filterPotential(candidates);
     }

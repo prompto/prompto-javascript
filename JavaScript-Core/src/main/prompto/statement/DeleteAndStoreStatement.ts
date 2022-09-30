@@ -25,7 +25,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
     }
 
     locateSectionAtLine(line: number): Section | null {
-        if(line === this.startLocation.line)
+        if(line == this.startLocation.line)
             return this;
         else if(this.andThen)
             return this.andThen.locateSectionAtLine(line);
@@ -40,7 +40,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
     toDialect(writer: CodeWriter): void {
         if(this.toDel) {
             writer.append("delete ");
-            if (writer.dialect === Dialect.E)
+            if (writer.dialect == Dialect.E)
                 this.toDel.toDialect(writer);
             else {
                 writer.append('(');
@@ -52,7 +52,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         }
         if (this.toAdd) {
             writer.append ("store ");
-            if (writer.dialect === Dialect.E)
+            if (writer.dialect == Dialect.E)
                 this.toAdd.toDialect(writer);
             else {
                 writer.append('(');
@@ -61,7 +61,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
             }
         }
         if(this.meta) {
-            if(writer.dialect === Dialect.E) {
+            if(writer.dialect == Dialect.E) {
                 writer.append(" with ");
                 this.meta.toDialect(writer);
                 writer.append(" as metadata");
@@ -72,7 +72,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
             }
         }
         if(this.andThen) {
-            if(writer.dialect === Dialect.O) {
+            if(writer.dialect == Dialect.O) {
                 writer.append(" then {").newLine().indent();
                 this.andThen.toDialect(writer);
                 writer.dedent().append("}").newLine();

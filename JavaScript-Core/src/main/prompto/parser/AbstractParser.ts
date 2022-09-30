@@ -15,42 +15,42 @@ export default class AbstractParser extends Parser {
 
 	isText(token: Token, text: string): boolean {
 		this.getTokenStream();
-		return text === token.text;
+		return text == token.text;
 	}
 
 	was(type: number): boolean {
-		return this.lastHiddenTokenType() === type;
+		return this.lastHiddenTokenType() == type;
 	}
 
 	wasNot(type: number): boolean {
-		return this.lastHiddenTokenType() !== type;
+		return this.lastHiddenTokenType() != type;
 	}
 
 	wasNotWhiteSpace(): boolean {
-		return this.lastHiddenTokenType() !== this.wsToken();
+		return this.lastHiddenTokenType() != this.wsToken();
 	}
 
 	willBe(type: number): boolean {
-		return this.getTokenStream().LA(1) === type;
+		return this.getTokenStream().LA(1) == type;
 	}
 
 	willBeIn(...args: number[]): boolean {
 		const next = this.getTokenStream().LA(1);
 		for(let i=0;i<args.length;i++) {
-			if(next === args[i])
+			if(next == args[i])
 				return true;
 		}
 		return false;
 	}
 
 	willNotBe(type: number): boolean {
-		return this.getTokenStream().LA(1) !== type;
+		return this.getTokenStream().LA(1) != type;
 	}
 
 	nextHiddenTokenType(): number {
 		const bts = this.getTokenStream();
 		const hidden = bts.getHiddenTokensToRight(bts.index - 1);
-		if (hidden === null || hidden.length === 0) {
+		if (hidden == null || hidden.length == 0) {
 			return 0;
 		} else {
 			return hidden[0].type;
@@ -62,13 +62,13 @@ export default class AbstractParser extends Parser {
 	}
 
 	willBeText(text: string): boolean {
-		return text === this.getTokenStream().LT(1).text;
+		return text == this.getTokenStream().LT(1).text;
 	}
 
 	lastHiddenTokenType(): number {
 		const bts = this.getTokenStream();
 		const hidden = bts.getHiddenTokensToLeft(bts.index);
-		if (hidden === null || hidden.length === 0) {
+		if (hidden == null || hidden.length == 0) {
 			return 0;
 		} else {
 			return hidden[hidden.length - 1].type;

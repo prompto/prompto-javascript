@@ -115,7 +115,7 @@ export default class JavaScriptModule {
     }
 
     transpile_intrinsic(transpiler: Transpiler, name: string) {
-        return this.ids[0]==="prompto" && this.ids[1]==="intrinsic";
+        return this.ids[0]=="prompto" && this.ids[1]=="intrinsic";
     }
 
     transpile_webpack(transpiler: Transpiler, name: string) {

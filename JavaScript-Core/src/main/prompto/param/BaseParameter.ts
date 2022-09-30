@@ -53,7 +53,7 @@ export default abstract class BaseParameter extends NamedInstance implements IWr
 
     transpileCall(transpiler: Transpiler, expression: IExpression): void {
         const expType = expression.check(transpiler.context);
-        if (this.getType(transpiler.context) === IntegerType.instance && expType === DecimalType.instance) {
+        if (this.getType(transpiler.context) == IntegerType.instance && expType == DecimalType.instance) {
             transpiler.append("Math.round(");
             expression.transpile(transpiler);
             transpiler.append(")");

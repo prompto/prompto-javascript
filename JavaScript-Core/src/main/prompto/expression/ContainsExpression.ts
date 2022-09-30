@@ -251,7 +251,7 @@ export default class ContainsExpression extends BaseExpression implements IPredi
         const info = decl.getAttributeInfo();
         let value = this.right.interpret(context);
         if (value instanceof Instance)
-            value = value.getMemberValue(context, Identifier.DB_ID, false);
+            value = value.GetMemberValue(context, Identifier.DB_ID, false);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const data = value.getStorableData();
         const matchOp = this.getMatchOp(context, decl.getType(), value.type, this.operator, false);
@@ -323,7 +323,6 @@ export default class ContainsExpression extends BaseExpression implements IPredi
         arrow.declareFilter(transpiler, itemType);
     }
 
-
     declareValue(transpiler: Transpiler): void {
         const lt = this.left.check(transpiler.context);
         const rt = this.right.check(transpiler.context);
@@ -353,13 +352,13 @@ export default class ContainsExpression extends BaseExpression implements IPredi
                 transpiler.append("!");
                 // no-break
             case ContOp.HAS_ALL:
-                lt.transpileHasAllPredicate(transpiler, this.left, this.right);
+                lt.transpileHasAllPredicate(transpiler, lt, this.left, this.right);
                 break;
             case ContOp.NOT_HAS_ANY:
                 transpiler.append("!");
                 // no-break
             case ContOp.HAS_ANY:
-                lt.transpileHasAnyPredicate(transpiler, this.left, this.right);
+                lt.transpileHasAnyPredicate(transpiler, lt, this.left, this.right);
                 break;
             default:
                 throw new Error("Unsupported " + this.operator.name);

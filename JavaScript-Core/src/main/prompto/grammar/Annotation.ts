@@ -23,7 +23,7 @@ export default class Annotation extends Section {
     }
 
     getDefaultArgument(): IExpression | null {
-        if(this.entries && this.entries.length===1)
+        if(this.entries && this.entries.length==1)
             return this.entries[0].value;
         else
             return null;

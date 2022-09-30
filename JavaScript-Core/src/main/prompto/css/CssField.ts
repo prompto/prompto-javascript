@@ -28,7 +28,7 @@ export default class CssField {
 
     transpile(transpiler: Transpiler): void {
         transpiler.append("'").append(this.name).append("':");
-        if(this.values.length === 1)
+        if(this.values.length == 1)
             this.values[0].transpile(transpiler);
         else {
             transpiler.append('"" + ');

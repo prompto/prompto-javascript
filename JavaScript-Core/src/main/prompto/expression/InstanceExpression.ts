@@ -64,7 +64,7 @@ export default class InstanceExpression extends BaseExpression {
                 transpiler.append(")");
             }
         } else {
-            if (transpiler.getterName === this.name)
+            if (transpiler.getterName == this.name)
                 transpiler.append("$");
             transpiler.append(this.name);
         }
@@ -72,7 +72,7 @@ export default class InstanceExpression extends BaseExpression {
 
 
     toDialect(writer: CodeWriter, requireMethod?: boolean): void {
-        if(requireMethod === undefined)
+        if(requireMethod == undefined)
             requireMethod = true;
         if(requireMethod && this.requiresMethod(writer))
             writer.append("Method: ");
@@ -80,7 +80,7 @@ export default class InstanceExpression extends BaseExpression {
     }
 
     requiresMethod(writer: CodeWriter): boolean {
-        if(writer.dialect !== Dialect.E)
+        if(writer.dialect != Dialect.E)
             return false;
         const o = writer.context.getRegistered(this.id);
         return o instanceof MethodDeclarationMap;

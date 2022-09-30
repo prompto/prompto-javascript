@@ -27,7 +27,7 @@ export default class JavaScriptMemberExpression extends JavaScriptSelectorExpres
     }
 
     transpile(transpiler: Transpiler): void {
-        if (this.parent !== null) {
+        if (this.parent != null) {
             this.parent.transpile(transpiler);
             transpiler.append(".");
         }
@@ -42,7 +42,7 @@ export default class JavaScriptMemberExpression extends JavaScriptSelectorExpres
     }
 
     toDialect(writer: CodeWriter): void {
-        if (this.parent !== null) {
+        if (this.parent != null) {
             this.parent.toDialect(writer);
             writer.append('.');
         }

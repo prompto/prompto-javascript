@@ -28,7 +28,7 @@ export default class ForEachStatement extends BaseStatement {
     locateSectionAtLine(line: number) {
         if(this.source instanceof Section) {
             const section = this.source.locateSectionAtLine(line);
-            if(section !== null)
+            if(section != null)
                 return section;
         }
         if(this.statements instanceof StatementList)
@@ -60,7 +60,7 @@ export default class ForEachStatement extends BaseStatement {
     }
 
     interpretItemIterator(context: Context, elemType: IType) {
-        if (this.v2 === null) {
+        if (this.v2 == null) {
             return this.interpretItemIteratorNoIndex(context, elemType);
         } else {
             return this.interpretItemIteratorWithIndex(context, elemType);
@@ -145,7 +145,7 @@ export default class ForEachStatement extends BaseStatement {
         writer.append(" in ");
         this.source.toDialect(writer);
         writer.append(")");
-        const oneLine = this.statements.length === 1 && this.statements[0].isSimple();
+        const oneLine = this.statements.length == 1 && this.statements[0].isSimple();
         if(!oneLine)
             writer.append(" {");
         writer.newLine();

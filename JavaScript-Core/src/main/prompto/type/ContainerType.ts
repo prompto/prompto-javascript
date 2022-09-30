@@ -1,18 +1,19 @@
 import IterableType from './IterableType'
 import { BooleanType, IntegerType } from './index'
-import { Variable } from '../runtime'
-import IType from "../../../main/prompto/type/IType";
+import {Context, Transpiler, Variable} from '../runtime'
+import IType from "./IType";
+import {Section} from "../parser";
+import {Identifier} from "../grammar";
+import {TypeFamily} from "../store";
+import {IExpression} from "../expression";
 
-export default class ContainerType extends IterableType {
+export default abstract class ContainerType extends IterableType {
 
-    itemType: IType;
-
-    constructor(id, itemType) {
-        super(id);
-        this.itemType = itemType;
+    constructor(id: Identifier, family: TypeFamily, itemType: IType) {
+        super(id, family, itemType);
     }
 
-    checkContains(context, section, other) {
+    checkContains(context: Context, section: Section, other: IType): IType {
         if(other.isAssignableFrom(context, this.itemType)) {
             return BooleanType.instance;
         } else {
@@ -20,41 +21,37 @@ export default class ContainerType extends IterableType {
         }
     }
 
-    checkMember(context: Context, section: Section, id: Identifier): IType {
-        if ("count" === id.name) {
+    checkMember(context: Context, section: Section, member: Identifier): IType {
+        if ("count" == member.name) {
             return IntegerType.instance;
         } else {
-            return  super.checkMember(context, section, id);
+            return  super.checkMember(context, section, member);
         }
     }
 
-    declareMember(transpiler, section, id) {
-        if(id.name !== "count")
-           super.declareMember(transpiler, section, id);
+    declareMember(transpiler: Transpiler, member: Identifier): void {
+        if(member.name != "count")
+           super.declareMember(transpiler, member);
     }
 
-    transpileMember(transpiler: Transpiler, id: Identifier): void {
-        if ("count" === id.name) {
+    transpileMember(transpiler: Transpiler, member: Identifier): void {
+        if ("count" == member.name) {
             transpiler.append("length");
         } else {
-            return super.transpileMember(transpiler, id);
+            return super.transpileMember(transpiler, member);
         }
     }
 
-    declareSorted(transpiler, key) {
-        // nothing to do
-    }
-
-    declareIterator(transpiler, name, expression) {
+    declareIterator(transpiler: Transpiler, name: Identifier, expression: IExpression) {
         transpiler = transpiler.newChildTranspiler();
-        transpiler.context.registerValue(new Variable(name, this.itemType));
+        transpiler.context.registerInstance(new Variable(name, this.itemType), true);
         expression.declare(transpiler);
     }
 
-    transpileIterator(transpiler, name, expression) {
-        transpiler.append(".iterate(function(").append(name).append(") { return ");
+    transpileIterator(transpiler: Transpiler, name: Identifier, expression: IExpression){
+        transpiler.append(".iterate(function(").append(name.name).append(") { return ");
         transpiler = transpiler.newChildTranspiler();
-        transpiler.context.registerValue(new Variable(name, this.itemType));
+        transpiler.context.registerInstance(new Variable(name, this.itemType), true);
         expression.transpile(transpiler);
         transpiler.append("; }, this)");
         transpiler.flush();

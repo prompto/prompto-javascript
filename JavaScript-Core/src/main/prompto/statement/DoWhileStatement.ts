@@ -22,7 +22,7 @@ export default class DoWhileStatement extends BaseStatement {
     locateSectionAtLine(line: number) {
         if(this.statements instanceof StatementList) {
             const section = this.statements.locateSectionAtLine(line);
-            if(section !== null)
+            if(section != null)
                 return section;
         }
         if(this.condition instanceof Section)

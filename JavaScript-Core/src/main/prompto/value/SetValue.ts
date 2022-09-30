@@ -38,7 +38,7 @@ export default class SetValue extends Container<StrictSet<IValue>> {
     }
 
     GetMemberValue(context: Context, id: Identifier): IValue {
-        if ("count" === id.name) {
+        if ("count" == id.name) {
             return new IntegerValue(this.value.length);
         } else {
             return super.GetMemberValue(context, id);
@@ -46,7 +46,7 @@ export default class SetValue extends Container<StrictSet<IValue>> {
     }
 
     isEmpty(): boolean {
-        return this.value.length === 0;
+        return this.value.length == 0;
     }
 
     hasValue(context: Context, value: IValue): boolean {

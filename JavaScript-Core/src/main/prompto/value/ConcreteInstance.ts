@@ -132,9 +132,9 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         if (getter != null) {
             context = context.newInstanceContext(this, null).newChildContext();
             return getter.interpret(context);
-        } else if (this.declaration.hasAttribute(context, id) || "dbId" === id.name) {
+        } else if (this.declaration.hasAttribute(context, id) || "dbId" == id.name) {
             return this.values[id.name] || NullValue.instance;
-        } else if ("text" === id.name) {
+        } else if ("text" == id.name) {
             return new TextValue(this.toString());
         } else
             return NullValue.instance;
@@ -173,28 +173,28 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
     }
 
     autocast(decl, value) {
-        if(value instanceof IntegerValue && decl.getType() === DecimalType.instance)
+        if(value instanceof IntegerValue && decl.getType() == DecimalType.instance)
             value = new DecimalValue(value.DecimalValue());
         return value;
     }
 
     equals(obj) {
-        if(obj === this) {
+        if(obj == this) {
             return true;
         } else if(!(obj instanceof ConcreteInstance)) {
             return false;
-        } else if(this.declaration!==obj.declaration) {
+        } else if(this.declaration!=obj.declaration) {
             return false;
         } else {
             const names = Object.getOwnPropertyNames(this.values);
             const otherNames = Object.getOwnPropertyNames(obj.values);
-            if(names.length !== otherNames.length) {
+            if(names.length != otherNames.length) {
                 return false;
             }
             for(let i=0;i<names.length;i++) {
                 const v1 = this.values[names[i]] || null;
                 const v2 = obj.values[names[i]];
-                if(v1 === v2) {
+                if(v1 == v2) {
                     continue;
                 } else if(v1==null || v2==null) {
                     return false;
@@ -219,7 +219,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
     toString() {
         const props = [];
         for(const name in this.values) {
-            if("dbId" !== name && typeof(this[name]) !== 'function')
+            if("dbId" != name && typeof(this[name]) != 'function')
                 props.push(name + ":" + this.values[name].toString())
         }
         return "{" + props.join(", ") + "}";

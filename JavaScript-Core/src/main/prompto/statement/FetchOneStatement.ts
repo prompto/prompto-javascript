@@ -17,7 +17,7 @@ export default class FetchOneStatement extends FetchOneExpression {
     }
 
     locateSectionAtLine(line: number): Section | null {
-        if(line === this.startLocation.line)
+        if(line == this.startLocation.line)
             return this;
         else if(this.thenWith?.statements)
             return this.thenWith?.statements.locateSectionAtLine(line);

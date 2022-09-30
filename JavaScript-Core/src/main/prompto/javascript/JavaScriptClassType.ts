@@ -83,12 +83,12 @@ export default class JavaScriptClassType extends CategoryType {
             res = JavaScriptClassType.convertCategory(context, value, klass, returnType);
         if(res)
             return res;
-        else if(returnType === AnyType.instance) {
+        else if(returnType == AnyType.instance) {
             return new NativeInstance(context, AnyNativeCategoryDeclaration.instance, value);
         } else {
             // when running under nodeunit, process.stdout is sometimes a WriteStream rather than a Socket
             // so need to adjust accordingly to prevent TestNative.testPrinter to fail
-            if(klass === 'WriteStream') {
+            if(klass == 'WriteStream') {
                 res = JavaScriptClassType.convertCategory(context, value, "Socket", returnType);
                 if(res)
                     return res;
@@ -133,8 +133,8 @@ export default class JavaScriptClassType extends CategoryType {
     }
 
     static convertList(context: Context, value: any, klass: string, returnType: IType): IValue | null {
-        const maybeList = returnType instanceof ListType || returnType instanceof AnyType || (returnType && returnType.toString()==="Any");
-        if(maybeList && (klass==="Array" || klass==="List")) {
+        const maybeList = returnType instanceof ListType || returnType instanceof AnyType || (returnType && returnType.toString()=="Any");
+        if(maybeList && (klass=="Array" || klass=="List")) {
             const itemType = returnType instanceof IterableType ? returnType.itemType : AnyType.instance;
             const items = (value as any[]).map(item => {
                 klass = getTypeName(item)!;
@@ -146,8 +146,8 @@ export default class JavaScriptClassType extends CategoryType {
     }
 
     static convertDocument(context: Context, value: any, klass: string, returnType: IType): IValue | null {
-        const maybeDoc = returnType instanceof DocumentType || returnType instanceof AnyType || (returnType && returnType.toString()==="Any");
-        if(maybeDoc && (klass==="object" || klass==="Object" || klass==="Document")) {
+        const maybeDoc = returnType instanceof DocumentType || returnType instanceof AnyType || (returnType && returnType.toString()=="Any");
+        if(maybeDoc && (klass=="object" || klass=="Object" || klass=="Document")) {
             const doc = new DocumentValue();
             Object.getOwnPropertyNames(value).filter(name =>!name.startsWith("$")).forEach(name => {
                 const item = value[name as keyof typeof value];
@@ -164,7 +164,7 @@ export default class JavaScriptClassType extends CategoryType {
         const promptoType = JavaScriptClassType.valueToTypeMap.get(klass) || null;
         if (promptoType != null) {
             return promptoType.convertJavaScriptValueToPromptoValue(context, value, returnType);
-        } else if(klass === 'number') {
+        } else if(klass == 'number') {
             if (Number.isInteger(value)) {
                 return IntegerType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
             } else {

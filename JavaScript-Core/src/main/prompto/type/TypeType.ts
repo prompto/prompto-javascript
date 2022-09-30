@@ -38,7 +38,7 @@ export default class TypeType extends BaseType {
         this.type.transpileStaticMember(transpiler, id);
     }
 
-    getMemberMethods(context, id) {
+    getMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration> {
         return this.type.getStaticMemberMethods(context, id);
     }
 }

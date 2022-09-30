@@ -17,7 +17,7 @@ export default class MethodType extends BaseType {
 
     equals(other: any): boolean {
         return other == this ||
-            ((other instanceof MethodType) && (this.method.getProto() === other.method.getProto()));
+            ((other instanceof MethodType) && (this.method.getProto() == other.method.getProto()));
     }
 
     checkExists(context: Context): void {

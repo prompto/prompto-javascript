@@ -20,7 +20,7 @@ export default class PythonIdentifierExpression implements IPythonExpression {
     }
 
     toString() {
-        if(this.parent===null) {
+        if(this.parent==null) {
             return this.identifier;
         } else {
             return this.parent.toString() + "." + this.identifier;

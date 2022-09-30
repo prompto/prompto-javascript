@@ -87,6 +87,6 @@ export default class AttributeParameter extends BaseParameter {
     }
 
     equals(other: IParameter): boolean {
-        return other == this || (other instanceof AttributeParameter && this.name === other.name);
+        return other == this || (other instanceof AttributeParameter && this.name == other.name);
     }
 }

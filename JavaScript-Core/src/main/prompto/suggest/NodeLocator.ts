@@ -40,7 +40,7 @@ export default class NodeLocator {
     }
 
     _checkTokenBefore(token: antlr4.Token, caret: Caret) {
-        if(token.line > caret.line || (token.line === caret.line && token.column >= caret.column - 1))
+        if(token.line > caret.line || (token.line == caret.line && token.column >= caret.column - 1))
             throw new Error("after caret");
     }
 

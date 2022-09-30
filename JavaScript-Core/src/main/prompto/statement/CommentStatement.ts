@@ -7,9 +7,9 @@ import {IValue} from "../value";
 
 
 function uncomment(line: string) {
-    if (line.indexOf("#")===0)
+    if (line.indexOf("#")==0)
         return line.substring(1);
-    else if(line.indexOf("//")===0)
+    else if(line.indexOf("//")==0)
         return line.substring(2);
     else
         return line;

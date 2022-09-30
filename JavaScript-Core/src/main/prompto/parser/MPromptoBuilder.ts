@@ -29,7 +29,7 @@ export default class MPromptoBuilder extends MParserListener {
     }
 
     setNodeValue(node, value) {
-        if (node["%id"] === undefined)
+        if (node["%id"] == undefined)
             node["%id"] = this.nextNodeId++;
         this.nodeValues[node["%id"]] = value;
         if (value instanceof parser.Section) {
@@ -39,7 +39,7 @@ export default class MPromptoBuilder extends MParserListener {
 
 
     getNodeValue(node) {
-        if (node == null || node === undefined || node["%id"] === null || node["%id"] === undefined)
+        if (node == null || node == undefined || node["%id"] == null || node["%id"] == undefined)
             return null;
         else
             return this.nodeValues[node["%id"]];
@@ -60,7 +60,7 @@ export default class MPromptoBuilder extends MParserListener {
 
 
     getHiddenTokensText(hidden) {
-        if (hidden == null || hidden.length === 0)
+        if (hidden == null || hidden.length == 0)
             return null;
         else
             return hidden.map(token => token.text).join("");
@@ -73,7 +73,7 @@ export default class MPromptoBuilder extends MParserListener {
             }, this)
             .map(child => child.getText(), this)
             .join("");
-        if (within == null || within.length === 0)
+        if (within == null || within.length == 0)
             return null;
         const before = this.getHiddenTokensBefore(ctx.start);
         if (before != null)
@@ -297,7 +297,7 @@ export default class MPromptoBuilder extends MParserListener {
 
 
     exitList_literal(ctx) {
-        const mutable = ctx.MUTABLE() !== null;
+        const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue(ctx.expression_list()) || null;
         const value = new literal.ListLiteral(mutable, items);
         this.setNodeValue(ctx, value);
@@ -305,7 +305,7 @@ export default class MPromptoBuilder extends MParserListener {
 
 
     exitDict_literal(ctx) {
-        const mutable = ctx.MUTABLE() !== null;
+        const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue(ctx.dict_entry_list()) || null;
         const value = new literal.DictLiteral(mutable, items);
         this.setNodeValue(ctx, value);
@@ -313,7 +313,7 @@ export default class MPromptoBuilder extends MParserListener {
 
 
     exitTuple_literal(ctx) {
-        const mutable = ctx.MUTABLE() !== null;
+        const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue(ctx.expression_tuple()) || null;
         const value = new literal.TupleLiteral(mutable, items);
         this.setNodeValue(ctx, value);
@@ -2949,12 +2949,12 @@ export default class MPromptoBuilder extends MParserListener {
     }
 
     findFirstValidToken(idx, allowWS) {
-        if (idx === -1) { // happens because input.index() is called before any other read operation (bug?)
+        if (idx == -1) { // happens because input.index() is called before any other read operation (bug?)
             idx = 0;
         }
         do {
             const token = this.readValidToken(idx++, allowWS);
-            if (token !== null) {
+            if (token != null) {
                 return token;
             }
         } while (idx < this.input.tokenSource.size);
@@ -2962,12 +2962,12 @@ export default class MPromptoBuilder extends MParserListener {
     }
 
     findLastValidToken(idx, allowWS) {
-        if (idx === -1) { // happens because input.index() is called before any other read operation (bug?)
+        if (idx == -1) { // happens because input.index() is called before any other read operation (bug?)
             idx = 0;
         }
         while (idx >= 0) {
             const token = this.readValidToken(idx--, allowWS);
-            if (token !== null) {
+            if (token != null) {
                 return token;
             }
         }
@@ -2978,7 +2978,7 @@ export default class MPromptoBuilder extends MParserListener {
         const token = this.input.get(idx);
         const text = token.text;
         // ignore trailing whitespace
-        if (text !== null && (allowWS || text.replace(/(\n|\r|\t| )/g, "").length > 0)) {
+        if (text != null && (allowWS || text.replace(/(\n|\r|\t| )/g, "").length > 0)) {
             return token;
         } else {
             return null;
