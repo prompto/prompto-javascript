@@ -1,4 +1,4 @@
-import Literal from './Literal'
+import ContainerLiteral from './ContainerLiteral'
 import { ExpressionList } from '../expression'
 import {SetValue, DecimalValue, TextValue, IValue, IntegerValue, CharacterValue} from '../value'
 import {SetType, DecimalType, MissingType, TextType, IType} from '../type'
@@ -6,10 +6,8 @@ import {CodeWriter, inferExpressionsType} from '../utils'
 import StrictSet from "../intrinsic/StrictSet.js"
 import {Context, Transpiler} from "../runtime";
 
-export default class SetLiteral extends Literal<SetValue> {
+export default class SetLiteral extends ContainerLiteral<SetValue> {
 
-    expressions: ExpressionList;
-    itemType?: IType;
     type?: IType;
 
     constructor(expressions?: ExpressionList | null) {

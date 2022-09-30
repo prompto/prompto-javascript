@@ -1,7 +1,11 @@
 import IStatement from "./IStatement";
 import Section from '../parser/Section'
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
+import {IValue} from "../value";
+import {IType} from "../type";
 
-export default class BaseStatement extends Section implements IStatement {
+export default abstract class BaseStatement extends Section implements IStatement {
   
     canReturn() {
         return false;
@@ -20,7 +24,7 @@ export default class BaseStatement extends Section implements IStatement {
         this.toDialect(writer);
     }
 
-    checkReference(context) {
+    checkReference(context: Context) {
         return this.check(context);
     }
 
@@ -32,13 +36,17 @@ export default class BaseStatement extends Section implements IStatement {
         throw new Error("Declare not implemented by " + this.constructor.name);
     }
 
-    declareParent(transpiler) {
+    declareParent(transpiler: Transpiler) {
         this.declare(transpiler);
     }
 
-    transpileParent(transpiler) {
+    transpileParent(transpiler: Transpiler) {
         this.transpile(transpiler);
     }
+
+    abstract check(context: Context): IType;
+    abstract interpret(context: Context): IValue | null;
+    abstract toDialect(writer: CodeWriter): void;
 
 }
 

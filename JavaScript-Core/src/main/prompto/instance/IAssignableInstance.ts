@@ -7,9 +7,11 @@ import { Identifier } from "../grammar";
 import {IExpression} from "../expression";
 
 export default interface IAssignableInstance {
+
     check(context: Context): IType;
+    checkAssignValue(context: Context, section: Section, valueType: IType): void;
     checkAssignItem(context: Context, section: Section, itemType: IType, valueType: IType): IType;
-    checkAssignMember(context: Context, section: Section, member: Identifier, valueType: IType): IType;
+    checkAssignMember(context: Context, member: Identifier, valueType: IType): IType;
     interpret(context: Context): IValue;
     declare(transpiler: Transpiler): void;
     transpile(transpiler: Transpiler): void;
@@ -17,4 +19,7 @@ export default interface IAssignableInstance {
 
     toDialect(writer: CodeWriter, expression: IExpression): void;
 
+    assign(context: Context, expression: IExpression): void;
+    declareAssign(transpiler: Transpiler, expression: IExpression): void;
+    transpileAssign(transpiler: Transpiler, expression: IExpression): void;
 }

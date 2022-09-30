@@ -1,21 +1,23 @@
 import SimpleStatement from './SimpleStatement'
-import { VoidType } from '../type'
-import { NullValue } from '../value'
-import { VoidResult } from '../runtime'
+import {IType, VoidType} from '../type'
+import {IValue, NullValue} from '../value'
+import {Context, Transpiler, VoidResult} from '../runtime'
 import {IExpression} from "../expression";
+import {CodeWriter, equalObjects} from "../utils";
 
 export default class ReturnStatement extends SimpleStatement {
 
-    expression: IExpression;
+    expression: IExpression | null;
+    fromArrowExpression: boolean;
 
-    constructor(expression, fromArrowExpression) {
+    constructor(expression: IExpression | null, fromArrowExpression?: boolean) {
         super();
-        this.expression = expression || null;
+        this.expression = expression;
         this.fromArrowExpression = fromArrowExpression || false;
     }
 
     toString() {
-        return "return " + this.expression==null ? "" : this.expression.toString();
+        return "return " + (this.expression ? this.expression.toString() : "");
     }
 
     toDialect(writer: CodeWriter): void {
@@ -26,22 +28,8 @@ export default class ReturnStatement extends SimpleStatement {
         }
     }
 
-    equals(obj) {
-        if(obj==this) {
-            return true;
-        }
-        if(obj==null) {
-            return false;
-        }
-        if(!(obj instanceof ReturnStatement)) {
-            return false;
-        }
-        if(this.expression==obj.expression)
-            return true;
-        else if(this.expression==null || obj.expression==null)
-            return false;
-        else
-            return this.expression.equals(obj.expression);
+    equals(obj: any) {
+        return obj == this || (obj instanceof ReturnStatement && equalObjects(this.expression, obj.expression));
     }
 
     declare(transpiler: Transpiler): void {
@@ -62,7 +50,7 @@ export default class ReturnStatement extends SimpleStatement {
             return VoidType.instance;
         const type = this.expression.check(context);
         if(type == VoidType.instance && !this.fromArrowExpression)
-            context.problemListener.reportReturningVoidType(this.expression);
+            context.problemListener.reportReturningVoidType(this.expression.asSection() || this);
         return type;
     }
 

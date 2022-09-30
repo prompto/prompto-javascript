@@ -1,14 +1,15 @@
 import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration'
 import {Identifier, IdentifierList} from '../grammar'
 import { CategoryType } from '../type'
-import {IMethodDeclaration} from "./index";
+import {IMethodDeclaration, IWidgetDeclaration} from "./index";
 import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
-import {JsxProperty} from "../jsx";
+import {PropertyMap} from "../property";
+import {IDeclarationInfo, IWidgetInfo} from "../runtime/Catalog";
 
-export default class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration implements WidgetDeclaration {
+export default class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration implements IWidgetDeclaration {
 
-    properties?: JsxProperty[] | null;
+    properties?: PropertyMap | null;
 
     constructor(id: Identifier, derivedFrom: Identifier | null, methods: IMethodDeclaration[] | null) {
         const derivedFromList = derivedFrom ? new IdentifierList(null, derivedFrom) : null;
@@ -19,14 +20,18 @@ export default class ConcreteWidgetDeclaration extends ConcreteCategoryDeclarati
         return true;
     }
 
-    getProperties(context: Context): JsxProperty[] | null {
+    toDeclarationInfo(): IWidgetInfo {
+        return { name: this.name, dialect: this.dialect.name, pageWidgetOf: this.getPageWidgetOf()};
+    }
+
+    getProperties(context: Context): PropertyMap | null {
         if(typeof(this.properties)=="undefined") {
             this.properties = null;
             // don't bubble up buried problems
             const savedProblems = context.problemListener.problems;
             context.problemListener.problems = [];
             try {
-                this.check(context);
+                this.check(context); // will populate properties
             } finally {
                 context.problemListener.problems = savedProblems;
             }

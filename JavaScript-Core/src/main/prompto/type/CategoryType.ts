@@ -356,7 +356,7 @@ export default class CategoryType extends BaseType {
         }
     }
 
-    checkCategoryAttribute(context: Context, section: Section, decl: CategoryDeclaration, id: Identifier): IType {
+    checkCategoryAttribute(context: Context, section: Section, decl: SingletonCategoryDeclaration, id: Identifier): IType {
         if(decl.storable && "dbId" === id.name)
             return AnyType.instance;
         else if (decl.hasAttribute(context, id)) {
@@ -621,14 +621,14 @@ export default class CategoryType extends BaseType {
         return cmp.bind(this);
     }
 
-    getMemberMethods(context: Context, id: Identifier): IMethodDeclaration[] {
+    getMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration> {
         const decl = this.getDeclaration(context);
-       if (!(decl instanceof ConcreteCategoryDeclaration)) {
-           context.problemListener.reportUnknownCategory(this.id, id);
-           return [];
+       if (decl instanceof ConcreteCategoryDeclaration) {
+           const methods = decl.getMemberMethodsMap(context, id);
+           return new Set<IMethodDeclaration>(methods ? methods.getAll() : []);
        } else {
-            const methods = decl.getMemberMethodsMap(context, id);
-            return methods ? methods.getAll() : [];
+           context.problemListener.reportUnknownCategory(this.id, id.name);
+           return new Set<IMethodDeclaration>();
         }
     }
 

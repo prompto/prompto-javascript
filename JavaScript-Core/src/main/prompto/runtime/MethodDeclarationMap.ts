@@ -39,11 +39,11 @@ export default class MethodDeclarationMap implements IDeclaration {
         throw new Error("Should never get there!");
     }
 
-    toEDialect(writer: CodeWriter): void {
+    toDialect(writer: CodeWriter): void {
         throw new Error("Should never get there!");
     }
 
-    toMDialect(writer: CodeWriter): void {
+    toEDialect(writer: CodeWriter): void {
         throw new Error("Should never get there!");
     }
 
@@ -51,16 +51,32 @@ export default class MethodDeclarationMap implements IDeclaration {
         throw new Error("Should never get there!");
     }
 
+    toMDialect(writer: CodeWriter): void {
+        throw new Error("Should never get there!");
+    }
+
     transpile(transpiler: Transpiler): void {
         throw new Error("Should never get there!");
     }
 
-    registerOrReplace(method: IMethodDeclaration): void {
+    register(context: Context): void {
+        throw new Error("Should never get there!");
+    }
+
+    unregister(context: Context): void {
+        throw new Error("Should never get there!");
+    }
+
+    check(context: Context): IType {
+        throw new Error("Should never get there!");
+    }
+
+    registerOrReplaceProto(method: IMethodDeclaration): void {
         const proto = method.getProto();
         this.protos.set(proto, method);
     }
 
-    register(method: IMethodDeclaration, problemListener: ProblemListener, override: boolean): void {
+    registerProto(method: IMethodDeclaration, problemListener: ProblemListener, override: boolean): void {
         const proto = method.getProto();
         const current = this.protos.get(proto) || null;
         if (current !== null && !override)
@@ -68,7 +84,7 @@ export default class MethodDeclarationMap implements IDeclaration {
         this.protos.set(proto, method);
     }
 
-    unregister(proto: string): boolean {
+    unregisterProto(proto: string): boolean {
         this.protos.delete(proto);
         return this.protos.size == 0;
     }

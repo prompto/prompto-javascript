@@ -34,8 +34,8 @@ export interface ITestInfo extends IDeclarationInfo {
 
 }
 
-export interface IWidgetInfo extends IDeclarationInfo {
-
+export interface IWidgetInfo extends ICategoryInfo {
+    pageWidgetOf: string | null;
 }
 
 

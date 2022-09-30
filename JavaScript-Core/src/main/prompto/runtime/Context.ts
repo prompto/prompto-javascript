@@ -7,16 +7,32 @@ import {
     TestMethodDeclaration
 } from '../declaration'
 import {CategoryType, DecimalType, MethodType, IType} from '../type'
-import {IntegerValue, DecimalValue, ClosureValue, ConcreteInstance, IValue, DocumentValue, Instance} from '../value'
+import {
+    IntegerValue,
+    DecimalValue,
+    ClosureValue,
+    ConcreteInstance,
+    IValue,
+    DocumentValue,
+    Instance,
+    NativeInstance
+} from '../value'
 import { InternalError } from '../error'
 import { IDebugger } from "../debug";
 import {Identifier, INamed, NamedInstance } from "../grammar";
-import {ICatalog, ICatalogInfo, ICategoryInfo, IChapters, IEnumerationInfo, IMethodsInfo, IWidgetInfo} from "./Catalog";
+import {
+    IAttributeInfo,
+    ICatalog,
+    ICatalogInfo,
+    ICategoryInfo,
+    IChapters,
+    IEnumerationInfo,
+    IMethodsInfo,
+    IWidgetInfo
+} from "./Catalog";
 import {Constructor} from "../utils/Generics";
 import IMethodDeclaration from "../declaration/IMethodDeclaration";
 import {IStatement} from "../statement";
-import {context} from "../../../../../../../antlr4/ericvergnaud/antlr4/runtime/JavaScript";
-import {AttributeInfo} from "../store";
 
 export class Context {
 
@@ -112,7 +128,7 @@ export class Context {
         return context;
     }
 
-    newDocumentContext(doc: DocumentValue, isChild: boolean): DocumentContext {
+    newDocumentContext(doc: DocumentValue | null, isChild: boolean): DocumentContext {
         const context = new DocumentContext(this.globals, doc);
         context.calling = isChild ? this.calling : this;
         context.parent = isChild ? this : null;
@@ -130,7 +146,7 @@ export class Context {
         return context;
     }
 
-    newInstanceContext(instance: Instance<any> | null, type: IType | null, isChild = false): InstanceContext {
+    newInstanceContext(instance: ConcreteInstance | NativeInstance | null, type: CategoryType | null, isChild = false): InstanceContext {
         const context = new InstanceContext(this.globals, instance, type);
         context.calling = isChild ? this.calling : this;
         context.parent = isChild ? this : null;
@@ -179,27 +195,16 @@ export class Context {
         this.declarations.forEach((decl, key) => {
             const record = { type: "Document", value: decl.toDeclarationInfo(this)};
             if(decl instanceof AttributeDeclaration) {
-                chapters.attributes?.push(record as ICatalogInfo<AttributeInfo>);
+                chapters.attributes?.push(record as ICatalogInfo<IAttributeInfo>);
             } else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
                 chapters.enumerations?.push(record as ICatalogInfo<IEnumerationInfo>);
            } else if(decl instanceof CategoryDeclaration) {
-                if((decl as CategoryDeclaration).isWidget(this)) {
+                if(decl.isWidget(this)) {
                     chapters.widgets?.push(record as ICatalogInfo<IWidgetInfo>);
                 } else {
                     chapters.categories?.push(record as ICatalogInfo<ICategoryInfo>);
                 }
-                /*
-                const info = {};
-                info.dbId = decl.dbId;
-                info.name = decl.name;
-                info.dialect = decl.dialect.name;
-                if(decl.isWidget(this)) {
-                    info.pageWidgetOf = decl.getPageWidgetOf();
-                    catalog.widgets.push({ type: "Document", value: info});
-                } else
-                    catalog.categories.push({ type: "Document", value: info});
-                 */
-            } else if(decl instanceof MethodDeclarationMap) {
+           } else if(decl instanceof MethodDeclarationMap) {
                 chapters.methods?.push(record as ICatalogInfo<IMethodsInfo>);
                 /*
                 const method = {};
@@ -337,7 +342,7 @@ export class Context {
     unregisterMethodDeclaration(declaration: IMethodDeclaration, proto: string): void {
         const map = this.declarations.get(declaration.name) || null;
         if(map instanceof MethodDeclarationMap) {
-            if(map.unregister(proto)) {
+            if(map.unregisterProto(proto)) {
                 this.declarations.delete(declaration.name);
             }
         }
@@ -349,7 +354,7 @@ export class Context {
             actual = new MethodDeclarationMap(declaration.id);
             this.declarations.set(declaration.name, actual);
         }
-        actual.register(declaration, this.problemListener, false);
+        actual.registerProto(declaration, this.problemListener, false);
     }
 
     checkDuplicateMethod(declaration: IMethodDeclaration): MethodDeclarationMap | null {
@@ -463,13 +468,14 @@ export class Context {
 
     setValue(id: Identifier, value: IValue): void {
         const context = this.contextForValue(id);
-        if(context===null)
+        if(context)
+            context.writeValue(id, value);
+        else
             this.problemListener.reportUnknownVariable(id, id.name);
-        context.writeValue(id, value);
     }
 
     writeValue(id: Identifier, value: IValue): void {
-        value = this.autocast(id.name, value);
+        value = this.autocast(id.name, value) as IValue;
         const current = this.values.get(id.name);
         if(current instanceof LinkedValue)
             current.context.setValue(id, value);
@@ -478,7 +484,7 @@ export class Context {
     }
 
     autocast(name: string, value: IValue | null): IValue | null {
-        if(value != null && value instanceof IntegerValue) {
+        if(value instanceof IntegerValue) {
             const actual = this.instances.get(name);
             if(actual?.getType(this) == DecimalType.instance)
                 value = new DecimalValue(value.DecimalValue());
@@ -547,17 +553,18 @@ export class Context {
             let value = this.values.get(type.name) || null;
             if(!value) {
                 const decl = this.declarations.get(type.name) || null;
-                if(!(decl instanceof SingletonCategoryDeclaration))
+                if(decl instanceof SingletonCategoryDeclaration) {
+                    value = new ConcreteInstance(this, decl);
+                    value.mutable = true; // a singleton is protected by "with x do", so always mutable in that context
+                    const method = decl.getInitializeMethod(this);
+                    if (method != null) {
+                        const instance = this.newInstanceContext(value, type, false);
+                        const child = instance.newChildContext();
+                        method.interpret(child);
+                    }
+                    this.values.set(type.name, value);
+                } else
                     throw new InternalError("No such singleton:" + type.name);
-                value = new ConcreteInstance(this, decl);
-                value.mutable = true; // a singleton is protected by "with x do", so always mutable in that context
-                const method = (decl as SingletonCategoryDeclaration).getInitializeMethod(this);
-                if(method != null) {
-                    const instance = this.newInstanceContext(value, type,false);
-                    const child = instance.newChildContext();
-                    method.interpret(child);
-                }
-                this.values.set(type.name, value);
             }
             if(value instanceof ConcreteInstance)
                 return value;
@@ -582,13 +589,13 @@ export class ResourceContext extends Context {
 
 export class InstanceContext extends Context {
 
-    instance: Instance<any> | null;
+    instance: ConcreteInstance | NativeInstance | null;
     instanceType: CategoryType;
     widgetFields: Map<string, WidgetField> | null;
 
-    constructor(globals: Context, instance: Instance<any> | null, type: CategoryType | null) {
+    constructor(globals: Context, instance: ConcreteInstance | NativeInstance | null, type: CategoryType | null) {
         super(globals);
-        this.instance = instance || null;
+        this.instance = instance;
         this.instanceType = type || instance!.type as unknown as CategoryType;
         this.widgetFields = null;
     }
@@ -695,17 +702,19 @@ export class InstanceContext extends Context {
 
     readValue(id: Identifier): IValue | null {
         const decl = this.getDeclaration();
-        if(decl.hasAttribute(this, id)) {
-            return this.instance.getMemberValue(this.calling, id);
-        } else if(decl.hasMethod(this, id)) {
-            const method = decl.getMemberMethodsMap(this, id).getFirst();
-            return new ClosureValue(this, new MethodType(method));
-        } else
-            return null;
+        if(decl) {
+            if(decl.hasAttribute(this, id))
+                return this.instance!.GetMemberValue(this.calling!, id);
+            else if(decl.hasMethod(this, id)) {
+                const method = decl.getMemberMethodsMap(this, id).getFirst();
+                return new ClosureValue(this, new MethodType(method!));
+            }
+        }
+        return null;
     }
 
     writeValue(id: Identifier, value: IValue): void {
-        this.instance.setMember(this.calling, id, value);
+        this.instance!.SetMemberValue(this.calling!, id, value);
     }
 }
 
@@ -721,9 +730,9 @@ export class BuiltInContext extends Context {
 
 export class DocumentContext extends Context {
 
-    document: DocumentValue;
+    document: DocumentValue | null;
 
-    constructor(globals: Context, document: DocumentValue) {
+    constructor(globals: Context, document: DocumentValue | null) {
         super(globals);
         this.document = document;
     }
@@ -741,11 +750,11 @@ export class DocumentContext extends Context {
     }
 
     readValue(id: Identifier): IValue | null {
-        return this.document.getMemberValue(this.calling, id);
+        return this.document!.getMemberValue(this.calling!, id);
     }
 
     writeValue(id: Identifier, value: IValue): void {
-        this.document.setMember(this.calling, id, value);
+        this.document!.setMember(this.calling, id, value);
     }
 }
 

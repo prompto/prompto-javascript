@@ -1,20 +1,25 @@
-import SimpleStatement from '../../../main/prompto/statement/SimpleStatement.ts'
+import SimpleStatement from './SimpleStatement'
 import { Dialect } from '../parser'
 import { Identifier, ArgumentList } from '../grammar'
-import { MethodFinder, MethodDeclarationMap, InstanceContext } from '../runtime'
-import { AbstractMethodDeclaration, ConcreteMethodDeclaration, BuiltInMethodDeclaration, 
-    DispatchMethodDeclaration, ArrowDeclaration, ClosureDeclaration } from '../declaration'
-import { VoidType, MethodType } from '../type'
-import { ThisExpression, MethodSelector } from '../expression'
+import {MethodFinder, MethodDeclarationMap, InstanceContext, Context, Transpiler} from '../runtime'
+import {
+    AbstractMethodDeclaration, ConcreteMethodDeclaration, BuiltInMethodDeclaration,
+    DispatchMethodDeclaration, ArrowDeclaration, ClosureDeclaration, IMethodDeclaration
+} from '../declaration'
+import {VoidType, MethodType, IType} from '../type'
+import {ThisExpression, MethodSelector, IAssertion} from '../expression'
 import { SyntaxError, PromptoError, NotMutableError } from '../error'
 import { CodeParameter } from '../param'
-import { BooleanValue, ArrowValue, ClosureValue } from '../value'
+import {BooleanValue, ArrowValue, ClosureValue, IValue} from '../value'
 import { CodeWriter } from '../utils'
 import { ProblemCollector } from '../problem'
 
 
-export default class MethodCall extends SimpleStatement {
+export default class MethodCall extends SimpleStatement implements IAssertion {
 
+    static fullDeclareCounter = 0;
+
+    selector: MethodSelector;
     args: ArgumentList | null;
 
     constructor(selector: MethodSelector, args: ArgumentList | null) {
@@ -33,14 +38,14 @@ export default class MethodCall extends SimpleStatement {
             writer.append("()");
     }
 
-    requiresInvoke(writer) {
+    requiresInvoke(writer: CodeWriter) {
         if (writer.dialect !== Dialect.E || (this.args != null && this.args.length > 0))
             return false;
         try {
             const finder = new MethodFinder(writer.context, this);
             const declaration = finder.findBest(false);
             /* if method is a reference, need to prefix with invoke */
-            return declaration instanceof AbstractMethodDeclaration || declaration.closureOf !== null;
+            return declaration instanceof AbstractMethodDeclaration || (declaration && declaration.closureOf);
         } catch(e) {
             // ok
         }
@@ -51,7 +56,7 @@ export default class MethodCall extends SimpleStatement {
         return this.selector.toString() + "(" + (this.args!==null ? this.args.toString() : "") + ")";
     }
 
-    check(context, updateSelectorParent) {
+    check(context: Context, updateSelectorParent?: boolean) {
         const finder = new MethodFinder(context, this);
         const declaration = finder.findBest(false);
         if(!declaration)
@@ -76,10 +81,8 @@ export default class MethodCall extends SimpleStatement {
         }
     }
 
-    checkAbstractOnly(context, declaration) {
-        if (declaration.isReference())
-            return;
-        if (declaration.memberOf !== null)
+    checkAbstractOnly(context: Context, declaration: IMethodDeclaration) {
+        if (declaration.isReference() || declaration.memberOf)
             return;
         // if a global method, need to check for runtime dispatch
         const finder = new MethodFinder(context, this);
@@ -91,7 +94,7 @@ export default class MethodCall extends SimpleStatement {
         }
     }
 
-    checkReference(context) {
+    checkReference(context: Context): IType | null {
         const finder = new MethodFinder(context, this);
         const method = finder.findBest(false);
         if(method)
@@ -100,7 +103,7 @@ export default class MethodCall extends SimpleStatement {
             return null;
     }
 
-    isLocalClosure(context) {
+    isLocalClosure(context: Context) {
         if (this.selector.parent !== null) {
             return false;
         }
@@ -108,7 +111,7 @@ export default class MethodCall extends SimpleStatement {
         return decl instanceof MethodDeclarationMap;
     }
 
-    checkDeclaration(declaration, parent, local) {
+    checkDeclaration(declaration: IMethodDeclaration, parent: Context, local: Context) {
         if(declaration instanceof ConcreteMethodDeclaration && declaration.mustBeCheckedInCallContext(parent)) {
             return this.fullCheck(declaration, parent, local);
         } else {
@@ -116,12 +119,12 @@ export default class MethodCall extends SimpleStatement {
         }
     }
 
-    lightCheck(declaration, local) {
+    lightCheck(declaration: IMethodDeclaration, local: Context) {
         declaration.registerParameters(local);
         return declaration.check(local, false);
     }
 
-    fullCheck(declaration, parent, local) {
+    fullCheck(declaration: IMethodDeclaration, parent: Context, local: Context) {
         try {
             const args = this.makeArguments(parent, declaration);
             declaration.registerParameters(local);
@@ -310,7 +313,7 @@ export default class MethodCall extends SimpleStatement {
             transpiler.append("()");
     }
 
-    makeArguments(context, declaration) {
+    makeArguments(context: Context, declaration) {
         return (this.args || new ArgumentList()).makeArguments(context, declaration);
     }
 
@@ -325,7 +328,7 @@ export default class MethodCall extends SimpleStatement {
         return declaration.interpret(local, true);
     }
 
-    assignArguments(calling, local, declaration) {
+    assignArguments(calling: Context, loca: Contextl, declaration) {
         const args = this.makeArguments(calling, declaration);
         args.forEach(argument => {
             const expression = argument.resolve(local, declaration, true);
@@ -338,12 +341,12 @@ export default class MethodCall extends SimpleStatement {
 
     }
 
-    interpretReference(context) {
+    interpretReference(context: Context) {
         const declaration = this.findDeclaration(context);
         return new ClosureValue(context, new MethodType(declaration));
     }
 
-    interpretAssert(context, testMethodDeclaration) {
+    interpretAssert(context: Context, testMethodDeclaration) {
         const value = this.interpret(context);
         if(value instanceof BooleanValue)
             return value.value;
@@ -353,7 +356,7 @@ export default class MethodCall extends SimpleStatement {
         }
     }
 
-    getExpected(context, dialect, escapeMode) {
+    getExpected(context: Context, dialect, escapeMode) {
         const writer = new CodeWriter(this.dialect, context);
         writer.escapeMode = escapeMode;
         this.toDialect(writer);
@@ -364,7 +367,7 @@ export default class MethodCall extends SimpleStatement {
         transpiler.append("'<unknown>'");
     }
 
-    findDeclaration(context) {
+    findDeclaration(context: Context) {
         const method = this.findRegistered(context);
         if(method)
             return method;
@@ -375,7 +378,7 @@ export default class MethodCall extends SimpleStatement {
         }
     }
 
-    findRegistered(context) {
+    findRegistered(context: Context) {
         // look for method as value
         if(!this.selector.parent)  try {
             const o = context.getValue(this.selector.id);
@@ -392,7 +395,7 @@ export default class MethodCall extends SimpleStatement {
         return null;
     }
 
-    getClosureDeclaration(context, closure) {
+    getClosureDeclaration(context: Context, closure) {
         const decl = closure.type.method;
         if(decl.memberOf!=null) {
             // the closure references a member method (useful when a method reference is needed)
@@ -408,4 +411,4 @@ export default class MethodCall extends SimpleStatement {
     }
 }
 
-var fullDeclareCounter = 0;
+

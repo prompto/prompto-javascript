@@ -19,6 +19,10 @@ export default abstract class Literal<T extends IValue> extends Section implemen
         this.value = value;
     }
 
+    asSection(): Section {
+        return this;
+    }
+
     checkAssignItem(context: Context, section: Section, itemType: IType, valueType: IType): IType {
         throw new Error('Method not implemented.');
     }

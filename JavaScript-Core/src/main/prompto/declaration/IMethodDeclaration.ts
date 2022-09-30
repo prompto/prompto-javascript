@@ -18,9 +18,10 @@ export default interface IMethodDeclaration extends IDeclaration {
     isAbstract(): boolean;
     getProto(context?: Context): string;
     getTranspiledName(context: Context): string;
+    isReference(): boolean;
     asReference(): IMethodDeclaration;
 
-    check(context: Context): IType;
+    check(context: Context, isStart?: boolean): IType;
     checkChild(context: Context): IType;
     interpret(context: Context): IValue | null;
     registerParameters(context: Context): void;
@@ -29,4 +30,6 @@ export default interface IMethodDeclaration extends IDeclaration {
 
     locateSectionAtLine(line: number): Section | null;
 
+
+    isAssignableTo(context: Context, args: ArgumentList, checkInstance: boolean, allowDerived: boolean): boolean;
 }

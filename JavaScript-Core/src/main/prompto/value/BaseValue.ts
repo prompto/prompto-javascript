@@ -1,11 +1,13 @@
 import IValue from "../../../main/prompto/value/IValue";
-import { TextValue } from './index'
+import {IResource, TextValue} from './index'
 import { SyntaxError } from '../error'
 import {IType} from "../type";
 import {Context, Transpiler} from "../runtime";
 import {IStorable} from "../store";
 import {Identifier} from "../grammar";
 import {JsonNode, JsonParent} from "../json";
+import { CodeWriter } from "../utils";
+import IIterator from "./IIterator";
 
 export default abstract class BaseValue<T> implements IValue {
 
@@ -23,9 +25,14 @@ export default abstract class BaseValue<T> implements IValue {
         this.mutable = mutable;
     }
 
+    toDialect?: ((writer: CodeWriter) => void) | undefined;
 
     isIterable(): boolean {
         return false;
+    }
+
+    getIterator(): IIterator<IValue> {
+        throw new Error("Method not implemented.");
     }
 
     isSliceable(): boolean {
@@ -34,6 +41,10 @@ export default abstract class BaseValue<T> implements IValue {
 
     isResource(): boolean {
         return false;
+    }
+
+    asResource(): IResource {
+        throw new Error("Method not implemented.");
     }
 
     getValue(): T {

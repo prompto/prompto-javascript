@@ -1,8 +1,19 @@
 import BaseStatement from './BaseStatement'
-import { VoidType } from '../type'
+import {IType, VoidType} from '../type'
 import { Dialect } from '../parser'
 import {CodeWriter} from "../utils";
-import {Transpiler} from "../runtime";
+import {Context, Transpiler} from "../runtime";
+import {IValue} from "../value";
+
+
+function uncomment(line: string) {
+    if (line.indexOf("#")===0)
+        return line.substring(1);
+    else if(line.indexOf("//")===0)
+        return line.substring(2);
+    else
+        return line;
+}
 
 export default class CommentStatement extends BaseStatement {
 
@@ -13,7 +24,7 @@ export default class CommentStatement extends BaseStatement {
         this.text = text;
     }
 
-    locateSectionAtLine(line) {
+    locateSectionAtLine(line: number) {
         return null;
     }
 
@@ -21,15 +32,16 @@ export default class CommentStatement extends BaseStatement {
         return VoidType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpret(context: Context): IValue | null {
         return null;
     }
 
     declare(transpiler: Transpiler): void {
+        // nothing to do
     }
 
     transpile(transpiler: Transpiler): void {
-        return true; // skip
+        // nothing to do
     }
 
     toDialect(writer: CodeWriter): void {
@@ -65,11 +77,3 @@ export default class CommentStatement extends BaseStatement {
 }
 
 
-function uncomment(line) {
-    if (line.indexOf("#")===0)
-        return line.substring(1);
-    else if(line.indexOf("//")===0)
-        return line.substring(2);
-    else
-        return line;
-}

@@ -7,6 +7,7 @@ import {TypeFamily} from "../store";
 import {IValue} from "../value";
 import {JsonNode} from "../json";
 import MethodType from "./MethodType";
+import {IMethodDeclaration} from "../declaration";
 
 export default interface IType {
 
@@ -122,4 +123,7 @@ export default interface IType {
 
     transpileJsxCode(transpiler: Transpiler, expression: IExpression): void;
 
+    getMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration>;
+
+    isStorable(context: Context): boolean;
 }

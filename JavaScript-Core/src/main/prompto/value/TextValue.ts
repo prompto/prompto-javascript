@@ -1,8 +1,10 @@
 import BaseValue from './BaseValue'
-import { IntegerValue, CharacterValue, DbIdValue } from '../value'
+import {IntegerValue, CharacterValue, DbIdValue, IIterator} from '../value'
 import { TextType } from '../type'
 import { SyntaxError, IndexOutOfRangeError, InvalidDataError } from '../error'
 import { removeAccents } from '../utils'
+import IValue from "./IValue";
+import {Context} from "../runtime";
 
 export default class TextValue extends BaseValue<string> {
 
@@ -80,8 +82,12 @@ export default class TextValue extends BaseValue<string> {
 
     }
 
-    getIterator(context) {
-        return new TextIterator(this.value);
+    getIterator(context: Context): IIterator<CharacterValue> {
+        let index = -1;
+        return {
+            hasNext: () => index < this.value.length - 1,
+            next: () => new CharacterValue(this.value[++index])
+        }
     }
 
     convertToJavaScript() {
@@ -147,21 +153,7 @@ export default class TextValue extends BaseValue<string> {
     }
 }
 
-class TextIterator {
-    constructor(value) {
-        this.index = -1;
-        this.value = value;
-        return this;
-    }
 
-    hasNext() {
-        return this.index < this.value.length - 1;
-    }
-
-    next() {
-        return new CharacterValue(this.value[++this.index]);
-    }
-}
 
 
 

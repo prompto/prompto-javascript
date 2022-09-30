@@ -4,6 +4,7 @@ import {CodeWriter} from "../utils";
 import {IStorable} from "../store";
 import {JsonNode, JsonParent} from "../json";
 import {Identifier} from "../grammar";
+import {IIterator, IResource} from "./index";
 
 export default interface IValue {
     type: IType;
@@ -30,7 +31,9 @@ export default interface IValue {
     // use lowercase for internals
     equals(other: IValue): boolean;
     isResource(): boolean;
+    asResource(): IResource;
     isIterable(): boolean;
+    getIterator(): IIterator<IValue>;
     isSliceable(): boolean;
     getStorableData(): any;
     collectStorables(storables: Set<IStorable>): void;

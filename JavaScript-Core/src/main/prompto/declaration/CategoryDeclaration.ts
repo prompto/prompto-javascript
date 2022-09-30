@@ -172,7 +172,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
                 localMap = new MethodDeclarationMap(method.id);
                 maps.set(method.name, localMap);
             }
-            localMap.registerOrReplace(method);
+            localMap.registerOrReplaceProto(method);
         });
     }
 
@@ -250,9 +250,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
 
     processAnnotations(context: Context, processDerivedFrom: boolean): void {
         const annotations = processDerivedFrom ? this.getAllAnnotations(context) : (this.annotations || []);
-        annotations.forEach(function (ann) {
-            ann.processCategory(context, this);
-        }, this);
+        annotations.forEach(ann => ann.processCategory(context, this), this);
     }
 
     checkConstructorContext(context: Context): void {

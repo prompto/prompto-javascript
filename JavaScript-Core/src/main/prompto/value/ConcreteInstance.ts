@@ -32,7 +32,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         this.values = {};
     }
 
-    toMutable() {
+    ToMutable() {
         const result = Object.create(this);
         result.type = new CategoryType(this.type.id, true);
         result.mutable = true;
@@ -257,7 +257,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    Add(context, value) {
+    Add(context, value): IValue {
         try {
             return this.interpretOperator(context, value, Operator.PLUS);
         } catch(e) {
@@ -265,7 +265,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    Subtract(context, value) {
+    Subtract(context, value): IValue {
         try {
             return this.interpretOperator(context, value, Operator.MINUS);
         } catch(e) {
@@ -273,7 +273,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    interpretOperator(context, value, operator) {
+    interpretOperator(context, value, operator): IValue {
         const decl = this.declaration.getOperatorMethod(context, operator, value.type);
         context = context.newInstanceContext(this);
         const local = context.newChildContext();

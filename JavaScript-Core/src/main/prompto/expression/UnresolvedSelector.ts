@@ -13,9 +13,9 @@ import {IValue, NullValue} from "../value";
 export default class UnresolvedSelector extends SelectorBase {
 
     id: Identifier;
-    resolved?: SelectorBase;
+    resolved?: IExpression;
 
-    constructor(parent: IExpression | undefined, id: Identifier) {
+    constructor(parent: IExpression | null, id: Identifier) {
         super(parent);
         this.id = id;
         this.copySectionFrom(id);

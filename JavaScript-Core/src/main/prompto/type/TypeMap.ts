@@ -2,22 +2,19 @@ import { VoidType, NullType, AnyType, CategoryType, NativeType, DecimalType } fr
 import IType from "./IType";
 import {Context} from "../runtime";
 import {Section} from "../parser";
-import {CategoryDeclaration} from "../declaration";
 
-export default class TypeMap {
-
-    types = new Map<string, IType>();
+export default class TypeMap extends Map<string, IType> {
 
     add(type: IType) {
-        this.types.set(type.name, type);
+        this.set(type.name, type);
     }
 
     inferType(context: Context, section: Section) : IType {
-        switch (this.types.size) {
+        switch (this.size) {
             case 0:
                 return VoidType.instance;
             case 1:
-                return this.types.values().next().value as IType;
+                return this.values().next().value as IType;
             default:
                 return this.doInferType(context, section);
         }
@@ -26,7 +23,7 @@ export default class TypeMap {
     doInferType(context: Context, section: Section): IType {
         let inferred: IType | null = null;
         // first pass: get less specific type
-        this.types.forEach((type, ) => {
+        this.forEach((type, ) => {
             if(!inferred || inferred == NullType.instance) {
                 inferred = type;
             } else if(inferred.isAssignableFrom(context, type)) {
@@ -43,7 +40,7 @@ export default class TypeMap {
         }, this);
         if(inferred) {
             // second pass: check compatibility
-            this.types.forEach((type, ) => {
+            this.forEach((type, ) => {
                 if (type != inferred && !inferred?.isAssignableFrom(context, type)) {
                     context.problemListener.reportIncompatibleTypes(section, inferred!, type);
                 }

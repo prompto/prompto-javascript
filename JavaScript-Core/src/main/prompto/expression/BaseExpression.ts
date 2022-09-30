@@ -9,6 +9,10 @@ import {Identifier} from "../grammar";
 
 export default abstract class BaseExpression extends Section implements IExpression, IWritable {
 
+    asSection(): Section {
+        return this;
+    }
+
     isPredicate(): boolean {
         return false;
     }

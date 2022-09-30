@@ -15,7 +15,7 @@ export default abstract class Instance<T> extends BaseValue<T> {
 
     abstract ToMutable(): IValue;
     abstract getType(): IType;
-    abstract setDbId(dbId: never): void;
+    abstract setDbId(dbId: any): void;
     abstract setMember(context: Context, id: Identifier, value: IValue): void;
     abstract getMemberNames(): string[];
 }

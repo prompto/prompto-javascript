@@ -1,21 +1,15 @@
-import SimpleStatement from '../../../main/prompto/statement/SimpleStatement.js'
-import { VoidType } from '../type'
+import SimpleStatement from './SimpleStatement'
+import {IValue} from "../value";
+import {IType} from "../type";
+import {Context} from "../runtime";
 
-export default class NativeCall extends SimpleStatement {
+export default abstract class NativeCall extends SimpleStatement {
 
-    toString() {
-        return this.statement.toString();
+    interpret(context: Context): IValue | null {
+        throw new Error("Should never get there!");
     }
 
-    check(context: Context): IType {
-        return VoidType.instance;
-    }
+    abstract interpretNative(context: Context, returnType: IType): IValue | null;
 
-    transpile(transpiler: Transpiler): void {
-        return true;
-    }
-
-    declare(transpiler: Transpiler): void {
-    }
 }
 

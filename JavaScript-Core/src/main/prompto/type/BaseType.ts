@@ -72,12 +72,12 @@ export default abstract class BaseType extends Section implements IType {
 
     abstract isMoreSpecificThan(context: Context, other: IType): boolean;
 
-    getMemberMethods(context: Context, id: Identifier): IMethodDeclaration[] {
-        return [];
+    getMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration> {
+        return new Set<IMethodDeclaration>();
     }
 
-    getStaticMemberMethods(context: Context, id: Identifier): IMethodDeclaration[] {
-        return [];
+    getStaticMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration> {
+        return new Set<IMethodDeclaration>();
     }
 
     getStaticMemberValue(context: Context, id: Identifier): IValue {
@@ -496,7 +496,7 @@ export default abstract class BaseType extends Section implements IType {
         throw new Error("Unsupported for type " + this.name);
     }
 
-    transpileSortedComparator(transpiler: Transpiler, key: IExpression | undefined, descending: boolean): void {
+    transpileSortedComparator(transpiler: Transpiler, key: IExpression | null, descending: boolean): void {
         throw new Error("Unsupported for type " + this.name);
     }
 
@@ -522,4 +522,6 @@ export default abstract class BaseType extends Section implements IType {
 
 
 }
+
+
 

@@ -1,7 +1,7 @@
 import BaseStatement from './BaseStatement'
 import {VoidType, MethodType, IType} from '../type'
 import {ClosureValue, IValue} from '../value'
-import {ConcreteMethodDeclaration, IDeclaration} from '../declaration'
+import {ConcreteMethodDeclaration, IDeclaration, IMethodDeclaration} from '../declaration'
 import {Context, Transpiler, Variable} from '../runtime'
 import { SyntaxError } from '../error'
 import {CodeWriter, IWritable} from "../utils";
@@ -21,7 +21,7 @@ export default class DeclarationStatement<D extends IDeclaration> extends BaseSt
 
     toDialect(writer: CodeWriter): void {
         if(this.declaration instanceof ConcreteMethodDeclaration) try {
-            writer.context.registerMethodDeclaration(this.declaration);
+            writer.context.registerMethodDeclaration(this.declaration as IMethodDeclaration);
          } catch(e) {
             // ok
          }
@@ -43,7 +43,7 @@ export default class DeclarationStatement<D extends IDeclaration> extends BaseSt
     check(context: Context): IType {
         if(this.declaration instanceof ConcreteMethodDeclaration) {
             this.declaration.checkChild(context);
-            context.registerMethodDeclaration(this.declaration);
+            context.registerMethodDeclaration(this.declaration as IMethodDeclaration);
         } else {
             throw new SyntaxError("Unsupported:" + this.declaration.getDeclarationType());
         }
@@ -52,7 +52,7 @@ export default class DeclarationStatement<D extends IDeclaration> extends BaseSt
 
     interpret(context: Context): IValue | null {
         if(this.declaration instanceof ConcreteMethodDeclaration) {
-            const method = this.declaration;
+            const method = this.declaration as IMethodDeclaration;
             context.registerMethodDeclaration(method);
             const type = new MethodType(method);
             context.registerInstance(new Variable(method.id, type), true);
@@ -66,7 +66,7 @@ export default class DeclarationStatement<D extends IDeclaration> extends BaseSt
     declare(transpiler: Transpiler): void {
         if(this.declaration instanceof ConcreteMethodDeclaration) {
             this.declaration.declareChild(transpiler);
-            transpiler.context.registerMethodDeclaration(this.declaration);
+            transpiler.context.registerMethodDeclaration(this.declaration as IMethodDeclaration);
         } else {
             throw new SyntaxError("Unsupported:" + typeof(this.declaration));
         }
@@ -75,7 +75,7 @@ export default class DeclarationStatement<D extends IDeclaration> extends BaseSt
     transpile(transpiler: Transpiler): void {
         if(this.declaration instanceof ConcreteMethodDeclaration) {
             this.declaration.transpile(transpiler);
-            transpiler.context.registerMethodDeclaration(this.declaration);
+            transpiler.context.registerMethodDeclaration(this.declaration as IMethodDeclaration);
             const instance = transpiler.context.getClosestInstanceContext();
             if(instance!=null) {
                 const name = this.declaration.getTranspiledName(transpiler.context);

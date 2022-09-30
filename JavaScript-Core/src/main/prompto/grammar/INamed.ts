@@ -5,6 +5,6 @@ import Identifier from "./Identifier";
 export default interface INamed {
     id: Identifier;
     get name(): string;
-    getType(context: Context): IType;
+    getType(context?: Context): IType;
 
 }

@@ -6,11 +6,12 @@ import {CodeWriter} from "../utils";
 import {AttributeDeclaration} from "../declaration";
 
 export default interface IExpression {
+    equals(other: any): boolean;
     toString(): string;
     isPredicate(): boolean;
     isAssertion(): boolean;
     check(context: Context): IType;
-    checkReference(context: Context): IType;
+    checkReference(context: Context): IType | null;
     interpret(context: Context): IValue;
     interpretReference(context: Context): IValue;
     declare(transpiler: Transpiler): void;
@@ -19,9 +20,12 @@ export default interface IExpression {
     transpileParent(transpiler: Transpiler): void;
     transpileReference(transpiler: Transpiler, method: MethodType): void;
     checkAttribute(context: Context): AttributeDeclaration | null;
-    locateSectionAtLine(line: number): Section | null;
     toDialect(writer: CodeWriter): void;
     parentToDialect(writer: CodeWriter): unknown;
+
+    locateSectionAtLine(line: number): Section | null;
+    asSection(): Section;
+
 }
 
 

@@ -23,7 +23,7 @@ export default class JavaScriptNativeCall extends NativeCall {
         return this.statement.check(context);
     }
 
-    interpret(context: Context, returnType: IType) {
+    interpretNative(context: Context, returnType: IType) {
         return this.statement.interpret(context, returnType);
     }
 

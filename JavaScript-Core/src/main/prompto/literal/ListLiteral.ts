@@ -1,4 +1,4 @@
-import Literal from './Literal'
+import ContainerLiteral from "./ContainerLiteral";
 import {ListType, MissingType, TextType, DecimalType, IType} from '../type'
 import {ListValue, TextValue, DecimalValue, IValue, IntegerValue, CharacterValue} from '../value'
 import { List } from '../intrinsic'
@@ -6,11 +6,8 @@ import { ExpressionList } from '../expression'
 import {CodeWriter, inferExpressionsType} from '../utils'
 import {Context, Transpiler} from "../runtime";
 
-export default class ListLiteral extends Literal<ListValue> {
+export default class ListLiteral extends ContainerLiteral<ListValue> {
 
-    mutable: boolean;
-    expressions: ExpressionList;
-    itemType?: IType;
     type?: IType;
 
     constructor(mutable: boolean, expressions: ExpressionList | null) {

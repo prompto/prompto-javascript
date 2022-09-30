@@ -3,12 +3,13 @@ import { SyntaxError } from '../error'
 import {Identifier, NativeCategoryBindingList} from "../grammar";
 import {IMethodDeclaration} from "./index";
 import {Context, Transpiler} from "../runtime";
-import {JsxProperty} from "../jsx";
 import {CodeWriter} from "../utils";
+import {PropertyMap} from "../property";
+import {IWidgetInfo} from "../runtime/Catalog";
 
 export default class NativeWidgetDeclaration extends NativeCategoryDeclaration {
 
-    properties?: JsxProperty[] | null;
+    properties?: PropertyMap | null;
 
     constructor(id: Identifier, categoryBindings: NativeCategoryBindingList, methods: IMethodDeclaration[] | null) {
         super(id, null, categoryBindings, null, methods);
@@ -18,11 +19,15 @@ export default class NativeWidgetDeclaration extends NativeCategoryDeclaration {
         return true;
     }
 
+    toDeclarationInfo(): IWidgetInfo {
+        return { name: this.name, dialect: this.dialect.name, pageWidgetOf: this.getPageWidgetOf()};
+    }
+
     getPageWidgetOf(): string | null {
         return null;
     }
 
-    getProperties(context: Context): JsxProperty[] | null {
+    getProperties(context: Context): PropertyMap | null {
         if(typeof(this.properties)=="undefined") {
             this.properties = null;
             // don't bubble up buried problems

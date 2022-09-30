@@ -175,20 +175,16 @@ export default class StatementList extends ObjectList<IStatement> {
     }
 
     doInterpretNative(context: Context, returnType: IType | null): IValue | null {
-        for (let i = 0; i < this.length; i++) {
-            const stmt = this[i];
-            if (!(stmt instanceof JavaScriptNativeCall))
-                continue;
-            context.enterStatement(stmt);
+        const native = this.findNativeStatement();
+        if(native) {
+            context.enterStatement(native);
             try {
-                const result = stmt.interpret(context, returnType);
-                if (result != null)
-                    return result;
+                return native.interpretNative(context, returnType || VoidType.instance);
             } finally {
-                context.leaveStatement(stmt);
+                context.leaveStatement(native);
             }
-        }
-        return null;
+        } else
+            return null;
     }
 
     toDialect(writer: CodeWriter): void {

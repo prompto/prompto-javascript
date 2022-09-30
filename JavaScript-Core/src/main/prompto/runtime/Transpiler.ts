@@ -414,7 +414,7 @@ const ObjectUtils = {
         return values;
     },
 
-    stringSplitToList: function(separator: string): List {
+    stringSplitToList: function(separator: string): List<string> {
         return new List(false, (this as string).split(separator));
     },
 
