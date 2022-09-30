@@ -43,7 +43,7 @@ export default class ConstructorExpression extends BaseExpression {
                 else if(expression instanceof InstanceExpression)
                     id = expression.id;
                 if (id && decl.hasAttribute(context, id)) {
-                    assign.parameter = new AttributeParameter(id);
+                    assign.parameter = new AttributeParameter(id, false);
                     assign._expression = null;
                 }
             }
@@ -161,7 +161,7 @@ export default class ConstructorExpression extends BaseExpression {
                     instance.setMember(context, arg.id, value);
                 }, this);
             }
-            (instance as ConcreteInstance).mutable = this.type.mutable;
+            instance.mutable = this.type.mutable;
             return instance;
         } else
             return NullValue.instance;
@@ -173,7 +173,7 @@ export default class ConstructorExpression extends BaseExpression {
             if(name !== "dbId") {
                 const id = new Identifier(name);
                 if (decl.hasAttribute(context, id)) {
-                    const value = copyFrom.getMemberValue(context, id);
+                    const value = copyFrom.GetMemberValue(context, id);
                     if (value && value.mutable && !this.type.mutable)
                         throw new NotMutableError();
                     instance.setMember(context, id, value);

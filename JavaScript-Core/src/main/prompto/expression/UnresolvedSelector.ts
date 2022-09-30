@@ -64,18 +64,27 @@ export default class UnresolvedSelector extends SelectorBase {
     }
 
     resolve(context: Context, forMember: boolean) {
-        if (!this.resolved)
-            this.resolved = this.tryResolveMethod(context, null);
-        if (!this.resolved)
-            this.resolved = this.tryResolveMember(context);
-        if (!this.resolved)
-            throw new SyntaxError("Unknown identifier:" + this.name);
+        if (!this.resolved) {
+            let resolved: IExpression | null = this.tryResolveMethod(context, null);
+            if (!resolved)
+                resolved = this.tryResolveMember(context);
+            if (resolved)
+                this.resolved = resolved!
+            else
+                throw new SyntaxError("Unknown identifier:" + this.name);
+        }
         return this.resolved;
     }
 
-    resolveMethod(context: Context, assignments: ArgumentList | null) {
-        if (!this.resolved)
-            this.resolved = this.tryResolveMethod(context, assignments);
+    resolveMethod(context: Context, assignments: ArgumentList | null): UnresolvedCall | null {
+        if (this.resolved instanceof UnresolvedCall)
+            return this.resolved;
+        const resolved = this.tryResolveMethod(context, assignments);
+        if(resolved) {
+            this.resolved = resolved;
+            return resolved;
+        } else
+            return null;
     }
 
     tryResolveMember(context: Context) {
@@ -99,7 +108,7 @@ export default class UnresolvedSelector extends SelectorBase {
         }
     }
 
-    tryResolveMethod(context: Context, assignments: ArgumentList | null) {
+    tryResolveMethod(context: Context, assignments: ArgumentList | null): UnresolvedCall | null {
         context.pushProblemListener(new ProblemRaiser());
         try {
             let resolvedParent = this.parent;

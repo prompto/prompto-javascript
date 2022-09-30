@@ -6,7 +6,6 @@ import {IExpression} from "../expression";
 import {CodeWriter} from "../utils";
 import {Context} from "../runtime";
 import {CategoryDeclaration} from "../declaration";
-import {IValue} from "../value";
 
 export default class Annotation extends Section {
 
@@ -24,16 +23,16 @@ export default class Annotation extends Section {
     }
 
     getDefaultArgument(): IExpression | null {
-        if(this.entries && this.entries.items.length===1)
-            return this.entries.items[0].value;
+        if(this.entries && this.entries.length===1)
+            return this.entries[0].value;
         else
             return null;
     }
 
-    getArgument(name: string): IValue | null {
-        if(!this.entries || !this.entries.items)
+    getArgument(name: string): IExpression | null {
+        if(!this.entries)
             return null;
-        const entry = this.entries.items.filter(entry => name == entry.key.toString() )[0];
+        const entry = this.entries.filter(entry => name == entry.key!.toString() )[0];
         if(entry)
             return entry.value;
         else
@@ -42,10 +41,10 @@ export default class Annotation extends Section {
 
     toDialect(writer: CodeWriter): void {
         writer.append(this.name);
-        if(this.entries != null && this.entries.items.length > 0) {
+        if(this.entries != null && this.entries.length > 0) {
             writer.append("(");
-            this.entries.items.forEach(entry => {
-                writer.append(entry.key.toString());
+            this.entries.forEach(entry => {
+                writer.append(entry.key!.toString());
                 writer.append(" = ");
                 entry.value.toDialect(writer);
                 writer.append(", ");
