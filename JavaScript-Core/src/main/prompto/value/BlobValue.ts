@@ -3,7 +3,7 @@ import { BlobType } from '../type'
 
 export default class BlobValue extends BinaryValue {
 
-    constructor(mimeType: string, data: Uint8Array) {
+    constructor(mimeType: string, data: ArrayBuffer) {
         super(BlobType.instance, mimeType, data);
     }
 }

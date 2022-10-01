@@ -52,7 +52,7 @@ export default class OrExpression extends BaseExpression implements IPredicate, 
     check(context: Context): IType {
         const lt = this.left.check(context);
         const rt = this.right.check(context);
-        return lt.checkOr(context, rt);
+        return lt.checkOr(context, this, rt);
     }
 
     checkQuery(context: Context) {

@@ -14,7 +14,7 @@ export default class SuperExpression extends ThisExpression {
         if (ctx && !(ctx instanceof InstanceContext))
             ctx = ctx.getClosestInstanceContext ();
         if (ctx instanceof InstanceContext)
-            return ctx.instanceType.getSuperType(context, this);
+            return ctx.instanceType.getSuperType(context, this) || AnyType.instance;
         else {
             context.problemListener.reportNoSuperType(this, AnyType.instance);
             return VoidType.instance;

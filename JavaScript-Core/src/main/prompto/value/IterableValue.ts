@@ -4,16 +4,16 @@ import {IteratorType, IType} from '../type'
 import {Context, Variable} from '../runtime'
 import {IExpression} from "../expression";
 import {Identifier} from "../grammar";
-import IIterableWithCounts from "./IIterableWithCounts";
+import IValueIterableWithCounts from "./IValueIterableWithCounts";
 
-export default class IterableValue extends BaseValue<IIterableWithCounts<IValue>> implements IIterableWithCounts<IValue> {
+export default class IterableValue extends BaseValue<IValueIterableWithCounts> implements IValueIterableWithCounts {
 
     context: Context;
     name: Identifier;
     sourceType: IType;
     expression: IExpression
 
-    constructor(context: Context, name: Identifier, sourceType: IType, iterable: IIterableWithCounts<IValue>, expression: IExpression, resultType: IType) {
+    constructor(context: Context, name: Identifier, sourceType: IType, iterable: IValueIterableWithCounts, expression: IExpression, resultType: IType) {
         // TODO should this not be IterableType ?
         super(new IteratorType(resultType), iterable);
         this.context = context;
@@ -23,7 +23,7 @@ export default class IterableValue extends BaseValue<IIterableWithCounts<IValue>
     }
 
     isEmpty() {
-        return this.value.count===0;
+        return this.value.count == 0;
     }
 
     length() {

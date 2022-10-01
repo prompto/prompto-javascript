@@ -7,7 +7,7 @@ import {IStorable} from "../store";
 import {Identifier} from "../grammar";
 import {JsonNode, JsonParent} from "../json";
 import { CodeWriter } from "../utils";
-import IIterator from "./IIterator";
+import IValueIterable from "./IValueIterable";
 
 export default abstract class BaseValue<T> implements IValue {
 
@@ -31,7 +31,7 @@ export default abstract class BaseValue<T> implements IValue {
         return false;
     }
 
-    getIterator(context: Context): IIterator<IValue> {
+    asIterable(context: Context): IValueIterable {
         throw new Error("Method not implemented.");
     }
 

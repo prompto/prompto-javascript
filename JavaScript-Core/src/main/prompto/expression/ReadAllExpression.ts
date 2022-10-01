@@ -64,7 +64,7 @@ export default class ReadAllExpression extends BaseExpression {
         transpiler.append(".readFully()");
     }
 
-    private asSection(): Section {
+    asSection(): Section {
         return this.resource instanceof Section ? this.resource : this;
     }
 }

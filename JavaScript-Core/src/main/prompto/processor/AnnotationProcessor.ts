@@ -10,5 +10,5 @@ export default abstract class AnnotationProcessor {
         this.name = name;
     }
 
-    abstract processCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration): void;
+    abstract processCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration<any>): void;
 }

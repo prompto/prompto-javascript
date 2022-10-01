@@ -124,7 +124,7 @@ export default class CompareExpression extends BaseExpression {
         let value = this.right.interpret(context);
         const info = decl.getAttributeInfo();
         if (value instanceof Instance)
-            value = value.getMemberValue(context, Identifier.DB_ID, false);
+            value = value.GetMemberValue(context, Identifier.DB_ID, false);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         let data = value ? value.getStorableData() : null;
         if(info.family == TypeFamily.DATETIME && data instanceof LocalDate)

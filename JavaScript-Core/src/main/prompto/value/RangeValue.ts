@@ -1,9 +1,11 @@
 import BaseValue from './BaseValue'
-import {IValue, IIterable, IIterator, IntegerValue} from '../value'
+import {IValue, IntegerValue} from '../value'
 import { SyntaxError, IndexOutOfRangeError, InternalError } from '../error'
 import {IType, RangeType} from '../type'
 import {Identifier} from "../grammar";
 import {Context} from "../runtime";
+import {IIterable, IIterator} from "../intrinsic";
+import {context} from "../../../../../../../antlr4/ericvergnaud/antlr4/runtime/JavaScript";
 
 export interface Limits<T extends IValue> {
     low: T;
@@ -97,21 +99,19 @@ export default abstract class RangeValue<T extends IValue> extends BaseValue<Lim
         return value;
     }
 
-    getIterator(context: Context): IIterator<T> {
-        return new RangeIterator(context, this);
+    getIterator(): IIterator<T> {
+        return new RangeIterator(this);
     }
 
 }
 
 class RangeIterator<T extends IValue> {
 
-    context: Context;
     range: RangeValue<T>;
     size: number;
     index: number;
 
-    constructor(context: Context, range: RangeValue<T>) {
-        this.context = context;
+    constructor(range: RangeValue<T>) {
         this.range = range;
         this.size = range.size();
         this.index = 0;
@@ -122,7 +122,7 @@ class RangeIterator<T extends IValue> {
     }
 
     next(): T {
-        return this.range.GetItemValue(this.context, new IntegerValue(++this.index)) as T;
+        return this.range.getItem(++this.index) as T;
     }
 }
 

@@ -19,7 +19,7 @@ export default class ListLiteral extends ContainerLiteral<ListValue> {
 
     check(context: Context): IType {
         if(!this.itemType) {
-            this.itemType = inferExpressionsType(context, this.expressions);
+            this.itemType = inferExpressionsType(context, this, this.expressions);
             delete this.type;
         }
         if(!this.type)

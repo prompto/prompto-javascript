@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-return */
 import CategoryType from '../type/CategoryType'
-import {IIterator, NativeInstance, NullValue} from '../value'
+import { NativeInstance, NullValue} from '../value'
 import { AnyNativeCategoryDeclaration } from '../declaration'
 import {
     AnyType, ListType, DocumentType, IntegerType, DecimalType, BooleanType, TextType, PeriodType,
@@ -10,7 +10,7 @@ import { ListValue, DocumentValue, IValue, IteratorValue } from '../value'
 import { Identifier } from '../grammar'
 import { getTypeName } from '../utils'
 import { InternalError } from '../error'
-import {LocalTime, LocalDate, DateTime, Period, UUID, Version} from '../intrinsic'
+import {LocalTime, LocalDate, DateTime, Period, UUID, Version, IIterator} from '../intrinsic'
 import {Context} from "../runtime";
 import BaseValue from "../value/BaseValue";
 
@@ -45,7 +45,7 @@ export default class JavaScriptClassType extends CategoryType {
         super(id);
     }
 
-    convertJavaScriptValueToPromptoValue(context: Context, value: any, returnType: IType): IValue | null {
+    convertJavaScriptValueToPromptoValue(context: Context, value: any, returnType: IType): IValue {
         return JavaScriptClassType.doConvertJavaScriptValueToPromptoValue(context, value, this.id.name, returnType);
     }
 
@@ -140,7 +140,7 @@ export default class JavaScriptClassType extends CategoryType {
                 klass = getTypeName(item)!;
                 return JavaScriptClassType.doConvertJavaScriptValueToPromptoValue(context, item, klass, itemType);
             });
-            return new ListValue(itemType, false, items as IValue[]);
+            return new ListValue(itemType, false, items);
         } else
             return null;
     }
@@ -153,7 +153,7 @@ export default class JavaScriptClassType extends CategoryType {
                 const item = value[name as keyof typeof value];
                 klass = getTypeName(item)!;
                 const val = JavaScriptClassType.doConvertJavaScriptValueToPromptoValue(context, item, klass, AnyType.instance);
-                doc.setMember(context, new Identifier(name), val);
+                doc.SetMemberValue(context, new Identifier(name), val);
             }, this);
             return doc;
         } else

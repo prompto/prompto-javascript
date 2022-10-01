@@ -1,7 +1,5 @@
 export {default as IValue} from './IValue';
 export {default as IResource} from './IResource';
-export {default as IIterable} from './IIterable';
-export {default as IIterator} from './IIterator';
 export {default as DbIdValue} from './DbIdValue';
 export {default as NullValue} from './NullValue';
 export {default as AnyValue} from './AnyValue';

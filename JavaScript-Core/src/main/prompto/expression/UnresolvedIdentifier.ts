@@ -7,7 +7,7 @@ import {
     SymbolExpression,
     IExpression, IPredicate
 } from './index'
-import {VoidType, CategoryType, EnumeratedCategoryType, NativeType, IType, MethodType} from '../type'
+import {VoidType, CategoryType, EnumeratedCategoryType, NativeType, IType, MethodType, AnyType} from '../type'
 import { ProblemRaiser } from '../problem'
 import { PromptoError } from '../error'
 import { MethodCall } from '../statement'
@@ -56,7 +56,7 @@ export default class UnresolvedIdentifier extends BaseExpression implements IPre
 
     checkReference(context: Context): IType {
         this.resolve(context, false, false);
-        return this.resolved ? this.resolved.checkReference(context) : VoidType.instance;
+        return this.resolved ? this.resolved.checkReference(context) : AnyType.instance;
     }
 
     checkAttribute(context: Context) {

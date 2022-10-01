@@ -1,7 +1,7 @@
 import BaseValue from './BaseValue'
-import {TextValue, IntegerValue, SetValue, NullValue, ListValue, IValue, IIterator} from './index'
+import {TextValue, IntegerValue, SetValue, NullValue, ListValue, IValue} from './index'
 import {AnyType, DictionaryType, IType, TextType} from '../type'
-import { Dictionary } from '../intrinsic'
+import {Dictionary, IIterator} from '../intrinsic'
 import { SyntaxError } from '../error'
 import {Context} from "../runtime";
 import {Identifier} from "../grammar";
@@ -27,6 +27,7 @@ export default class DictionaryValue extends BaseValue<Dictionary<TextValue, IVa
         if (value instanceof DictionaryValue) {
             const dict = new Dictionary<TextValue, IValue>();
             dict.add(this.value);
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             dict.add(value.value);
             return new DictionaryValue((this.type as DictionaryType).itemType, false, dict);
         } else {

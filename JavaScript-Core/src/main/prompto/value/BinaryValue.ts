@@ -1,13 +1,10 @@
 import BaseValue from './BaseValue'
+import {IType} from "../type";
+import Binary from "../intrinsic/Binary";
 
-export default class BinaryValue extends BaseValue<null> {
+export default class BinaryValue extends BaseValue<Binary> {
 
-    mimeType: string;
-    data: Uint8Array;
-
-    constructor(itype, mimeType, data) {
-        super(itype);
-        this.mimeType = mimeType;
-        this.data = data;
+    constructor(itype: IType, mimeType: string, data: ArrayBuffer) {
+        super(itype, { mimeType: mimeType, data: data }, false);
     }
 }

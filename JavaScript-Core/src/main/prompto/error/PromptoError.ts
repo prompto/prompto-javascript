@@ -1,8 +1,3 @@
-import {IValue} from "../value";
-import {Identifier} from "../grammar";
-import {Context} from "../runtime";
-import {IExpression} from "../expression";
-
 export default abstract class PromptoError {
 
     error: Error;
@@ -22,8 +17,5 @@ export default abstract class PromptoError {
     get stack() {
         return this.error.stack;
     }
-
-    abstract interpret(context: Context, identifier: Identifier): IValue;
-    abstract getExpression(context: Context): IExpression;
 
 }

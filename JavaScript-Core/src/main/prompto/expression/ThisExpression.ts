@@ -24,7 +24,7 @@ export default class ThisExpression extends BaseExpression {
 
     interpret(context: Context): IValue {
         if (context instanceof DocumentContext)
-            return context.document;
+            return context.document!;
         let ctx: Context | null = context;
         if (ctx && !(ctx instanceof InstanceContext))
             ctx = ctx.getClosestInstanceContext ();

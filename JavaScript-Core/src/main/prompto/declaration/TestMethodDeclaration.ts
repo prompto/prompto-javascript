@@ -1,8 +1,8 @@
 import BaseDeclaration from './BaseDeclaration'
 import {IType, VoidType} from '../type'
 import {ExecutionError, PromptoError} from '../error'
-import { Identifier } from '../grammar'
-import {IStatement, StatementList} from '../statement'
+import { ArgumentList, Identifier} from '../grammar'
+import {DeclarationStatement, IStatement, StatementList} from '../statement'
 import {AssertionList, SymbolExpression} from '../expression'
 import {Context, Transpiler} from "../runtime";
 import {ITestInfo} from "../runtime/Catalog";
@@ -20,7 +20,8 @@ export default class TestMethodDeclaration extends BaseDeclaration implements IM
     assertions: AssertionList;
     error: SymbolExpression | null;
     closureOf: IDeclaration | null = null;
-    memberOf: CategoryDeclaration | null = null;
+    memberOf: CategoryDeclaration<any> | null = null;
+    declarationOf: DeclarationStatement<IMethodDeclaration> | null = null;
     parameters: ParameterList | null = null;
     returnType: IType | null = null;
 
@@ -243,7 +244,7 @@ export default class TestMethodDeclaration extends BaseDeclaration implements IM
 
     private getErrorName(context: Context, error: ExecutionError, actual: IValue): string {
         if(actual instanceof Instance) {
-            const actualValue = actual.getMemberValue(context, new Identifier("name")) as TextValue;
+            const actualValue = actual.GetMemberValue(context, new Identifier("name")) as TextValue;
             return actualValue.getValue();
         } else
             return actual.toString();
@@ -338,6 +339,16 @@ export default class TestMethodDeclaration extends BaseDeclaration implements IM
 
     transpileMethodType(transpiler: Transpiler): void {
         throw new Error("Should never get there!");
+    }
+
+    isReference(): boolean {
+        throw new Error('Method not implemented.')
+    }
+    asReference(): IMethodDeclaration {
+        throw new Error('Method not implemented.')
+    }
+    isAssignableTo(context: Context, args: ArgumentList, checkInstance: boolean, allowDerived: boolean): boolean {
+        throw new Error('Method not implemented.')
     }
 
 

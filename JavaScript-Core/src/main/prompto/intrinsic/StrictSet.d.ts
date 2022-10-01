@@ -1,5 +1,4 @@
-import {IIterable, IIterator} from "../value";
-import {List} from "./index";
+import {IIterable, IIterator, List} from "./index";
 
 export default class StrictSet<V> implements Iterable<V>, IIterable<V>  {
     length: number;

@@ -1,8 +1,10 @@
-import SetterMethodDeclaration from '../../../main/prompto/declaration/SetterMethodDeclaration.js'
+import SetterMethodDeclaration from './SetterMethodDeclaration'
+import {Identifier} from "../grammar";
+import {StatementList} from "../statement";
 
 export default class NativeSetterMethodDeclaration extends SetterMethodDeclaration {
 
-    constructor(id, statements) {
+    constructor(id: Identifier, statements: StatementList) {
         super(id, statements);
     }
 }

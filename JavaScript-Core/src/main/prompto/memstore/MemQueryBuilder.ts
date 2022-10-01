@@ -2,7 +2,6 @@
 import IQueryBuilder from '../store/IQueryBuilder'
 import { MatchPredicate, AndPredicate, OrPredicate, NotPredicate } from './index'
 import {AttributeInfo, MatchOp} from "../store";
-import IQuery from "../store/IQuery";
 import MemPredicate from "./MemPredicate";
 import MemOrderBy from "./MemOrderBy";
 import MemQuery from "./MemQuery";
@@ -25,7 +24,7 @@ export default class MemQueryBuilder implements IQueryBuilder {
     }
 
     verify(fieldInfo: AttributeInfo, matchOp: MatchOp, value: any): IQueryBuilder {
-        if(this.predicates==null)
+        if (this.predicates == null)
             this.predicates = [];
         this.predicates.push(new MatchPredicate(fieldInfo, matchOp, value));
         return this;
@@ -39,15 +38,15 @@ export default class MemQueryBuilder implements IQueryBuilder {
     }
 
     or(): IQueryBuilder {
-        const right = this.predicates!.pop();
-        const left = this.predicates!.pop();
+        const right = this.predicates!.pop()!;
+        const left = this.predicates!.pop()!;
         this.predicates!.push(new OrPredicate(left, right));
         return this;
     }
 
     not(): IQueryBuilder {
-        const top = this.predicates!.pop();
-        this.predicates!.push(new NotPredicate(top!));
+        const top = this.predicates!.pop()!;
+        this.predicates!.push(new NotPredicate(top));
         return this;
     }
 
@@ -67,7 +66,7 @@ export default class MemQueryBuilder implements IQueryBuilder {
             first: this.first_,
             last: this.last_,
             projection: this.projection,
-            orderBys : this.orderBys
+            orderBys: this.orderBys
         };
     }
 

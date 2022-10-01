@@ -5,6 +5,7 @@ import IConstraint from "./IConstraint";
 import {IExpression} from "../expression";
 import {TextValue, IValue} from "../value";
 import {CodeWriter} from "../utils";
+import {IType} from "../type";
 
 export default class MatchingPatternConstraint implements IConstraint {
 
@@ -39,7 +40,7 @@ export default class MatchingPatternConstraint implements IConstraint {
     declare(transpiler: Transpiler): void {
     }
 
-    declareChecker(transpiler: Transpiler, name: string, type: IValue): void {
+    declareChecker(transpiler: Transpiler, name: string, type: IType): void {
         transpiler = transpiler.newChildTranspiler();
         const id = new Identifier("value");
         transpiler.context.registerInstance(new Variable(id, type), true);
@@ -52,7 +53,7 @@ export default class MatchingPatternConstraint implements IConstraint {
         this.transpiler(transpiler);
     }
 
-    transpileChecker(transpiler: Transpiler, name: string, type: IValue): void {
+    transpileChecker(transpiler: Transpiler, name: string, type: IType): void {
         transpiler.append("function $check_").append(name).append("(value) {").indent();
         transpiler = transpiler.newChildTranspiler();
         const id = new Identifier("value");

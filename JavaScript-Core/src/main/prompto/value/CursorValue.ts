@@ -1,18 +1,19 @@
 import BaseValue from './BaseValue'
-import {IntegerValue, ListValue, IValue, IIterator} from './index'
+import {IntegerValue, ListValue, IValue} from './index'
 import {CursorType, CategoryType, IType} from '../type'
 import { Identifier } from '../grammar'
 import {Context} from "../runtime";
-import IIterableWithCounts from "./IIterableWithCounts";
 import {IStored} from "../store";
+import IValueIterableWithCounts from "./IValueIterableWithCounts";
+import {Cursor, IIterator} from "../intrinsic";
 
-export default class CursorValue extends BaseValue<IIterableWithCounts<IStored>> implements IIterableWithCounts<IValue> {
+export default class CursorValue extends BaseValue<Cursor<IStored>> implements IValueIterableWithCounts {
 
     context: Context;
     itemType: IType;
 
-    constructor(context: Context, itemType: IType, iterable: IIterableWithCounts<IStored>) {
-        super(new CursorType(itemType), iterable);
+    constructor(context: Context, itemType: IType, cursor: Cursor<IStored>) {
+        super(new CursorType(itemType), cursor);
         this.context = context;
         this.itemType = itemType;
         this.mutable = itemType.mutable || false;
@@ -35,7 +36,7 @@ export default class CursorValue extends BaseValue<IIterableWithCounts<IStored>>
     }
 
     getIterator(context: Context): IIterator<IValue> {
-        const iterator = this.value.getIterator(this.context);
+        const iterator = this.value;
         return {
             hasNext: () => iterator.hasNext(),
             next: () => {

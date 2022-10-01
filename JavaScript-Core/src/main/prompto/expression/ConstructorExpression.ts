@@ -1,5 +1,5 @@
 import BaseExpression from './BaseExpression';
-import { UnresolvedIdentifier, InstanceExpression } from '../expression'
+import {UnresolvedIdentifier, InstanceExpression, IExpression} from '../expression'
 import { ArgumentList, Argument, Identifier } from '../grammar'
 import { AttributeParameter } from '../param'
 import {CategoryType, DocumentType, IType, VoidType} from '../type'
@@ -13,8 +13,7 @@ import {
 } from '../declaration'
 import {CodeWriter, getTypeName} from '../utils'
 import {Context, Transpiler} from "../runtime";
-import IExpression from "../../../main/prompto/expression/IExpression";
-import {ConcreteInstance, DocumentValue, Instance, NullValue, IValue} from "../value";
+import {DocumentValue, Instance, NullValue, IValue} from "../value";
 
 export default class ConstructorExpression extends BaseExpression {
 
@@ -30,7 +29,7 @@ export default class ConstructorExpression extends BaseExpression {
         this.args = args;
     }
 
-    checkFirstHomonym(context: Context, decl: CategoryDeclaration): void {
+    checkFirstHomonym(context: Context, decl: CategoryDeclaration<any>): void {
         if(this.checked)
             return;
         if(this.args && this.args.length>0) {
@@ -68,7 +67,7 @@ export default class ConstructorExpression extends BaseExpression {
         this.type.toDialect(writer, false);
         const assignments = new ArgumentList();
         if (this.copyFrom != null)
-            assignments.add(new Argument(new AttributeParameter(new Identifier("from")), this.copyFrom));
+            assignments.add(new Argument(new AttributeParameter(new Identifier("from"), false), this.copyFrom));
         if(this.args!=null)
             assignments.addAll(this.args);
         assignments.toDialect(writer);
@@ -102,14 +101,14 @@ export default class ConstructorExpression extends BaseExpression {
         }
     }
 
-    checkConstructable(context: Context, declaration: CategoryDeclaration): void {
+    checkConstructable(context: Context, declaration: CategoryDeclaration<any>): void {
         if(declaration.isWidget(context))
             context.problemListener.reportIllegalWidgetConstructor(this, declaration.name);
         declaration.getAbstractMethods(context, this).forEach(method => context.problemListener.reportIllegalAbstractCategory(this, declaration.name, method.getSignature(Dialect.O)));
 
     }
 
-    getActualType(context: Context, declaration: CategoryDeclaration): IType {
+    getActualType(context: Context, declaration: CategoryDeclaration<any>): IType {
         return declaration.getType(context).asMutable(context, this.type.mutable);
     }
 
@@ -122,14 +121,14 @@ export default class ConstructorExpression extends BaseExpression {
     }
 
 
-    checkArguments(context: Context, declaration: CategoryDeclaration): void {
+    checkArguments(context: Context, declaration: CategoryDeclaration<any>): void {
         if(this.args) {
             this.args.forEach(argument => this.checkArgument(context, declaration, argument));
         }
     }
 
     // noinspection JSMethodCanBeStatic
-    checkArgument(context: Context, declaration: CategoryDeclaration, argument: Argument): void {
+    checkArgument(context: Context, declaration: CategoryDeclaration<any>, argument: Argument): void {
         const id = argument.id;
         if(id == null)
             context.problemListener.reportMissingAttribute(argument, argument.toString());
@@ -145,7 +144,7 @@ export default class ConstructorExpression extends BaseExpression {
         if(cd) {
             this.checkFirstHomonym(context, cd);
             const instance = this.type.newInstance(context);
-            (instance as ConcreteInstance).mutable = true;
+            instance.mutable = true;
             if (this.copyFrom != null) {
                 const copyObj = this.copyFrom.interpret(context);
                 if (copyObj instanceof Instance)
@@ -158,7 +157,7 @@ export default class ConstructorExpression extends BaseExpression {
                     const value = arg.expression.interpret(context);
                     if (value != null && value.mutable && !this.type.mutable)
                         throw new NotMutableError();
-                    instance.setMember(context, arg.id, value);
+                    instance.SetMemberValue(context, arg.id!, value);
                 }, this);
             }
             instance.mutable = this.type.mutable;
@@ -167,7 +166,7 @@ export default class ConstructorExpression extends BaseExpression {
             return NullValue.instance;
     }
 
-    copyFromInstance(context: Context, decl: CategoryDeclaration, instance: Instance<unknown>, copyFrom: Instance<unknown>): void {
+    copyFromInstance(context: Context, decl: CategoryDeclaration<any>, instance: Instance<unknown>, copyFrom: Instance<unknown>): void {
         const names = copyFrom.getMemberNames();
         names.forEach(name => {
             if(name != "dbId") {
@@ -176,7 +175,7 @@ export default class ConstructorExpression extends BaseExpression {
                     const value = copyFrom.GetMemberValue(context, id);
                     if (value && value.mutable && !this.type.mutable)
                         throw new NotMutableError();
-                    instance.setMember(context, id, value);
+                    instance.SetMemberValue(context, id, value);
                 }
             }
         }, this);
@@ -186,11 +185,11 @@ export default class ConstructorExpression extends BaseExpression {
         const names = copyFrom.getMemberNames();
         names.forEach(name => {
             const id = new Identifier(name);
-            const value = copyFrom.getMemberValue(context, id);
+            const value = copyFrom.GetMemberValue(context, id);
             if (value && value.mutable && !this.type.mutable)
                 throw new NotMutableError();
             // TODO convert Document member to attribute type
-            instance.setMember(context, id, value);
+            instance.SetMemberValue(context, id, value);
         }, this);
     }
 

@@ -23,7 +23,7 @@ export default class JsxLiteral implements IJsxValue {
         return this.text;
     }
 
-    isLiteral(context: Context) {
+    isLiteral() {
         return true;
     }
 
@@ -37,5 +37,13 @@ export default class JsxLiteral implements IJsxValue {
 
     transpile(transpiler: Transpiler): void {
         transpiler.append(this.text);
+    }
+
+    declareProto(transpiler: Transpiler, proto: MethodType): void {
+        throw new Error("Should never get there!");
+    }
+
+    transpileProto(transpiler: Transpiler, proto: MethodType): void {
+        throw new Error("Should never get there!");
     }
 }

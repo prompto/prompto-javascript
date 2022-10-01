@@ -61,7 +61,7 @@ export default class ReadOneExpression extends BaseExpression {
         transpiler.append(".readLine()");
     }
 
-    private asSection(): Section {
+    asSection(): Section {
         return this.resource instanceof Section ? this.resource : this;
     }
 

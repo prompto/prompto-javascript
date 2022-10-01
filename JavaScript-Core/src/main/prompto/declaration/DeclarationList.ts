@@ -23,7 +23,7 @@ export default class DeclarationList extends ObjectList<IDeclaration> {
     }
 
     registerCategories(context: Context) {
-        this.filter(decl => decl instanceof CategoryDeclaration).map(decl => decl as CategoryDeclaration).forEach(decl => decl.register(context));
+        this.filter(decl => decl instanceof CategoryDeclaration).map(decl => decl as CategoryDeclaration<any>).forEach(decl => decl.register(context));
     }
 
     registerEnumerated(context: Context) {

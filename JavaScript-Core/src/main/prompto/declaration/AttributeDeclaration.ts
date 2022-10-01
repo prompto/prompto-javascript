@@ -1,12 +1,13 @@
 import BaseDeclaration from './BaseDeclaration'
 import { AttributeInfo } from '../store'
 import {ContainerType, IType} from '../type'
-import {catalog, Context, Transpiler} from '../runtime';
+import {Context, Transpiler} from '../runtime';
 import {Identifier, IdentifierList} from "../grammar";
 import {IConstraint} from "../constraint";
 import {CodeWriter} from "../utils";
 import {IExpression} from "../expression";
 import {IValue} from "../value";
+import {IAttributeInfo} from "../runtime/Catalog";
 
 export default class AttributeDeclaration extends BaseDeclaration {
 
@@ -27,7 +28,7 @@ export default class AttributeDeclaration extends BaseDeclaration {
         return "Attribute";
     }
 
-    toDeclarationInfo(): catalog.AttributeInfo {
+    toDeclarationInfo(): IAttributeInfo {
         return { name: this.name, dialect: this.dialect.name };
     }
 
@@ -122,7 +123,8 @@ export default class AttributeDeclaration extends BaseDeclaration {
     getAttributeInfo(): AttributeInfo {
         const collection = this.type instanceof ContainerType;
         const family = collection ? (this.type as unknown as ContainerType).itemType.family : this.type.family;
-        return new AttributeInfo(this.name, family, collection, this.indexTypes);
+        const indexTypes: string[] | null = this.indexTypes ? this.indexTypes.map(id => id.name) : null;
+        return new AttributeInfo(this.name, family, collection, indexTypes);
     }
 
     declare(transpiler: Transpiler): void {

@@ -32,7 +32,7 @@ export default abstract class Store {
     abstract fetchAuditRecordsMatchingAsDocuments(auditPredicates: Map<string, any> | null, instancePredicates: Map<string, any> | null): List<Document<string, any>>;
     abstract deleteAuditRecord(dbId: any): void;
     abstract deleteAuditMetadata(dbId: any): void;
-
+    abstract isDbIdType(value: any): boolean;
 }
 
 

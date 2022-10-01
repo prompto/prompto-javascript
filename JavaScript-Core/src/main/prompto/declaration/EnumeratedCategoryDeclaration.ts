@@ -74,7 +74,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
         return this.getType(context);
     }
 
-    getType(context: Context): IType {
+    getType(context: Context): EnumeratedCategoryType {
         return new EnumeratedCategoryType(this.id);
     }
 

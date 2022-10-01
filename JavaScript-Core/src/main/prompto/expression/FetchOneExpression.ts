@@ -11,10 +11,10 @@ import IQuery from "../store/IQuery";
 export default class FetchOneExpression extends BaseExpression {
 
     type: IType | null;
-    predicate: IExpression;
+    predicate: IExpression | null;
     include: IdentifierList | null;
 
-    constructor(type: IType | null, predicate: IExpression, include: IdentifierList | null) {
+    constructor(type: IType | null, predicate: IExpression | null, include: IdentifierList | null) {
         super();
         this.type = type;
         this.predicate = predicate;
@@ -34,7 +34,7 @@ export default class FetchOneExpression extends BaseExpression {
             writer.append(" ");
         }
         writer.append("where ");
-        this.predicate.toDialect(writer);
+        this.predicate!.toDialect(writer);
         if(this.include!=null) {
             writer.append(" include ");
             if (this.include.length == 1)
@@ -60,7 +60,7 @@ export default class FetchOneExpression extends BaseExpression {
             writer.append(") ");
         }
         writer.append("where (");
-        this.predicate.toDialect(writer);
+        this.predicate!.toDialect(writer);
         writer.append(")");
         if(this.include != null) {
             writer.append("include (");
@@ -79,7 +79,7 @@ export default class FetchOneExpression extends BaseExpression {
             writer.append(" ");
         }
         writer.append("where ");
-        this.predicate.toDialect(writer);
+        this.predicate!.toDialect(writer);
         if(this.include != null) {
             writer.append("include ");
             this.include.forEach(id => writer.append(id.name).append(", "));
@@ -99,14 +99,14 @@ export default class FetchOneExpression extends BaseExpression {
                 context.problemListener.reportNotStorable(this.type.id, this.type.name);
             context = context.newInstanceContext(null, decl.getType(context), true);
         }
-        if (this.predicate.isPredicate())
+        if (this.predicate!.isPredicate())
             (this.predicate as IPredicate).checkQuery(context);
         return this.type || AnyType.instance;
     }
 
     interpret(context: Context): IValue {
         const store = $DataStore.instance;
-        const query = this.buildFetchOneQuery(context, store);
+        const query = this.buildFetchOneQuery(context, store) as IQuery;
         const stored = store.fetchOne (query);
         if (stored) {
             const typeName = stored.getData<string>("category").slice(-1)[0];
@@ -123,7 +123,7 @@ export default class FetchOneExpression extends BaseExpression {
         transpiler.require(TypeFamily);
         if (this.type != null)
             this.type.declare(transpiler);
-        if (this.predicate.isPredicate())
+        if (this.predicate!.isPredicate())
             (this.predicate as IPredicate).declareQuery(transpiler);
     }
 

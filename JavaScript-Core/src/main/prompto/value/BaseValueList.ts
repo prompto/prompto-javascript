@@ -1,10 +1,11 @@
 import Container from './Container'
-import {IValue, IntegerValue, IIterator} from './index'
+import {IValue, IntegerValue} from './index'
 import { PromptoError, SyntaxError, IndexOutOfRangeError, InternalError } from '../error'
 import {ContainerType} from "../type";
 import {Context} from "../runtime";
 import {Identifier} from "../grammar";
 import {CodeWriter} from "../utils";
+import {IIterator} from "../intrinsic";
 
 /* an abstract list of values, common to ListValue and TupleValue */
 export default abstract class BaseValueList<T extends BaseValueList<T>> extends Container<IValue[]> {

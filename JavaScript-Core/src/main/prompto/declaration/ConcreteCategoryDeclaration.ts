@@ -150,7 +150,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration<Con
     }
 
     check(context: Context): IType {
-        context = context.newInstanceContext(null, this.getType(context) as CategoryType, false);
+        context = context.newInstanceContext(null, this.getType(context), false);
         this.checkDerived(context);
         this.checkMethods(context);
         return super.check(context);

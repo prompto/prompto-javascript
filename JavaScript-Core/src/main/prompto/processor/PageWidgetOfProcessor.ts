@@ -9,7 +9,7 @@ export default class PageWidgetOfProcessor extends AnnotationProcessor {
         super("@PageWidgetOf");
     }
 
-    processCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration): void {
+    processCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration<any>): void {
         if(declaration.isWidget(context)) {
             this.doProcessCategory(context, annotation, declaration);
         } else {
@@ -17,7 +17,7 @@ export default class PageWidgetOfProcessor extends AnnotationProcessor {
         }
     }
 
-    doProcessCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration): void {
+    doProcessCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration<any>): void {
         // TODO check resource
     }
 }

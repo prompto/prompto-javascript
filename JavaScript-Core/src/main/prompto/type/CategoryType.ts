@@ -89,7 +89,7 @@ export default class CategoryType extends BaseType {
         writer.append(this.name);
     }
 
-    getSuperType(context: Context, section: Section): CategoryType {
+    getSuperType(context: Context, section: Section): CategoryType | null {
         const decl = this.getDeclaration(context);
         if(decl instanceof CategoryDeclaration) {
             const derived = decl.derivedFrom;
@@ -97,7 +97,7 @@ export default class CategoryType extends BaseType {
                 return new CategoryType(derived[0]);
         }
         context.problemListener.reportNoSuperType(section, this);
-        return VoidType.instance;
+        return null;
     }
 
     declare(transpiler: Transpiler): void {
@@ -188,7 +188,7 @@ export default class CategoryType extends BaseType {
         if(type!=null)
             return type;
         else
-            return super.checkDivide(context, other);
+            return super.checkDivide(context, section, other);
     }
 
     declareDivide(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
@@ -213,7 +213,7 @@ export default class CategoryType extends BaseType {
         if(type!=null)
             return type;
         else
-            return super.checkIntDivide(context, other);
+            return super.checkIntDivide(context, section, other);
     }
 
     declareIntDivide(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
@@ -288,7 +288,7 @@ export default class CategoryType extends BaseType {
         if(type!=null)
             return type;
         else
-            return super.checkSubtract(context, other);
+            return super.checkSubtract(context, section, other);
     }
 
     declareSubtract(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
@@ -356,7 +356,7 @@ export default class CategoryType extends BaseType {
         }
     }
 
-    checkCategoryAttribute(context: Context, section: Section, decl: SingletonCategoryDeclaration, id: Identifier): IType {
+    checkCategoryAttribute(context: Context, section: Section, decl: CategoryDeclaration<any>, id: Identifier): IType {
         if(decl.storable && "dbId" == id.name)
             return AnyType.instance;
         else if (decl.hasAttribute(context, id)) {
@@ -461,7 +461,7 @@ export default class CategoryType extends BaseType {
         return false; // TODO
     }
 
-    isDerivedFromCategory(context: Context, decl: CategoryDeclaration, other: CategoryType): boolean {
+    isDerivedFromCategory(context: Context, decl: CategoryDeclaration<any>, other: CategoryType): boolean {
         if(decl.derivedFrom==null) {
             return false;
         }
@@ -494,16 +494,16 @@ export default class CategoryType extends BaseType {
         }
     }
 
-    isDerivedFromAnonymousCategory(context: Context, section: Section, thisDecl: CategoryDeclaration, otherDecl: CategoryDeclaration): boolean {
+    isDerivedFromAnonymousCategory(context: Context, thisDecl: CategoryDeclaration<any>, otherDecl: CategoryDeclaration<any>): boolean {
         // an anonymous category extends 1 and only 1 category
         const baseId = otherDecl.derivedFrom![0];
         // check we derive from root category (if not extending 'Any')
         if("any" != baseId.name && !thisDecl.isDerivedFrom(context, new CategoryType(baseId)))
             return false;
-        const allAttributeIds = otherDecl.getAllAttributes(context, section);
+        const allAttributeIds = otherDecl.getAllAttributes(context, this);
         if (!allAttributeIds)
             return false;
-        for(const id of allAttributeIds?.values()) {
+        for(const id of allAttributeIds.values()) {
             if(!thisDecl.hasAttribute(context, id)) {
                 return false;
             }
@@ -553,7 +553,7 @@ export default class CategoryType extends BaseType {
     newInstance(context: Context): ConcreteInstance {
         const decl = context.getRegisteredDeclaration<ConcreteCategoryDeclaration>(ConcreteCategoryDeclaration, this.id);
         if(decl)
-            return decl.newInstance(context)
+            return decl.newInstance(context) as ConcreteInstance;
         else
             throw new InternalError("Could not instantiate " + this.name);
     }
@@ -619,7 +619,7 @@ export default class CategoryType extends BaseType {
             const value2 = call.interpret(context);
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
         };
-        return cmp.bind(this);
+        return cmp.bind(this) as (o1: IValue, o2: IValue) => number;
     }
 
     getMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration> {
@@ -673,27 +673,27 @@ export default class CategoryType extends BaseType {
     }
 
     convertJavaScriptValueToPromptoValue(context: Context, value: any, returnType: IType | null): IValue {
-        const decl = this.getDeclaration(context);
+        const decl = this.getDeclaration(context) as CategoryDeclaration<any>;
         if (decl == null)
             return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
-        if(decl instanceof EnumeratedNativeDeclaration || decl instanceof EnumeratedCategoryDeclaration)
-            return this.loadEnumValue(context, decl, value);
+        if(decl instanceof EnumeratedCategoryDeclaration)
+            return this.loadEnumValue(context, value as string);
         if ($DataStore.instance.isDbIdType(typeof(value)))
             value = $DataStore.instance.fetchUnique(value);
-        return decl.newInstanceFromStored(context, value);
+        return decl.newInstanceFromStored(context, value as IStored);
     }
 
-    loadEnumValue(context: Context, value: any, name: string) {
+    loadEnumValue(context: Context, name: string) {
         return context.getRegistered(new Identifier(name)) as CategorySymbol;
     }
 
     declareSorted(transpiler: Transpiler, key: IExpression) {
         const keyId = this.getKeyIdentifier(key);
-        let decl = this.getDeclaration(transpiler.context);
-        if (!(decl.hasAttribute(transpiler.context, keyId) || decl.hasMethod(transpiler.context, keyId, null))) {
-            decl = this.findGlobalMethod(transpiler.context, keyId, true);
-            if (decl != null) {
-                decl.declare(transpiler);
+        const decl = this.getDeclaration(transpiler.context) as CategoryDeclaration<any>;
+        if (!(decl.hasAttribute(transpiler.context, keyId) || decl.hasMethod(transpiler.context, keyId))) {
+            const method = this.findGlobalMethod(transpiler.context, keyId);
+            if (method) {
+                method.declare(transpiler);
             } else if(key instanceof ArrowExpression) {
                 // TODO
             } else {
@@ -717,15 +717,16 @@ export default class CategoryType extends BaseType {
 
     transpileSortedComparator(transpiler: Transpiler, key: IExpression, desc: boolean) {
         const keyId = this.getKeyIdentifier(key);
-        let decl = this.getDeclaration(transpiler.context);
-        if (decl.hasAttribute(transpiler.context, keyId.toString())) {
+        const decl = this.getDeclaration(transpiler.context) as CategoryDeclaration<any>;
+        if (decl.hasAttribute(transpiler.context, keyId)) {
             this.transpileAttributeSortedComparator(transpiler, key, desc);
-        } else if (decl.hasMethod(transpiler.context, keyId.toString(), null)) {
-            this.transpileMemberMethodSortedComparator(transpiler, key, desc);
+        } else if (decl.hasMethod(transpiler.context, keyId)) {
+            // TODO this.transpileMemberMethodSortedComparator(transpiler, key, desc);
+            throw new Error("Not implemented!")
         } else {
-            decl = this.findGlobalMethod(transpiler.context, keyId, true);
-            if (decl != null) {
-                this.transpileGlobalMethodSortedComparator(transpiler, decl.getTranspiledName(transpiler.context), desc);
+            const method = this.findGlobalMethod(transpiler.context, keyId);
+            if (method) {
+                this.transpileGlobalMethodSortedComparator(transpiler, method.getTranspiledName(transpiler.context), desc);
             } else if(key instanceof ArrowExpression) {
                 return key.transpileSortedComparator(transpiler, this, desc);
             } else {

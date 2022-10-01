@@ -18,7 +18,7 @@ export default class SetLiteral extends ContainerLiteral<SetValue> {
 
     check(context: Context): IType {
         if(!this.itemType) {
-            this.itemType = inferExpressionsType(context, this.expressions);
+            this.itemType = inferExpressionsType(context, this, this.expressions);
             delete this.type;
         }
         if(!this.type)

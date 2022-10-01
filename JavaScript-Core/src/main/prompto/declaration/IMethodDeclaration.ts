@@ -6,12 +6,13 @@ import {Context, Transpiler} from "../runtime";
 import {IValue} from "../value";
 import {CategoryDeclaration} from "./index";
 import {DeclarationStatement} from "../statement";
+import {ArgumentList} from "../grammar";
 
 export default interface IMethodDeclaration extends IDeclaration {
 
     parameters: ParameterList | null;
     returnType: IType | null;
-    memberOf: CategoryDeclaration | null;
+    memberOf: CategoryDeclaration<any> | null;
     closureOf: IDeclaration | null;
     declarationOf: DeclarationStatement<IMethodDeclaration> | null;
 

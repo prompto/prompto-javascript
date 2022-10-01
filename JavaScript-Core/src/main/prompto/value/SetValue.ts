@@ -1,8 +1,8 @@
 import Container from './Container'
-import {IIterator, IntegerValue, ListValue} from './index'
+import {IntegerValue, ListValue} from './index'
 import { SyntaxError, IndexOutOfRangeError } from '../error'
 import {SetType, IType} from '../type'
-import { StrictSet } from '../intrinsic'
+import {IIterator, StrictSet} from '../intrinsic'
 import IValue from "./IValue";
 import {Identifier} from "../grammar";
 import {Context} from "../runtime";

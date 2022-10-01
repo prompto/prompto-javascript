@@ -8,6 +8,7 @@ import {Identifier} from "../grammar";
 import BaseParameter from "./BaseParameter";
 import {Dialect} from "../parser";
 import {IExpression} from "../expression";
+import {IValue, NullValue} from "../value";
 
 export default class UnresolvedParameter extends BaseParameter {
 
@@ -63,12 +64,12 @@ export default class UnresolvedParameter extends BaseParameter {
             context.setValue(this.id, this.defaultExpression.interpret(context));
     }
 
-    checkValue(context: Context, value: IExpression) {
+    checkValue(context: Context, expression: IExpression): IValue {
         this.resolveAndCheck(context);
         if(this.resolved)
-            return this.resolved.checkValue(context, value);
+            return this.resolved.checkValue(context, expression);
         else
-            return VoidType.instance;
+            return NullValue.instance;
     }
 
     resolveAndCheck(context: Context): IType {

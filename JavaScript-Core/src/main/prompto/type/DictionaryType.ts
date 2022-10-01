@@ -119,7 +119,7 @@ export default class DictionaryType extends ContainerType {
         transpiler.append(")");
     }
 
-    checkItem(context: Context, section: Section, other: IType) {
+    checkItem(context: Context, section: Section, other: IType): IType {
         if (other == TextType.instance) {
             return this.itemType;
         } else {

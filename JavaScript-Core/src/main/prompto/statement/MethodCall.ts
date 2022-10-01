@@ -14,7 +14,6 @@ import {BooleanValue, ArrowValue, ClosureValue, IValue} from '../value'
 import { CodeWriter } from '../utils'
 import { ProblemCollector } from '../problem'
 
-
 export default class MethodCall extends SimpleStatement implements IAssertion {
 
     static fullDeclareCounter = 0;
@@ -56,7 +55,7 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
         return this.selector.toString() + "(" + (this.args!=null ? this.args.toString() : "") + ")";
     }
 
-    check(context: Context, updateSelectorParent?: boolean) {
+    check(context: Context, updateSelectorParent?: boolean): IType {
         const finder = new MethodFinder(context, this);
         const declaration = finder.findBest(false);
         if(!declaration)
@@ -94,7 +93,7 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
         }
     }
 
-    checkReference(context: Context): IType | null {
+    checkReference(context: Context): IType {
         const finder = new MethodFinder(context, this);
         const method = finder.findBest(false);
         if(method)

@@ -1,6 +1,7 @@
 import BaseValue from './BaseValue'
 import {IteratorType, IType} from '../type'
-import {IValue, IIterator, ListValue} from "./index";
+import {IValue, ListValue} from "./index";
+import {IIterator} from "../intrinsic";
 
 /* thin wrapper to expose an iterator as a prompto value */
 export default class IteratorValue extends BaseValue<IIterator<IValue>> {

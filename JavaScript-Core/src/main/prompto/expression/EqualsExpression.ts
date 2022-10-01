@@ -143,7 +143,7 @@ export default class EqualsExpression extends BaseExpression implements IPredica
             const actual = lval.type;
             if(actual == NullType.instance)
                 return false;
-            const toCheck = rval.value.resolve(context);
+            const toCheck = rval.value.resolve(context) as IType;
             return toCheck.isAssignableFrom(context, actual);
         } else
             return false;
@@ -161,10 +161,10 @@ export default class EqualsExpression extends BaseExpression implements IPredica
                 if(sourceType.mutable)
                     targetType = targetType.asMutable(context, true);
                 const local = context.newChildContext();
-                value = new LinkedVariable(targetType, value);
-                local.registerInstance(value!, false);
+                value = new LinkedVariable(targetType, value!);
+                local.registerInstance(value, false);
                 if(setValue)
-                    local.setValue(id, new LinkedValue(context));
+                    local.setValue(id, new LinkedValue(context, targetType));
                 context = local;
             }
         }
@@ -209,7 +209,7 @@ export default class EqualsExpression extends BaseExpression implements IPredica
             throw new SyntaxError("Unable to interpret predicate");
         let value = this.right.interpret(context);
         if (value instanceof Instance)
-            value = value.getMemberValue(context, Identifier.DB_ID, false);
+            value = value.GetMemberValue(context, Identifier.DB_ID, false);
         const info = decl.getAttributeInfo();
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const data = value.getStorableData();

@@ -251,7 +251,7 @@ export default class DocumentType extends NativeType {
         transpiler.flush();
     }
 
-    readJSONValue(context: Context, node: JsonNode, parts: Map<string, Uint8Array>) {
+    readJSONValue(context: Context, node: JsonNode, parts: Map<string, ArrayBuffer>) {
         const instance = new DocumentValue();
         for (const key in node as object) {
             const value = this.readJSONField(context, node![key as keyof typeof node] as JsonNode, parts);
@@ -260,7 +260,7 @@ export default class DocumentType extends NativeType {
         return instance;
     }
 
-    readJSONField(context: Context, node: JsonNode, parts: Map<string, Uint8Array>) {
+    readJSONField(context: Context, node: JsonNode, parts: Map<string, ArrayBuffer>) {
         if (!node)
             return NullValue.instance;
         else if (typeof (node) === typeof (true))

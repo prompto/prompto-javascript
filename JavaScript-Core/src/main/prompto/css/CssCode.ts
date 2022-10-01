@@ -1,9 +1,9 @@
 import {IExpression} from "../expression";
 import {CodeWriter} from "../utils";
 import {Transpiler} from "../runtime";
-import {CssValue} from "../value";
+import ICssValue from "./ICssValue";
 
-export default class CssCode implements CssValue {
+export default class CssCode implements ICssValue {
 
     expression: IExpression;
 

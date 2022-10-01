@@ -2,6 +2,7 @@ import PropertyValidator from './PropertyValidator';
 import {MethodType, AnyType, IType} from '../type';
 import {Context, MethodDeclarationMap} from '../runtime';
 import {JsxProperty} from "../jsx";
+import {IMethodDeclaration} from "../declaration";
 
 export default class TypeSetValidator extends PropertyValidator {
 
@@ -34,11 +35,12 @@ export default class TypeSetValidator extends PropertyValidator {
         }
     }
 
-    getMethodDeclarations(context: Context) {
-        return Array.from(this.types)
+    getMethodDeclarations(context: Context): Set<IMethodDeclaration> {
+        const decls = Array.from(this.types)
             .filter(type => type instanceof MethodType)
             .map(type => context.getRegistered(type.id))
             .map(decl => decl instanceof MethodDeclarationMap ? decl.getAll() : [])
             .flatMap(m => m);
+        return new Set<IMethodDeclaration>(decls);
     }
 }

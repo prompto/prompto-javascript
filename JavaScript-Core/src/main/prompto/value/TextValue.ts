@@ -1,5 +1,5 @@
 import BaseValue from './BaseValue'
-import {IntegerValue, CharacterValue, DbIdValue, IIterator} from '../value'
+import {IntegerValue, CharacterValue, DbIdValue} from '../value'
 import { TextType } from '../type'
 import { SyntaxError, IndexOutOfRangeError, InvalidDataError } from '../error'
 import { removeAccents } from '../utils'
@@ -7,6 +7,7 @@ import {Context} from "../runtime";
 import IValue from "./IValue";
 import {Identifier} from "../grammar";
 import {JsonParent} from "../json";
+import {IIterator} from "../intrinsic";
 
 export default class TextValue extends BaseValue<string> {
 
@@ -33,6 +34,7 @@ export default class TextValue extends BaseValue<string> {
     Multiply(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             try {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 const text = this.value.repeat(value.value);
                 return new TextValue(text);
             } catch(error) {
@@ -53,6 +55,7 @@ export default class TextValue extends BaseValue<string> {
 
     hasItem(context: Context, value: IValue) {
         if (value instanceof CharacterValue || value instanceof TextValue) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             return this.value.indexOf(value.value) >= 0;
         } else {
             throw new SyntaxError("Illegal contains: TextValue + " + typeof(value));
@@ -128,7 +131,9 @@ export default class TextValue extends BaseValue<string> {
 
     Roughly(context: Context, value: IValue) {
         if (value instanceof TextValue || value instanceof CharacterValue) {
-            return removeAccents(this.value.toLowerCase()) == removeAccents(value.value.toLowerCase());
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            const s: string = value.value;
+            return removeAccents(this.value.toLowerCase()) == removeAccents(s.toLowerCase());
         } else {
             return false;
         }
@@ -136,6 +141,7 @@ export default class TextValue extends BaseValue<string> {
 
     Contains(context: Context, value: IValue) {
         if (value instanceof TextValue || value instanceof CharacterValue) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             return this.value.indexOf(value.value) >= 0;
         } else {
             return false;

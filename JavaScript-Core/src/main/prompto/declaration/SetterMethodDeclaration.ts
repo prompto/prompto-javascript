@@ -30,7 +30,7 @@ export default class SetterMethodDeclaration extends ConcreteMethodDeclaration {
     }
 
     transpile(transpiler: Transpiler): void {
-        const arg = new AttributeParameter(this.id);
+        const arg = new AttributeParameter(this.id, false);
         arg.register(transpiler.context);
         this.statements.transpile(transpiler);
     }

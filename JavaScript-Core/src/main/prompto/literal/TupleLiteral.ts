@@ -13,7 +13,7 @@ export default class TupleLiteral extends Literal<TupleValue> {
 
     constructor(mutable: boolean, expressions: ExpressionList | null) {
         expressions = expressions || new ExpressionList();
-        super("(" + expressions.toString() + ")", new TupleValue());
+        super("(" + expressions.toString() + ")", new TupleValue(false));
         this.mutable = mutable;
         this.expressions = expressions;
     }

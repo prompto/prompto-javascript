@@ -82,7 +82,7 @@ export default class TernaryExpression extends BaseExpression {
         transpiler.flush();
     }
 
-    private asSection(): Section {
+    asSection(): Section {
         return this.condition instanceof Section ? this.condition : this;
     }
 }

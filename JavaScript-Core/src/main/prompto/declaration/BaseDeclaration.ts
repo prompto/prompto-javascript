@@ -23,6 +23,7 @@ export default abstract class BaseDeclaration extends Section implements IDeclar
         this.annotations = null;
     }
 
+    abstract check(context: Context, isStart?: boolean): void;
     abstract getType(context: Context): IType;
     abstract getDeclarationType(): string;
     abstract declare(transpiler: Transpiler): void;

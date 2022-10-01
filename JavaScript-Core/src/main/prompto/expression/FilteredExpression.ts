@@ -5,7 +5,9 @@ import {IExpression, PredicateExpression} from "./index";
 import {CodeWriter} from "../utils";
 import {Dialect} from "../parser";
 import {Context, Transpiler} from "../runtime";
-import {IIterable, IValue} from "../value";
+import {IValue, ListValue} from "../value";
+import IValueIterable from "../value/IValueIterable";
+import {IIterator} from "../intrinsic";
 
 export default class FilteredExpression extends BaseExpression {
 
@@ -49,13 +51,25 @@ export default class FilteredExpression extends BaseExpression {
         if(!sourceValue) {
             throw new NullReferenceError();
         }
-        if(!sourceValue.isIterable()) {
+        if(sourceValue.isIterable()) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
+            const iterable: IValueIterable = sourceValue.asIterable(context);
+            const itemType = sourceType.itemType;
+            const arrow = this.predicate.toArrowExpression();
+            const filter = arrow.getFilter(context, itemType);
+            return this.filter(itemType, iterable.getIterator(context), filter);
+        } else
             throw new InternalError("Illegal fetch source: " + this.source!.toString());
+    }
+
+    private filter(itemType: IType, iterator: IIterator<IValue>, filter: (o: IValue) => boolean): ListValue {
+        const items: IValue[] = [];
+        while(iterator.hasNext()) {
+            const value = iterator.next();
+            if(filter(value))
+                items.push(value);
         }
-        const itemType = sourceType.itemType;
-        const arrow = this.predicate.toArrowExpression();
-        const filter = arrow.getFilter(context, itemType);
-        return (sourceValue as unknown as IIterable<IValue>).filter(filter)
+        return new ListValue(itemType, false, items);
     }
 
     declare(transpiler: Transpiler): void {

@@ -1,7 +1,7 @@
 import { Context } from '../runtime'
 import {Dialect} from "../parser";
-import IWritable from "../../../main/prompto/utils/IWritable";
-import IType from "../type";
+import IWritable from "./IWritable";
+import {CategoryType} from "../type";
 
 class Indenter {
 
@@ -22,7 +22,7 @@ class Indenter {
         this.isStartOfLine = s.charAt(s.length-1)=='\n';
     }
 
-    append(s) {
+    append(s: string) {
         this.value += s;
     }
 
@@ -103,7 +103,7 @@ export default class CodeWriter {
         return new CodeWriter(this.dialect, context, this.indenter);
     }
 
-    newInstanceWriter(type: IType) {
+    newInstanceWriter(type: CategoryType) {
         return new CodeWriter(this.dialect, this.context.newInstanceContext(null, type), this.indenter);
     }
 

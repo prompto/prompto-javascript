@@ -14,7 +14,6 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
 
     statements: StatementList;
     beingChecked = false;
-    declarationOf?: DeclarationStatement<never>;
     codeParameters?: Map<string, ValueCodeParameter>;
 
     constructor(id: Identifier, params: ParameterList | null, returnType: IType | null, statements: StatementList) {

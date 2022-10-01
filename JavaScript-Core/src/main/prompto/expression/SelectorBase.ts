@@ -6,9 +6,9 @@ import {Context} from "../runtime";
 
 export default class SelectorBase extends BaseExpression {
 
-    parent: IExpression | null;
+    parent?: IExpression | null;
 
-    constructor(parent: IExpression | null) {
+    constructor(parent?: IExpression | null) {
         super();
         this.parent = parent;
     }

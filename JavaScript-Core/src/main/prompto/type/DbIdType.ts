@@ -2,7 +2,7 @@ import NativeType from './NativeType'
 import { Identifier } from '../grammar'
 import {TypeFamily} from "../store";
 import {Context, Transpiler} from "../runtime";
-import {Type} from "../intrinsic";
+import IType from "./IType";
 
 export default class DbIdType extends NativeType {
 
@@ -12,7 +12,7 @@ export default class DbIdType extends NativeType {
         super(new Identifier("DbId"), TypeFamily.ANY);
      }
 
-    isAssignableFrom(context: Context, other: Type): boolean {
+    isAssignableFrom(context: Context, other: IType): boolean {
         return super.isAssignableFrom(context, other) || other instanceof NativeType;
     }
 

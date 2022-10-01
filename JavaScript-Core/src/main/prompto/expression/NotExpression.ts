@@ -45,7 +45,7 @@ export default class NotExpression extends BaseExpression implements IPredicate,
     check(context: Context): IType {
         const type = this.expression.check(context);
         if (type)
-            return type.checkNot(context);
+            return type.checkNot(context, this);
         else {
             context.problemListener.reportError(this, "Could not check expression to negate");
             return BooleanType.instance; // don't propagate error

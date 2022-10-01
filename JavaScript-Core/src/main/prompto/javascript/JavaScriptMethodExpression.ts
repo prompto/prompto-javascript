@@ -98,7 +98,7 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
             throw "Null reference";
         }
         if(i instanceof NativeInstance) {
-            i = i.instance;
+            i = i.value;
         }
         if(i) {
             const key = this.id.name as keyof typeof i;

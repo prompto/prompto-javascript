@@ -206,7 +206,7 @@ export default abstract class CategoryDeclaration<T> extends BaseDeclaration {
         return new CategoryType(this.id);
     }
 
-    getType(context: Context): IType {
+    getType(context: Context): CategoryType {
         return new CategoryType(this.id);
     }
 

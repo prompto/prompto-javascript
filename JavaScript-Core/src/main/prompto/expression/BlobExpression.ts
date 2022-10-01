@@ -29,7 +29,8 @@ export default class BlobExpression extends BaseExpression {
             const zipped = BlobRef.zipDatas(datas);
             return new BlobValue("application/zip", zipped);
         } catch (e) {
-            throw new ReadWriteError(e.message);
+            const message = e instanceof Error ? e.message : "<mmm...>";
+            throw new ReadWriteError(message);
         }
     }
 

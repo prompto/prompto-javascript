@@ -87,14 +87,14 @@ export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
                 if(count++)
                     transpiler.append(" && ");
                 if(incoming instanceof UnresolvedParameter)
-                    incoming = incoming.resolved;
+                    incoming = incoming.resolved || null;
                 let outgoing: IParameter | null = incoming==null ? declaration.parameters![0] : this.findCorrespondingParameter(transpiler.context, declaration.parameters!, common, incoming);
                 if(outgoing instanceof UnresolvedParameter)
-                    outgoing = outgoing.resolved;
+                    outgoing = outgoing.resolved || null;
                 if(incoming==null)
                     incoming = this.declaration.parameters![0];
                 if(incoming instanceof UnresolvedParameter)
-                    incoming = incoming.resolved;
+                    incoming = incoming.resolved || null;
                 if(incoming instanceof CategoryParameter && outgoing instanceof CategoryParameter) {
                     transpiler.append(incoming.name).append(".instanceOf(").append(outgoing.type.name).append(")");
                 } else if(incoming instanceof CategoryParameter && outgoing instanceof AttributeParameter) {

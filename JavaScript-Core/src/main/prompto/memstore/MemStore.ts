@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,no-unused-labels,@typescript-eslint/no-unsafe-return */
 import Store from '../store/Store'
 import {MemQueryBuilder, StorableDocument, AuditRecord, AuditMetadata, StoredDocument} from '../memstore'
-import {Cursor, DateTime, Document, List} from '../intrinsic'
+import {Cursor, DateTime, Document, IIterator, List} from '../intrinsic'
 import {IStored} from "../store";
 import MemQuery from "./MemQuery";
 import MemOrderBy from "./MemOrderBy";
@@ -136,15 +136,16 @@ export default class MemStore extends Store {
         if(query.projection)
             docs = docs.map(doc => doc.project(query.projection!));
         let index = 0;
+        const iterator: IIterator<StoredDocument> = {
+            hasNext: () => index < docs.length,
+            next: () => docs[index++]
+        };
         const iterable = {
             count: () => docs.length,
             totalCount: () => totalCount,
-            iterator: () => {
-                hasNext: () => index < docs.length;
-                next: () => docs[index++];
-            }
+            getIterator: () => iterator
         };
-        return new Cursor(false, iterable)
+        return new Cursor<StoredDocument>(false, iterable)
     }
 
     fetchManyAsync(query: MemQuery, andThen: (cursor: Cursor<IStored>) => void) {
@@ -249,7 +250,7 @@ export default class MemStore extends Store {
     fetchAuditMetadataAsDocument(dbId: any): Document<string, any> | null {
         const auditMeta = this.fetchAuditMetadata(dbId);
         if(auditMeta) {
-            const result = new Document();
+            const result = new Document<string, any>();
             Object.keys(auditMeta).forEach(key => result.$safe_setMember(key, auditMeta.get(key)));
             return result;
         } else
@@ -268,7 +269,7 @@ export default class MemStore extends Store {
 
     fetchAllAuditRecords(dbId: any): List<AuditRecord> {
         let values = Array.from(this.auditRecords.values());
-        values = values.filter(a => a.instanceDbId == dbId).sort((a1, a2) => a2.utcTimestamp.compareTo(a1.utcTimestamp));
+        values = values.filter(a => a.instanceDbId == dbId).sort((a1, a2) => a2.utcTimestamp.compareTo(a1.utcTimestamp.date, a1.utcTimestamp.tzOffset));
         return new List<AuditRecord>(false, values);
     }
 

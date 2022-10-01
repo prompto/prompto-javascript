@@ -130,7 +130,7 @@ export default class SortedExpression extends BaseExpression {
         transpiler.append(")");
     }
 
-    private asSection(): Section {
+    asSection(): Section {
         return this.source instanceof Section ? this.source : this;
     }
 }

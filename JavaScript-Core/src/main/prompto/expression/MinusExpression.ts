@@ -25,7 +25,7 @@ export default class MinusExpression extends BaseExpression {
 
     check(context: Context): IType {
         const type = this.expression.check(context);
-        return type.checkMinus(context);
+        return type.checkMinus(context, this);
     }
 
     interpret(context: Context): IValue {

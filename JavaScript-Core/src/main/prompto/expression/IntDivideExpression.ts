@@ -29,7 +29,7 @@ export default class IntDivideExpression extends BaseExpression {
     check(context: Context): IType {
         const lt = this.left.check(context);
         const rt = this.right.check(context);
-        return lt.checkIntDivide(context, rt);
+        return lt.checkIntDivide(context, this, rt);
     }
 
     interpret(context: Context): IValue {

@@ -24,7 +24,7 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
         super("@WidgetProperties");
     }
 
-    processCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration) {
+    processCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration<any>) {
         if(declaration.isWidget(context)) {
             this.doProcessCategory(context, annotation, declaration as unknown as IWidgetDeclaration);
         } else {
@@ -194,8 +194,8 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
             .filter(l => l != NullValue.instance)
             .map(l => this.newValidatorFromValue(context, annotation, l), this)
             .filter(v => v != null)
-            .map(v => v.optional());
-        let validator = new ValidatorSetValidator(validators);
+            .map(v => v!.optional());
+        let validator: PropertyValidator = new ValidatorSetValidator(validators);
         if(validators.length == value.size()) // no null
             validator = validator.required();
         return validator;
@@ -218,7 +218,7 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
         const texts = value.items
             .filter(l => l != NullValue.instance)
             .map(l => l.toString());
-        let validator = new ValueSetValidator(new Set<string>(texts));
+        let validator: PropertyValidator = new ValueSetValidator(new Set<string>(texts));
         if(texts.length == value.items.length) // no null
             validator = validator.required();
         return validator;
@@ -228,14 +228,14 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
         const types = value.items
             .filter(l => l != NullValue.instance)
             .map(l => (l as TypeValue).value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation!, "Unkown type: " + t.name) ), this);
-        let validator = new TypeSetValidator(new Set<IType>(types));
+        let validator: PropertyValidator = new TypeSetValidator(new Set<IType>(types));
         if(types.length == value.items.length)
             validator = validator.required();
         return validator;
     }
 
 
-    loadPropertyFromTypeLiteral(context: Context, annotation: Annotation | null, entry: DocEntry, prop: Property, literal: TypeLiteral): PropertyValidator | null {
+    loadPropertyFromTypeLiteral(context: Context, annotation: Annotation | null, entry: DocEntry, prop: Property, literal: TypeLiteral): Property | null {
         const section: Section = annotation || literal;
         const type = literal.value.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(section, "Unkown type: " + t.name));
         if(!type)

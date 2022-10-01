@@ -41,12 +41,12 @@ export default class DocumentLiteral extends Literal<DocumentValue> {
     interpret(context: Context): IValue {
         if(this.entries.length>0) {
             this.check(context); /// force computation of itemType
-            const doc = new Document<TextValue, IValue>();
+            const doc = new Document<string, IValue>();
             this.entries.forEach(entry => {
-                const key = entry.key.interpret(context);
+                const key = entry.key!.interpret(context).getStorableData();
                 let val = entry.value.interpret(context);
                 val = this.interpretPromotion(val);
-                doc.$safe_setMember(key, val);
+                doc.$safe_setMember(key as string, val);
             }, this);
             return new DocumentValue(doc);
         } else

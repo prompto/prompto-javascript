@@ -2,6 +2,8 @@ import {DateTime, LocalTime, Period} from "./index";
 
 export default class LocalDate {
 
+    static parse(s: string): LocalDate;
+
     constructor(value: Date | number);
     toString(): string
     equals(obj: any): boolean;
@@ -15,4 +17,5 @@ export default class LocalDate {
     addTime(value: LocalTime): DateTime;
     subtractDate(value: LocalDate): Period;
     valueOf(): number;
+
 }

@@ -1,3 +1,5 @@
+export {default as IIterable} from './IIterable';
+export {default as IIterator} from './IIterator';
 export { $Root } from './$Root';
 export {default as Any} from './Any';
 export {default as BlobRef} from './BlobRef';

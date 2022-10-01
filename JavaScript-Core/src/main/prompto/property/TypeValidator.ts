@@ -2,6 +2,7 @@ import PropertyValidator from './PropertyValidator'
 import {IType, MethodType} from '../type'
 import {Context, MethodDeclarationMap, Transpiler} from '../runtime'
 import {JsxProperty} from "../jsx";
+import {IMethodDeclaration} from "../declaration";
 
 export default class TypeValidator extends PropertyValidator {
 
@@ -45,11 +46,11 @@ export default class TypeValidator extends PropertyValidator {
             jsxProp.transpile(transpiler);
     }
 
-    getMethodDeclarations(context: Context) {
+    getMethodDeclarations(context: Context): Set<IMethodDeclaration> {
         if(this.type instanceof MethodType) {
             const decls = context.getRegistered(this.type.id);
             if(decls instanceof MethodDeclarationMap)
-                return decls.getAll().map(m => m.asReference());
+                return new Set<IMethodDeclaration>(decls.getAll().map(m => m.asReference()));
         }
         return super.getMethodDeclarations(context);
     }

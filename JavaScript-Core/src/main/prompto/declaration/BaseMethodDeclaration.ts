@@ -18,7 +18,7 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
 
     parameters: ParameterList;
     returnType: IType | null;
-    memberOf: CategoryDeclaration | null;
+    memberOf: CategoryDeclaration<any> | null;
     closureOf: IDeclaration | null;
     declarationOf: DeclarationStatement<IMethodDeclaration> | null;
 
@@ -118,7 +118,7 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
         }
     }
 
-    abstract check(context: Context, isStart: boolean): IType;
+    abstract check(context: Context, isStart?: boolean): IType;
     abstract checkChild(context: Context): IType;
     abstract interpret(context: Context): IValue | null;
 
@@ -168,8 +168,8 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
 
     computeSpecificity(context: Context, parameter: IParameter, argument: Argument, checkInstance: boolean, allowDerived: boolean): Specificity {
         try {
-            const requiredType = parameter.getType(context).resolve(context, null);
-            let actualType = argument.checkActualType(context, requiredType, checkInstance)!.resolve(context, null);
+            const requiredType = parameter.getType(context).resolve(context);
+            let actualType = argument.checkActualType(context, requiredType, checkInstance)!.resolve(context);
             // retrieve actual runtime type
             if(checkInstance && (actualType instanceof CategoryType)) {
                 const value = argument.expression.interpret(context.getCallingContext()!);

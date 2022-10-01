@@ -6,8 +6,9 @@ import INamed from "../grammar/INamed";
 import IValue from "../value/IValue";
 import { JsonParent, JsonNode } from '../json';
 import {CodeWriter} from "../utils";
-import { IResource, IIterator } from '../value';
+import { IResource } from '../value';
 import IEnumeratedType from "../type/IEnumeratedType";
+import IValueIterable from "../value/IValueIterable";
 
 export default abstract class EnumSymbol<T extends IEnumeratedType> extends BaseExpression implements INamed, IValue {
 
@@ -137,7 +138,7 @@ export default abstract class EnumSymbol<T extends IEnumeratedType> extends Base
     asResource(): IResource {
         throw new Error('Method not implemented.');
     }
-    getIterator(context: Context): IIterator<IValue> {
+    asIterable(context: Context): IValueIterable {
         throw new Error('Method not implemented.');
     }
     isSliceable(): boolean {

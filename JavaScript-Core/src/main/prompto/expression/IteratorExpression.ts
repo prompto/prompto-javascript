@@ -2,12 +2,14 @@
 import { ParenthesisExpression } from '../expression'
 import {Context, Transpiler, Variable} from '../runtime'
 import { IteratorType, IType } from '../type'
-import {IIterable, IIterator, IterableValue, IValue} from '../value'
+import {IterableValue, IValue} from '../value'
 import { UnresolvedCall } from '../statement'
 import { InternalError } from '../error'
 import { Identifier } from "../grammar";
  import IExpression from "../../../main/prompto/expression/IExpression";
  import {CodeWriter} from "../utils";
+ import {IIterator} from "../intrinsic";
+ import IValueIterable from "../value/IValueIterable";
 
 export default class IteratorExpression extends BaseExpression {
 
@@ -33,9 +35,13 @@ export default class IteratorExpression extends BaseExpression {
     interpret(context: Context): IValue {
         const elemType = this.source.check(context).checkIterator(context, this, this.source);
         const items = this.source.interpret(context);
-        const length = items.GetMemberValue(context, new Identifier("count"));
-        const iterator = this.getIterator(context, items);
-        return new IterableValue(context, this.id, elemType, iterator, length, this.expression);
+        const length = items.GetMemberValue(context, new Identifier("count")).getStorableData() as number;
+        const iterable = {
+            count: length,
+            totalCount: length,
+            getIterator: (context: Context) => this.getIterator(context, items)
+        }
+        return new IterableValue(context, this.id, elemType, iterable, this.expression, elemType);
     }
 
     declare(transpiler: Transpiler): void {
@@ -55,7 +61,7 @@ export default class IteratorExpression extends BaseExpression {
 
     getIterator(context: Context, source: IValue): IIterator<IValue> {
         if (source.isIterable())
-            return (source as unknown as IIterable<IValue>).getIterator();
+            return (source as unknown as IValueIterable).getIterator(context);
         else
             throw new InternalError("Should never get there!");
     }

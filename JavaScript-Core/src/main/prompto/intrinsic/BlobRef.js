@@ -52,13 +52,13 @@ BlobRef.readParts = function(zipped) {
     var JSZip = require("jszip-sync");
     var zip = new JSZip();
     return zip.sync(function() {
-        var parts = {};
+        var parts = new Map();
         zip.loadAsync(zipped);
         zip.forEach(function (entry) {
             zip.file(entry)
                 .async("arraybuffer")
                 .then(function(value) {
-                    parts[entry] = value;
+                    parts.set(entry, value);
                 });
         });
         return parts;

@@ -1,7 +1,7 @@
 import MemberSelector from './MemberSelector'
 import {CategorySymbol, IExpression, SuperExpression} from './index'
 import { Identifier } from '../grammar'
-import {CategoryType, IType, TypeType} from '../type'
+import {CategoryType, IType, MissingType, TypeType} from '../type'
 import {NullValue, TypeValue, Instance} from '../value'
 import {IMethodDeclaration, SingletonCategoryDeclaration} from '../declaration'
 import { NullReferenceError } from '../error'
@@ -43,17 +43,17 @@ export default class MethodSelector extends MemberSelector {
 
     checkParentType(context: Context, checkInstance: boolean): IType {
         if(checkInstance)
-            return this.checkSuperParent(context);
+            return this.checkSuperParent(context) || MissingType.instance;
         else
             return this.checkParent(context);
     }
 
-    checkSuperParent(context: Context): IType {
+    checkSuperParent(context: Context): IType | null{
         const value = this.parent!.interpret(context);
         if(!value || value == NullValue.instance)
             throw new NullReferenceError();
         if(this.parent instanceof SuperExpression)
-            return value.type.getSuperType(context, this);
+            return (value.type as CategoryType).getSuperType(context, this);
         else
             return value.type;
     }
@@ -116,11 +116,11 @@ export default class MethodSelector extends MemberSelector {
             throw new NullReferenceError();
         }
         if(value instanceof TypeValue) {
-            const type = value.value;
+            const type = value.value as IType;
             if(type instanceof CategoryType) {
                 const decl = type.getDeclaration(context);
                 if(decl instanceof SingletonCategoryDeclaration) {
-                    value = context.loadSingleton(value.value);
+                    value = context.loadSingleton(type);
                 }
             }
         }

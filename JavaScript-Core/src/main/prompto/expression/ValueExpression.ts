@@ -46,7 +46,7 @@ export default class ValueExpression extends BaseValue<IValue> implements IExpre
         throw new Error("Not implemented!")
     }
 
-    checkReference(context: Context): IType | null {
+    checkReference(context: Context): IType {
         throw new Error("Not implemented!")
     }
 

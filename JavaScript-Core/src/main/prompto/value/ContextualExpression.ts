@@ -30,7 +30,7 @@ export default class ContextualExpression extends BaseValue<any> implements IExp
         return this.expression.check(this.calling);
     }
 
-    checkReference(context: Context): IType | null {
+    checkReference(context: Context): IType {
         return this.expression.checkReference(this.calling);
     }
 

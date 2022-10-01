@@ -80,9 +80,7 @@ export default abstract class JsxElementBase extends Section implements IJsxExpr
             if(types) {
                 if (HTML_TEST_MODE) {
                     const any = new TypeLiteral(AnyType.instance);
-                    types.entries.items.forEach(e => {
-                        e.value = any;
-                    });
+                    types.entries.forEach(e => e.value = any);
                 }
                 const processor = new WidgetPropertiesProcessor();
                 HTML_PROPERTY_MAP = processor.loadProperties(context, null, types);

@@ -9,7 +9,7 @@ export default class InlinedProcessor extends AnnotationProcessor {
         super("@Inlined");
     }
 
-    processCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration): void {
+    processCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration<any>): void {
         // nothing to do
     }
 }

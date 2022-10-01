@@ -1,10 +1,12 @@
 import BaseValue from "./BaseValue";
-import {IValue, ListValue, IIterable, IIterator} from '../value'
+import {IValue, ListValue} from '../value'
 import {AnyType, ContainerType, IType} from '../type'
 import {Context} from "../runtime";
 import {JsonArray, JsonParent} from "../json";
+import IValueIterable from "./IValueIterable";
+import {IIterator} from "../intrinsic";
 
-export default abstract class Container<T extends Iterable<IValue>> extends BaseValue<T> implements IIterable<IValue> {
+export default abstract class Container<T extends Iterable<IValue>> extends BaseValue<T> implements IValueIterable {
 
     protected static makeItems(items?: IValue[], item?: IValue): IValue[] {
         let value: IValue[];

@@ -15,7 +15,7 @@ export default class DictLiteral extends Literal<DictionaryValue> {
     itemType?: IType;
 
     constructor(mutable: boolean, entries: DictEntryList | null) {
-        super("<:>", new DictionaryValue(MissingType.instance, new Dictionary(), mutable));
+        super("<:>", new DictionaryValue(MissingType.instance, mutable, new Dictionary<TextValue, IValue>()));
         this.mutable = mutable;
         this.entries = entries || new DictEntryList();
     }
@@ -57,14 +57,14 @@ export default class DictLiteral extends Literal<DictionaryValue> {
     interpret(context: Context): IValue {
         if(this.entries.length>0) {
             this.check(context); /// force computation of itemType
-            const dict = new Dictionary();
+            const dict = new Dictionary<TextValue, IValue>();
             this.entries.forEach(entry => {
-                const key = entry.key.interpret(context);
+                const key = entry.key.interpret(context) as TextValue;
                 let val = entry.value.interpret(context);
                 val = this.interpretPromotion(val);
-                dict[key] = val;
+                dict.setItem(key, val);
             }, this);
-            return new DictionaryValue(this.itemType, dict, this.mutable);
+            return new DictionaryValue(this.itemType!, this.mutable, dict);
         } else
             return this.value;
     }

@@ -39,7 +39,7 @@ export default class ArrowExpression extends PredicateExpression {
         }
     }
 
-    check(context: Context, returnType: IType | null): IType {
+    check(context: Context, returnType?: IType | null): IType {
         return this.statements!.check(context, returnType || null);
     }
 
@@ -150,6 +150,7 @@ export default class ArrowExpression extends PredicateExpression {
             local.setValue(this.args[0], o);
             const result = this.statements!.interpret(local);
             if(result instanceof BooleanValue)
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-return
                 return result.value;
             else
                 throw new SyntaxError("Expecting a Boolean result!");
@@ -205,9 +206,10 @@ export default class ArrowExpression extends PredicateExpression {
             local.setValue(this.args[0], o1);
             local.setValue(this.args[1], o2);
             const result = this.statements!.interpret(local);
-            if(!(result instanceof IntegerValue))
-                throw new SyntaxError("Expecting an Integer as result of key body!");
-            return descending ? -result.value : result.value;
+            if(result instanceof IntegerValue)
+                return descending ? -result.value : result.value as number;
+            else
+               throw new SyntaxError("Expecting an Integer as result of key body!");
         };
         return cmp.bind(this) as (o1: IValue, o2: IValue) => number;
     }

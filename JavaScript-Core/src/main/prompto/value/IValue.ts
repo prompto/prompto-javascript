@@ -4,7 +4,8 @@ import {CodeWriter} from "../utils";
 import {IStorable} from "../store";
 import {JsonNode, JsonParent} from "../json";
 import {Identifier} from "../grammar";
-import {IIterator, IResource} from "./index";
+import {IResource} from "./index";
+import IValueIterable from "./IValueIterable";
 
 export default interface IValue {
     type: IType;
@@ -34,7 +35,7 @@ export default interface IValue {
     isResource(): boolean;
     asResource(): IResource;
     isIterable(): boolean;
-    getIterator(context: Context): IIterator<IValue>;
+    asIterable(context: Context): IValueIterable;
     isSliceable(): boolean;
     getStorableData(): any;
     collectStorables(storables: Set<IStorable>): void;

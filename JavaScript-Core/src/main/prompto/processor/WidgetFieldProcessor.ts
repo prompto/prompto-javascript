@@ -12,7 +12,7 @@ export default class WidgetFieldProcessor extends AnnotationProcessor {
         super("@WidgetField");
     }
 
-    processCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration): void {
+    processCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration<any>): void {
         if(declaration.isWidget(context)) {
             this.doProcessCategory(context, annotation, declaration);
         } else {
@@ -20,7 +20,7 @@ export default class WidgetFieldProcessor extends AnnotationProcessor {
         }
     }
 
-    doProcessCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration): void {
+    doProcessCategory(context: Context, annotation: Annotation, declaration: CategoryDeclaration<any>): void {
         const fieldName = annotation.getArgument("name");
         const fieldType = annotation.getArgument("type");
         if(!(fieldName instanceof TextLiteral)) {

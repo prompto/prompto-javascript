@@ -139,8 +139,8 @@ export default class UnresolvedCall extends BaseStatement implements IAssertion 
     }
 
 
-    resolveUnresolvedMethodReference(context: Context, id) {
-        const named = context.getRegisteredValue(id);
+    resolveUnresolvedMethodReference(context: Context, id: Identifier) {
+        const named = context.getRegisteredInstance(id);
         if(named == null)
             return null;
         let type = named.getType(context);
@@ -180,7 +180,7 @@ export default class UnresolvedCall extends BaseStatement implements IAssertion 
     }
 
     resolveMember(context: Context, caller: MemberSelector): IExpression | null {
-        const call = new MethodCall(new MethodSelector(caller.parent, caller.id), this.args);
+        const call = new MethodCall(new MethodSelector(caller.parent || null, caller.id), this.args);
         call.copySectionFrom(this);
         return call;
     }
@@ -197,7 +197,7 @@ export default class UnresolvedCall extends BaseStatement implements IAssertion 
             this.resolved.transpile(transpiler);
     }
 
-    setParent(parent) {
+    setParent(parent: IExpression) {
         if(parent) {
             if(this.caller instanceof UnresolvedIdentifier)
                 this.caller = new MethodSelector(parent, this.caller.id);

@@ -3,8 +3,9 @@ import {CssValue, IValue} from '../value'
 import {CssField} from "./index";
 import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
+import ICssValue from "./ICssValue";
 
-export default class CssExpression implements CssValue {
+export default class CssExpression implements ICssValue {
 
     fields: CssField[];
 

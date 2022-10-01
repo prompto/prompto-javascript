@@ -7,7 +7,7 @@ import IJsxExpression from "./IJsxExpression";
 export default class JsxCode implements IJsxExpression {
 
     expression: IExpression;
-    suite: string | null;
+    suite?: string | null;
 
     constructor(expression: IExpression, suite?: string | null) {
         this.expression = expression;

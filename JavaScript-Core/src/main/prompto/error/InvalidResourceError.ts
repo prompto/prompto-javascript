@@ -1,13 +1,14 @@
-import ExecutionError from './ExecutionError.ts'
+import ExecutionError from './ExecutionError'
 import { TextLiteral } from '../literal'
+import {Context} from "../runtime";
 
 export default class InvalidResourceError extends ExecutionError {
 
-	constructor(message) {
+	constructor(message: string) {
 		super(message);
 	}
 
-	etExpression(context) {
+	getExpression(context: Context) {
 		return new TextLiteral(this.message);
 	}
 

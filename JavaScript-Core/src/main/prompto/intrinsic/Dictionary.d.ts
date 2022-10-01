@@ -1,6 +1,5 @@
-import {StrictSet} from "./index";
+import {IIterator, StrictSet} from "./index";
 import List from "./List";
-import {IIterator} from "../value";
 
 export interface KVP<K,V> {
     key: K;

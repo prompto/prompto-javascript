@@ -113,7 +113,7 @@ export default class CategoryParameter extends BaseParameter {
 
     resolve(context: Context): IType {
         if (!this.resolved)
-            this.resolved = this.type.resolve(context, null);
+            this.resolved = this.type.resolve(context);
         return this.resolved;
     }
 

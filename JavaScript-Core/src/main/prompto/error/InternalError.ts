@@ -1,8 +1,8 @@
-import PromptoError from './PromptoError.ts'
+import PromptoError from './PromptoError'
 
 export default class InternalError extends PromptoError {
 
-	constructor(message) {
+	constructor(message: string) {
 		super(message);
 	}
 

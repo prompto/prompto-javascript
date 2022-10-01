@@ -1,5 +1,7 @@
 export default class Period {
 
+    static parse(s: string): Period;
+
     equals(value: any): boolean;
     totalMilliseconds(): number;
     minus(): Period;
@@ -7,4 +9,4 @@ export default class Period {
     subtract(value: Period): Period;
     multiply(value: number): Period;
 
- }
+}

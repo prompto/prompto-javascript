@@ -1,14 +1,15 @@
 import FetchOneExpression from './FetchOneExpression'
 import {AnyType, CursorType, IntegerType, IType} from '../type'
-import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store'
+import {$DataStore, TypeFamily, AttributeInfo, MatchOp, Store} from '../store'
 import {CursorValue, IValue} from '../value'
 import { CategoryDeclaration } from '../declaration'
 import { InvalidDataError } from '../error'
 import { Cursor } from "../intrinsic";
 import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
-import {IExpression } from "./index";
+import {IExpression, IPredicate} from "./index";
 import {IdentifierList, OrderByClauseList} from "../grammar";
+import IQuery from "../store/IQuery";
 
 export default class FetchManyExpression extends FetchOneExpression {
 
@@ -40,7 +41,7 @@ export default class FetchManyExpression extends FetchOneExpression {
         if(this.first!=null) {
             this.first.toDialect(writer);
             writer.append(" to ");
-            this.last.toDialect(writer);
+            this.last!.toDialect(writer);
             writer.append(" ");
         }
         if(this.predicate!=null) {
@@ -81,7 +82,7 @@ export default class FetchManyExpression extends FetchOneExpression {
             writer.append("rows ( ");
             this.first.toDialect(writer);
             writer.append(" to ");
-            this.last.toDialect(writer);
+            this.last!.toDialect(writer);
             writer.append(") ");
         }
         if(this.predicate!=null) {
@@ -105,7 +106,7 @@ export default class FetchManyExpression extends FetchOneExpression {
             writer.append("rows ");
             this.first.toDialect(writer);
             writer.append(" to ");
-            this.last.toDialect(writer);
+            this.last!.toDialect(writer);
             writer.append(" ");
         } else
             writer.append("all ");
@@ -134,15 +135,17 @@ export default class FetchManyExpression extends FetchOneExpression {
 
     check(context: Context): IType {
         let type = this.type;
-        if (type==null)
+        if (!type)
             type = AnyType.instance;
         else {
-            const decl = context.getRegisteredDeclaration(this.type.id);
-            if (decl == null  || !(decl instanceof CategoryDeclaration))
+            const decl = context.getRegistered(this.type!.id);
+            if(decl instanceof CategoryDeclaration) {
+                if (decl.isStorable(context))
+                    context = context.newInstanceContext(null, decl.getType(context), true);
+                else
+                    context.problemListener.reportNotStorable(type.id, type.name);
+            } else
                 context.problemListener.reportUnknownCategory(type.id, type.name);
-            if(!(decl && decl.isStorable && decl.isStorable(context)))
-                context.problemListener.reportNotStorable(this.type.id, this.type.name);
-            context = context.newInstanceContext(null, decl.getType(context), true);
         }
         this.checkPredicate(context);
         this.checkInclude(context);
@@ -151,56 +154,59 @@ export default class FetchManyExpression extends FetchOneExpression {
         return new CursorType(type);
     }
 
-    checkPredicate(context) {
-        if(this.predicate)
-            this.predicate.checkQuery(context);
+    checkPredicate(context: Context) {
+        if(this.predicate?.isPredicate() )
+            (this.predicate as IPredicate).checkQuery(context);
     }
 
-    checkInclude(context) {
+    checkInclude(context: Context) {
+        // TODO
     }
 
-    checkOrderBy(context) {
+    checkOrderBy(context: Context) {
         if (this.orderBy != null)
             this.orderBy.checkQuery(context);
     }
 
-    checkSlice(context) {
+    checkSlice(context: Context) {
+        // TODO
     }
 
     interpret(context: Context): IValue {
         const store = $DataStore.instance;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const query = this.buildFetchManyQuery(context, store);
         const type = this.type || AnyType.instance;
-        const cursor = store.fetchMany(query, type.mutable);
-        return new CursorValue(context, type, cursor.iterable);
+        const cursor = store.fetchMany(query);
+        return new CursorValue(context, type, cursor);
     }
 
-    buildFetchManyQuery(context, store) {
+    buildFetchManyQuery(context: Context, store: Store): IQuery {
         const builder = store.newQueryBuilder();
-        builder.setFirst(this.interpretLimit(context, this.first));
-        builder.setLast(this.interpretLimit(context, this.last));
+        builder.first(this.interpretLimit(context, this.first));
+        builder.last(this.interpretLimit(context, this.last));
         if (this.type != null) {
             const info = new AttributeInfo("category", TypeFamily.TEXT, true, null);
             builder.verify(info, MatchOp.HAS, this.type.name);
         }
-        if (this.predicate != null)
-            this.predicate.interpretQuery(context, builder);
+        if (this.predicate)
+            (this.predicate as IPredicate).interpretQuery(context, builder);
         if (this.type != null && this.predicate != null)
             builder.and();
-        if (this.include != null)
-            builder.project(this.include);
+        if (this.include)
+            builder.project(this.include.map(id => id.name));
         if (this.orderBy != null)
             this.orderBy.interpretQuery(context, builder);
         return builder.build();
     }
 
-    interpretLimit(context, exp) {
+    interpretLimit(context: Context, exp: IExpression | null) {
         if (exp == null)
             return null;
         const value = exp.interpret(context);
         if(value.type!=IntegerType.instance)
             throw new InvalidDataError("Expecting an Integer, got:" + value.type.name);
-        return value.getStorableData();
+        return value.getStorableData() as number;
     }
 
     declare(transpiler: Transpiler): void {
@@ -225,16 +231,16 @@ export default class FetchManyExpression extends FetchOneExpression {
         transpiler.append("(function() {").indent();
         this.transpileQuery(transpiler);
         const mutable = this.type ? this.type.mutable : false;
-        transpiler.append("return $DataStore.instance.fetchMany(builder.build(), ").append(mutable).append(");").newLine().dedent();
+        transpiler.append("return $DataStore.instance.fetchMany(builder.build(), ").appendBoolean(mutable).append(");").newLine().dedent();
         transpiler.append("})()");
     }
 
-    transpileQuery(transpiler) {
+    transpileQuery(transpiler: Transpiler) {
         transpiler.append("var builder = $DataStore.instance.newQueryBuilder();").newLine();
         if (this.type != null)
             transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.type.name).append("');").newLine();
-        if (this.predicate != null)
-            this.predicate.transpileQuery(transpiler, "builder");
+        if (this.predicate)
+            (this.predicate as IPredicate).transpileQuery(transpiler, "builder");
         if (this.type != null && this.predicate != null)
             transpiler.append("builder.and();").newLine();
         if (this.first) {
