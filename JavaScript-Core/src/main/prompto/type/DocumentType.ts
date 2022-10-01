@@ -177,7 +177,7 @@ export default class DocumentType extends NativeType {
     declareSorted(transpiler: Transpiler, key: IExpression | null): void {
         if (!key)
             key = new TextLiteral('"key"');
-        const decl = this.findGlobalMethod(transpiler.context, new Identifier(key!.toString()));
+        const decl = this.findGlobalMethod(transpiler.context, new Identifier(key.toString()));
         if (decl != null) {
             decl.declare(transpiler);
         } else {
@@ -282,7 +282,7 @@ export default class DocumentType extends NativeType {
     getSortedComparator(context: Context, desc: boolean, key: IExpression | Identifier | null): (o1: IValue, o2: IValue) => number {
         if (!key)
             key = new TextLiteral('"key"');
-        const keyId = key instanceof Identifier ? key : new Identifier(key!.toString());
+        const keyId = key instanceof Identifier ? key : new Identifier(key.toString());
         const decl = this.findGlobalMethod(context, keyId);
         if (decl) {
             return this.getGlobalMethodSortedComparator(context, desc, decl);
@@ -306,8 +306,8 @@ export default class DocumentType extends NativeType {
         const exp = new ValueExpression(this, new DocumentValue());
         const arg = new Argument(null, exp);
         const args = new ArgumentList([arg]);
-        const call = new MethodCall(new MethodSelector(null, id), args);
-        const cmp = function (o1: IValue, o2: IValue) {
+        const call = new MethodCall(new MethodSelector(null, decl.id), args);
+        const cmp = (o1: IValue, o2: IValue) => {
             const argument = call.args![0];
             argument._expression = new ValueExpression(this, o1);
             const value1 = call.interpret(context);
@@ -319,7 +319,7 @@ export default class DocumentType extends NativeType {
     }
 
     getEntrySortedComparator(context: Context, desc: boolean, key: TextLiteral): (o1: IValue, o2: IValue) => number {
-        const id = new Identifier(key.value.getStorableData());
+        const id = new Identifier(key.value.getStorableData() as string);
         return (o1, o2) => {
             const value1 = o1.GetMemberValue(context, id);
             const value2 = o2.GetMemberValue(context, id);

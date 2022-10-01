@@ -3,6 +3,15 @@ import { IntegerValue, TextValue } from '../value'
 import { SyntaxError } from '../error'
 import { CharacterType } from '../type'
 import { removeAccents } from '../utils'
+import {Context} from "../runtime";
+import {Identifier} from "../grammar";
+import IValue from "./IValue";
+
+const whitespace: boolean[] = [];
+whitespace[" ".charCodeAt(0)] = true;
+whitespace["\t".charCodeAt(0)] = true;
+whitespace["\r".charCodeAt(0)] = true;
+whitespace["\n".charCodeAt(0)] = true;
 
 
 export default class CharacterValue extends BaseValue<string> {
@@ -11,15 +20,15 @@ export default class CharacterValue extends BaseValue<string> {
         super(CharacterType.instance, value);
     }
 
-    static isWhitespace(c) {
-        return !!whitespace[c.charCodeAt(0)];
+    static isWhitespace(c: string): boolean {
+        return whitespace[c.charCodeAt(0)] || false;
     }
 
-    getMemberValue(context, id) {
-        if ("codePoint" == id.name) {
+    GetMemberValue(context: Context, member: Identifier): IValue {
+        if ("codePoint" == member.name) {
             return new IntegerValue(this.value.charCodeAt(0));
         } else {
-            return super.getMemberValue(context, id);
+            return super.GetMemberValue(context, member);
         }
     }
 
@@ -27,28 +36,28 @@ export default class CharacterValue extends BaseValue<string> {
         return this.value;
     }
 
-    Add(context, value) {
+    Add(context: Context, value: IValue) {
         return new TextValue(this.value + value.toString());
     }
 
-    Multiply(context, value) {
+    Multiply(context: Context, value: IValue) {
         if (value instanceof IntegerValue) {
             try {
                 const text = this.value.repeat(value.value);
                 return new TextValue(text);
             } catch(error) {
-                throw new SyntaxError("Negative repeat count:" + value.value);
+                throw new SyntaxError("Negative repeat count:" + String(value.value));
             }
         } else {
             throw new SyntaxError("Illegal: Chararacter * " + typeof(value));
         }
     }
 
-    cmp(obj) {
+    cmp(obj: CharacterValue) {
         return this.value > obj.value ? 1 : this.value == obj.value ? 0 : -1 ;
     }
 
-    compareToValue(context, value) {
+    compareToValue(context: Context, value: IValue) {
         if(value instanceof TextValue || value instanceof CharacterValue) {
             return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
         } else {
@@ -68,28 +77,19 @@ export default class CharacterValue extends BaseValue<string> {
         return this.value;
     }
 
-    equals(obj) {
-        if (obj instanceof CharacterValue) {
-            return this.value == obj.value;
-        } else {
-            return false;
-        }
+    equals(obj: any) {
+        return obj == this || (obj instanceof CharacterValue && this.value == obj.value);
     }
 
-    Roughly(context, obj) {
-        if (obj instanceof TextValue || obj instanceof CharacterValue) {
-            return removeAccents(this.value.toLowerCase()) == removeAccents(obj.value.toLowerCase());
+    Roughly(context: Context, value: IValue) {
+        if (value instanceof TextValue || value instanceof CharacterValue) {
+            return removeAccents(this.value.toLowerCase()) == removeAccents(value.value.toLowerCase());
         } else {
             return false;
         }
     }
 }
 
-const whitespace = [];
-whitespace[" ".charCodeAt(0)] = true;
-whitespace["\t".charCodeAt(0)] = true;
-whitespace["\r".charCodeAt(0)] = true;
-whitespace["\n".charCodeAt(0)] = true;
 
 
 

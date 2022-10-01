@@ -3,15 +3,16 @@ import {Identifier} from "../grammar";
 import {Context} from "../runtime";
 import {IStorable} from "../store";
 import INamed from "../grammar/INamed";
-import {MissingType, IType} from "../type";
 import IValue from "../value/IValue";
 import { JsonParent, JsonNode } from '../json';
 import {CodeWriter} from "../utils";
+import { IResource, IIterator } from '../value';
+import IEnumeratedType from "../type/IEnumeratedType";
 
-export default abstract class EnumSymbol<T extends IType> extends BaseExpression implements INamed, IValue {
+export default abstract class EnumSymbol<T extends IEnumeratedType> extends BaseExpression implements INamed, IValue {
 
     id: Identifier;
-    type: T = MissingType.instance;
+    type: T;
     mutable: boolean;
 
     constructor(id: Identifier) {
@@ -20,11 +21,13 @@ export default abstract class EnumSymbol<T extends IType> extends BaseExpression
         this.mutable = false;
     }
 
+    value: any;
     get name(): string {
         return this.id.name;
     }
 
     getType(context: Context): T {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.type;
     }
 
@@ -104,6 +107,40 @@ export default abstract class EnumSymbol<T extends IType> extends BaseExpression
         throw new Error('Method not implemented.');
     }
     isIterable(): boolean {
+        throw new Error('Method not implemented.');
+    }
+
+    SetMemberValue(context: Context, member: Identifier, value: IValue): void {
+        throw new Error('Method not implemented.');
+    }
+    SetItemValue(context: Context, item: IValue, value: IValue): void {
+        throw new Error('Method not implemented.');
+    }
+    Add(context: Context, other: IValue): IValue {
+        throw new Error('Method not implemented.');
+    }
+    Subtract(context: Context, other: IValue): IValue {
+        throw new Error('Method not implemented.');
+    }
+    And(context: Context, other: IValue): IValue {
+        throw new Error('Method not implemented.');
+    }
+    Or(context: Context, other: IValue): IValue {
+        throw new Error('Method not implemented.');
+    }
+    Not(context: Context): IValue {
+        throw new Error('Method not implemented.');
+    }
+    isResource(): boolean {
+        throw new Error('Method not implemented.');
+    }
+    asResource(): IResource {
+        throw new Error('Method not implemented.');
+    }
+    getIterator(context: Context): IIterator<IValue> {
+        throw new Error('Method not implemented.');
+    }
+    isSliceable(): boolean {
         throw new Error('Method not implemented.');
     }
 

@@ -3,6 +3,7 @@ import { SyntaxError } from '../error'
 import BaseValue from "./BaseValue";
 import {Context} from "../runtime";
 import IValue from "./IValue";
+import {JsonObject, JsonParent} from "../json";
 
 export default class BooleanValue extends BaseValue<boolean> {
 
@@ -75,11 +76,11 @@ export default class BooleanValue extends BaseValue<boolean> {
         }
     }
 
-    toJson(context: Context, json: any, instanceId: any, fieldName: string, withType: boolean, binaries: any) {
+    toJsonStream(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
         if(Array.isArray(json))
             json.push(this.value);
         else
-            json[fieldName] = this.value;
+            json.set(fieldName, this.value);
     }
 }
 

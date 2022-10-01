@@ -1,9 +1,9 @@
-import BinaryValue from '../../../main/prompto/value/BinaryValue.ts'
+import BinaryValue from './BinaryValue'
 import { ImageType } from '../type'
 
 export default class ImageValue extends BinaryValue {
 
-    constructor(mimeType, data) {
+    constructor(mimeType: string, data: Uint8Array) {
         super(ImageType.instance, mimeType, data);
     }
 }

@@ -3,21 +3,21 @@ import { IntegerValue, NullValue, TextValue, SetValue, ListValue } from './index
 import { DocumentType, AnyType, TextType } from '../type'
 import { Document, StrictSet } from '../intrinsic'
 import { SyntaxError } from '../error'
-import { equalArrays } from '../utils'
+import { equalObjects } from '../utils'
 import {JsonNode, JsonObject, JsonParent} from '../json'
 import {Context, Transpiler} from '../runtime'
 import {Identifier} from "../grammar";
 import IValue from "../../../main/prompto/value/IValue";
 
-export default class DocumentValue extends BaseValue<Document> {
+export default class DocumentValue extends BaseValue<Document<string, IValue>> {
 
-    constructor(values?: Document) {
-        super(DocumentType.instance, values || new Document());
+    constructor(values?: Document<string, IValue>) {
+        super(DocumentType.instance, values || new Document<string, IValue>());
         this.mutable = true;
     }
 
     getMemberNames(): string[] {
-        return Object.getOwnPropertyNames(this.value);
+        return this.value.$user_keys;
     }
 
     getStorableData(): any {
@@ -25,128 +25,115 @@ export default class DocumentValue extends BaseValue<Document> {
     }
 
     convertToJavaScript() {
-        const values = new Document();
-        Object.getOwnPropertyNames(this.values).forEach(function(key) {
-            const value = this.values[key];
-            values[key] = value.convertToJavaScript();
-        }, this);
+        const values = new Document<string, IValue>();
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        this.getMemberNames().forEach(key => values.$safe_setMember(key, this.value.$safe_getMember(key)!.convertToJavaScript()), this);
         return values;
     }
 
-    hasMember(name) {
-        return this.values.hasOwnProperty(name);
+    hasMember(name: string) {
+        return this.value.hasOwnProperty(name);
     }
 
-    getMemberValue(context: Context, id: Identifier, autocreate?: boolean): IValue {
-        switch(id.name) {
+    GetMemberValue(context: Context, member: Identifier, autoCreate?: boolean): IValue {
+        switch(member.name) {
             case "count":
-                return new IntegerValue(this.values.$safe_length);
-            case "keys": {
-                const keys = new StrictSet();
-                this.getMemberNames().forEach(name => {
-                    keys.add(new TextValue(name));
-                });
-                return new SetValue(TextType.instance, keys);
-            }
-            case "values": {
-                const list = this.getMemberNames().map(function (name) {
-                    return this.values[name];
-                }, this);
-                return new ListValue(AnyType.instance, list);
-            }
+                return new IntegerValue(this.value.$safe_length);
+            case "keys":
+                return this.getMemberKeys();
+            case "values":
+                return this.getMemberValues();
             case "json":
-                return super.getMemberValue(context, id, autoCreate);
+                if(!this.value.hasOwnProperty("json"))
+                    return super.GetMemberValue(context, member, autoCreate);
+                // eslint-disable-next-line no-fallthrough
             default:
-                if (this.values.hasOwnProperty(id.name))
-                    return this.values[id.name] || null;
-                else if ("text" == id.name)
-                    return new TextValue(this.toString());
-                else if (autoCreate) {
-                    const result = new DocumentValue();
-                    this.values[id.name] = result;
-                    return result;
-                } else
-                    return NullValue.instance;
+                return this.getMemberValue(member.name, autoCreate);
         }
     }
 
-    setMember(context, name, value) {
-        this.values[name] = value;
+    getMemberValue(member: string, autoCreate?: boolean): IValue {
+        if (this.value.hasOwnProperty(member))
+            return this.value.$safe_getMember(member) || NullValue.instance;
+        else if ("text" == member)
+            return new TextValue(this.toString());
+        else if (autoCreate) {
+            const result = new DocumentValue();
+            this.value.$safe_setMember(member, result);
+            return result;
+        } else
+            return NullValue.instance;
     }
 
-    getItemInContext(context, index) {
+    getMemberValues(): ListValue {
+        return new ListValue(AnyType.instance, false, this.value.$safe_values);
+    }
+
+    getMemberKeys() {
+        const keys = this.value.$user_keys.map(key => new TextValue(key));
+        return new SetValue(TextType.instance, new StrictSet<TextValue>(keys));
+
+    }
+
+    setMember(context: Context, name: string, value: IValue) {
+        this.value.$safe_setMember(name, value);
+    }
+
+    GetItemValue(context: Context, index: IValue) {
         if (index instanceof TextValue) {
             // TODO autocreate
-            return this.values[index.value] || NullValue.instance;
+            return this.value.$safe_getMember(index.value) || NullValue.instance;
         } else {
             throw new SyntaxError("No such item:" + index.toString())
         }
     }
 
-    setItemInContext(context, index, value) {
+    SetItemValue(context: Context, index: IValue, value: IValue) {
         if (index instanceof TextValue) {
-            this.values[index.value] = value
+            this.value.$safe_setMember(index.value, value);
         } else {
             throw new SyntaxError("No such item:" + index.toString());
         }
     }
 
-    Add(context, value) {
+    Add(context: Context, value: IValue): IValue {
         if (value instanceof DocumentValue) {
-            return new DocumentValue(this.values.$safe_add(value.values));
+            return new DocumentValue(this.value.$safe_add(value.value));
         } else {
             throw new SyntaxError("Illegal: Document + " + typeof(value));
         }
     }
 
-    equals(other) {
-        if(this==other)
-            return true;
-        if(!(other instanceof DocumentValue))
-            return false;
-        const thisNames = Object.getOwnPropertyNames(this.values);
-        const otherNames = Object.getOwnPropertyNames(other.values);
-        if(!equalArrays(thisNames, otherNames))
-            return false;
-        return thisNames.every(function(name) {
-            return this.values[name].equals(other.values[name]);
-        }, this);
+    equals(other: any) {
+        return other==this || (other instanceof DocumentValue && equalObjects(this.value, other.value));
     }
 
     toString() {
-        const binaries = {};
-        // create json type-aware object graph and collect binaries
-        const values = {}; // need a temporary parent
-        for (const key in this.values) {
-            const value = this.values[key];
-            if(typeof(value) == 'function')
-                continue;
-            if (value == null || value == undefined)
-                values[key] = null;
-            else {
-                const id = this; // TODO create identifier
-                value.toJson(null, values, id, key, false, binaries);
-            }
-        }
-        return JSON.stringify(values);
+        return this.value.toString();
     }
 
-    toJson(context, json, instanceId, fieldName, withType, binaries) {
-        const values = {};
-        Object.getOwnPropertyNames(this.values).forEach(function(key) {
-            const value = this.values[key];
-            if (value == null || value == undefined)
-                values[key] = null;
+    toJsonStream(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
+        let values = new Map<string, any>();
+        this.getMemberNames().forEach(key => {
+            const value = this.value.$safe_getMember(key);
+            if (value == null || value == NullValue.instance)
+                values.set(key, null);
             else {
+                // eslint-disable-next-line @typescript-eslint/no-this-alias
                 const id = this; // TODO create identifier
-                value.toJson(context, values, id, key, withType, binaries);
+                value.toJsonStream(context, values, id, key, withType, binaries);
             }
         }, this);
-        const doc = withType ? { type: DocumentType.instance.name, value: values} : values;
+        if(withType) {
+            const doc = new Map<string, any>();
+            doc.set("type", DocumentType.instance.name);
+            doc.set("value", values);
+            values = doc;
+        }
         if(Array.isArray(json))
-            json.push(doc);
+            json.push(values);
         else
-            json[fieldName] = doc;
+            json.set(fieldName, values);
     }
 
     declare(transpiler: Transpiler): void {
@@ -154,19 +141,16 @@ export default class DocumentValue extends BaseValue<Document> {
     }
 
     toJsonNode(): JsonObject {
-        const node = new Map<string, JsonNode>();
-        Object.getOwnPropertyNames(this.value).forEach(key => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const value = this.value[key] || null;
-            node.set(key, value instanceof BaseValue ? value.toJsonNode() : null);
+        const map = new Map<string, JsonNode>();
+        this.getMemberNames().forEach(key => {
+            const value = this.value.$safe_getMember(key) || null;
+            if(value == null)
+                map.set(key, null);
+            else
+                map.set(key, value.toJsonNode());
         }, this);
-        return node;
+        return map;
     }
-
-    toJsonStream(context: Context, values: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
-        throw new Error('Method not implemented.')
-    }
-
 
 }
 

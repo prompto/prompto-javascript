@@ -7,20 +7,25 @@ import {
     RemoveKeyMethodDeclaration,
     RemoveValueMethodDeclaration
 } from "../builtins/DictionaryTypeBuiltins";
-import {convertToJsonString, convertToJsonNode} from "../utils";
+import {convertToJsonString, convertToJsonNode, equalObjects} from "../utils";
+import IType from "./IType";
+import {TypeFamily} from "../store";
+import {Context, Transpiler} from "../runtime";
+import {Section} from "../parser";
+import {IExpression} from "../expression";
+import {IMethodDeclaration} from "../declaration";
 
 export default class DictionaryType extends ContainerType {
 
-    constructor(itemType) {
-        super(new Identifier(itemType.name + "<:>"), itemType);
-        this.itemType = itemType;
+    constructor(itemType: IType) {
+        super(new Identifier(itemType.name + "<:>"), TypeFamily.DICTIONARY, itemType);
     }
 
-    withItemType(itemType) {
+    withItemType(itemType: IType): IType {
         return new DictionaryType(itemType);
     }
 
-    getTranspiledName(context) {
+    getTranspiledName(context: Context) {
         return this.itemType.getTranspiledName(context) + "_dict";
     }
 
@@ -37,19 +42,11 @@ export default class DictionaryType extends ContainerType {
             || ((other instanceof DictionaryType) && this.itemType.isAssignableFrom(context, other.itemType));
     }
 
-    equals(obj) {
-        if (obj == null) {
-            return false;
-        } else if (obj == this) {
-            return true;
-        } else if (!(obj instanceof DictionaryType)) {
-            return false;
-        } else {
-            return this.itemType.equals(obj.itemType);
-        }
+    equals(obj: any) {
+        return obj == this || (obj instanceof DictionaryType && equalObjects(this.itemType,  obj.itemType));
     }
 
-    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
+    checkAdd(context: Context, section: Section, other: IType, tryReverse: boolean): IType {
         if (other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
             return this;
         } else {
@@ -57,7 +54,7 @@ export default class DictionaryType extends ContainerType {
         }
     }
 
-    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
+    declareAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void {
         if (other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -66,7 +63,7 @@ export default class DictionaryType extends ContainerType {
         }
     }
 
-    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
+    transpileAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void {
         if (other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
             left.transpile(transpiler);
             transpiler.append(".add(");
@@ -81,7 +78,7 @@ export default class DictionaryType extends ContainerType {
         if (other == TextType.instance) {
             return BooleanType.instance;
         } else {
-            return super.checkContains(context, other);
+            return super.checkContains(context, section, other);
         }
     }
 
@@ -98,7 +95,7 @@ export default class DictionaryType extends ContainerType {
         transpiler.append(")");
     }
 
-    checkHasAllOrAny(context: Context, section: Section, other: Type): Type {
+    checkHasAllOrAny(context: Context, section: Section, other: IType): IType {
         return BooleanType.instance;
     }
 
@@ -122,7 +119,7 @@ export default class DictionaryType extends ContainerType {
         transpiler.append(")");
     }
 
-    checkItem(context, other, section) {
+    checkItem(context: Context, section: Section, other: IType) {
         if (other == TextType.instance) {
             return this.itemType;
         } else {
@@ -141,7 +138,7 @@ export default class DictionaryType extends ContainerType {
         transpiler.append(")");
     }
 
-    transpileAssignItemValue(transpiler, item, expression) {
+    transpileAssignItemValue(transpiler: Transpiler, item: IExpression, expression: IExpression) {
         transpiler.append(".setItem(");
         item.transpile(transpiler);
         transpiler.append(", ");
@@ -153,7 +150,7 @@ export default class DictionaryType extends ContainerType {
         return new EntryType(this.itemType);
     }
 
-    checkMember(context: Context, section: Section, id: Identifier): Type {
+    checkMember(context: Context, section: Section, id: Identifier): IType {
         switch (id.name) {
             case "count":
                 return IntegerType.instance;
@@ -167,7 +164,7 @@ export default class DictionaryType extends ContainerType {
     }
 
     declareMember(transpiler: Transpiler, member: Identifier): void {
-        switch (id.name) {
+        switch (member.name) {
             case "keys":
                 transpiler.require(StrictSet);
                 break;
@@ -182,38 +179,43 @@ export default class DictionaryType extends ContainerType {
             case "count":
                 break;
             default:
-                super.declareMember(transpiler, section, id);
+                super.declareMember(transpiler, member);
         }
     }
 
-    transpileMember(transpiler: Transpiler, id: Identifier): void {
-        switch(id.name) {
+    transpileMember(transpiler: Transpiler, member: Identifier): void {
+        switch(member.name) {
             case "count":
                 transpiler.append("length");
                 break;
             case "keys":
             case "values":
-                transpiler.append(id.name);
+                transpiler.append(member.name);
                 break;
             case "json":
                 transpiler.append("toJson()");
                 break;
             default:
-             super.transpileMember(transpiler, id);
+             super.transpileMember(transpiler, member);
         }
     }
 
     getMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration> {
+        let methods: IMethodDeclaration[] | null = null;
         switch (id.name) {
             case "swap" :
-                return [new SwapMethodDeclaration()];
+                methods = [new SwapMethodDeclaration()];
+                break;
             case "removeKey":
-                return [new RemoveKeyMethodDeclaration()];
+                methods = [new RemoveKeyMethodDeclaration()];
+                break;
             case "removeValue":
-                return [new RemoveValueMethodDeclaration()];
-            default:
-                return super.getMemberMethods.call(context, id);
+                methods = [new RemoveValueMethodDeclaration()];
         }
+        if(methods)
+            return new Set<IMethodDeclaration>(methods);
+        else
+            return super.getMemberMethods(context, id);
     }
 }
 

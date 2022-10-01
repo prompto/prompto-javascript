@@ -1,19 +1,16 @@
-import IValue from './IValue.ts'
+import BaseValue from './BaseValue'
 import { TextValue } from '../value'
-import { InvalidDataError } from '../error'
 import { UUID } from '../intrinsic'
 import { UUIDType } from '../type'
+import {equalObjects} from "../utils";
+import {Context} from "../runtime";
 
-export default class UUIDValue extends IValue {
+export default class UUIDValue extends BaseValue<UUID> {
    
-    constructor(value) {
-        if(typeof(value) == 'string') {
+    constructor(value: UUID | string) {
+        if(typeof(value) == 'string')
             value = UUID.fromString(value);
-        }
-        if(!(value instanceof UUID))
-            throw new InvalidDataError("Not a UUID: " + typeof(value));
-        super(UUIDType.instance);
-        this.value = value;
+        super(UUIDType.instance, value);
     }
 
     toString() {
@@ -28,20 +25,14 @@ export default class UUIDValue extends IValue {
         return this.value.toString();
     }
 
-    equals(obj) {
-        if (obj instanceof UUIDValue) {
-            return this.value.equals(obj.value);
-        } else {
-            return false;
-        }
+    equals(obj: any) {
+        return obj == this || (obj instanceof UUIDValue && equalObjects(this.value, obj.value));
     }
 
-    toDocumentValue(context) {
+    toDocumentValue(context: Context) {
         return new TextValue(this.toString());
     }
 }
 
-
-export {UUIDValue};
 
 

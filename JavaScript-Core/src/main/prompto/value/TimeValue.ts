@@ -1,13 +1,17 @@
-import IValue from '../../../main/prompto/value/IValue.ts'
-import {PeriodValue, IntegerValue, TextValue} from './index.ts'
+import BaseValue from "./BaseValue";
+import {PeriodValue, IntegerValue, TextValue, IValue} from './index'
 import {TimeType} from '../type'
 import {SyntaxError} from '../error'
+import {Context} from "../runtime";
+import {LocalTime} from "../intrinsic";
+import {Identifier} from "../grammar";
+import {equalObjects} from "../utils";
+import {JsonNode, JsonParent} from "../json";
 
-export default class TimeValue extends IValue {
+export default class TimeValue extends BaseValue<LocalTime> {
 
-    constructor(value) {
-        super(TimeType.instance);
-        this.value = value;
+    constructor(value: LocalTime) {
+        super(TimeType.instance, value);
     }
 
     toString() {
@@ -26,15 +30,15 @@ export default class TimeValue extends IValue {
         return this.value;
     }
 
-    Add(context, value) {
+    Add(context: Context, value: IValue) {
         if (value instanceof PeriodValue) {
-            return new TimeValue(this.value.addPeriod(value));
+            return new TimeValue(this.value.addPeriod(value.value));
         } else {
             throw new SyntaxError("Illegal: TimeValue + " + typeof (value));
         }
     }
 
-    Subtract(context, value) {
+    Subtract(context: Context, value: IValue) {
         if (value instanceof PeriodValue) {
             return new TimeValue(this.value.subtractPeriod(value.value));
         } else if (value instanceof TimeValue) {
@@ -44,7 +48,7 @@ export default class TimeValue extends IValue {
         }
     }
 
-    compareToValue(context, value) {
+    compareToValue(context: Context, value: IValue) {
         if (value instanceof TimeValue) {
             return this.cmp(value);
         } else {
@@ -52,8 +56,8 @@ export default class TimeValue extends IValue {
         }
     }
 
-    getMemberValue(context, id) {
-        switch (id.name) {
+    GetMemberValue(context: Context, member: Identifier) {
+        switch (member.name) {
             case "hour":
                 return new IntegerValue(this.value.getHour());
             case "minute":
@@ -63,34 +67,30 @@ export default class TimeValue extends IValue {
             case "millisecond":
                 return new IntegerValue(this.value.getMillisecond());
             default:
-                return super.getMemberValue(context, id);
+                return super.GetMemberValue(context, member);
         }
     }
 
-    cmp(obj) {
+    cmp(obj: TimeValue) {
         const a = this.value.valueOf();
         const b = obj.value.valueOf();
         return a > b ? 1 : (a === b ? 0 : -1);
     }
 
-    equals(obj) {
-        if (obj instanceof TimeValue) {
-            return this.value.equals(obj.value);
-        } else {
-            return false;
-        }
+    equals(obj: any) {
+        return obj == this || (obj instanceof TimeValue && equalObjects(this.value, obj.value));
     }
 
-    toDocumentValue(context) {
+    toDocumentValue(context: Context) {
         return new TextValue(this.toString());
     }
 
-    toJson(context, json, instanceId, fieldName, withType, binaries) {
+    toJsonStream(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
         const value = withType ? {type: TimeType.instance.name, value: this.value.toString()} : this.value.toString();
         if (Array.isArray(json))
-            json.push(value);
+            json.push(value as JsonNode);
         else
-            json[fieldName] = value;
+            json.set(fieldName, value as JsonNode);
     }
 
 }

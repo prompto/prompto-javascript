@@ -40,7 +40,7 @@ export default interface IValue {
     collectStorables(storables: Set<IStorable>): void;
     convertToJavaScript(): any;
     toDocumentValue(context: Context): IValue;
-    toJsonStream(context: Context, values: JsonParent, instanceId: never | null, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void;
+    toJsonStream(context: Context, values: JsonParent, instanceId: any, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void;
     toJsonNode(): JsonNode;
 
 }

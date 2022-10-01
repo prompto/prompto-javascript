@@ -128,13 +128,11 @@ export default class DecimalValue extends BaseValue<number> {
         }
     }
 
-    toJson(context: Context, json: JsonParent, instanceId: any, fieldName: string, withType: boolean, binaries: any[]): void {
+    toJsonStream(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
         if(Array.isArray(json))
             json.push(this.value);
         else
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            json[fieldName as keyof typeof json] = this.value;
+            json.set(fieldName, this.value);
     }
 
 }

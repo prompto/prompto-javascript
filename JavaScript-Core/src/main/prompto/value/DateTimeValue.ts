@@ -1,13 +1,17 @@
-import IValue from '../../../main/prompto/value/IValue.ts'
-import { PeriodValue, DateValue, TextValue, TimeValue, IntegerValue } from './index.ts'
+import BaseValue from "./BaseValue";
+import {PeriodValue, DateValue, TextValue, TimeValue, IntegerValue, IValue} from './index'
 import { DateTimeType } from '../type'
 import { SyntaxError } from '../error'
+import {DateTime} from "../intrinsic";
+import {Context} from "../runtime";
+import {Identifier} from "../grammar";
+import {JsonNode, JsonParent} from "../json";
+import {equalObjects} from "../utils";
 
-export default class DateTimeValue extends IValue {
+export default class DateTimeValue extends BaseValue<DateTime> {
   
-    constructor(value) {
-        super(DateTimeType.instance);
-        this.value = value;
+    constructor(value: DateTime) {
+        super(DateTimeType.instance, value);
    }
 
     getStorableData(): any {
@@ -27,7 +31,7 @@ export default class DateTimeValue extends IValue {
     }
 
 
-    Add(context, value) {
+    Add(context: Context, value: IValue) {
         if (value instanceof PeriodValue) {
             const result = this.value.addPeriod(value.value);
             return new DateTimeValue(result);
@@ -36,7 +40,7 @@ export default class DateTimeValue extends IValue {
         }
     }
 
-    Subtract(context, value) {
+    Subtract(context: Context, value: IValue) {
         if (value instanceof DateTimeValue) {
             return new PeriodValue(this.value.subtractDateTime(value.value));
         } /* else if (value instanceof DateValue) {
@@ -50,18 +54,18 @@ export default class DateTimeValue extends IValue {
         }
     }
 
-    compareToValue(context, value) {
+    compareToValue(context: Context, value: IValue) {
         if (value instanceof DateTimeValue) {
             return this.value.compareTo(value.value.date, value.value.tzOffset);
         } else if (value instanceof DateValue) {
-            return this.value.compareTo(value.value.date, 0);
+            return this.value.compareTo(value.value, 0);
         } else {
             throw new SyntaxError("Illegal comparison: DateTimeValue and " + typeof(value));
         }
     }
 
-    getMemberValue(context, id) {
-        switch(id.name) {
+    GetMemberValue(context: Context, member: Identifier): IValue {
+        switch(member.name) {
             case "year":
                 return new IntegerValue(this.value.getYear());
             case "month":
@@ -87,28 +91,24 @@ export default class DateTimeValue extends IValue {
             case "time":
                 return new TimeValue(this.value.getTime());
             default:
-                return super.getMemberValue(context, id);
+                return super.GetMemberValue(context, member);
          }
     }
 
-    equals(obj) {
-        if (obj instanceof DateTimeValue) {
-            return this.value.equals(obj.value);
-        } else {
-            return false;
-        }
+    equals(obj: any) {
+        return obj == this || (obj instanceof DateTimeValue && equalObjects(this.value, obj.value));
     }
 
-    toDocumentValue(context) {
+    toDocumentValue(context: Context) {
         return new TextValue(this.toString());
     }
 
-    toJson(context, json, instanceId, fieldName, withType, binaries) {
+    toJsonStream(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
         const value = withType ? { type: DateTimeType.instance.name, value: this.value.toString() } : this.value.toString();
         if(Array.isArray(json))
-            json.push(value);
+            json.push(value as JsonNode);
         else
-            json[fieldName] = value;
+            json.set(fieldName, value as JsonNode);
     }
 
 }

@@ -1,5 +1,5 @@
-import NativeType from './NativeType'
-import { IntegerType, ListType, SetType, AnyType, BooleanType } from '../type'
+import ContainerType from './ContainerType'
+import {IntegerType, ListType, SetType, AnyType, BooleanType} from '../type'
 import { Identifier } from '../grammar'
 import { StrictSet } from '../intrinsic'
 import { JoinTupleMethodDeclaration } from '../builtins/ContainerTypeBuiltins'
@@ -10,12 +10,12 @@ import {Section} from "../parser";
 import {IExpression} from "../expression";
 import {IMethodDeclaration} from "../declaration";
 
-export default class TupleType extends NativeType {
+export default class TupleType extends ContainerType {
 
     static instance = new TupleType();
     
     constructor() {
-        super(new Identifier("Tuple"), TypeFamily.TUPLE);
+        super(new Identifier("Tuple"), TypeFamily.TUPLE, AnyType.instance);
     }
 
     withItemType(itemType: IType): IType {

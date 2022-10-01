@@ -3,8 +3,10 @@ import {IntegerValue, CharacterValue, DbIdValue, IIterator} from '../value'
 import { TextType } from '../type'
 import { SyntaxError, IndexOutOfRangeError, InvalidDataError } from '../error'
 import { removeAccents } from '../utils'
-import IValue from "./IValue";
 import {Context} from "../runtime";
+import IValue from "./IValue";
+import {Identifier} from "../grammar";
+import {JsonParent} from "../json";
 
 export default class TextValue extends BaseValue<string> {
 
@@ -24,24 +26,24 @@ export default class TextValue extends BaseValue<string> {
         return this.value;
     }
 
-    Add(context, value) {
+    Add(context: Context, value: IValue): IValue {
         return new TextValue(this.value + value.toString());
     }
 
-    Multiply(context, value) {
+    Multiply(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             try {
                 const text = this.value.repeat(value.value);
                 return new TextValue(text);
             } catch(error) {
-                throw new SyntaxError("Negative repeat count:" + value.value);
+                throw new SyntaxError("Negative repeat count:" + String(value.value));
             }
         } else {
             throw new SyntaxError("Illegal: Chararacter * " + typeof(value));
         }
     }
 
-    compareToValue(context, value) {
+    compareToValue(context: Context, value: IValue) {
         if(value instanceof TextValue || value instanceof CharacterValue) {
             return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
         } else {
@@ -49,7 +51,7 @@ export default class TextValue extends BaseValue<string> {
         }
     }
 
-    hasItem(context, value) {
+    hasItem(context: Context, value: IValue) {
         if (value instanceof CharacterValue || value instanceof TextValue) {
             return this.value.indexOf(value.value) >= 0;
         } else {
@@ -57,15 +59,15 @@ export default class TextValue extends BaseValue<string> {
         }
     }
 
-    getMemberValue(context, id) {
-        if ("count" == id.name) {
+    GetMemberValue(context: Context, member: Identifier): IValue {
+        if ("count" == member.name) {
             return new IntegerValue(this.value.length);
         } else {
-            return super.getMemberValue(context, id);
+            return super.GetMemberValue(context, member);
         }
     }
 
-    getItemInContext(context, index) {
+    GetItemValue(context: Context, index: IValue): IValue {
         try {
             if (index instanceof IntegerValue) {
                 return new CharacterValue(this.value[index.IntegerValue() - 1]);
@@ -94,13 +96,13 @@ export default class TextValue extends BaseValue<string> {
         return this.value;
     }
 
-    slice(fi, li) {
+    slice(fi: IntegerValue | null, li: IntegerValue | null) {
         const first = this.checkFirst(fi);
         const last = this.checkLast(li);
         return new TextValue(this.value.slice(first - 1, last));
     }
 
-    checkFirst(fi) {
+    checkFirst(fi: IntegerValue | null) {
         const value = (fi == null) ? 1 : fi.IntegerValue();
         if (value < 1 || value > this.value.length) {
             throw new IndexOutOfRangeError();
@@ -108,10 +110,10 @@ export default class TextValue extends BaseValue<string> {
         return value;
     }
 
-    checkLast(li) {
+    checkLast(li: IntegerValue | null) {
         let value = (li == null) ? this.value.length : li.IntegerValue();
         if (value < 0) {
-            value = this.value.length + 1 + li.IntegerValue();
+            value = this.value.length + 1 + li!.IntegerValue();
         }
         if (value < 1 || value > this.value.length) {
             throw new IndexOutOfRangeError();
@@ -119,37 +121,32 @@ export default class TextValue extends BaseValue<string> {
         return value;
     }
 
-    equals(obj) {
-        if (obj instanceof TextValue) {
-            return this.value == obj.value;
-        } else if (obj instanceof DbIdValue) {
-            return this.value == obj.value;
+    equals(obj: any) {
+        return obj == this || (obj instanceof TextValue && this.value == obj.value)
+            || (obj instanceof DbIdValue && this.value == obj.value);
+    }
+
+    Roughly(context: Context, value: IValue) {
+        if (value instanceof TextValue || value instanceof CharacterValue) {
+            return removeAccents(this.value.toLowerCase()) == removeAccents(value.value.toLowerCase());
         } else {
             return false;
         }
     }
 
-    Roughly(context, obj) {
-        if (obj instanceof TextValue || obj instanceof CharacterValue) {
-            return removeAccents(this.value.toLowerCase()) == removeAccents(obj.value.toLowerCase());
+    Contains(context: Context, value: IValue) {
+        if (value instanceof TextValue || value instanceof CharacterValue) {
+            return this.value.indexOf(value.value) >= 0;
         } else {
             return false;
         }
     }
 
-    Contains(context, obj) {
-        if (obj instanceof TextValue || obj instanceof CharacterValue) {
-            return this.value.indexOf(obj.value) >= 0;
-        } else {
-            return false;
-        }
-    }
-
-    toJson(context, json, instanceId, fieldName, withType, binaries) {
+    toJsonStream(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
         if(Array.isArray(json))
             json.push(this.value);
         else
-            json[fieldName] = this.value;
+            json.set(fieldName, this.value);
     }
 }
 

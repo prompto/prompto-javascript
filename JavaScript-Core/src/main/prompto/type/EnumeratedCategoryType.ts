@@ -2,20 +2,29 @@ import CategoryType from './CategoryType'
 import { TextType, ListType } from '../type'
 import { SymbolOfMethodDeclaration } from '../builtins/EnumeratedCategoryTypeBuiltins'
 import { SyntaxError } from '../error'
+import {TypeFamily} from "../store";
+import {Identifier} from "../grammar";
+import {Context, Transpiler} from "../runtime";
+import {Section} from "../parser";
+import IType from "./IType";
+import BaseDeclaration from "../declaration/BaseDeclaration";
+import {EnumeratedCategoryDeclaration, IMethodDeclaration} from "../declaration";
+import {IValue} from "../value";
+import IEnumeratedType from "./IEnumeratedType";
 
-export default class EnumeratedCategoryType extends CategoryType {
+export default class EnumeratedCategoryType extends CategoryType implements IEnumeratedType {
   
-    constructor(id) {
-        super(id);
+    constructor(id: Identifier) {
+        super(id, false, TypeFamily.ENUMERATED);
     }
 
-    asMutable(context, mutable) {
+    asMutable(context: Context, mutable: boolean) {
         if(mutable)
-            ; // TODO throw ?
+            throw new Error("Should never get there!");
         return this;
     }
 
-    checkExists(context) {
+    checkExists(context: Context) {
         // TODO
     }
 
@@ -27,48 +36,48 @@ export default class EnumeratedCategoryType extends CategoryType {
         }
     }
 
-    checkStaticMember(context: Context, section: Section, id: Identifier): void {
-        if ("symbols" === id.name) {
+    checkStaticMember(context: Context, section: Section, member: Identifier): IType {
+        if ("symbols" === member.name) {
             return new ListType(this);
         } else {
-            return super.checkStaticMember(context, section, id);
+            return super.checkStaticMember(context, section, member);
         }
     }
 
-    declareStaticMember(context: Context, id: Identifier): void {
-        if("symbols" === id.name) {
-            const decl = transpiler.context.getRegisteredDeclaration(this.id);
-            transpiler.declare(decl);
+    declareStaticMember(transpiler: Transpiler, member: Identifier): void {
+        if("symbols" === member.name) {
+            const decl = transpiler.context.getRegistered(this.id);
+            if(decl instanceof BaseDeclaration)
+                transpiler.declare(decl);
         } else
-            super.declareStaticMember(transpiler, section, id);
+            super.declareStaticMember(transpiler, member);
     }
 
-    transpileStaticMember(transpiler, id) {
-        if ("symbols" === id.name) {
-            transpiler.append(id.name);
+    transpileStaticMember(transpiler: Transpiler, member: Identifier) {
+        if ("symbols" === member.name) {
+            transpiler.append(member.name);
         } else {
-            return super.transpileStaticMember(transpiler, id);
+            return super.transpileStaticMember(transpiler, member);
         }
     }
 
-    getStaticMemberValue(context, id) {
-        const decl = context.getRegisteredDeclaration(this.id);
-        if (!decl || !decl.symbols) {
-            throw new SyntaxError(id.name + " is not an enumerated type!");
-        }
-        if ("symbols" === id.name) {
-            return decl.symbols;
-        } else {
-            throw new SyntaxError("Unknown member:" + id.name);
-        }
+    getStaticMemberValue(context: Context, member: Identifier): IValue {
+        const decl = context.getRegistered(this.id);
+        if(decl instanceof EnumeratedCategoryDeclaration) {
+            if ("symbols" == member.name)
+                return decl.symbols;
+            else
+                throw new SyntaxError("Unknown member:" + member.name);
+        } else
+            throw new SyntaxError(member.name + " is not an enumerated type!");
     }
 
-    getStaticMemberMethods(context, id) {
-        switch (id.name) {
+    getStaticMemberMethods(context: Context, member: Identifier): Set<IMethodDeclaration> {
+        switch (member.name) {
             case "symbolOf":
-                return [new SymbolOfMethodDeclaration(this)];
+                return new Set<IMethodDeclaration>([new SymbolOfMethodDeclaration(this)]);
             default:
-                return [];
+                return new Set<IMethodDeclaration>();
         }
     }
 }

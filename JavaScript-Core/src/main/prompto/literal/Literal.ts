@@ -19,6 +19,10 @@ export default abstract class Literal<T extends IValue> extends Section implemen
         this.value = value;
     }
 
+    equals(other: any): boolean {
+        throw new Error('Method not implemented.');
+    }
+
     asSection(): Section {
         return this;
     }

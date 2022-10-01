@@ -1,10 +1,23 @@
 import BaseValue from "./BaseValue";
-import {IValue, DocumentValue, ListValue, IIterable, IIterator} from '../value'
+import {IValue, ListValue, IIterable, IIterator} from '../value'
 import {AnyType, ContainerType, IType} from '../type'
 import {Context} from "../runtime";
-import {JsonNode, JsonParent} from "../json";
+import {JsonArray, JsonParent} from "../json";
 
 export default abstract class Container<T extends Iterable<IValue>> extends BaseValue<T> implements IIterable<IValue> {
+
+    protected static makeItems(items?: IValue[], item?: IValue): IValue[] {
+        let value: IValue[];
+        if(items && item)
+            value = items.concat([item]);
+        else if(items)
+            value = items;
+        else if (item)
+            value = [item];
+        else
+            value = [];
+        return value;
+    }
 
     constructor(type: ContainerType, value: T, mutable: boolean) {
         super(type, value, mutable);
@@ -16,18 +29,18 @@ export default abstract class Container<T extends Iterable<IValue>> extends Base
 
     abstract get items(): IValue[];
     abstract getIterator(context: Context): IIterator<IValue>;
-    abstract filter<ListValue>(filter: (value: IValue) => boolean): ListValue
+    abstract filter(filter: (value: IValue) => boolean): Container<any>;
 
-    toJson(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: never[]): void {
-        const values: JsonNode[] = [];
-        this.items.forEach(item => item.toJson(context, values, instanceId, fieldName, withType, binaries));
+    toJsonStream(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
+        const values: JsonArray = [];
+        this.items.forEach(item => item.toJsonStream(context, values, instanceId, fieldName, withType, binaries));
         if(Array.isArray(json))
             json.push(...values);
         else
-            json[fieldName as keyof typeof json] = values as never;
+            json.set(fieldName, values);
     }
 
-    toDocumentValue(context: Context): DocumentValue {
+    toDocumentValue(context: Context): IValue {
         const values = this.items.map(item => item.toDocumentValue(context));
         return new ListValue(AnyType.instance, false, values);
     }

@@ -27,11 +27,11 @@ export default class NullValue extends BaseValue<any> {
         return null; // <- YES!
     }
 
-    toJsonStream(context: Context, values: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
-        if(Array.isArray(values))
-            values.push(null);
+    toJsonStream(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
+        if(Array.isArray(json))
+            json.push(null);
         else
-            throw new Error("Should never get there!");
+            json.set(fieldName, null);
     }
 
 }

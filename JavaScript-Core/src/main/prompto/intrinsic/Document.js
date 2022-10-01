@@ -1,6 +1,6 @@
 import List from './List.js';
 import StrictSet from './StrictSet.js';
-import { equalArrays, isANumber, convertToJson, convertToJsonNode } from '../utils/Utils.js';
+import { equalArrays, equalObjects, isANumber, convertToJson, convertToJsonNode } from '../utils/Utils.js';
 
 export default function Document(entries) {
     if(entries)
@@ -67,10 +67,7 @@ Document.prototype.equals = function(other) {
     return thisNames.every(function(name) {
         var thisVal = this[name];
         var otherVal = other[name];
-        if (thisVal === null)
-            return otherVal == null;
-        else
-            return thisVal === otherVal || (thisVal.equals && thisVal.equals(otherVal));
+        return equalObjects(thisVal, otherVal);
     }, this);
 };
 

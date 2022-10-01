@@ -1,7 +1,9 @@
 import BaseValue from "./BaseValue";
-import { DecimalValue, DbIdValue } from './index'
+import {DecimalValue, DbIdValue, IValue} from './index'
 import { SyntaxError, DivideByZeroError } from '../error'
 import { IntegerType } from '../type'
+import {Context} from "../runtime";
+import {JsonParent} from "../json";
 
 
 export default class IntegerValue extends BaseValue<number> {
@@ -38,7 +40,7 @@ export default class IntegerValue extends BaseValue<number> {
         return this.value * 1.0;
     }
 
-    Add(context, value) {
+    Add(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             return new IntegerValue(this.value + value.value);
         } else if (value instanceof DecimalValue) {
@@ -48,7 +50,7 @@ export default class IntegerValue extends BaseValue<number> {
         }
     }
 
-    Subtract(context, value) {
+    Subtract(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             return new IntegerValue(this.value - value.value);
         } else if (value instanceof DecimalValue) {
@@ -58,7 +60,7 @@ export default class IntegerValue extends BaseValue<number> {
         }
     }
 
-    Multiply(context, value) {
+    Multiply(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             return new IntegerValue(this.value * value.value);
         } else if (value instanceof DecimalValue) {
@@ -70,7 +72,7 @@ export default class IntegerValue extends BaseValue<number> {
         }
     }
 
-    Divide(context, value) {
+    Divide(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
             if (value.DecimalValue() == 0.0) {
                 throw new DivideByZeroError();
@@ -82,7 +84,7 @@ export default class IntegerValue extends BaseValue<number> {
         }
     }
 
-    IntDivide(context, value) {
+    IntDivide(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             if (value.IntegerValue() == 0) {
                 throw new DivideByZeroError();
@@ -94,7 +96,7 @@ export default class IntegerValue extends BaseValue<number> {
         }
     }
 
-    Modulo(context, value) {
+    Modulo(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             if (value.IntegerValue() == 0) {
                 throw new DivideByZeroError();
@@ -106,15 +108,15 @@ export default class IntegerValue extends BaseValue<number> {
         }
     }
 
-    Minus(context) {
+    Minus(context: Context): IValue {
         return new IntegerValue(-this.value);
     }
 
-    cmp(obj) {
+    cmp(obj: IntegerValue) {
         return this.value > obj.IntegerValue() ? 1 : this.value == obj.IntegerValue() ? 0 : -1 ;
     }
 
-    compareToValue(context, value) {
+    compareToValue(context: Context, value: IValue) {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
             return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
         } else {
@@ -122,22 +124,16 @@ export default class IntegerValue extends BaseValue<number> {
         }
     }
 
-    equals(obj) {
-        if (obj instanceof IntegerValue) {
-            return this.value == obj.value;
-        } else if (obj instanceof DecimalValue) {
-            return this.value == obj.value;
-        } else if (obj instanceof DbIdValue) {
-            return this.value == obj.value;
-        } else {
-            return false;
-        }
+    equals(obj: any) {
+        return obj == this || (obj instanceof IntegerValue && this.value == obj.value)
+            || (obj instanceof DecimalValue && this.value == obj.value)
+            ||(obj instanceof DbIdValue && this.value == obj.value);
     }
 
-    toJson(context, json, instanceId, fieldName, withType, binaries) {
+    toJsonStream(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
         if(Array.isArray(json))
             json.push(this.value);
         else
-            json[fieldName] = this.value;
+            json.set(fieldName, this.value);
     }
 }

@@ -18,6 +18,10 @@ export default abstract class BaseParameter extends NamedInstance implements IWr
         this.mutable = mutable;
     }
 
+    setMutable(mutable: boolean): void {
+        this.mutable = mutable;
+    }
+
     abstract toEDialect(writer: CodeWriter): void;
     abstract toODialect(writer: CodeWriter): void;
     abstract toMDialect(writer: CodeWriter): void;
@@ -64,5 +68,6 @@ export default abstract class BaseParameter extends NamedInstance implements IWr
     abstract getSignature(dialect: Dialect): string;
     abstract getProto(context: Context): string;
     abstract getTranspiledName(context: Context): string;
+
 
 }

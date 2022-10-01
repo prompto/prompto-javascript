@@ -10,8 +10,9 @@ import IType from "./IType";
 import {TypeFamily} from "../store";
 import {EnumeratedNativeDeclaration, IMethodDeclaration} from "../declaration";
 import {IValue} from "../value";
+import IEnumeratedType from "./IEnumeratedType";
 
-export default class EnumeratedNativeType extends BaseType {
+export default class EnumeratedNativeType extends BaseType implements IEnumeratedType {
 
     derivedFrom: IType;
 

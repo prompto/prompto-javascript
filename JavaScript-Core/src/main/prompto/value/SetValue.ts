@@ -93,7 +93,7 @@ export default class SetValue extends Container<StrictSet<IValue>> {
         }
     }
 
-    filter(filter: (value: IValue) => boolean) {
+    filter(filter: (value: IValue) => boolean): SetValue {
         const items = this.items.filter(filter);
         const result = new StrictSet(items);
         return new SetValue(this.itemType, result);

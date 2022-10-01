@@ -1,18 +1,18 @@
 import EnumSymbol from './EnumSymbol'
 import { ConstructorExpression } from '../expression'
-import {ConcreteInstance, Instance, TextValue, IValue} from '../value'
+import {Instance, TextValue, IValue} from '../value'
 import { TextLiteral } from '../literal'
 import { AttributeParameter } from '../param'
 import { Argument, ArgumentList, Identifier } from '../grammar'
 import { SyntaxError } from '../error'
 import {CodeWriter} from "../utils";
-import {CategoryType} from "../type";
+import {CategoryType, EnumeratedCategoryType} from "../type";
 import {Context, Transpiler} from "../runtime";
 
-export default class CategorySymbol extends EnumSymbol<CategoryType> {
+export default class CategorySymbol<T extends Instance<never>> extends EnumSymbol<EnumeratedCategoryType> {
 
     args: ArgumentList;
-    instance?: Instance<ConcreteInstance>;
+    instance?: T;
 
     constructor(id: Identifier, args: ArgumentList) {
         super(id);
@@ -58,27 +58,27 @@ export default class CategorySymbol extends EnumSymbol<CategoryType> {
         return this.makeInstance(context);
     }
 
-    makeInstance(context: Context): Instance<ConcreteInstance> {
+    makeInstance(context: Context): T {
         if(!this.instance) {
-            const instance = (this.type as unknown as CategoryType).newInstance(context);
+            const instance = (this.type as CategoryType).newInstance(context) as unknown as T;
             instance.mutable = true;
             if(this.args!=null) {
                 context = context.newLocalContext();
                 this.args.forEach(argument => {
                     const value = argument.expression.interpret(context);
-                    instance.setMember(context, argument.id, value);
+                    instance.setMember(context, argument.id!, value);
                 });
             }
             instance.setMember(context, new Identifier("name"), new TextValue(this.name));
             instance.mutable = false;
             this.instance = instance;
         }
-        return this.instance!;
+        return this.instance;
     }
 
     getMemberValue(context: Context, id: Identifier, autoCreate: boolean): IValue {
         const instance = this.makeInstance(context);
-        return instance.getMemberValue(context, id, autoCreate);
+        return instance.GetMemberValue(context, id, autoCreate);
     }
 
     declare(transpiler: Transpiler): void {
@@ -91,7 +91,7 @@ export default class CategorySymbol extends EnumSymbol<CategoryType> {
 
     initialize(transpiler: Transpiler): void {
         transpiler.append("var ").append(this.name).append(" = ");
-        const param = new AttributeParameter(new Identifier("name"));
+        const param = new AttributeParameter(new Identifier("name"), false);
         const argument = new Argument(param, new TextLiteral('"' + this.name + '"'));
         const args = new ArgumentList(this.args);
         args.add(argument);

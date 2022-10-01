@@ -1,18 +1,18 @@
 import {IIterable, IIterator} from "../value";
 import {List} from "./index";
 
-export default class StrictSet<T> implements Iterable<T>, IIterable<T>  {
+export default class StrictSet<V> implements Iterable<V>, IIterable<V>  {
     length: number;
 
-    constructor(items?: T[] | null);
-    [Symbol.iterator](): Iterator<T>;
-    toArray(): T[];
-    add(item: T): void;
-    addItems(items: T[] | StrictSet<T>): void;
-    has(value: T): boolean;
-    getIterator(): IIterator<T>;
-    filter(expression: (a:T)=>boolean): List<T>;
+    constructor(items?: V[] | null);
+    [Symbol.iterator](): Iterator<V>;
+    toArray(): V[];
+    add(item: V): void;
+    addItems(items: V[] | StrictSet<V>): void;
+    has(value: V): boolean;
+    getIterator(): IIterator<V>;
+    filter(expression: (a:V)=>boolean): List<V>;
     equals(value: any): boolean;
-    intersect(other: StrictSet<T>): StrictSet<T>;
+    intersect(other: StrictSet<V>): StrictSet<V>;
 
 }

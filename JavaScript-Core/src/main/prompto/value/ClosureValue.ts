@@ -1,7 +1,7 @@
-import IValue from '../../../main/prompto/value/IValue'
 import BaseValue from "./BaseValue";
 import {Context} from "../runtime";
 import {MethodType} from "../type";
+import {IValue, NullValue} from "./index";
 
 export default class ClosureValue extends BaseValue<MethodType> {
 
@@ -27,7 +27,7 @@ export default class ClosureValue extends BaseValue<MethodType> {
     }
 
     doInterpret(context: Context): IValue {
-        return this.value.method.interpret(context);
+        return this.value.method.interpret(context) || NullValue.instance;
     }
 
     convertToJavaScript() {

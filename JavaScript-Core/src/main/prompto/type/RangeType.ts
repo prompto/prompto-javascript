@@ -1,23 +1,28 @@
-import ContainerType from '../../../main/prompto/type/ContainerType.ts'
-import { BooleanType, IntegerType } from './index.ts'
+import ContainerType from './ContainerType'
+import { BooleanType, IntegerType } from './index'
 import { Identifier } from '../grammar'
 import { StrictSet } from '../intrinsic'
+import IType from "./IType";
+import {TypeFamily} from "../store";
+import {Context, Transpiler} from "../runtime";
+import {Section} from "../parser";
+import {IExpression} from "../expression";
 
 export default class RangeType extends ContainerType {
 
-    constructor(itemType) {
-        super(new Identifier(itemType.name+"[..]"), itemType);
+    constructor(itemType: IType) {
+        super(new Identifier(itemType.name+"[..]"), TypeFamily.RANGE, itemType);
     }
 
-    withItemType(itemType) {
+    withItemType(itemType: IType) {
         return new RangeType(itemType);
     }
 
-    checkItem(context, other, expression) {
+    checkItem(context: Context, section: Section, other: IType) {
         if (other == IntegerType.instance) {
             return this.itemType;
         } else {
-            return super.checkItem(context, other, expression);
+            return super.checkItem(context, section, other);
         }
     }
 
@@ -61,7 +66,7 @@ export default class RangeType extends ContainerType {
         return this.itemType;
     }
 
-    checkHasAllOrAny(context: Context, section: Section, other: IType): Type {
+    checkHasAllOrAny(context: Context, section: Section, other: IType): IType {
         return BooleanType.instance;
     }
 

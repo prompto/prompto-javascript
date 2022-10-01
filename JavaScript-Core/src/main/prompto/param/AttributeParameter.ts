@@ -8,6 +8,7 @@ import {AttributeDeclaration} from "../declaration";
 import {IExpression} from "../expression";
 import {IParameter} from "./index";
 import { CodeWriter } from '../utils';
+import {IValue, NullValue} from "../value";
 
 export default class AttributeParameter extends BaseParameter {
 
@@ -65,9 +66,9 @@ export default class AttributeParameter extends BaseParameter {
         return decl ? decl.getType(context) : VoidType.instance;
     }
 
-    checkValue(context: Context, value: IExpression) {
+    checkValue(context: Context, value: IExpression): IValue {
         const decl = context.getRegisteredDeclaration(AttributeDeclaration, this.id);
-        return decl ? decl.checkValue(context, value) : VoidType.instance;
+        return decl ? decl.checkValue(context, value) : NullValue.instance;
     }
 
     declare(transpiler: Transpiler): void {

@@ -1,10 +1,12 @@
 import BaseValue from '../value/BaseValue'
 import {IntegerValue, IValue} from "../value";
-import {IType} from "../type";
+import {IType, MethodType} from "../type";
 import {IExpression} from "./index";
-import {Context} from "../runtime";
+import {Context, Transpiler} from "../runtime";
 import ISliceable from "../value/ISliceable";
 import {CodeWriter} from "../utils";
+import {Section} from "../parser";
+import {AttributeDeclaration} from "../declaration";
 
 export default class ValueExpression extends BaseValue<IValue> implements IExpression, ISliceable {
 
@@ -28,11 +30,55 @@ export default class ValueExpression extends BaseValue<IValue> implements IExpre
         return this.value.toString();
     }
 
-    toDialect(writer: CodeWriter) {
+    toDialect = (writer: CodeWriter) => {
         writer.append(this.value.toString());
     }
 
     slice(first: IntegerValue | null, last: IntegerValue | null): ISliceable {
         return (this.value as ISliceable).slice(first, last);
+    }
+
+    asSection(): Section {
+        throw new Error("Not implemented!")
+    }
+
+    checkAttribute(context: Context): AttributeDeclaration | null {
+        throw new Error("Not implemented!")
+    }
+
+    checkReference(context: Context): IType | null {
+        throw new Error("Not implemented!")
+    }
+
+    declareParent(transpiler: Transpiler): void {
+        throw new Error("Not implemented!")
+    }
+
+    interpretReference(context: Context): IValue {
+        throw new Error("Not implemented!")
+    }
+
+    isAssertion(): boolean {
+        return false;
+    }
+
+    isPredicate(): boolean {
+        return false;
+    }
+
+    locateSectionAtLine(line: number): Section | null {
+        throw new Error("Not implemented!")
+    }
+
+    parentToDialect(writer: CodeWriter): unknown {
+        throw new Error("Not implemented!")
+    }
+
+    transpileParent(transpiler: Transpiler): void {
+        throw new Error("Not implemented!")
+    }
+
+    transpileReference(transpiler: Transpiler, method: MethodType): void {
+        throw new Error("Not implemented!")
     }
 }

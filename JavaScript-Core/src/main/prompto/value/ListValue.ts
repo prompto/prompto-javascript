@@ -20,6 +20,7 @@ export default class ListValue extends BaseValueList<ListValue> {
     }
 
     getStorableData(): any {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return this.value.map(item => item.getStorableData()) as never;
     }
 
@@ -28,6 +29,7 @@ export default class ListValue extends BaseValueList<ListValue> {
     }
 
     convertToJavaScript(): any {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         const items = this.items.map(value => value.convertToJavaScript(), this);
         return new List(this.mutable, items) as never;
     }
@@ -91,17 +93,17 @@ export default class ListValue extends BaseValueList<ListValue> {
         if (value instanceof IntegerValue) {
             const count = value.value;
             if (count < 0) {
-                throw new SyntaxError("Negative repeat count:" + count);
+                throw new SyntaxError("Negative repeat count:" + String(count));
             } else {
                 const items = multiplyArray(this.items, count);
-                return new ListValue(this.type.itemType, items);
+                return new ListValue((this.type as ListType).itemType, false, items);
             }
         } else {
-            return super.Multiply.apply(this, context, value);
+            return super.Multiply(context, value);
         }
     }
 
-    toDialect(writer: CodeWriter): void {
+    toDialect = (writer: CodeWriter) => {
         writer.append('[');
         super.toDialect(writer);
         writer.append(']');
@@ -113,8 +115,7 @@ export default class ListValue extends BaseValueList<ListValue> {
     }
 
     toSetValue(): SetValue {
-        const items = new StrictSet();
-        this.items.forEach(item => items.add(item));
+        const items = new StrictSet(this.value);
         return new SetValue(this.itemType, items);
     }
 

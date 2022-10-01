@@ -1,9 +1,9 @@
-import BinaryValue from '../../../main/prompto/value/BinaryValue'
+import BinaryValue from './BinaryValue'
 import { BlobType } from '../type'
 
 export default class BlobValue extends BinaryValue {
 
-    constructor(mimeType, data) {
+    constructor(mimeType: string, data: Uint8Array) {
         super(BlobType.instance, mimeType, data);
     }
 }

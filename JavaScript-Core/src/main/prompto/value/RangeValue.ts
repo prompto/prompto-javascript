@@ -5,7 +5,7 @@ import {IType, RangeType} from '../type'
 import {Identifier} from "../grammar";
 import {Context} from "../runtime";
 
-interface Limits<T extends IValue> {
+export interface Limits<T extends IValue> {
     low: T;
     high: T;
 }
@@ -46,9 +46,11 @@ export default abstract class RangeValue<T extends IValue> extends BaseValue<Lim
         }
     }
 
+    abstract newInstance(first: T, last: T): RangeValue<T>;
     abstract hasItem(context: Context, lval: IValue): boolean ;
     abstract getItem(item: number): T | null ;
     abstract size(): number;
+
 
     GetItemValue(context: Context, index: IValue): IValue {
         if (index instanceof IntegerValue) {
@@ -68,8 +70,13 @@ export default abstract class RangeValue<T extends IValue> extends BaseValue<Lim
         }
     }
 
-    abstract slice(fi: IntegerValue | null, li: IntegerValue | null): RangeValue<T>;
-    abstract filter<K>(filter: (value: T) => boolean): K;
+    slice(fi: IntegerValue | null, li: IntegerValue | null): RangeValue<T> {
+        const _fi = fi ? fi.IntegerValue() : 1;
+        const _li = li ? li.IntegerValue() : -1;
+        return this.newInstance(this.getItem(_fi)!, this.getItem(_li)!);
+
+    }
+
 
     checkFirst(fi: IntegerValue | null, size: number): number {
         const value = (fi == null) ? 1 : fi.IntegerValue();
