@@ -1,6 +1,9 @@
 import {LocalDate, LocalTime, Period} from "./index";
 
 export default class DateTime {
+
+    static now(): DateTime;
+
     date: Date;
     tzOffset: number;
 
