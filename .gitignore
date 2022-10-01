@@ -12,6 +12,8 @@ transpiled.js
 generated
 **/*.js
 **/*.js.map
-JavaScript-Core/src/generated-saved
-JavaScript-Core/src/test/prompto/perf/*
-JavaScript-Core/.clinic
+!**/prompto/*.js
+!**/prompto/intrinsic/*.js
+**/generated-saved/*
+**/prompto/perf/*
+**/.clinic/*
