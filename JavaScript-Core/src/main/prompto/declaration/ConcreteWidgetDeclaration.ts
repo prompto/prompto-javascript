@@ -5,7 +5,7 @@ import {IMethodDeclaration, IWidgetDeclaration} from "./index";
 import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
 import {PropertyMap} from "../property";
-import {IDeclarationInfo, IWidgetInfo} from "../runtime/Catalog";
+import {IWidgetInfo} from "../runtime/Catalog";
 
 export default class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration implements IWidgetDeclaration {
 

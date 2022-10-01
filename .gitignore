@@ -10,6 +10,8 @@ prompto-libraries
 prompto-tests
 transpiled.js
 generated
+**/*.js
+**/*.js.map
 JavaScript-Core/src/generated-saved
 JavaScript-Core/src/test/prompto/perf/*
 JavaScript-Core/.clinic

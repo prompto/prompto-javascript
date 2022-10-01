@@ -1,39 +1,56 @@
 import Instance from './Instance'
-import { NullValue, DbIdValue, DecimalValue, TextValue, IntegerValue, DocumentValue, NativeInstance } from './index'
+import {
+    NullValue,
+    DbIdValue,
+    DecimalValue,
+    TextValue,
+    IntegerValue,
+    DocumentValue,
+    NativeInstance,
+    IValue
+} from './index'
 import { CategoryType, DecimalType } from '../type'
 import {Context, Variable} from '../runtime'
 import { Identifier, Operator } from '../grammar'
-import { $DataStore } from '../store'
-import {EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration, ConcreteCategoryDeclaration} from '../declaration'
-import { NotStorableError, NotMutableError } from '../error'
-import { $Root } from "../../../main/prompto/intrinsic/$Root.js";
-import IValue from "../../../main/prompto/value/IValue";
+import {$DataStore, IStorable} from '../store'
+import {
+    EnumeratedCategoryDeclaration,
+    ConcreteCategoryDeclaration, NativeCategoryDeclaration, AttributeDeclaration
+} from '../declaration'
+import { SyntaxError, NotStorableError, NotMutableError } from '../error'
 import {JsonNode} from "../json";
+import {equalMaps} from "../utils/Utils";
 
 export default class ConcreteInstance extends Instance<Map<string, IValue>> {
 
-    declaration: ConcreteCategoryDeclaration;
-    storable: boolean;
+    _declaration: ConcreteCategoryDeclaration;
+    storable: IStorable | null;
     mutable: boolean;
+    activeGetters?: Map<string, Context>;
+    activeSetters?: Map<string, Context>;
 
     constructor(context: Context, declaration: ConcreteCategoryDeclaration) {
         super(new CategoryType(declaration.id), new Map<string, IValue>());
-        this.declaration = declaration;
+        this._declaration = declaration;
         this.storable = null;
         if(declaration.storable) {
-            const categories = declaration.collectCategories(context);
+            const categories = declaration.getAllCategories(context);
             const dbIdFactory = {
-                provider: this.getDbId.bind(this),
-                listener: this.setDbId.bind(this)
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+                provider: () => this.getDbId(),
+                listener: (dbId: any) => this.setDbId(dbId)
             };
             this.storable = $DataStore.instance.newStorableDocument(categories, dbIdFactory);
         }
         this.mutable = false;
-        this.values = {};
+    }
+
+    get declaration() {
+        return this._declaration;
     }
 
     ToMutable() {
-        const result = Object.create(this);
+        const result = Object.create(this) as ConcreteInstance;
         result.type = new CategoryType(this.type.id, true);
         result.mutable = true;
         return result;
@@ -47,33 +64,36 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         return this; // TODO, until we have a translator
     }
 
-    getDbId() {
-        const dbId = this.values["dbId"] || null;
+    getDbId(): any {
+        const dbId = this.value.get("dbId") || null;
         return dbId == null ? null : dbId.getStorableData();
     }
 
-    getOrCreateDbId() {
+    getOrCreateDbId(): any {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         let dbId = this.getDbId();
-        if(dbId==null) {
-            dbId = this.storable.getOrCreateDbId();
+        if(!dbId) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            dbId = this.storable!.getOrCreateDbId();
             this.setDbId(dbId);
         }
         return dbId;
     }
 
-    setDbId(dbId) {
-        this.values["dbId"] = new DbIdValue(dbId);
+    setDbId(dbId: any) {
+        this.value.set("dbId", new DbIdValue(dbId));
     }
 
     getAttributeNames() {
-        return $Root.prototype.getAttributeNames.bind(this.values)();
+        return Array.from(this.value.keys())
+            .filter(name => name!="dbId" && !name.startsWith('$'));
     }
 
     getStorableData(): any {
         // this is called when storing the instance as a field value
         // if this is an enum then we simply store the symbol name
-        if(this.declaration instanceof EnumeratedNativeDeclaration || this.declaration instanceof EnumeratedCategoryDeclaration)
-            return this.values["name"].getStorableData()
+        if(this.declaration instanceof EnumeratedCategoryDeclaration)
+            return this.value.get("name")!.getStorableData()
         // otherwise we just return the dbId, the instance data itself will be collected as part of collectStorables
         if (this.storable == null)
             throw new NotStorableError();
@@ -82,11 +102,11 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
     }
 
     getMemberNames() {
-        return Object.getOwnPropertyNames(this.values);
+        return Array.from(this.value.keys());
     }
 
-    collectStorables(set) {
-        if(this.declaration instanceof EnumeratedNativeDeclaration || this.declaration instanceof EnumeratedCategoryDeclaration)
+    collectStorables(set: Set<IStorable>) {
+        if(this.declaration instanceof EnumeratedCategoryDeclaration)
             return;
         if (this.storable==null)
             throw new NotStorableError();
@@ -94,138 +114,116 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
             this.getOrCreateDbId();
             set.add(this.storable);
         }
-        this.getAttributeNames().forEach(name => this.values[name].collectStorables(set));
+        for(const value of this.value.values())
+            value.collectStorables(set);
     }
 
-    getMemberValue(context, id) {
-        switch(id.name) {
+    GetMemberValue(context: Context, member: Identifier) {
+        switch(member.name) {
             case "category":
                 return this.getCategory(context);
             case "json":
-                return super.getMemberValue(context, id);
+                return super.GetMemberValue(context, member);
             default:
-                return this.getAttributeValue(context, id);
+                return this.getAttributeValue(context, member);
         }
     }
 
-    getAttributeValue(context, id) {
-        const stacked = getActiveGetters()[id.name] || null;
+    getAttributeValue(context: Context, member: Identifier): IValue {
+        const stacked = this.activeGetters ? this.activeGetters.get(member.name) || null : null;
         const first = stacked==null;
-        if(first)
-            getActiveGetters()[id.name] = context;
+        if(first) {
+            if(!this.activeGetters)
+                this.activeGetters = new Map<string, Context>();
+            this.activeGetters.set(member.name, context);
+        }
         try {
-            return this.doGetAttributeValue(context, id, first);
+            return this.doGetAttributeValue(context, member, first) || NullValue.instance;
         } finally {
             if(first) {
-                delete getActiveGetters()[id.name];
+                this.activeGetters?.delete(member.name);
+                if(!this.activeGetters?.size)
+                    delete this.activeGetters;
             }
         }
     }
 
-    getCategory(context) {
-        const decl = context.getRegisteredDeclaration(new Identifier("Category"));
-        return new NativeInstance(context, decl, this.declaration);
+    getCategory(context: Context) {
+        const decl = context.getRegisteredDeclaration(NativeCategoryDeclaration, new Identifier("Category"));
+        return new NativeInstance(context, decl!, this.declaration);
     }
 
-    doGetAttributeValue(context, id, allowGetter) {
-        const getter = allowGetter ? this.declaration.findGetter(context, id) : null;
-        if (getter != null) {
+    doGetAttributeValue(context: Context, member: Identifier, allowGetter: boolean): IValue | null {
+        const getter = allowGetter ? this.declaration.findGetter(context, member) : null;
+        if (getter) {
             context = context.newInstanceContext(this, null).newChildContext();
             return getter.interpret(context);
-        } else if (this.declaration.hasAttribute(context, id) || "dbId" == id.name) {
-            return this.values[id.name] || NullValue.instance;
-        } else if ("text" == id.name) {
+        } else if (this.declaration.hasAttribute(context, member) || "dbId" == member.name) {
+            return this.value.get(member.name) || null;
+        } else if ("text" == member.name) {
             return new TextValue(this.toString());
         } else
-            return NullValue.instance;
+            return null;
     }
 
-    setMember(context, id, value) {
+    SetMemberValue(context: Context, member: Identifier, value: IValue) {
         if(!this.mutable)
             throw new NotMutableError();
-        const stacked = getActiveSetters()[id.name] || null;
+        const stacked = this.activeSetters ? this.activeSetters.get(member.name) || null : null;
         const first = stacked==null;
-        if(first)
-            getActiveSetters()[id.name] = context;
+        if(first) {
+            if(!this.activeSetters)
+                this.activeSetters = new Map<string, Context>();
+            this.activeSetters.set(member.name, context);
+        }
         try {
-            this.doSetAttributeValue(context, id, value, first);
+            this.doSetAttributeValue(context, member, value, first);
         } finally {
             if(first) {
-                delete getActiveSetters()[id.name];
+                this.activeSetters?.delete(member.name);
+                if(!this.activeSetters?.size)
+                    delete this.activeSetters;
             }
         }
     }
 
-    doSetAttributeValue(context, id, value, allowSetter) {
-        const decl = context.getRegisteredDeclaration(id);
-        const setter = allowSetter ? this.declaration.findSetter(context, id) : null;
-        if(setter!=null) {
+    doSetAttributeValue(context: Context, member: Identifier, value: IValue, allowSetter: boolean) {
+        const decl = context.getRegisteredDeclaration(AttributeDeclaration, member)!;
+        const setter = allowSetter ? this.declaration.findSetter(context, member) : null;
+        if(setter) {
             // use attribute name as parameter name for incoming value
             context = context.newInstanceContext(this, null).newChildContext();
-            context.registerValue(new Variable(id, decl.getType()));
-            context.setValue(id, value);
-            value = setter.interpret(context);
+            context.registerInstance(new Variable(member, decl.getType(context)), true);
+            context.setValue(member, value);
+            value = setter.interpret(context)!;
         }
         value = this.autocast(decl, value);
-        this.values[id.name] = value;
+        this.value.set(member.name, value);
         if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
-            this.storable.setData(id.name, value.getStorableData(), this.getDbId());
+            this.storable.setData(member.name, value.getStorableData(), this.getDbId());
     }
 
-    autocast(decl, value) {
+    autocast(decl: AttributeDeclaration, value: IValue) {
         if(value instanceof IntegerValue && decl.getType() == DecimalType.instance)
             value = new DecimalValue(value.DecimalValue());
         return value;
     }
 
-    equals(obj) {
-        if(obj == this) {
-            return true;
-        } else if(!(obj instanceof ConcreteInstance)) {
-            return false;
-        } else if(this.declaration!=obj.declaration) {
-            return false;
-        } else {
-            const names = Object.getOwnPropertyNames(this.values);
-            const otherNames = Object.getOwnPropertyNames(obj.values);
-            if(names.length != otherNames.length) {
-                return false;
-            }
-            for(let i=0;i<names.length;i++) {
-                const v1 = this.values[names[i]] || null;
-                const v2 = obj.values[names[i]];
-                if(v1 == v2) {
-                    continue;
-                } else if(v1==null || v2==null) {
-                    return false;
-                } else {
-                    if(v1.equals) {
-                        if(!v1.equals(v2)) {
-                            return false;
-                        }
-                    } else if(v2.equals) {
-                        if(!v2.equals(v1)) {
-                            return false;
-                        }
-                    } else {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
+    equals(obj: any) {
+        return obj == this || (obj instanceof ConcreteInstance && this.equalsConcreteInstance(obj));
+    }
+
+    equalsConcreteInstance(obj: ConcreteInstance) {
+        return this.declaration == obj.declaration && equalMaps(this.value, obj.value);
     }
 
     toString() {
-        const props = [];
-        for(const name in this.values) {
-            if("dbId" != name && typeof(this[name]) != 'function')
-                props.push(name + ":" + this.values[name].toString())
-        }
-        return "{" + props.join(", ") + "}";
+        const entries = Array.from(this.value.entries())
+            .map(entry => entry[0] + ":" + entry[1].toString());
+        return "{" + entries.join(", ") + "}";
     }
 
-    Multiply(context, value): IValue {
+    Multiply(context: Context, value: IValue): IValue {
         try {
             return this.interpretOperator(context, value, Operator.MULTIPLY);
         } catch(e) {
@@ -233,7 +231,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    Divide(context, value): IValue {
+    Divide(context: Context, value: IValue): IValue {
         try {
             return this.interpretOperator(context, value, Operator.DIVIDE);
         } catch(e) {
@@ -241,7 +239,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    IntDivide(context, value): IValue {
+    IntDivide(context: Context, value: IValue): IValue {
         try {
             return this.interpretOperator(context, value, Operator.IDIVIDE);
         } catch(e) {
@@ -249,7 +247,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    Modulo(context, value): IValue {
+    Modulo(context: Context, value: IValue): IValue {
         try {
             return this.interpretOperator(context, value, Operator.MODULO);
         } catch(e) {
@@ -257,7 +255,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    Add(context, value): IValue {
+    Add(context: Context, value: IValue): IValue {
         try {
             return this.interpretOperator(context, value, Operator.PLUS);
         } catch(e) {
@@ -265,7 +263,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    Subtract(context, value): IValue {
+    Subtract(context: Context, value: IValue): IValue {
         try {
             return this.interpretOperator(context, value, Operator.MINUS);
         } catch(e) {
@@ -273,21 +271,23 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    interpretOperator(context, value, operator): IValue {
+    interpretOperator(context: Context, value: IValue, operator: Operator): IValue {
         const decl = this.declaration.getOperatorMethod(context, operator, value.type);
-        context = context.newInstanceContext(this);
+        if(!decl)
+            throw new SyntaxError("No such operator: " + operator.name);
+        context = context.newInstanceContext(this, null);
         const local = context.newChildContext();
         decl.registerParameters(local);
         const arg = decl.parameters[0];
         local.setValue(arg.id, value);
-        return decl.interpret(local);
+        return decl.interpret(local) || NullValue.instance;
     }
 
     toDocumentValue(context: Context): DocumentValue {
         const doc = new DocumentValue();
-        Object.getOwnPropertyNames(this.values).map(name => {
-            doc.values[name] = this.values[name].toDocumentValue(context);
-        }, this);
+        for(const entry of this.value.entries()) {
+            doc.SetMemberValue(context, new Identifier(entry[0]), entry[1].toDocumentValue(context));
+        }
         return doc;
     }
 
@@ -300,23 +300,6 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
     }
 }
 
-// don't call getters from getters, so register them
-// TODO: thread local storage
-
-const activeGetters = {};
-
-function getActiveGetters() {
-    return activeGetters;
-}
-
-
-// don't call setters from setters, so register them
-
-const activeSetters = {};
-
-function getActiveSetters() {
-    return activeSetters;
-}
 
 
 

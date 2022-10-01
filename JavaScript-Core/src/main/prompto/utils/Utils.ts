@@ -32,6 +32,19 @@ export function equalArrays(o1: object | null, o2: object | null): boolean {
 	return true;
 }
 
+export function equalMaps<K,V>(o1: Map<K,V> | null, o2: Map<K,V> | null): boolean {
+    if(o1 == o2)
+        return true;
+    else if(o1 == null)
+        return false;
+    const o1Names = Array.from(o1.keys());
+    const o2Names = Array.from(o2!.keys());
+    if(equalArrays(o1Names, o2Names))
+        return o1Names.every(name => equalObjects(o1.get(name), o2!.get(name)));
+    else
+        return false;
+}
+
 export function arrayContains(a: any[], o: any): boolean {
 	for(let i=0;i<a.length;i++) {
 		if(equalObjects(a[i], o)) {

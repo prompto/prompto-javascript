@@ -19,7 +19,8 @@ export default class ArrowValue extends ContextualExpression {
             context.setParentContext(this.calling);
             return this.expression.interpret(context);
         } finally {
-            context.setParentContext(parent);
+            if(parent)
+                context.setParentContext(parent);
         }
     }
 }

@@ -1,113 +1,147 @@
 import Instance from './Instance'
-import { CategoryType } from '../type'
-import { Variable } from '../runtime'
+import {CategoryType, DecimalType} from '../type'
+import {Context, Variable} from '../runtime'
 import { Identifier } from '../grammar'
-import { $DataStore } from '../store'
+import {$DataStore, IStorable} from '../store'
 import { NotMutableError } from '../error'
 import { convertFromJavaScript } from '../utils'
+import {AttributeDeclaration, NativeCategoryDeclaration} from "../declaration";
+import {DecimalValue, IntegerValue, IValue, NullValue, TextValue} from "./index";
 
 export default class NativeInstance extends Instance<any> {
 
-    instance: any;
-
-    constructor(context, declaration, instance) {
-        super(new CategoryType(declaration.id));
-        this.declaration = declaration;
-        this.storable = false;
-        if(declaration.storable && $DataStore.instance) {
-            const categories = declaration.collectCategories(context);
-            this.storable = $DataStore.instance.newStorableDocument(categories, null);
-        }
-        this.instance = instance || this.makeInstance();
+    static newInstance(declaration: NativeCategoryDeclaration): any {
+        const bound = declaration.getBoundFunction(true);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        return new bound();
     }
 
-    makeInstance() {
-        const bound = this.declaration.getBoundFunction(true);
-        return new bound();
+    _declaration: NativeCategoryDeclaration;
+    storable: IStorable | null;
+    activeGetters?: Map<string, Context>;
+    activeSetters?: Map<string, Context>;
+
+    constructor(context: Context, declaration: NativeCategoryDeclaration, instance?: any) {
+        super(new CategoryType(declaration.id), instance || NativeInstance.newInstance(declaration));
+        this.storable = null;
+        if(declaration.storable && $DataStore.instance) {
+            const categories = declaration.getAllCategories(context);
+            this.storable = $DataStore.instance.newStorableDocument(categories, null);
+        }
+    }
+
+    get declaration() {
+        return this._declaration;
     }
 
     getType() {
         return new CategoryType(this.declaration.id);
     }
 
-    getMemberValue(context, id) {
-        if("category" == id.name)
+    GetMemberValue(context: Context, member: Identifier) {
+        if ("category" == member.name)
             return this.getCategory(context);
-        const stacked = getActiveGetters()[id.name] || null;
+        else
+            return this.getAttributeValue(context, member);
+    }
+
+    getCategory(context: Context) {
+        const decl = context.getRegisteredDeclaration(NativeCategoryDeclaration, new Identifier("Category"));
+        return new NativeInstance(context, decl!, this.declaration);
+    }
+
+    getAttributeValue(context: Context, member: Identifier): IValue {
+        const stacked = this.activeGetters ? this.activeGetters.get(member.name) || null : null;
         const first = stacked==null;
-        if(first)
-            getActiveGetters()[id.name] = context;
+        if(first) {
+            if(!this.activeGetters)
+                this.activeGetters = new Map<string, Context>();
+            this.activeGetters.set(member.name, context);
+        }
         try {
-            return this.doGetMember(context, id, first);
+            return this.doGetAttributeValue(context, member, first) || NullValue.instance;
         } finally {
             if(first) {
-                delete getActiveGetters()[id.name];
+                this.activeGetters?.delete(member.name);
+                if(!this.activeGetters?.size)
+                    delete this.activeGetters;
             }
         }
     }
 
-    getCategory(context) {
-        const decl = context.getRegisteredDeclaration(new Identifier("Category"));
-        return new NativeInstance(context, decl, this.declaration);
-    }
-
-    doGetMember(context, id, allowGetter) {
-        const getter = allowGetter ? this.declaration.findGetter(context, id) : null;
-        if(getter!=null) {
+    doGetAttributeValue(context: Context, member: Identifier, allowGetter: boolean): IValue | null {
+        const getter = allowGetter ? this.declaration.findGetter(context, member) : null;
+        if (getter) {
             context = context.newInstanceContext(this, null).newChildContext();
             return getter.interpret(context);
-        } else {
-            const value = this.instance[id.name];
+        } else if (this.declaration.hasAttribute(context, member) || "dbId" == member.name) {
+            const obj = this.value as object;
+            const value = obj[member.name as keyof typeof obj] || null;
             return convertFromJavaScript(value);
-        }
+        } else if ("text" == member.name) {
+            return new TextValue(this.toString());
+        } else
+            return null;
     }
 
-    setMember(context, id, value) {
+    SetMemberValue(context: Context, member: Identifier, value: IValue) {
         if(!this.mutable)
             throw new NotMutableError();
-        const stacked = getActiveSetters()[id.name] || null;
+        const stacked = this.activeSetters ? this.activeSetters.get(member.name) || null : null;
         const first = stacked==null;
-        if(first)
-            getActiveSetters()[id.name] = context;
+        if(first) {
+            if(!this.activeSetters)
+                this.activeSetters = new Map<string, Context>();
+            this.activeSetters.set(member.name, context);
+        }
         try {
-            this.doSetMember(context, id, value, first);
+            this.doSetAttributeValue(context, member, value, first);
         } finally {
             if(first) {
-                delete getActiveSetters()[id.name];
+                this.activeSetters?.delete(member.name);
+                if(!this.activeSetters?.size)
+                    delete this.activeSetters;
             }
         }
     }
 
-    doSetMember(context, id, value, allowSetter) {
-        const decl = context.getRegisteredDeclaration(id);
-        const setter = allowSetter ? this.declaration.findSetter(context, id) : null;
-        if(setter!=null) {
+    doSetAttributeValue(context: Context, member: Identifier, value: IValue, allowSetter: boolean) {
+        const decl = context.getRegisteredDeclaration(AttributeDeclaration, member)!;
+        const setter = allowSetter ? this.declaration.findSetter(context, member) : null;
+        if(setter) {
             // use attribute name as parameter name for incoming value
             context = context.newInstanceContext(this, null).newChildContext();
-            context.registerValue(new Variable(id, decl.getType()));
-            context.setValue(id, value);
-            value = setter.interpret(context);
+            context.registerInstance(new Variable(member, decl.getType(context)), true);
+            context.setValue(member, value);
+            value = setter.interpret(context)!;
         }
+        value = this.autocast(decl, value);
         if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
-            this.storable.setData(id.name, value.getStorableData(), null);
-        this.instance[id.name] = value.convertToJavaScript();
+            this.storable.setData(member.name, value.getStorableData(), null);
+        const obj = this.value as object;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        obj[member.name as keyof typeof obj] = value.convertToJavaScript() as never;
+
     }
+
+    autocast(decl: AttributeDeclaration, value: IValue) {
+        if(value instanceof IntegerValue && decl.getType() == DecimalType.instance)
+            value = new DecimalValue(value.DecimalValue());
+        return value;
+    }
+
+    ToMutable(): IValue {
+        throw new Error("Should never get there!");
+    }
+
+    getMemberNames(): string[] {
+        throw new Error("Should never get there!");
+    }
+
+    setDbId(dbId: any): void {
+        throw new Error("Should never get there!");
+    }
+
 }
-
-// don't call getters from getters, so register them
-// TODO: thread local storage
-
-const activeGetters = {};
-
-function getActiveGetters() {
-    return activeGetters;
-}
-
-// don't call setters from setters, so register them
-const activeSetters = {};
-
-function getActiveSetters() {
-    return activeSetters;
-}
-
 

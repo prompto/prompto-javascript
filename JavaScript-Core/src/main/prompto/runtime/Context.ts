@@ -14,8 +14,7 @@ import {
     ConcreteInstance,
     IValue,
     DocumentValue,
-    Instance,
-    NativeInstance
+    Instance
 } from '../value'
 import { InternalError } from '../error'
 import { IDebugger } from "../debug";
@@ -146,14 +145,14 @@ export class Context {
         return context;
     }
 
-    newInstanceContext(instance: ConcreteInstance | NativeInstance | null, type: CategoryType | null, isChild = false): InstanceContext {
+    newInstanceContext(instance: Instance<any> | null, type: CategoryType | null, isChild = false): InstanceContext {
         const context = new InstanceContext(this.globals, instance, type);
         context.calling = isChild ? this.calling : this;
         context.parent = isChild ? this : null;
         context.debugger = this.debugger;
         context.problemListener = this.problemListener;
         const decl = context.getDeclaration();
-        if(decl != null)
+        if(decl)
             decl.processAnnotations(context, true);
         return context;
     }
@@ -288,7 +287,7 @@ export class Context {
         }
     }
 
-    getRegisteredCategoryDeclaration(id: Identifier): CategoryDeclaration | null {
+    getRegisteredCategoryDeclaration(id: Identifier): CategoryDeclaration<never> | null {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         return this.getRegisteredCategoryDeclaration(id);
@@ -550,26 +549,26 @@ export class Context {
 
     loadSingleton(type: IType): ConcreteInstance {
         if(this == this.globals) {
-            let value = this.values.get(type.name) || null;
+            const value = this.values.get(type.name) || null;
             if(!value) {
                 const decl = this.declarations.get(type.name) || null;
                 if(decl instanceof SingletonCategoryDeclaration) {
-                    value = new ConcreteInstance(this, decl);
-                    value.mutable = true; // a singleton is protected by "with x do", so always mutable in that context
+                    const instance = new ConcreteInstance(this, decl);
+                    instance.mutable = true; // a singleton is protected by "with x do", so always mutable in that context
                     const method = decl.getInitializeMethod(this);
                     if (method != null) {
-                        const instance = this.newInstanceContext(value, type, false);
-                        const child = instance.newChildContext();
+                        const context = this.newInstanceContext(instance, type as CategoryType, false);
+                        const child = context.newChildContext();
                         method.interpret(child);
                     }
-                    this.values.set(type.name, value);
+                    this.values.set(type.name, instance);
                 } else
                     throw new InternalError("No such singleton:" + type.name);
             }
             if(value instanceof ConcreteInstance)
                 return value;
             else
-                throw new InternalError("Not a concrete instance:" + value.toString());
+                throw new InternalError("Not a concrete instance:" + value!.toString());
         } else
             return this.globals.loadSingleton(type);
     }
@@ -589,11 +588,11 @@ export class ResourceContext extends Context {
 
 export class InstanceContext extends Context {
 
-    instance: ConcreteInstance | NativeInstance | null;
+    instance: Instance<any> | null;
     instanceType: CategoryType;
     widgetFields: Map<string, WidgetField> | null;
 
-    constructor(globals: Context, instance: ConcreteInstance | NativeInstance | null, type: CategoryType | null) {
+    constructor(globals: Context, instance: Instance<any> | null, type: CategoryType | null) {
         super(globals);
         this.instance = instance;
         this.instanceType = type || instance!.type as unknown as CategoryType;
@@ -635,7 +634,7 @@ export class InstanceContext extends Context {
                 return;
             this.problemListener.reportDuplicate(id, id);
         } else
-            this.widgetFields.set(id.name, new WidgetField(id.name, type, createdBy));
+            this.widgetFields.set(id.name, new WidgetField(id, type, createdBy));
     }
 
     overrideWidgetFieldType(id: Identifier, type: IType, updatedBy: object) {
@@ -648,12 +647,12 @@ export class InstanceContext extends Context {
     }
 
     getRegisteredDeclaration<T extends IDeclaration>(klass: Constructor<T>, id: Identifier): T | null {
-        if (klass == MethodDeclarationMap) {
+        if (klass == MethodDeclarationMap.prototype.constructor) {
             const decl = this.getDeclaration();
             if (decl) {
                 const methods = decl.getMemberMethodsMap(this, id);
                 if (methods && !methods.isEmpty())
-                    return methods;
+                    return methods as unknown as T;
             }
         }
         return super.getRegisteredDeclaration<T>(klass, id);
@@ -686,15 +685,15 @@ export class InstanceContext extends Context {
             return context;
         }
         const decl = this.getDeclaration();
-        if(decl.hasAttribute(this, id) || decl.hasMethod(this, id)) {
+        if(decl && (decl.hasAttribute(this, id) || decl.hasMethod(this, id))) {
             return this;
         } else {
             return null;
         }
     }
 
-    getDeclaration(): CategoryDeclaration | null {
-        if(this.instance != null)
+    getDeclaration(): CategoryDeclaration<any> | null {
+        if(this.instance)
             return this.instance.declaration;
         else
             return this.getRegisteredCategoryDeclaration(this.instanceType.id);
@@ -750,11 +749,11 @@ export class DocumentContext extends Context {
     }
 
     readValue(id: Identifier): IValue | null {
-        return this.document!.getMemberValue(this.calling!, id);
+        return this.document!.GetMemberValue(this.calling!, id);
     }
 
     writeValue(id: Identifier, value: IValue): void {
-        this.document!.setMember(this.calling, id, value);
+        this.document!.SetMemberValue(this.calling!, id, value);
     }
 }
 

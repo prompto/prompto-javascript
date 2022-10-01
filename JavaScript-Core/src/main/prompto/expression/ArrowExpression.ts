@@ -111,9 +111,9 @@ export default class ArrowExpression extends PredicateExpression {
 
     bodyToDialect(writer: CodeWriter): void {
         if(this.statements) {
-            const statements = this.statements!;
+            const statements = this.statements;
             if (statements.length == 1 && statements[0] instanceof ReturnStatement)
-                (statements[0] as ReturnStatement).expression.toDialect(writer);
+                statements[0].expression!.toDialect(writer);
             else {
                 writer.append("{").newLine().indent();
                 statements.toDialect(writer);
@@ -154,7 +154,7 @@ export default class ArrowExpression extends PredicateExpression {
             else
                 throw new SyntaxError("Expecting a Boolean result!");
         };
-        return filter.bind(this);
+        return filter.bind(this) as (o: IValue) => boolean;
     }
 
     declareFilter(transpiler: Transpiler, itemType: IType): void {

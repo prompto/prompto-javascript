@@ -8,7 +8,7 @@ import {
 } from '../declaration'
 import {Context, MethodDeclarationMap, Transpiler} from '../runtime'
 import $Root from '../intrinsic/$Root.js'
-import {ConcreteInstance} from '../value'
+import {ConcreteInstance, Instance} from '../value'
 import {CategoryType, IType} from '../type'
 import { $DataStore } from '../store'
 import {CodeWriter, equalArrays} from "../utils";
@@ -16,7 +16,7 @@ import {Identifier, IdentifierList, Operator} from "../grammar";
 import {Section} from "../parser";
 import BaseDeclaration from "./BaseDeclaration";
 
-export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
+export default class ConcreteCategoryDeclaration extends CategoryDeclaration<ConcreteInstance> {
 
     methods: IMethodDeclaration[];
     methodsMap?: Map<string, MethodDeclarationMap>;
@@ -27,10 +27,11 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     isWidget(context: Context): boolean {
-        if (this.derivedFrom == null || this.derivedFrom.length != 1)
+        if (this.derivedFrom && this.derivedFrom.length == 1) {
+            const derived = context.getRegisteredCategoryDeclaration(this.derivedFrom[0]);
+            return derived ? derived.isWidget(context) : false;
+        } else
             return false;
-        const derived = context.getRegisteredCategoryDeclaration(this.derivedFrom[0]);
-        return derived ? derived.isWidget(context) : false;
     }
 
     toEDialect(writer: CodeWriter): void {
@@ -149,7 +150,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     check(context: Context): IType {
-        context = context.newInstanceContext(null, this.getType(context), false);
+        context = context.newInstanceContext(null, this.getType(context) as CategoryType, false);
         this.checkDerived(context);
         this.checkMethods(context);
         return super.check(context);
@@ -193,7 +194,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if (map.hasProto(proto))
             context.problemListener.reportDuplicate(method as unknown as Section, method.id);
         else
-            map.register(method, context.problemListener, false);
+            map.registerProto(method, context.problemListener, false);
     }
 
     static getMethodKey(name: string): string {
@@ -235,7 +236,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
             return;
         this.methodsMap.get(result.id.name)!.getAll().forEach(method => {
             if(includeAbstract || !method.isAbstract())
-                result.register(method, context.problemListener, true);
+                result.registerProto(method, context.problemListener, true);
         }, this);
     }
 
@@ -270,7 +271,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         return actual ? actual.isDerivedFrom(context, categoryType) : false;
     }
 
-    newInstance(context: Context): ConcreteInstance {
+    newInstance(context: Context): Instance<any> {
         return new ConcreteInstance(context, this);
     }
 

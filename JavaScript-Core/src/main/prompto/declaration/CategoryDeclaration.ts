@@ -16,7 +16,7 @@ import {CodeWriter} from "../utils";
 import ITranspilable from "../../../main/prompto/runtime/ITranspilable";
 import {PropertyMap} from "../property";
 
-export default abstract class CategoryDeclaration extends BaseDeclaration {
+export default abstract class CategoryDeclaration<T> extends BaseDeclaration {
 
     attributes: IdentifierList | null;
     derivedFrom: IdentifierList | null;
@@ -68,9 +68,9 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
             }) >= 0;
     }
 
-    abstract newInstance(context: Context): Instance<never>;
+    abstract newInstance(context: Context): Instance<T>;
 
-    newInstanceFromStored(context: Context, stored: IStored): Instance<never> {
+    newInstanceFromStored(context: Context, stored: IStored): Instance<T> {
         const instance = this.newInstance(context);
         instance.mutable = true;
         try {
@@ -84,7 +84,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
                             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                             const data = stored.getData(id.name);
                             const value = decl.getType(context).convertJavaScriptValueToPromptoValue(context, data, null);
-                            instance.setMember(context, id, value);
+                            instance.SetMemberValue(context, id, value);
                         }
                     }
                 }, this);
