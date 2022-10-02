@@ -1,6 +1,6 @@
 import {DictionaryType, IType, TextType} from '../type'
 import { CmdLineParser } from '../utils'
-import { TextValue, DictionaryValue } from '../value'
+import {TextValue, DictionaryValue, IValue} from '../value'
 import { Identifier, Argument, ArgumentList } from '../grammar'
 import { ValueExpression, MethodSelector } from '../expression'
 import { MethodCall } from '../statement'
@@ -10,13 +10,14 @@ import { SyntaxError } from '../error'
 import {Context} from "./Context";
 import {MethodDeclarationMap} from "./index";
 import {IMethodDeclaration} from "../declaration";
+import {Dictionary} from "../intrinsic";
 
 function parseCmdLineArgs(cmdLineArgs: string | null) {
 	try {
 		const args = CmdLineParser.parse(cmdLineArgs);
-		const valueArgs = new Map<TextValue, TextValue>();
+		const valueArgs = new Dictionary<TextValue, IValue>();
 		args.forEach((v,k) => valueArgs.set(new TextValue(k), new TextValue(v)));
-		const dict = new DictionaryValue(TextType.instance, valueArgs, false);
+		const dict = new DictionaryValue(TextType.instance, false, valueArgs);
 		const argsType = new DictionaryType(TextType.instance);
 		return new ValueExpression(argsType, dict);
 	} catch(e) {

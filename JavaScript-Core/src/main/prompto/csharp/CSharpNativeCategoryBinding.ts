@@ -2,12 +2,11 @@ import INativeCategoryBinding from '../../../main/prompto/grammar/INativeCategor
 import {CodeWriter} from "../utils";
 import {CSharpIdentifierExpression} from "./index";
 
-export default class CSharpNativeCategoryBinding extends INativeCategoryBinding {
+export default class CSharpNativeCategoryBinding implements INativeCategoryBinding {
 
     expression: CSharpIdentifierExpression;
 
     constructor(expression: CSharpIdentifierExpression) {
-        super();
         this.expression = expression;
     }
 

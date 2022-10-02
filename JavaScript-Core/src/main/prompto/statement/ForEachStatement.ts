@@ -2,8 +2,8 @@ import BaseStatement from './BaseStatement'
 import {Variable, BreakResult, Context, Transpiler} from '../runtime'
 import { IntegerType, ListType, DictionaryType, IType } from '../type'
 import { InternalError } from '../error'
-import { StrictSet } from '../intrinsic'
-import {IIterator, IntegerValue, IValue} from '../value'
+import {IIterator, StrictSet} from '../intrinsic'
+import {IntegerValue, IValue} from '../value'
 import {Section} from "../parser";
 import {StatementList} from "./index";
 import {IExpression} from "../expression";
@@ -72,9 +72,8 @@ export default class ForEachStatement extends BaseStatement {
         while (iterator.hasNext()) {
             const child = context.newChildContext();
             child.registerInstance(new Variable(this.v1!, elemType), true);
-            let value: IValue | null = iterator.next();
-            child.setValue(this.v1!, value);
-            value = this.statements.interpret(child);
+            child.setValue(this.v1!, iterator.next());
+            const value = this.statements.interpret(child);
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             if(value == BreakResult.instance)
@@ -89,7 +88,7 @@ export default class ForEachStatement extends BaseStatement {
     getIterator(context: Context): IIterator<IValue> {
         const src = this.source.interpret(context);
         if(src.isIterable())
-            return src.getIterator();
+            return src.asIterable(context).getIterator(context);
         // is it an IIterable ?
         // eslint-disable-next-line @typescript-eslint/ban-types
         const getIterator = src["getIterator" as keyof typeof src] as Function;

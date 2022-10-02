@@ -11,7 +11,7 @@ export default interface IAssignableInstance {
     check(context: Context): IType;
     checkAssignValue(context: Context, section: Section, valueType: IType): void;
     checkAssignItem(context: Context, section: Section, itemType: IType, valueType: IType): IType;
-    checkAssignMember(context: Context, member: Identifier, valueType: IType): IType;
+    checkAssignMember(context: Context, section: Section, member: Identifier, valueType: IType): IType;
     interpret(context: Context): IValue;
     declare(transpiler: Transpiler): void;
     transpile(transpiler: Transpiler): void;

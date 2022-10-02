@@ -49,7 +49,7 @@ export default abstract class BaseExpression extends Section implements IExpress
         throw new Error("check not implemented by " + this.constructor.name);
     }
 
-    checkReference(context: Context): IType {
+    checkReference(context: Context): IType | null {
         return this.check(context);
     }
 

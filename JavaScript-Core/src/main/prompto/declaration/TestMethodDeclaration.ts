@@ -1,16 +1,16 @@
 import BaseDeclaration from './BaseDeclaration'
 import {IType, VoidType} from '../type'
 import {ExecutionError, PromptoError} from '../error'
-import { ArgumentList, Identifier} from '../grammar'
+import {Argument, ArgumentList, Identifier, Specificity} from '../grammar'
 import {DeclarationStatement, IStatement, StatementList} from '../statement'
 import {AssertionList, SymbolExpression} from '../expression'
 import {Context, Transpiler} from "../runtime";
 import {ITestInfo} from "../runtime/Catalog";
-import {Section} from "../parser";
+import {Dialect, Section} from "../parser";
 import {CodeWriter} from "../utils";
 import {Instance, TextValue, IValue} from "../value";
 import {CategoryDeclaration, IDeclaration, IMethodDeclaration} from "./index";
-import {ParameterList} from "../param";
+import {IParameter, ParameterList} from "../param";
 
 const isNodeJs = typeof window == 'undefined' && typeof importScripts == 'undefined';
 
@@ -349,6 +349,30 @@ export default class TestMethodDeclaration extends BaseDeclaration implements IM
     }
     isAssignableTo(context: Context, args: ArgumentList, checkInstance: boolean, allowDerived: boolean): boolean {
         throw new Error('Method not implemented.')
+    }
+
+    isAssignableFrom(context: Context, args: ArgumentList): boolean {
+        throw new Error("Should never get there!");
+    }
+
+    getSignature(dialect?: Dialect): string {
+        throw new Error("Should never get there!");
+    }
+
+    computeSpecificity(context: Context, param: IParameter | null, argument: Argument, checkInstance: boolean, allowDerived: boolean): Specificity {
+        throw new Error("Should never get there!");
+    }
+
+    declareCall(transpiler: Transpiler) {
+        throw new Error("Should never get there!");
+    }
+
+    transpileCall(transpiler: Transpiler, args: ArgumentList | null, refOnly?: boolean) {
+        throw new Error("Should never get there!");
+    }
+
+    fullDeclare(transpiler: Transpiler, id: Identifier) {
+        throw new Error("Should never get there!");
     }
 
 

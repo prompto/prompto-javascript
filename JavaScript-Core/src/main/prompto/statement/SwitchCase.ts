@@ -4,7 +4,7 @@ import {IExpression} from "../expression";
 import {Context, Transpiler} from "../runtime";
 import {IValue} from "../value";
 import {IType} from "../type";
-import {CodeWriter, IWritable} from "../utils";
+import {CodeWriter} from "../utils";
 
 export default abstract class SwitchCase extends Section {
 
@@ -50,7 +50,9 @@ export default abstract class SwitchCase extends Section {
     }
 
     abstract transpile(transpiler: Transpiler): void;
-    abstract transpileError(child: Transpiler): void;
+    transpileError(child: Transpiler): void {
+        throw new Error("Should never get there!");
+    }
 
     abstract matches(context: Context, switchValue: IValue): boolean;
 

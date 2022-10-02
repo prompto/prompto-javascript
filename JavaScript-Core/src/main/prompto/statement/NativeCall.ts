@@ -1,6 +1,6 @@
 import SimpleStatement from './SimpleStatement'
 import {IValue} from "../value";
-import {IType} from "../type";
+import {IType, VoidType} from "../type";
 import {Context} from "../runtime";
 
 export default abstract class NativeCall extends SimpleStatement {
@@ -9,7 +9,14 @@ export default abstract class NativeCall extends SimpleStatement {
         throw new Error("Should never get there!");
     }
 
-    abstract interpretNative(context: Context, returnType: IType): IValue | null;
+    check(context: Context): IType {
+        return VoidType.instance;
+    }
+
+    interpretNative(context: Context, returnType: IType) {
+        throw new Error("Should never get there!");
+    }
+
 
 }
 

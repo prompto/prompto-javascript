@@ -1,5 +1,5 @@
 import BaseStatement from './BaseStatement'
-import { Dialect } from '../parser'
+import {Dialect, Section} from '../parser'
 import {VoidType, MethodType, CategoryType, IType} from '../type'
 import { CodeWriter } from '../utils'
 import {
@@ -12,19 +12,19 @@ import {
     IExpression, IAssertion
 } from '../expression'
 import { MethodCall } from '../statement'
-import {CategoryDeclaration, TestMethodDeclaration} from '../declaration'
+import {AttributeDeclaration, CategoryDeclaration, TestMethodDeclaration} from '../declaration'
 import { SyntaxError } from '../error'
 import {ArgumentList, Identifier} from "../grammar";
 import {Context, InstanceContext, Transpiler} from "../runtime";
-import {IValue} from "../value";
+import {IValue, NullValue} from "../value";
 
 export default class UnresolvedCall extends BaseStatement implements IAssertion {
 
     caller: IExpression;
-    args: ArgumentList;
+    args: ArgumentList | null;
     resolved?: IExpression;
     
-    constructor(caller: IExpression, args: ArgumentList) {
+    constructor(caller: IExpression, args: ArgumentList | null) {
         super();
         this.caller = caller;
         this.args = args || null;
@@ -32,6 +32,22 @@ export default class UnresolvedCall extends BaseStatement implements IAssertion 
 
     isSimple() {
         return true;
+    }
+
+    isPredicate(): boolean {
+        return false;
+    }
+
+    isAssertion(): boolean {
+        return true;
+    }
+
+    checkAttribute(context: Context): AttributeDeclaration | null {
+        return null;
+    }
+
+    equals(other: any) {
+        return this.resolved ? this.resolved.equals(other) : false;
     }
 
     toDialect(writer: CodeWriter): void {
@@ -60,11 +76,15 @@ export default class UnresolvedCall extends BaseStatement implements IAssertion 
         return this.resolved ? this.resolved.check(context) : VoidType.instance;
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    interpret(context: Context): IValue | null {
+    interpret(context: Context): IValue {
         this.resolve(context);
-        return this.resolved ? this.resolved.interpret(context) : null;
+        const result = this.resolved ? this.resolved.interpret(context) : null;
+        return result || NullValue.instance; // TODO only use NullValue when interpreted as expression
+    }
+
+    interpretReference(context: Context): IValue {
+        this.resolve(context);
+        return this.resolved ? this.resolved.interpretReference(context) : NullValue.instance;
     }
 
     interpretAssert(context: Context, testMethodDeclaration: TestMethodDeclaration) {
@@ -117,7 +137,7 @@ export default class UnresolvedCall extends BaseStatement implements IAssertion 
         if (!resolved)
             resolved = this.resolveUnresolvedDeclaration(context, id);
         if (!resolved)
-            resolved.problemListener.reportUnknownMethod(this, id.name);
+            context.problemListener.reportUnknownMethod(this, id.name);
         else
             (resolved.asSection()).copySectionFrom(this);
         return resolved;
@@ -197,6 +217,12 @@ export default class UnresolvedCall extends BaseStatement implements IAssertion 
             this.resolved.transpile(transpiler);
     }
 
+    transpileReference(transpiler: Transpiler, method: MethodType): void {
+        this.resolve(transpiler.context);
+        if(this.resolved)
+            this.resolved.transpileReference(transpiler, method);
+    }
+
     setParent(parent: IExpression) {
         if(parent) {
             if(this.caller instanceof UnresolvedIdentifier)
@@ -207,4 +233,13 @@ export default class UnresolvedCall extends BaseStatement implements IAssertion 
                 throw new Error("Should never happen!");
         }
     }
+
+    checkAssert(context: Context): Context {
+        return context;
+    }
+
+    locateSectionAtLine(line: number): Section | null {
+        return this;
+    }
+
 }

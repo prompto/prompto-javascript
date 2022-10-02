@@ -24,7 +24,7 @@ export default class AtomicSwitchCase extends SwitchCase {
         return value.equals(thisValue);
     }
 
-    casetoMDialect(writer: CodeWriter): void {
+    caseToMDialect(writer: CodeWriter): void {
         this.caseToEDialect(writer);
     }
 
@@ -52,7 +52,7 @@ export default class AtomicSwitchCase extends SwitchCase {
         writer.dedent();
     }
 
-    catchToPDialect(writer: CodeWriter) {
+    catchToMDialect(writer: CodeWriter) {
         writer.append("except ");
         this.expression && this.expression.toDialect(writer);
         writer.append(":").newLine().indent();

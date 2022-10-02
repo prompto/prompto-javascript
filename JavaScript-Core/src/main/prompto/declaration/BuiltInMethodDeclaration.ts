@@ -44,6 +44,10 @@ export default abstract class BuiltInMethodDeclaration<T extends IValue> extends
         throw new Error("Should never get there!");
     }
 
+    declareCall(transpiler: Transpiler) {
+        throw new Error("Need to override declareCall in " + this.constructor.name);
+    }
+
     transpileCall(transpiler: Transpiler, args: ArgumentList): void {
         throw new Error("Need to override transpileCall in " + this.constructor.name);
     }
@@ -67,4 +71,5 @@ export default abstract class BuiltInMethodDeclaration<T extends IValue> extends
     toODialect(writer: CodeWriter) {
         throw new Error("TBD!");
     }
+
 }

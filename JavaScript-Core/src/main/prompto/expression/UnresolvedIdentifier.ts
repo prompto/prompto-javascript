@@ -54,7 +54,7 @@ export default class UnresolvedIdentifier extends BaseExpression implements IPre
         return this.resolveAndCheck(context, false);
     }
 
-    checkReference(context: Context): IType {
+    checkReference(context: Context): IType | null {
         this.resolve(context, false, false);
         return this.resolved ? this.resolved.checkReference(context) : AnyType.instance;
     }

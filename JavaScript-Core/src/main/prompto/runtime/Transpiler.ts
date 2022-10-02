@@ -5,7 +5,7 @@ import {CategoryDeclaration} from '../declaration'
 import { StrictSet, List } from '../intrinsic';
 import { equalObjects } from '../utils'
 import {Context} from "./Context";
-import {IType} from "../type";
+import {CategoryType} from "../type";
 import ITranspilable from '../../../main/prompto/runtime/ITranspilable';
 
 const coreNodeClasses = new Set<string>(["Socket"]);
@@ -87,7 +87,7 @@ export default class Transpiler {
         return transpiler;
     }
 
-    newInstanceTranspiler(type: IType): Transpiler {
+    newInstanceTranspiler(type: CategoryType): Transpiler {
         const context = this.context.newInstanceContext(null, type, true);
         return this.copyTranspiler(context);
     }

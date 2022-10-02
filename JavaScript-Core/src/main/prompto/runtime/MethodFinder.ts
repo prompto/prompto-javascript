@@ -2,7 +2,7 @@ import {Score, MethodDeclarationMap, Context} from './index'
 import { CategoryType, MethodType } from '../type'
 import { PromptoError, SyntaxError } from '../error'
 import { ProblemRaiser } from '../problem';
-import { ClosureValue, ArrowValue } from '../value';
+import {ClosureValue, ArrowValue, Instance} from '../value';
 import {ConcreteCategoryDeclaration, ClosureDeclaration, ArrowDeclaration, IMethodDeclaration} from '../declaration'
 import {MethodCall} from "../statement";
 
@@ -53,10 +53,10 @@ export default class MethodFinder {
 
     findBest(checkInstance: boolean): IMethodDeclaration | null {
        const allCandidates = new Set<IMethodDeclaration>();
-       let decl = this.findBestReference(checkInstance, allCandidates);
+       let decl = this.findBestReference(allCandidates, checkInstance);
        if (decl)
            return decl;
-       decl = this.findBestMethod(checkInstance, allCandidates);
+       decl = this.findBestMethod(allCandidates, checkInstance);
        if (decl)
            return decl;
        if (allCandidates.size == 0)
@@ -66,12 +66,12 @@ export default class MethodFinder {
        return null;
    }
 
-    findBestReference(checkInstance: boolean, allCandidates: Set<IMethodDeclaration>): IMethodDeclaration | null {
+    findBestReference(candidates: Set<IMethodDeclaration>, checkInstance: boolean): IMethodDeclaration | null {
         const candidate = this.findCandidateReference(checkInstance);
         if(!candidate)
             return null;
-        allCandidates.add(candidate);
-        const compatibles = this.filterCompatible([candidate], checkInstance, false);
+        candidates.add(candidate);
+        const compatibles = this.filterCompatible(new Set<IMethodDeclaration>([candidate]), checkInstance, false);
         return compatibles.size > 0 ? [...compatibles][0] : null;
     }
 
@@ -103,7 +103,7 @@ export default class MethodFinder {
     }
 
     getClosureDeclaration(context: Context, closure: ClosureValue) {
-        const decl = closure.type.method;
+        const decl = (closure.type as MethodType).method;
         if(decl.memberOf != null) {
             // the closure references a member method (useful when a method reference is needed)
             // in which case we may simply want to return that method to avoid spilling context into method body
@@ -118,7 +118,7 @@ export default class MethodFinder {
         return new ClosureDeclaration(closure);
     }
 
-    findBestMethod(checkInstance, allCandidates) {
+    findBestMethod(allCandidates: Set<IMethodDeclaration>, checkInstance: boolean) {
         const candidates = this.findCandidates(checkInstance);
         candidates.forEach(c => allCandidates.add(c));
         const compatibles = this.filterCompatible(candidates, checkInstance, false);
@@ -126,21 +126,21 @@ export default class MethodFinder {
             case 0:
                 return null;
             case 1:
-                return compatibles.values().next().value;
+                return compatibles.values().next().value as IMethodDeclaration;
             default:
                 return this.findMostSpecific(compatibles, checkInstance);
         }
     }
 
-    findMostSpecific(candidates, checkInstance) {
-        let candidate = null;
+    findMostSpecific(candidates: Set<IMethodDeclaration>, checkInstance: boolean): IMethodDeclaration | null {
+        let candidate: IMethodDeclaration | null  = null;
         let ambiguous = [];
-        candidates.forEach(function(c) {
+        for(const c of candidates.values()) {
             if(candidate==null)
                 candidate = c;
             else {
                 // noinspection JSPotentiallyInvalidUsageOfClassThis
-                const score = this.compareSpecifity(candidate, c, checkInstance);
+                const score = this.compareSpecifity(candidate, c, checkInstance, false);
                 switch(score) {
                 case Score.WORSE:
                     candidate = c;
@@ -153,28 +153,23 @@ export default class MethodFinder {
                     break;
                 }
             }
-        }, this);
-        if(ambiguous.length>0) {
-            this.context.problemListener.reportTooManyPrototypes(this.methodCall);
+        }
+        if(ambiguous.length > 0) {
+            this.context.problemListener.reportTooManyPrototypes(this.methodCall, this.methodCall);
         }
         return candidate;
     }
 
-    sortMostSpecificFirst(declarations) {
-        const self = this;
-        declarations = Array.from(declarations);
-        // console.error("sorting:"+ declarations.map(function(decl) { return decl.getProto(); }).join(","));
-        declarations.sort((d1, d2) => {
-            // console.error( d1.getProto() + "/" + d2.getProto() );
-            const score = self.compareSpecifity(d2, d1, false, true);
-            // console.error( "-> " + score.name );
-            return score.value;
+    sortMostSpecificFirst(declarations: Set<IMethodDeclaration>): IMethodDeclaration[] {
+        const sorted = Array.from(declarations);
+        sorted.sort((d1, d2) => {
+            const score = this.compareSpecifity(d2, d1, false, true);
+            return score;
         });
-        // console.error("sorted:"+ declarations.map(function(decl) { return decl.getProto(); }).join(","));
-        return declarations;
+        return sorted;
     }
 
-    compareSpecifity(decl1, decl2, checkInstance, allowDerived) {
+    compareSpecifity(decl1: IMethodDeclaration, decl2: IMethodDeclaration, checkInstance: boolean, allowDerived: boolean): Score {
         try {
             const ctx1 = this.context.newLocalContext();
             decl1.registerParameters(ctx1);
@@ -185,8 +180,8 @@ export default class MethodFinder {
             for(let i=0;i<ass1.length && i<ass2.length;i++) {
                 const as1 = ass1[i];
                 const as2 = ass2[i];
-                const arg1 = decl1.parameters.find(as1.name);
-                const arg2 = decl2.parameters.find(as2.name);
+                const arg1 = decl1.parameters!.findByName(as1.name!);
+                const arg2 = decl2.parameters!.findByName(as2.name!);
                 if(as1.name==as2.name) {
                     // the general case with named arguments
                     const typ1 = arg1.getType(ctx1);
@@ -194,28 +189,25 @@ export default class MethodFinder {
                     // try resolving runtime type
                     if(checkInstance && typ1 instanceof CategoryType && typ2 instanceof CategoryType) {
                         const value = as1.expression.interpret(this.context); // in the named case as1==as2, so only evaluate 1
-                        if(value.getType) {
-                            const actual = value.getType();
+                        if(value instanceof Instance) {
+                            const actual = value.getType() as CategoryType;
                             const score = actual.compareSpecifity(this.context, typ1, typ2);
                             if(score!=Score.SIMILAR) {
                                 return score;
                             }
                         }
                     }
-                    if(typ1.isMoreSpecificThan(ctx2, typ2)) {
+                    if(typ1.isMoreSpecificThan(ctx2, typ2))
                         return Score.BETTER;
-                    }
-                    if(typ2.isMoreSpecificThan(ctx1, typ1)) {
+                    else if(typ2.isMoreSpecificThan(ctx1, typ1))
                         return Score.WORSE;
-                    }
                 } else {
                     // specific case for single anonymous argument
                     const sp1 = decl1.computeSpecificity(ctx1, arg1, as1, checkInstance, allowDerived);
                     const sp2 = decl2.computeSpecificity(ctx2, arg2, as2, checkInstance, allowDerived);
-                    if(sp1.moreSpecificThan(sp2)) {
+                    if (sp1 > sp2)
                         return Score.BETTER;
-                    }
-                    if(sp2.moreSpecificThan(sp1)) {
+                    else if (sp2 > sp1) {
                         return Score.WORSE;
                     }
                 }
@@ -228,7 +220,7 @@ export default class MethodFinder {
         return Score.SIMILAR;
     }
 
-    filterCompatible(candidates: IMethodDeclaration[], checkInstance: boolean, allowDerived: boolean): Set<IMethodDeclaration> {
+    filterCompatible(candidates: Set<IMethodDeclaration>, checkInstance: boolean, allowDerived: boolean): Set<IMethodDeclaration> {
         try {
             this.context.pushProblemListener(new ProblemRaiser());
             return this.doFilterCompatible(candidates, checkInstance, allowDerived);
@@ -237,7 +229,7 @@ export default class MethodFinder {
         }
     }
 
-    doFilterCompatible(candidates: IMethodDeclaration[], checkInstance: boolean, allowDerived: boolean): Set<IMethodDeclaration> {
+    doFilterCompatible(candidates: Set<IMethodDeclaration>, checkInstance: boolean, allowDerived: boolean): Set<IMethodDeclaration> {
         const compatibles = new Set<IMethodDeclaration>();
         candidates.forEach(decl => {
             try {
@@ -255,29 +247,17 @@ export default class MethodFinder {
         return compatibles;
     }
 
-    findPotential(checkInstance: boolean): Set<IMethodDeclaration> {
+    findPotential(checkInstance = false): Set<IMethodDeclaration> {
         const candidates = this.findCandidates(false);
-        if(candidates.length == 0)
+        if(!candidates.size)
             this.context.problemListener.reportUnknownMethod(this.methodCall.selector.id, this.methodCall.selector.name);
         return this.filterPotential(candidates);
     }
 
-    filterPotential(candidates) {
-        const potential = new Set();
-        candidates.forEach(declaration => {
-            try {
-                const args = this.methodCall.makeArguments(this.context, declaration);
-                if(declaration.isAssignableFrom(this.context, args)) {
-                    potential.add(declaration);
-                }
-            } catch(e) {
-                if(!(e instanceof SyntaxError)) {
-                    throw e;
-                }
-                // else OK
-            }
-        }, this);
-        return potential;
+    filterPotential(candidates: Set<IMethodDeclaration>) {
+        const potential = Array.from(candidates)
+            .filter(decl => decl.isAssignableFrom(this.context, this.methodCall.makeArguments(this.context, decl)), this);
+        return new Set<IMethodDeclaration>(potential);
     }
 
 }

@@ -5,7 +5,7 @@ import {IType, VoidType} from '../type'
 import {IExpression} from "../expression";
 import {ArgumentList, ThenWith} from "../grammar";
 import {CodeWriter} from "../utils";
-import {IValue} from "../value";
+import {IValue, NullValue} from "../value";
 import RemoteRunner from "../intrinsic/RemoteRunner"
 
 export default class RemoteCall extends UnresolvedCall {
@@ -57,16 +57,16 @@ export default class RemoteCall extends UnresolvedCall {
         return VoidType.instance;
     }
 
-    interpret(context: Context): IValue | null {
+    interpret(context: Context): IValue {
         const resultType = this.resolveAndCheck(context);
         const resultValue = super.interpret(context);
         context = context.newChildContext();
         if (this.thenWith && this.thenWith.id) {
             context.registerInstance(new Variable(this.thenWith.id, resultType), true);
-            context.setValue(this.thenWith.id, resultValue!);
+            context.setValue(this.thenWith.id, resultValue);
         }
         this.thenWith?.statements!.interpret(context)
-        return null;
+        return NullValue.instance; // TODO distinguish expression/statement
     }
 
     declare(transpiler: Transpiler): void {

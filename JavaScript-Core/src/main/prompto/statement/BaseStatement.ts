@@ -24,7 +24,7 @@ export default abstract class BaseStatement extends Section implements IStatemen
         this.toDialect(writer);
     }
 
-    checkReference(context: Context) {
+    checkReference(context: Context): IType | null {
         return this.check(context);
     }
 

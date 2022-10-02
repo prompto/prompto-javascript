@@ -5,7 +5,7 @@ import {CodeWriter} from "../utils";
 export default class JavaMethodExpression extends JavaSelectorExpression {
 
     name: string;
-    args: JavaExpressionList | null;
+    args: JavaExpressionList;
 
     constructor(name: string, args: JavaExpressionList | null) {
         super(null);

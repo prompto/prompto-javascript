@@ -45,7 +45,7 @@ export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
                 transpiler.append(")");
             }
             transpiler.indent();
-            this.transpileCall(transpiler, this.declarations[i]);
+            this.transpileDispatchCall(transpiler, this.declarations[i]);
             transpiler.dedent();
         }
     }
@@ -66,7 +66,7 @@ export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
         return common!;
     }
 
-    transpileCall(transpiler: Transpiler, declaration: IMethodDeclaration): void {
+    transpileDispatchCall(transpiler: Transpiler, declaration: IMethodDeclaration): void {
         this.methodCall.transpileSelector(transpiler, declaration);
         transpiler.append("(");
         this.parameters.forEach(param => {

@@ -11,7 +11,6 @@ export default class PythonStatement {
     constructor(expression: IPythonExpression, isReturn: boolean) {
         this.expression = expression;
         this.isReturn = isReturn;
-        this.module = null;
     }
 
     toString() {
@@ -22,7 +21,7 @@ export default class PythonStatement {
         if(this.isReturn)
             writer.append("return ");
         this.expression.toDialect(writer);
-        if(this.module!=null)
+        if(this.module)
             this.module.toDialect(writer);
     }
 }

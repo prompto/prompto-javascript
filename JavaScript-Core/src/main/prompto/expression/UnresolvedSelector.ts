@@ -87,10 +87,10 @@ export default class UnresolvedSelector extends SelectorBase {
             return null;
     }
 
-    tryResolveMember(context: Context) {
+    tryResolveMember(context: Context): IExpression | null {
         context.pushProblemListener(new ProblemRaiser());
         try {
-            let resolvedParent = this.parent;
+            let resolvedParent = this.parent || null;
             if(resolvedParent instanceof UnresolvedIdentifier) {
                 resolvedParent.checkMember(context);
                 resolvedParent = resolvedParent.resolved || null;
@@ -100,7 +100,7 @@ export default class UnresolvedSelector extends SelectorBase {
             return member;
         } catch (e) {
             if (e instanceof SyntaxError)
-                return undefined;
+                return null;
             else
                 throw e;
         } finally {
@@ -116,7 +116,7 @@ export default class UnresolvedSelector extends SelectorBase {
                 resolvedParent.checkMember(context);
                 resolvedParent = resolvedParent.resolved || null;
             }
-            const method = new UnresolvedCall(new MethodSelector(resolvedParent, this.id), assignments);
+            const method = new UnresolvedCall(new MethodSelector(resolvedParent || null, this.id), assignments);
             method.check(context);
             return method;
         } catch (e) {

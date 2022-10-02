@@ -221,7 +221,7 @@ export default class ConstructorExpression extends BaseExpression {
     }
 
     transpileConcreteWidget(transpiler: Transpiler, decl: ConcreteWidgetDeclaration): void {
-        transpiler = transpiler.newInstanceTranspiler(this.type as unknown as IType);
+        transpiler = transpiler.newInstanceTranspiler(this.type);
         transpiler.append("new ").append(this.type.name).append("()");
         transpiler.flush();
     }
@@ -234,7 +234,7 @@ export default class ConstructorExpression extends BaseExpression {
     }
 
     transpileConcrete(transpiler: Transpiler): void {
-        transpiler = transpiler.newInstanceTranspiler(this.type as unknown as IType);
+        transpiler = transpiler.newInstanceTranspiler(this.type);
         transpiler.append("new ").append(this.type.name).append("(");
         if(this.copyFrom!=null)
             this.copyFrom.transpile(transpiler);

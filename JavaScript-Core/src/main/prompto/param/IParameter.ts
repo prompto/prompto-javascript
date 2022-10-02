@@ -8,6 +8,7 @@ import {IValue} from "../value";
 
 export default interface IParameter extends INamed {
 
+    mutable: boolean;
     defaultExpression?: IExpression;
 
     register(context: Context): void;

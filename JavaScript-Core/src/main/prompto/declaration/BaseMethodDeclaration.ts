@@ -52,6 +52,10 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
         return wrapped;
     }
 
+    isEligibleAsMain() {
+        return false;
+    }
+
     getDeclarationType(): string {
         return "Method";
     }
@@ -72,6 +76,10 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
             return methodName;
         else
             return [methodName].concat(this.parameters.map(param => param.getTranspiledName(context))).join("$");
+    }
+
+    fullDeclare(transpiler: Transpiler, id: Identifier): void {
+        throw new Error("Should never get there!")
     }
 
     transpileProlog(transpiler: Transpiler): void {
@@ -121,6 +129,14 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
     abstract check(context: Context, isStart?: boolean): IType;
     abstract checkChild(context: Context): IType;
     abstract interpret(context: Context): IValue | null;
+
+    declareCall(transpiler: Transpiler) {
+        throw new Error("Should never get there!")
+    }
+
+    transpileCall(transpiler: Transpiler, args: ArgumentList | null, refOnly: boolean) {
+        throw new Error("Should never get there!")
+    }
 
     declareParameters(transpiler: Transpiler): void {
         if(this.parameters) {
@@ -245,9 +261,6 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
 
     }
 
-    isEligibleAsMain() {
-        return false;
-    }
 }
 
 

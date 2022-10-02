@@ -11,7 +11,7 @@ export default interface IExpression {
     isPredicate(): boolean;
     isAssertion(): boolean;
     check(context: Context): IType;
-    checkReference(context: Context): IType;
+    checkReference(context: Context): IType | null;
     interpret(context: Context): IValue;
     interpretReference(context: Context): IValue;
     declare(transpiler: Transpiler): void;
