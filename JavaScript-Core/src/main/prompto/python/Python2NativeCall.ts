@@ -4,7 +4,7 @@ import {PythonModule, PythonStatement} from "./index";
 
 export default class Python2NativeCall extends PythonNativeCall {
 
-    constructor(statement: PythonStatement, module: PythonModule) {
+    constructor(statement: PythonStatement, module?: PythonModule) {
         super(statement, module);
     }
 

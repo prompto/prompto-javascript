@@ -30,9 +30,9 @@ import * as path from '../../../../JavaScript-Runtime/src/main/prompto/path/inde
 import * as reader from '../../../../JavaScript-Runtime/src/main/prompto/reader/index.js';
 import * as writer from '../../../../JavaScript-Runtime/src/main/prompto/writer/index.js';
 
-export { constraint, csharp, declaration, error, expression, grammar, instance, intrinsic, java, jsx, literal, store,
+export default { constraint, csharp, declaration, error, expression, grammar, instance, intrinsic, java, jsx, literal, store,
     memstore, param, parser, problem, runtime, statement, suggest, type, utils, value, internet, io, path, reader, writer };
 
-import initAll from "./init.js"
+import initAll from "./init"
 initAll();
 

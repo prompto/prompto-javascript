@@ -21,6 +21,6 @@ import * as type from '../../main/prompto/type';
 import * as value from '../../main/prompto/value';
 import * as utils from '../../main/prompto/utils';
 export default { constraint, csharp, declaration, error, expression, grammar, instance, intrinsic, java, jsx, literal, store, memstore, param, parser, problem, runtime, statement, suggest, type, utils, value };
-import initAll from "./init.js";
+import initAll from "./init";
 initAll();
 //# sourceMappingURL=index.js.map

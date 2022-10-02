@@ -3,12 +3,14 @@ import HtmlEntities from 'html-entities'
 import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
 import IJsxExpression from "./IJsxExpression";
+import {Section} from "../parser";
 
-export default class JsxText implements IJsxExpression {
+export default class JsxText extends Section implements IJsxExpression {
 
     text: string;
 
     constructor(text: string) {
+        super();
         this.text = text;
     }
 

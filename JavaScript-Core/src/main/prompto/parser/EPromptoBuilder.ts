@@ -696,6 +696,7 @@ import IJsxValue from "../jsx/IJsxValue";
 import IJsxExpression from "../jsx/IJsxExpression";
 import {CssCode, CssExpression, CssField, CssText} from "../css";
 import ICssValue from "../css/ICssValue";
+import IPythonExpression from "../python/IPythonExpression";
 
 interface IndexedNode {
     __id?: number;
@@ -812,7 +813,7 @@ export default class EPromptoBuilder extends EParserListener {
     exitMethodCallExpression = (ctx: MethodCallExpressionContext) => {
         const exp = this.getNodeValue<IExpression>(ctx._exp1 || ctx._exp2);
         const args = this.getNodeValue<ArgumentList>(ctx._args);
-        const call = new UnresolvedCall(exp, args);
+        const call = new UnresolvedCall(exp!, args);
         this.setNodeValue(ctx, call);
     }
     
@@ -1180,7 +1181,7 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitListType = (ctx: ListTypeContext) => {
         const typ = this.getNodeValue<IType>(ctx._l);
-        this.setNodeValue(ctx, new ListType(typ));
+        this.setNodeValue(ctx, new ListType(typ!));
     }
 
     exitDictKeyIdentifier = (ctx: DictKeyIdentifierContext) => {
@@ -1195,7 +1196,7 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitDictType = (ctx: DictTypeContext) => {
         const typ = this.getNodeValue<IType>(ctx._d);
-        this.setNodeValue(ctx, new DictionaryType(typ));
+        this.setNodeValue(ctx, new DictionaryType(typ!));
     }
 
     exitAttributeList = (ctx: AttributeListContext) => {
@@ -1316,11 +1317,11 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitStore_statement = (ctx: Store_statementContext) => {
-        const del = this.getNodeValue(ctx._to_del);
-        const add = this.getNodeValue(ctx._to_add);
-        const meta = this.getNodeValue(ctx._with_meta);
-        const stmts = this.getNodeValue(ctx._stmts);
-        const stmt = new DeleteAndStoreStatement(del, add, meta, stmts);
+        const del = this.getNodeValue<ExpressionList>(ctx._to_del);
+        const add = this.getNodeValue<ExpressionList>(ctx._to_add);
+        const meta = this.getNodeValue<IExpression>(ctx._with_meta);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        const stmt = new DeleteAndStoreStatement(del, add, meta, stmts!);
         this.setNodeValue(ctx, stmt);
     }
 
@@ -1332,7 +1333,7 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitMemberSelector = (ctx: MemberSelectorContext) => {
         const name = this.getNodeValue<Identifier>(ctx._name);
-        this.setNodeValue(ctx, new UnresolvedSelector(undefined, name!));
+        this.setNodeValue(ctx, new UnresolvedSelector(null, name!));
     }
 
     exitItemSelector = (ctx: ItemSelectorContext) => {
@@ -1478,14 +1479,14 @@ export default class EPromptoBuilder extends EParserListener {
 
 
     exitUnresolvedWithArgsStatement = (ctx: UnresolvedWithArgsStatementContext) => {
-        const exp = ctx._exp1 ? this.getNodeValue(ctx._exp1) : this.getNodeValue(ctx._exp2);
-        const args = this.getNodeValue(ctx._args);
-        const name = this.getNodeValue(ctx._name);
-        const stmts = this.getNodeValue(ctx._stmts);
+        const exp = ctx._exp1 ? this.getNodeValue<IExpression>(ctx._exp1) : this.getNodeValue<IExpression>(ctx._exp2);
+        const args = this.getNodeValue<ArgumentList>(ctx._args);
+        const name = this.getNodeValue<Identifier>(ctx._name);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
         if (name != null || stmts != null)
-            this.setNodeValue(ctx, new RemoteCall(exp, args, name, stmts));
+            this.setNodeValue(ctx, new RemoteCall(exp!, args!, new ThenWith(name!, stmts!)));
         else
-            this.setNodeValue(ctx, new UnresolvedCall(exp, args));
+            this.setNodeValue(ctx, new UnresolvedCall(exp!, args));
     }
 
 
@@ -1533,7 +1534,7 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitSetType = (ctx: SetTypeContext) => {
         const typ = this.getNodeValue<IType>(ctx._s);
-        this.setNodeValue(ctx, new SetType(typ));
+        this.setNodeValue(ctx, new SetType(typ!));
     }
 
     exitMember_method_declaration = (ctx: Member_method_declarationContext) => {
@@ -1635,21 +1636,21 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitAssign_instance_statement = (ctx: Assign_instance_statementContext) => {
-        const inst = this.getNodeValue(ctx._inst);
-        const exp = this.getNodeValue(ctx._exp);
-        this.setNodeValue(ctx, new AssignInstanceStatement(inst, exp));
+        const inst = this.getNodeValue<IAssignableInstance>(ctx._inst);
+        const exp = this.getNodeValue<IExpression>(ctx._exp);
+        this.setNodeValue(ctx, new AssignInstanceStatement(inst!, exp!));
     }
 
     exitAssign_variable_statement = (ctx: Assign_variable_statementContext) => {
-        const name = this.getNodeValue(ctx.variable_identifier());
-        const exp = this.getNodeValue(ctx.expression());
-        this.setNodeValue(ctx, new AssignVariableStatement(name, exp));
+        const name = this.getNodeValue<Identifier>(ctx.variable_identifier());
+        const exp = this.getNodeValue<IExpression>(ctx.expression());
+        this.setNodeValue(ctx, new AssignVariableStatement(name!, exp!));
     }
 
     exitAssign_tuple_statement = (ctx: Assign_tuple_statementContext) => {
-        const items = this.getNodeValue(ctx._items);
-        const exp = this.getNodeValue(ctx._exp);
-        this.setNodeValue(ctx, new AssignTupleStatement(items, exp));
+        const items = this.getNodeValue<IdentifierList>(ctx._items);
+        const exp = this.getNodeValue<IExpression>(ctx._exp);
+        this.setNodeValue(ctx, new AssignTupleStatement(items!, exp!));
     }
 
     exitRootInstance = (ctx: RootInstanceContext) => {
@@ -1951,7 +1952,7 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitIteratorType = (ctx: IteratorTypeContext) => {
         const typ = this.getNodeValue<IType>(ctx._i);
-        this.setNodeValue(ctx, new IteratorType(typ));
+        this.setNodeValue(ctx, new IteratorType(typ!));
     }
 
     exitJavaBooleanLiteral = (ctx: JavaBooleanLiteralContext) => {
@@ -2075,7 +2076,7 @@ export default class EPromptoBuilder extends EParserListener {
         const name2 = this.getNodeValue<Identifier>(ctx._name2);
         const source = this.getNodeValue<IExpression>(ctx._source);
         const stmts = this.getNodeValue<StatementList>(ctx._stmts);
-        this.setNodeValue(ctx, new ForEachStatement(name1, name2, source, stmts));
+        this.setNodeValue(ctx, new ForEachStatement(name1, name2, source!, stmts!));
     }
 
     exitForEachStatement = (ctx: ForEachStatementContext) => {
@@ -2110,7 +2111,7 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitReturn_statement = (ctx: Return_statementContext) => {
         const exp = this.getNodeValue<IExpression>(ctx._exp);
-        this.setNodeValue(ctx, new ReturnStatement(exp!, false));
+        this.setNodeValue(ctx, new ReturnStatement(exp, false));
     }
 
     exitReturnStatement = (ctx: ReturnStatementContext) => {
@@ -2123,25 +2124,25 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitIf_statement = (ctx: If_statementContext) => {
-        const exp = this.getNodeValue(ctx._exp);
-        const stmts = this.getNodeValue(ctx._stmts);
-        const elseIfs = this.getNodeValue(ctx._elseIfs);
-        const elseStmts = this.getNodeValue(ctx._elseStmts);
-        this.setNodeValue(ctx, new IfStatement(exp, stmts, elseIfs, elseStmts));
+        const exp = this.getNodeValue<IExpression>(ctx._exp);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        const elseIfs = this.getNodeValue<IfElementList>(ctx._elseIfs);
+        const elseStmts = this.getNodeValue<StatementList>(ctx._elseStmts);
+        this.setNodeValue(ctx, new IfStatement(exp!, stmts!, elseIfs, elseStmts));
     }
 
     exitElseIfStatementList = (ctx: ElseIfStatementListContext) => {
-        const exp = this.getNodeValue(ctx._exp);
-        const stmts = this.getNodeValue(ctx._stmts);
-        const elem = new IfElement(exp, stmts);
-        this.setNodeValue(ctx, new IfElementList(elem));
+        const exp = this.getNodeValue<IExpression>(ctx._exp);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        const elem = new IfElement(exp, stmts!);
+        this.setNodeValue(ctx, new IfElementList(undefined, elem));
     }
 
     exitElseIfStatementListItem = (ctx: ElseIfStatementListItemContext) => {
         const items = this.getNodeValue<IfElementList>(ctx._items);
-        const exp = this.getNodeValue(ctx._exp);
-        const stmts = this.getNodeValue(ctx._stmts);
-        const elem = new IfElement(exp, stmts);
+        const exp = this.getNodeValue<IExpression>(ctx._exp);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        const elem = new IfElement(exp, stmts!);
         items!.add(elem);
         this.setNodeValue(ctx, items);
     }
@@ -2231,8 +2232,8 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitAtomicSwitchCase = (ctx: AtomicSwitchCaseContext) => {
         const exp = this.getNodeValue<IExpression>(ctx._exp);
-        const stmts = this.getNodeValue(ctx._stmts);
-        this.setNodeValue(ctx, new AtomicSwitchCase(exp, stmts));
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        this.setNodeValue(ctx, new AtomicSwitchCase(exp, stmts!));
     }
 
     exitCollection_literal = (ctx: Collection_literalContext) => {
@@ -2240,9 +2241,9 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitCollectionSwitchCase = (ctx: CollectionSwitchCaseContext) => {
-        const exp = this.getNodeValue(ctx._exp);
-        const stmts = this.getNodeValue(ctx._stmts);
-        this.setNodeValue(ctx, new CollectionSwitchCase(exp, stmts));
+        const exp = this.getNodeValue<IExpression>(ctx._exp);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        this.setNodeValue(ctx, new CollectionSwitchCase(exp!, stmts!));
     }
 
     exitSwitch_case_statement_list = (ctx: Switch_case_statement_listContext) => {
@@ -2251,10 +2252,10 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitSwitch_statement = (ctx: Switch_statementContext) => {
-        const exp = this.getNodeValue(ctx._exp);
-        const cases = this.getNodeValue(ctx._cases);
-        const stmts = this.getNodeValue(ctx._stmts);
-        const stmt = new SwitchStatement(exp, cases, stmts);
+        const exp = this.getNodeValue<IExpression>(ctx._exp);
+        const cases = this.getNodeValue<SwitchCaseList>(ctx._cases);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        const stmt = new SwitchStatement(exp!, cases!, stmts);
         this.setNodeValue(ctx, stmt);
     }
 
@@ -2495,16 +2496,16 @@ export default class EPromptoBuilder extends EParserListener {
 
 
     exitWhile_statement = (ctx: While_statementContext) => {
-        const exp = this.getNodeValue(ctx._exp);
-        const stmts = this.getNodeValue(ctx._stmts);
-        this.setNodeValue(ctx, new WhileStatement(exp, stmts));
+        const exp = this.getNodeValue<IExpression>(ctx._exp);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        this.setNodeValue(ctx, new WhileStatement(exp!, stmts));
     }
 
 
     exitDo_while_statement = (ctx: Do_while_statementContext) => {
-        const exp = this.getNodeValue(ctx._exp);
-        const stmts = this.getNodeValue(ctx._stmts);
-        this.setNodeValue(ctx, new DoWhileStatement(exp, stmts));
+        const exp = this.getNodeValue<IExpression>(ctx._exp);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        this.setNodeValue(ctx, new DoWhileStatement(exp!, stmts));
     }
 
     exitSingleton_category_declaration = (ctx: Singleton_category_declarationContext) => {
@@ -2599,7 +2600,7 @@ export default class EPromptoBuilder extends EParserListener {
         const category = this.getNodeValue<IType>(ctx._typ);
         const predicate = this.getNodeValue<IExpression>(ctx._predicate);
         const include = this.getNodeValue<IdentifierList>(ctx._include);
-        this.setNodeValue(ctx, new FetchOneExpression(category, predicate!, include));
+        this.setNodeValue(ctx, new FetchOneExpression(category, predicate, include));
     }
 
     exitFetchOneAsync = (ctx: FetchOneAsyncContext) => {
@@ -2607,7 +2608,7 @@ export default class EPromptoBuilder extends EParserListener {
         const predicate = this.getNodeValue<IExpression>(ctx._predicate);
         const include = this.getNodeValue<IdentifierList>(ctx._include);
         const thenWith = ThenWith.OrEmpty(this.getNodeValue(ctx.then()));
-        this.setNodeValue(ctx, new FetchOneStatement(category, predicate!, include, thenWith));
+        this.setNodeValue(ctx, new FetchOneStatement(category!, predicate!, include, thenWith));
     }
 
     exitThen = (ctx: ThenContext) => {
@@ -2727,7 +2728,7 @@ export default class EPromptoBuilder extends EParserListener {
     exitRead_statement = (ctx: Read_statementContext) => {
         const source = this.getNodeValue<IExpression>(ctx._source);
         const thenWith = ThenWith.OrEmpty(this.getNodeValue(ctx.then()));
-        this.setNodeValue(ctx, new ReadStatement(source, thenWith));
+        this.setNodeValue(ctx, new ReadStatement(source!, thenWith));
     }
 
     exitReadAllExpression = (ctx: ReadAllExpressionContext) => {
@@ -2762,16 +2763,16 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitWrite_statement = (ctx: Write_statementContext) => {
-        const what = this.getNodeValue(ctx._what);
-        const target = this.getNodeValue(ctx._target);
-        const thenWith = this.getNodeValue(ctx.then());
-        this.setNodeValue(ctx, new WriteStatement(what, target, thenWith));
+        const what = this.getNodeValue<IExpression>(ctx._what);
+        const target = this.getNodeValue<IExpression>(ctx._target);
+        const thenWith = this.getNodeValue<ThenWith>(ctx.then());
+        this.setNodeValue(ctx, new WriteStatement(what!, target!, thenWith));
     }
 
     exitWith_resource_statement = (ctx: With_resource_statementContext) => {
-        const stmt = this.getNodeValue(ctx._stmt);
-        const stmts = this.getNodeValue(ctx._stmts);
-        this.setNodeValue(ctx, new WithResourceStatement(stmt, stmts));
+        const stmt = this.getNodeValue<AssignVariableStatement>(ctx._stmt);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        this.setNodeValue(ctx, new WithResourceStatement(stmt!, stmts));
     }
 
     exitAnyType = (ctx: AnyTypeContext) => {
@@ -2779,13 +2780,13 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitAnyListType = (ctx: AnyListTypeContext) => {
-        const typ = this.getNodeValue(ctx.any_type());
-        this.setNodeValue(ctx, new ListType(typ));
+        const typ = this.getNodeValue<IType>(ctx.any_type());
+        this.setNodeValue(ctx, new ListType(typ!));
     }
 
     exitAnyDictType = (ctx: AnyDictTypeContext) => {
-        const typ = this.getNodeValue(ctx.any_type());
-        this.setNodeValue(ctx, new DictionaryType(typ));
+        const typ = this.getNodeValue<IType>(ctx.any_type());
+        this.setNodeValue(ctx, new DictionaryType(typ!));
     }
 
     exitCastExpression = (ctx: CastExpressionContext) => {
@@ -2796,16 +2797,16 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitCatchAtomicStatement = (ctx: CatchAtomicStatementContext) => {
         const name = this.getNodeValue<Identifier>(ctx._name);
-        const stmts = this.getNodeValue(ctx._stmts);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
         const symbol = new SymbolExpression(name!);
         symbol.copySectionFrom(name!);
-        this.setNodeValue(ctx, new AtomicSwitchCase(symbol, stmts));
+        this.setNodeValue(ctx, new AtomicSwitchCase(symbol, stmts!));
     }
 
     exitCatchCollectionStatement = (ctx: CatchCollectionStatementContext) => {
-        const exp = this.getNodeValue(ctx._exp);
-        const stmts = this.getNodeValue(ctx._stmts);
-        this.setNodeValue(ctx, new CollectionSwitchCase(exp, stmts));
+        const exp = this.getNodeValue<IExpression>(ctx._exp);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        this.setNodeValue(ctx, new CollectionSwitchCase(exp!, stmts!));
     }
 
     exitCatch_statement_list = (ctx: Catch_statement_listContext) => {
@@ -2814,18 +2815,18 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitTry_statement = (ctx: Try_statementContext) => {
-        const name = this.getNodeValue(ctx._name);
-        const stmts = this.getNodeValue(ctx._stmts);
-        const handlers = this.getNodeValue(ctx._handlers);
-        const anyStmts = this.getNodeValue(ctx._anyStmts);
-        const finalStmts = this.getNodeValue(ctx._finalStmts);
-        const stmt = new SwitchErrorStatement(name, stmts, handlers, anyStmts, finalStmts);
+        const name = this.getNodeValue<Identifier>(ctx._name);
+        const stmts = this.getNodeValue<StatementList>(ctx._stmts);
+        const handlers = this.getNodeValue<SwitchCaseList>(ctx._handlers);
+        const anyStmts = this.getNodeValue<StatementList>(ctx._anyStmts);
+        const finalStmts = this.getNodeValue<StatementList>(ctx._finalStmts);
+        const stmt = new SwitchErrorStatement(name!, stmts!, handlers!, anyStmts, finalStmts);
         this.setNodeValue(ctx, stmt);
     }
 
     exitRaise_statement = (ctx: Raise_statementContext) => {
-        const exp = this.getNodeValue(ctx._exp);
-        this.setNodeValue(ctx, new RaiseStatement(exp));
+        const exp = this.getNodeValue<IExpression>(ctx._exp);
+        this.setNodeValue(ctx, new RaiseStatement(exp!));
     }
 
     exitMatchingList = (ctx: MatchingListContext) => {
@@ -2862,8 +2863,8 @@ export default class EPromptoBuilder extends EParserListener {
         const exp = this.getNodeValue(ctx._exp);
         if(exp instanceof  UnresolvedIdentifier)
             select = new MethodSelector(null, exp.id);
-        else if(exp instanceof  MemberSelector)
-            select = new MethodSelector(exp.parent, exp.id);
+        else if(exp instanceof MemberSelector)
+            select = new MethodSelector(exp.parent!, exp.id);
         if(select != null)
             this.setNodeValue(ctx, new MethodCall(select, null));
     }
@@ -2981,38 +2982,37 @@ export default class EPromptoBuilder extends EParserListener {
 
 
     exitPythonStatement = (ctx: PythonStatementContext) => {
-        const exp = this.getNodeValue(ctx._exp);
-        this.setNodeValue(ctx, new PythonStatement(exp, false));
+        const exp = this.getNodeValue<IPythonExpression>(ctx._exp);
+        this.setNodeValue(ctx, new PythonStatement(exp!, false));
     }
 
     exitPythonReturnStatement = (ctx: PythonReturnStatementContext) => {
-        const exp = this.getNodeValue(ctx._exp);
-        this.setNodeValue(ctx, new PythonStatement(exp, true));
+        const exp = this.getNodeValue<IPythonExpression>(ctx._exp);
+        this.setNodeValue(ctx, new PythonStatement(exp!, true));
     }
 
     exitPython2CategoryBinding = (ctx: Python2CategoryBindingContext) => {
-        const map = this.getNodeValue(ctx._binding);
-        this.setNodeValue(ctx, new Python2NativeCategoryBinding(map));
+        const binding = this.getNodeValue<PythonNativeCategoryBinding>(ctx._binding);
+        this.setNodeValue(ctx, new Python2NativeCategoryBinding(binding!));
     }
 
 
     exitPython3CategoryBinding = (ctx: Python3CategoryBindingContext) => {
-        const map = this.getNodeValue(ctx._binding);
-        this.setNodeValue(ctx, new Python3NativeCategoryBinding(map));
+        const binding = this.getNodeValue<PythonNativeCategoryBinding>(ctx._binding);
+        this.setNodeValue(ctx, new Python3NativeCategoryBinding(binding!));
     }
 
 
     exitPython_category_binding = (ctx: Python_category_bindingContext) => {
         const identifier = ctx.identifier().getText();
-        const module = this.getNodeValue(ctx.python_module()) || null;
-        const map = new PythonNativeCategoryBinding(identifier, module);
-        this.setNodeValue(ctx, map);
+        const module = this.getNodeValue<PythonModule>(ctx.python_module()) || null;
+        this.setNodeValue(ctx, new PythonNativeCategoryBinding(identifier, module!));
     }
 
     exitPython_method_expression = (ctx: Python_method_expressionContext) => {
-        const name = this.getNodeValue(ctx._name);
-        const args = this.getNodeValue(ctx._args);
-        const method = new PythonMethodExpression(name, args);
+        const name = this.getNodeValue<string>(ctx._name);
+        const args = this.getNodeValue<PythonArgumentList>(ctx._args);
+        const method = new PythonMethodExpression(name!, args!);
         this.setNodeValue(ctx, method);
     }
 
@@ -3031,21 +3031,22 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitPython2NativeStatement = (ctx: Python2NativeStatementContext) => {
-        const stmt = this.getNodeValue(ctx.python_native_statement());
-        this.setNodeValue(ctx, new Python2NativeCall(stmt));
+        const stmt = this.getNodeValue<PythonStatement>(ctx.python_native_statement());
+        this.setNodeValue(ctx, new Python2NativeCall(stmt!));
     }
 
 
     exitPython3NativeStatement = (ctx: Python3NativeStatementContext) => {
-        const stmt = this.getNodeValue(ctx.python_native_statement());
-        this.setNodeValue(ctx, new Python3NativeCall(stmt));
+        const stmt = this.getNodeValue<PythonStatement>(ctx.python_native_statement());
+        this.setNodeValue(ctx, new Python3NativeCall(stmt!));
     }
 
     exitPython_native_statement = (ctx: Python_native_statementContext) => {
         const stmt = this.getNodeValue<PythonStatement>(ctx.python_statement());
         const module = this.getNodeValue<PythonModule>(ctx.python_module());
-        stmt.module = module;
-        this.setNodeValue(ctx, new PythonNativeCall(stmt));
+        if(module)
+            stmt!.module = module;
+        this.setNodeValue(ctx, new PythonNativeCall(stmt!, module || undefined));
     }
 
     exitPython_identifier = (ctx: Python_identifierContext) => {
@@ -3053,8 +3054,8 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitPythonIdentifier = (ctx: PythonIdentifierContext) => {
-        const name = this.getNodeValue(ctx._name);
-        this.setNodeValue(ctx, new PythonIdentifierExpression(null, name));
+        const name = this.getNodeValue<string>(ctx._name);
+        this.setNodeValue(ctx, new PythonIdentifierExpression(null, name!));
     }
 
     exitPythonIdentifierExpression = (ctx: PythonIdentifierExpressionContext) => {
@@ -3062,9 +3063,9 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitPythonChildIdentifier = (ctx: PythonChildIdentifierContext) => {
-        const parent = this.getNodeValue(ctx._parent);
-        const name = this.getNodeValue(ctx._name);
-        const child = new PythonIdentifierExpression(parent, name);
+        const parent = this.getNodeValue<IPythonExpression>(ctx._parent);
+        const name = this.getNodeValue<string>(ctx._name);
+        const child = new PythonIdentifierExpression(parent, name!);
         this.setNodeValue(ctx, child);
     }
 
@@ -3113,16 +3114,16 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitPythonNamedArgumentList = (ctx: PythonNamedArgumentListContext) => {
-        const name = this.getNodeValue(ctx._name);
-        const exp = this.getNodeValue(ctx._exp);
-        const arg = new PythonNamedArgument(name, exp);
-        this.setNodeValue(ctx, new PythonArgumentList(arg));
+        const name = this.getNodeValue<string>(ctx._name);
+        const exp = this.getNodeValue<IPythonExpression>(ctx._exp);
+        const arg = new PythonNamedArgument(name!, exp!);
+        this.setNodeValue(ctx, new PythonArgumentList(undefined, arg));
     }
 
     exitPythonNamedArgumentListItem = (ctx: PythonNamedArgumentListItemContext) => {
-        const name = this.getNodeValue(ctx._name);
-        const exp = this.getNodeValue(ctx._exp);
-        const arg = new PythonNamedArgument(name, exp);
+        const name = this.getNodeValue<string>(ctx._name);
+        const exp = this.getNodeValue<IPythonExpression>(ctx._exp);
+        const arg = new PythonNamedArgument(name!, exp!);
         const items = this.getNodeValue<PythonArgumentList>(ctx._items);
         items!.add(arg);
         this.setNodeValue(ctx, items);
@@ -3133,23 +3134,23 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitPythonOrdinalArgumentList = (ctx: PythonOrdinalArgumentListContext) => {
-        const item = this.getNodeValue(ctx._item);
-        const arg = new PythonOrdinalArgument(item);
+        const item = this.getNodeValue<IPythonExpression>(ctx._item);
+        const arg = new PythonOrdinalArgument(item!);
         this.setNodeValue(ctx, new PythonArgumentList(undefined, arg));
     }
 
     exitPythonOrdinalArgumentListItem = (ctx: PythonOrdinalArgumentListItemContext) => {
-        const item = this.getNodeValue(ctx._item);
-        const arg = new PythonOrdinalArgument(item);
+        const item = this.getNodeValue<IPythonExpression>(ctx._item);
+        const arg = new PythonOrdinalArgument(item!);
         const items = this.getNodeValue<PythonArgumentList>(ctx._items);
         items!.add(arg);
         this.setNodeValue(ctx, items);
     }
 
     exitPythonSelectorExpression = (ctx: PythonSelectorExpressionContext) => {
-        const parent = this.getNodeValue(ctx._parent);
+        const parent = this.getNodeValue<IPythonExpression>(ctx._parent);
         const selector = this.getNodeValue<PythonSelectorExpression>(ctx._child);
-        selector.parent = parent;
+        selector!.parent = parent;
         this.setNodeValue(ctx, selector);
     }
 
@@ -3265,7 +3266,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitCssText = (ctx: CssTextContext) => {
-        const text = this.input.getText({start: ctx._text.start, stop: ctx._text.stop});
+        const text = this.input.getText(new antlr4.misc.Interval(ctx._text.start, ctx._text.stop));
         this.setNodeValue(ctx, new CssText(text));
     }
 

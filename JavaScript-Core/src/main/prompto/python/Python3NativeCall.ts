@@ -4,7 +4,7 @@ import {CodeWriter} from "../utils";
 
 export default class Python3NativeCall extends PythonNativeCall {
 
-    constructor(statement: PythonStatement, module: PythonModule) {
+    constructor(statement: PythonStatement, module?: PythonModule) {
         super(statement, module);
     }
 
