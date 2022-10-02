@@ -56,7 +56,7 @@ export default class MemberInstance extends Section implements IAssignableSelect
         const root = this.parent!.interpret(context);
         if(!root.mutable)
             throw new NotMutableError();
-        const value = expression.interpret(context);
+        const value = expression.interpretExpression(context);
         root.SetMemberValue(context, this.id, value);
     }
 

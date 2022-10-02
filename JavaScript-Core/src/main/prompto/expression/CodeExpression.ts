@@ -37,7 +37,7 @@ export default class CodeExpression extends BaseExpression {
         return CodeType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         return new CodeValue(this);
     }
 
@@ -55,7 +55,7 @@ export default class CodeExpression extends BaseExpression {
     }
 
     interpretCode(context: Context): IValue {
-        return this.expression.interpret(context);
+        return this.expression.interpretExpression(context);
     }
 
     declareCode(transpiler: Transpiler): void {

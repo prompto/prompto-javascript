@@ -68,11 +68,11 @@ export default class UnresolvedIdentifier extends BaseExpression implements IPre
         return this.resolveAndCheck(context, true);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         if(!this.resolved) {
             this.resolveAndCheck(context, false);
         }
-        return this.resolved ? this.resolved.interpret(context) : NullValue.instance;
+        return this.resolved ? this.resolved.interpretExpression(context) : NullValue.instance;
     }
 
     interpretReference(context: Context): IValue {

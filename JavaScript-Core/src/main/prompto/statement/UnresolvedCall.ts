@@ -76,10 +76,13 @@ export default class UnresolvedCall extends BaseStatement implements IAssertion 
         return this.resolved ? this.resolved.check(context) : VoidType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
+        return this.interpretStatement(context) || NullValue.instance;
+    }
+
+    interpretStatement(context: Context): IValue | null {
         this.resolve(context);
-        const result = this.resolved ? this.resolved.interpret(context) : null;
-        return result || NullValue.instance; // TODO only use NullValue when interpreted as expression
+        return this.resolved ? this.resolved.interpretExpression(context) : null;
     }
 
     interpretReference(context: Context): IValue {

@@ -58,8 +58,8 @@ export default class AssignTupleStatement extends SimpleStatement {
         this.expression.transpile(transpiler);
     }
 
-    interpret(context: Context): IValue | null {
-        const object = this.expression.interpret(context);
+    interpretStatement(context: Context): IValue | null {
+        const object = this.expression.interpretExpression(context);
         if(!(object instanceof TupleValue)) {
             throw new SyntaxError("Expecting a tuple expression, got " + typeof(object));
         }

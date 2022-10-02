@@ -103,12 +103,6 @@ export default class ListValue extends BaseValueList<ListValue> {
         }
     }
 
-    toDialect = (writer: CodeWriter) => {
-        writer.append('[');
-        super.toDialect(writer);
-        writer.append(']');
-    }
-
     filter(filter: (value: IValue) => boolean): ListValue {
         const items = this.items.filter(filter);
         return new ListValue(this.itemType, false, items);

@@ -3,7 +3,7 @@ export {default as BreakResult} from './BreakResult';
 export {default as VoidResult} from './VoidResult';
 export {default as MethodDeclarationMap} from './MethodDeclarationMap';
 export {default as Interpreter, locateMethod} from './Interpreter';
-export {default as Transpilable} from './ITranspilable';
+export {default as ITranspilable} from './ITranspilable';
 export {default as Transpiler} from './Transpiler';
 export {default as Scheduler} from './Scheduler';
 export {default as ApplicationContext} from './ApplicationContext';

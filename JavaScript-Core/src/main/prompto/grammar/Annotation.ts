@@ -55,7 +55,7 @@ export default class Annotation extends Section {
         writer.newLine();
     }
 
-    processCategory(context: Context, declaration: CategoryDeclaration) {
+    processCategory(context: Context, declaration: CategoryDeclaration<any>) {
         const processor = AnnotationProcessors.forId(this.id);
         if(processor) {
             processor.processCategory(context, this, declaration);

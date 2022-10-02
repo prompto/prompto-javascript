@@ -27,7 +27,7 @@ export default class TypeExpression extends BaseExpression {
         return new TypeType(this.value);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         return new TypeValue(this.value);
     }
 

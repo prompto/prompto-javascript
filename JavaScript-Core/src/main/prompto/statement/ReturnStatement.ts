@@ -54,11 +54,11 @@ export default class ReturnStatement extends SimpleStatement {
         return type;
     }
 
-    interpret(context: Context): IValue {
+    interpretStatement(context: Context): IValue {
         if(this.expression==null)
             return VoidResult.instance;
         else
-            return this.expression.interpret(context) || NullValue.instance;
+            return this.expression.interpretExpression(context) || NullValue.instance;
     }
 
     canReturn() {

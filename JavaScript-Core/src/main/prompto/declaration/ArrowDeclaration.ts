@@ -12,7 +12,7 @@ export default class ArrowDeclaration extends AbstractMethodDeclaration {
     }
 
     interpret(context: Context): IValue {
-        return this.arrow.interpret(context);
+        return this.arrow.interpretExpression(context);
     }
 }
 

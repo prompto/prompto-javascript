@@ -587,9 +587,9 @@ export default class CategoryType extends BaseType {
     getExpressionSortedComparator(context: Context, exp: IExpression, desc: boolean): (o1: IValue, o2: IValue) => number {
         return (o1: ConcreteInstance, o2: ConcreteInstance) => {
             let ctx = context.newInstanceContext(o1, null);
-            const value1 = exp.interpret(ctx);
+            const value1 = exp.interpretExpression(ctx);
             ctx = context.newInstanceContext(o2, null);
-            const value2 = exp.interpret(ctx);
+            const value2 = exp.interpretExpression(ctx);
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
         };
     }
@@ -614,9 +614,9 @@ export default class CategoryType extends BaseType {
         const cmp = (o1: IValue, o2: IValue) => {
             const argument = call.args![0];
             argument._expression = new ValueExpression(this, o1);
-            const value1 = call.interpret(context);
+            const value1 = call.interpretExpression(context);
             argument._expression = new ValueExpression(this, o2);
-            const value2 = call.interpret(context);
+            const value2 = call.interpretExpression(context);
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
         };
         return cmp.bind(this) as (o1: IValue, o2: IValue) => number;

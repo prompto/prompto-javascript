@@ -12,7 +12,7 @@ export class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration<IValue> 
     enumType: IType;
 
     constructor(enumType: IType) {
-        super("symbolOf", new CategoryParameter(TextType.instance, new Identifier("name")));
+        super("symbolOf", new CategoryParameter(new Identifier("name"), false, TextType.instance));
         this.enumType = enumType;
     }
 

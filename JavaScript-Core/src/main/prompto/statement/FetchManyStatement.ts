@@ -4,7 +4,7 @@ import {AnyType, CursorType, IType} from '../type'
 import {IExpression} from "../expression";
 import {IdentifierList, OrderByClauseList, ThenWith} from "../grammar";
 import {Section} from "../parser";
-import {IValue, NullValue} from "../value";
+import {IValue} from "../value";
 import {CodeWriter} from "../utils";
 
 export default class FetchManyStatement extends FetchManyExpression {
@@ -38,10 +38,10 @@ export default class FetchManyStatement extends FetchManyExpression {
         return this.thenWith.check(context, new CursorType(this.type || AnyType.instance));
     }
 
-    interpret(context: Context): IValue {
-        const record = super.interpret(context);
+    interpretStatement(context: Context): IValue | null {
+        const record = super.interpretExpression(context);
         this.thenWith.interpret(context, record);
-        return NullValue.instance;
+        return null;
     }
 
     toDialect(writer: CodeWriter): void {

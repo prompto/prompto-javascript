@@ -15,7 +15,7 @@ export default class TextValue extends BaseValue<string> {
         super(TextType.instance, value);
     }
 
-    getStorableData(): any {
+    getStorableData(): string {
         return this.value;
     }
 

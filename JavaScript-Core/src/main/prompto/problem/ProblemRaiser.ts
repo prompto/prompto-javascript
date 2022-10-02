@@ -1,6 +1,6 @@
 import ProblemListener from './ProblemListener'
 import {SyntaxError} from '../error'
-import IProblem from "../../../main/prompto/problem/IProblem";
+import IProblem from "../problem/IProblem";
 import ProblemType from "./ProblemType";
 
 export default class ProblemRaiser extends ProblemListener {

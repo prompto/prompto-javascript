@@ -38,13 +38,14 @@ export default class DocumentLiteral extends Literal<DocumentValue> {
         return DocumentType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         if(this.entries.length>0) {
             this.check(context); /// force computation of itemType
             const doc = new Document<string, IValue>();
             this.entries.forEach(entry => {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 const key = entry.key!.interpret(context).getStorableData();
-                let val = entry.value.interpret(context);
+                let val = entry.value.interpretExpression(context);
                 val = this.interpretPromotion(val);
                 doc.$safe_setMember(key as string, val);
             }, this);
@@ -57,7 +58,7 @@ export default class DocumentLiteral extends Literal<DocumentValue> {
         if (DecimalType.instance == this.itemType && item instanceof IntegerValue)
             return new DecimalValue(item.DecimalValue());
         else if (TextType.instance == this.itemType && item instanceof CharacterValue)
-            return new TextValue(item.value);
+            return new TextValue(item.value as string);
         else
             return item;
     }

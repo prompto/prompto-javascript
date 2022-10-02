@@ -22,7 +22,7 @@ export default class ValueExpression extends BaseValue<IValue> implements IExpre
         return this.type;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         return this.value;
     }
 

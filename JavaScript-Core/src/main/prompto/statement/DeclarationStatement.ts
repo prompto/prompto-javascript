@@ -50,7 +50,7 @@ export default class DeclarationStatement<D extends IDeclaration> extends BaseSt
         return VoidType.instance;
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         if(this.declaration instanceof ConcreteMethodDeclaration) {
             const method = this.declaration as IMethodDeclaration;
             context.registerMethodDeclaration(method);

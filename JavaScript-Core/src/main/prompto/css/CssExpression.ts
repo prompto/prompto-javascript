@@ -27,9 +27,7 @@ export default class CssExpression implements ICssValue {
 
     toDialect(writer: CodeWriter): void {
         writer.append("{");
-        this.fields.forEach(field => {
-            field.toDialect(writer);
-        }, this);
+        this.fields.forEach(field => field.toDialect(writer), this);
         writer.append("}");
     }
 

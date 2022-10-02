@@ -11,7 +11,7 @@ export default class FlushStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         $DataStore.instance.flush();
         return null;
     }

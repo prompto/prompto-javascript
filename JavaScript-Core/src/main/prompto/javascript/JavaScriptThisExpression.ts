@@ -13,7 +13,7 @@ export default class JavaScriptThisExpression extends JavaScriptExpression {
     }
 
     interpret(context: Context): any {
-        return this.expression.interpret(context);
+        return this.expression.interpretExpression(context);
     }
 
     toDialect(writer: CodeWriter): void {

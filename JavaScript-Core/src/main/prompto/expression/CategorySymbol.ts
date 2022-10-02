@@ -54,7 +54,7 @@ export default class CategorySymbol extends EnumSymbol<EnumeratedCategoryType> {
         return this.type;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         return this.makeInstance(context);
     }
 
@@ -65,7 +65,7 @@ export default class CategorySymbol extends EnumSymbol<EnumeratedCategoryType> {
             if(this.args!=null) {
                 context = context.newLocalContext();
                 this.args.forEach(argument => {
-                    const value = argument.expression.interpret(context);
+                    const value = argument.expression.interpretExpression(context);
                     instance.SetMemberValue(context, argument.id!, value);
                 });
             }

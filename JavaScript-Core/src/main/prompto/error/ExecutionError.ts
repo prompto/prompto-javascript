@@ -26,7 +26,7 @@ export default abstract class ExecutionError extends PromptoError {
         }
         if (context.getRegisteredInstance(errorName) == null)
             context.registerInstance(new ErrorVariable(errorName), false);
-        const error = exp.interpret(context);
+        const error = exp.interpretExpression(context);
         context.setValue(errorName, error);
         return error;
     }

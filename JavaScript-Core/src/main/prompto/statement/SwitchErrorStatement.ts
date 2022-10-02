@@ -71,7 +71,7 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         return section;
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         let result = null;
         try {
             result = this.statements.interpret(context);
@@ -101,7 +101,7 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         if(context.getRegisteredInstance(this.errorId) == null) {
             context.registerInstance(new ErrorVariable(this.errorId), true);
         }
-        const error = exp.interpret(context);
+        const error = exp.interpretExpression(context);
         context.setValue(this.errorId, error);
         return error;
     }

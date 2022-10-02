@@ -33,7 +33,7 @@ export default class RaiseStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretStatement(context: Context): IValue {
         throw new UserError(this.expression);
     }
 

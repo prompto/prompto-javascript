@@ -49,9 +49,9 @@ export default class WriteStatement extends BaseStatement {
             return VoidType.instance;
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         const resContext = context instanceof ResourceContext ? context : context.newResourceContext();
-        const value = this.resource.interpret(resContext);
+        const value = this.resource.interpretExpression(resContext);
         if(!value)
             throw new NullReferenceError();
         if(!value.isResource())
@@ -59,7 +59,7 @@ export default class WriteStatement extends BaseStatement {
         const res = value.asResource();
         if(!res.isWritable())
             throw new InvalidResourceError("Not writable");
-        const str = this.content.interpret(resContext).toString();
+        const str = this.content.interpretExpression(resContext).toString();
         try {
             if(context == resContext) {
                 res.writeLine(str);

@@ -34,10 +34,10 @@ export default class ReadOneExpression extends BaseExpression {
         return TextType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         if(!context.isWithResourceContext())
             context.problemListener.reportNotAResourceContext(this.asSection());
-        const value = this.resource.interpret(context);
+        const value = this.resource.interpretExpression(context);
         if(value==null) {
             throw new NullReferenceError();
         }

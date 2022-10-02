@@ -57,16 +57,16 @@ export default class RemoteCall extends UnresolvedCall {
         return VoidType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretStatement(context: Context): IValue | null {
         const resultType = this.resolveAndCheck(context);
-        const resultValue = super.interpret(context);
+        const resultValue = super.interpretExpression(context);
         context = context.newChildContext();
         if (this.thenWith && this.thenWith.id) {
             context.registerInstance(new Variable(this.thenWith.id, resultType), true);
             context.setValue(this.thenWith.id, resultValue);
         }
         this.thenWith?.statements!.interpret(context)
-        return NullValue.instance; // TODO distinguish expression/statement
+        return null;
     }
 
     declare(transpiler: Transpiler): void {

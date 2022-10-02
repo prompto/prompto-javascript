@@ -61,7 +61,7 @@ export default class UnresolvedParameter extends BaseParameter {
         if(this.resolved)
             this.resolved.register(context);
         if(this.defaultExpression!=null)
-            context.setValue(this.id, this.defaultExpression.interpret(context));
+            context.setValue(this.id, this.defaultExpression.interpretExpression(context));
     }
 
     checkValue(context: Context, expression: IExpression): IValue {

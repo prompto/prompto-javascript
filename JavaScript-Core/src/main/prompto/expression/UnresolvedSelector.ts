@@ -53,9 +53,9 @@ export default class UnresolvedSelector extends SelectorBase {
         return this.resolveAndCheck(context, false);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         this.resolveAndCheck(context, false);
-        return this.resolved ? this.resolved.interpret(context) : NullValue.instance;
+        return this.resolved ? this.resolved.interpretExpression(context) : NullValue.instance;
     }
 
     resolveAndCheck(context: Context, forMember: boolean) {

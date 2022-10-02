@@ -34,9 +34,9 @@ export default class ReadAllExpression extends BaseExpression {
         return TextType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         context = context.newResourceContext();
-        const value = this.resource.interpret(context);
+        const value = this.resource.interpretExpression(context);
         if(!value) {
             throw new NullReferenceError();
         }

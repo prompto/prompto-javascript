@@ -1,13 +1,15 @@
 import ObjectList from '../utils/ObjectList'
 import EnumSymbol from "../expression/EnumSymbol";
 import {Context} from "../runtime";
-import {IIterator, IResource, IValue} from "../value";
+import {IResource, IValue} from "../value";
 import {IType, MissingType} from "../type";
 import {IStorable} from "../store";
 import {JsonNode, JsonParent} from "../json";
 import {Identifier} from "./index";
+import {IIterator} from "../intrinsic";
+import IValueIterable from "../value/IValueIterable";
 
-export default abstract class SymbolList<T extends EnumSymbol<never>> extends ObjectList<T> implements IValue {
+export default abstract class SymbolList<T extends EnumSymbol<any>> extends ObjectList<T> implements IValue {
 
     type: IType;
     mutable = false;
@@ -18,8 +20,14 @@ export default abstract class SymbolList<T extends EnumSymbol<never>> extends Ob
         this.type = MissingType.instance;
     }
 
-    getIterator(context: Context): IIterator<T> {
-        return new SymbolListIterator<T>(this, context);
+    isIterable() {
+        return true;
+    }
+
+    asIterable(context: Context): IValueIterable {
+        return {
+                    getIterator: (context: Context) => new SymbolListIterator<T>(this, context)
+                };
     }
 
     toString() {
@@ -107,10 +115,6 @@ export default abstract class SymbolList<T extends EnumSymbol<never>> extends Ob
         throw new Error('Method not implemented.');
     }
 
-    isIterable(): boolean {
-        throw new Error('Method not implemented.');
-    }
-
     isResource(): boolean {
         throw new Error('Method not implemented.');
     }
@@ -130,9 +134,10 @@ export default abstract class SymbolList<T extends EnumSymbol<never>> extends Ob
     toJsonStream(context: Context, values: JsonParent, instanceId: null, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
         throw new Error('Method not implemented.');
     }
+
 }
 
-class SymbolListIterator<T extends EnumSymbol<never>> implements IIterator<T> {
+class SymbolListIterator<T extends EnumSymbol<any>> implements IIterator<T> {
 
     symbols: SymbolList<T>;
     context: Context;
@@ -150,6 +155,6 @@ class SymbolListIterator<T extends EnumSymbol<never>> implements IIterator<T> {
 
     next(): T {
         const symbol = this.symbols[this.idx++];
-        return symbol.interpret(this.context) as unknown as T;
+        return symbol.interpretExpression(this.context) as unknown as T;
     }
 }

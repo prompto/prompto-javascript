@@ -99,7 +99,7 @@ export default class CategoryParameter extends BaseParameter {
             context.registerInstance(param, true);
         }
         if (this.defaultExpression != null)
-            context.setValue(this.id, this.defaultExpression.interpret(context));
+            context.setValue(this.id, this.defaultExpression.interpretExpression(context));
     }
 
     check(context: Context): IType {

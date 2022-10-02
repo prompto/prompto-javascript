@@ -72,9 +72,9 @@ export default class EqualsExpression extends BaseExpression implements IPredica
         return BooleanType.instance; // can compare all objects
     }
 
-    interpret(context: Context): IValue {
-        const lval = this.left.interpret(context) || NullValue.instance;
-        const rval = this.right.interpret(context) || NullValue.instance;
+    interpretExpression(context: Context): IValue {
+        const lval = this.left.interpretExpression(context) || NullValue.instance;
+        const rval = this.right.interpretExpression(context) || NullValue.instance;
         return this.interpretValues(context, lval, rval);
     }
 
@@ -181,8 +181,8 @@ export default class EqualsExpression extends BaseExpression implements IPredica
     }
 
     interpretAssert(context: Context, test: TestMethodDeclaration): boolean {
-        const lval = this.left.interpret(context) || NullValue.instance;
-        const rval = this.right.interpret(context) || NullValue.instance;
+        const lval = this.left.interpretExpression(context) || NullValue.instance;
+        const rval = this.right.interpretExpression(context) || NullValue.instance;
         const result = this.interpretValues(context, lval, rval);
         if(result == BooleanValue.TRUE)
             return true;
@@ -207,7 +207,7 @@ export default class EqualsExpression extends BaseExpression implements IPredica
         const decl = this.left.checkAttribute(context);
         if(!decl || !decl.storable)
             throw new SyntaxError("Unable to interpret predicate");
-        let value = this.right.interpret(context);
+        let value = this.right.interpretExpression(context);
         if (value instanceof Instance)
             value = value.GetMemberValue(context, Identifier.DB_ID, false);
         const info = decl.getAttributeInfo();

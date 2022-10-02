@@ -6,7 +6,7 @@ import { StrictSet, List } from '../intrinsic';
 import { equalObjects } from '../utils'
 import {Context} from "./Context";
 import {CategoryType} from "../type";
-import ITranspilable from '../../../main/prompto/runtime/ITranspilable';
+import ITranspilable from '../runtime/ITranspilable';
 
 const coreNodeClasses = new Set<string>(["Socket"]);
 

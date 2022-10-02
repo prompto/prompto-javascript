@@ -22,7 +22,7 @@ export default class MatchingExpressionConstraint implements IConstraint {
         const id = new Identifier("value");
         child.registerInstance(new Variable(id, AnyType.instance), true);
         child.setValue(id, value);
-        const test = this.expression.interpret(child);
+        const test = this.expression.interpretExpression(child);
         if(test instanceof BooleanValue) {
             if(!test.value)
                 throw new InvalidDataError((value == null ? "null" : value.toString()) + " does not match:" + this.expression.toString());

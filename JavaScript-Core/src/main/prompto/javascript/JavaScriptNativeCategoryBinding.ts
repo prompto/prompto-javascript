@@ -1,7 +1,7 @@
-import INativeCategoryBinding from '../../../main/prompto/grammar/INativeCategoryBinding.js'
 import {JavaScriptModule} from "./index";
 import {Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
+import {INativeCategoryBinding} from "../grammar";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

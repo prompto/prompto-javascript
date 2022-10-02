@@ -96,7 +96,7 @@ export default class Interpreter {
             const method = locateMethod(context, methodName, cmdLineArgs);
             const assignments = buildAssignments(method, cmdLineArgs);
             const call = new MethodCall(new MethodSelector(null, new Identifier(methodName)),assignments);
-            call.interpret(context);
+            call.interpretExpression(context);
         } finally {
             context.terminated();
         }

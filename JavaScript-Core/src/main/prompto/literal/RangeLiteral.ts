@@ -39,8 +39,8 @@ export default class RangeLiteral extends Section {
         if("IntegerLimits"==type.name) {
             type = IntegerType.instance;
         }
-        const of = this.first.interpret(context);
-        const ol = this.last.interpret(context);
+        const of = this.first.interpretExpression(context);
+        const ol = this.last.interpretExpression(context);
         return type.newRange(of,ol);
     }
 

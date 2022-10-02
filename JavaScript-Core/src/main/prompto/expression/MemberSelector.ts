@@ -1,4 +1,3 @@
-import SelectorBase from '../../../main/prompto/expression/SelectorBase'
 import { UnresolvedIdentifier, ParenthesisExpression } from '../expression'
 import { Dialect } from '../parser'
 import { UnresolvedCall } from '../statement'
@@ -9,6 +8,7 @@ import IExpression from "./IExpression";
 import {Identifier} from "../grammar";
 import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
+import SelectorBase from "./SelectorBase";
 
 export default class MemberSelector extends SelectorBase {
 
@@ -111,10 +111,10 @@ export default class MemberSelector extends SelectorBase {
             return VoidType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         // resolve parent to keep clarity
         const parent = this.resolveParent(context);
-        const instance = parent.interpret(context);
+        const instance = parent.interpretExpression(context);
         if (instance == null || instance == NullValue.instance)
             throw new NullReferenceError();
         else
@@ -132,7 +132,7 @@ export default class MemberSelector extends SelectorBase {
     interpretReference(context: Context): IValue {
         // resolve parent to keep clarity
         const parent = this.resolveParent(context);
-        const instance = parent.interpret(context);
+        const instance = parent.interpretExpression(context);
         if (!instance || instance == NullValue.instance)
             throw new NullReferenceError();
         else if (instance instanceof Instance<never>) {

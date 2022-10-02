@@ -85,7 +85,7 @@ export default class VariableInstance extends Section implements IAssignableInst
     }
 
     assign(context: Context, expression: IExpression) {
-        const value = expression.interpret(context);
+        const value = expression.interpretExpression(context);
         if(context.getRegisteredInstance(this.id)==null) {
             const type = expression.check(context);
             context.registerInstance(new Variable(this.id, type), true);
@@ -103,7 +103,7 @@ export default class VariableInstance extends Section implements IAssignableInst
             transpiler.context.registerInstance(new Variable(this.id, valueType), true);
             // Code expressions need to be interpreted as part of full check
             if (valueType == CodeType.instance) {
-                transpiler.context.setValue(this.id, expression.interpret(transpiler.context));
+                transpiler.context.setValue(this.id, expression.interpretExpression(transpiler.context));
             }
 
         }

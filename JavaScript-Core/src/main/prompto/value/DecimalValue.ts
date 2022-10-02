@@ -38,7 +38,7 @@ export default class DecimalValue extends BaseValue<number> {
         return this.value;
     }
 
-    getStorableData(): any {
+    getStorableData(): number {
         return this.value;
     }
 

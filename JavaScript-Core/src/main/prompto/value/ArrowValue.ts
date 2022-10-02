@@ -13,11 +13,11 @@ export default class ArrowValue extends ContextualExpression {
         this.method = method;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         const parent = context.getParentContext();
         try {
             context.setParentContext(this.calling);
-            return this.expression.interpret(context);
+            return this.expression.interpretExpression(context);
         } finally {
             if(parent)
                 context.setParentContext(parent);

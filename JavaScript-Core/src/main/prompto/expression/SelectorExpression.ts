@@ -49,19 +49,19 @@ export default class SelectorExpression extends SelectorBase {
         return parentType.checkSlice(context, this);
     }
 
-    interpret(context: Context): IValue {
-        const value = this.parent!.interpret(context);
+    interpretExpression(context: Context): IValue {
+        const value = this.parent!.interpretExpression(context);
         if (!value || value == NullValue.instance) {
             throw new NullReferenceError();
         }
         if(!value.isSliceable())
             throw new SyntaxError("Illegal sliced object: " + this.parent!.toString());
         const sliceable = value as unknown as ISliceable;
-        const fi = this.first != null ? this.first.interpret(context) : null;
+        const fi = this.first != null ? this.first.interpretExpression(context) : null;
         if (fi && !(fi instanceof IntegerValue)) {
             throw new SyntaxError("Illegal slice value type: " + fi.toString());
         }
-        const li = this.last != null ? this.last.interpret(context) : null;
+        const li = this.last != null ? this.last.interpretExpression(context) : null;
         if (li && !(li instanceof IntegerValue)) {
             throw new SyntaxError("Illegal slice value type: " + li.toString());
         }

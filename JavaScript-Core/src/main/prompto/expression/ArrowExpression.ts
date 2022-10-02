@@ -43,7 +43,7 @@ export default class ArrowExpression extends PredicateExpression {
         return this.statements!.check(context, returnType || null);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         const value = this.statements!.interpret(context);
         return value || NullValue.instance;
     }

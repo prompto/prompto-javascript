@@ -54,14 +54,14 @@ export default class ItemInstance extends Section implements IAssignableSelector
         const root = this.parent!.interpret(context);
         if(!root.mutable)
             throw new NotMutableError();
-        const item = this.item.interpret(context);
-        const value = expression.interpret(context);
+        const item = this.item.interpretExpression(context);
+        const value = expression.interpretExpression(context);
         root.SetItemValue(context, item, value);
     }
 
     interpret(context: Context): IValue {
         const root = this.parent!.interpret(context);
-        const item = this.item.interpret(context);
+        const item = this.item.interpretExpression(context);
         return root.GetItemValue(context, item);
     }
 

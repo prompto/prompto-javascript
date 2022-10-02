@@ -57,7 +57,7 @@ export default class WhileStatement extends BaseStatement {
         return this.statements ? this.statements.check(child, null) : VoidType.instance;
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         while(this.interpretCondition(context)) {
             const child = context.newChildContext();
             const value = this.statements ? this.statements.interpret(child) : null;
@@ -70,7 +70,7 @@ export default class WhileStatement extends BaseStatement {
     }
 
     interpretCondition(context: Context) {
-        const value = this.condition.interpret(context);
+        const value = this.condition.interpretExpression(context);
         if(!(value instanceof BooleanValue)) {
             throw new InvalidDataError("Expected a Boolean, got:" + typeof(value));
         }

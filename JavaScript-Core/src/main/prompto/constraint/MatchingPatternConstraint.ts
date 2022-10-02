@@ -6,8 +6,9 @@ import {IExpression} from "../expression";
 import {TextValue, IValue} from "../value";
 import {CodeWriter} from "../utils";
 import {IType} from "../type";
+import {ITranspilable}  from "../runtime";
 
-export default class MatchingPatternConstraint implements IConstraint {
+export default class MatchingPatternConstraint implements IConstraint, ITranspilable {
 
     expression: IExpression;
     pattern?: RegExp;
@@ -20,9 +21,9 @@ export default class MatchingPatternConstraint implements IConstraint {
 
     checkValue(context: Context, value: IValue): void {
         if(!this.pattern) {
-            const toMatch = this.expression.interpret(context);
+            const toMatch = this.expression.interpretExpression(context);
             if(toMatch instanceof TextValue)
-                this.pattern = new RegExp(toMatch.value);
+                this.pattern = new RegExp(toMatch.value as string);
             else
                 throw new InvalidDataError(this.expression.toString() + " is not a valid pattern");
         }

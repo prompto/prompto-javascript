@@ -1,4 +1,4 @@
-import IDeclaration from "../../../main/prompto/declaration/IDeclaration";
+import IDeclaration from "./IDeclaration";
 import Section from '../parser/Section'
 import { Annotation, Identifier } from "../grammar";
 import { CommentStatement } from "../statement";

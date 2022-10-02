@@ -26,7 +26,7 @@ export default class ArgumentList extends ObjectList<Argument> {
                 if(leading != leading.toUpperCase()) {
                     this.pop();
                     // add AttributeParameter
-                    const parameter = new AttributeParameter(id);
+                    const parameter = new AttributeParameter(id, false);
                     const attribute = new Argument(parameter, null);
                     this.add(attribute);
                     // fix last argument

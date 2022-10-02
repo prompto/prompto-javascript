@@ -232,7 +232,7 @@ export default class TestMethodDeclaration extends BaseDeclaration implements IM
 
     interpretPromptoError(context: Context, error: ExecutionError): void {
         const actual = error.interpret (context, new Identifier("__test_error__"));
-        const expectedError = this.error ? this.error.interpret (context) : null;
+        const expectedError = this.error ? this.error.interpretExpression (context) : null;
         if (expectedError!=null && expectedError.equals (actual))
             this.printSuccess (context);
         else {

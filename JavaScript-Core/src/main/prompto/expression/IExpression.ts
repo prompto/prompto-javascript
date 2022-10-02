@@ -12,7 +12,7 @@ export default interface IExpression {
     isAssertion(): boolean;
     check(context: Context): IType;
     checkReference(context: Context): IType | null;
-    interpret(context: Context): IValue;
+    interpretExpression(context: Context): IValue;
     interpretReference(context: Context): IValue;
     declare(transpiler: Transpiler): void;
     declareParent(transpiler: Transpiler): unknown;

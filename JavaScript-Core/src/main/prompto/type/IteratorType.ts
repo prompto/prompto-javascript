@@ -10,7 +10,7 @@ import {equalObjects} from "../utils";
 import {Section} from "../parser";
 import {IExpression} from "../expression";
 import {IMethodDeclaration} from "../declaration";
-import {Container, IIterable, IValue, ListValue, SetValue} from "../value";
+import {IValue, ListValue, SetValue} from "../value";
 
 export default class IteratorType extends IterableType {
 

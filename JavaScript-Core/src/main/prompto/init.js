@@ -1,12 +1,9 @@
-import {NullValue, BooleanValue} from "../../main/prompto/value"
-import AnnotationProcessors from '../../main/prompto/processor/AnnotationProcessors.ts'
-import JavaScriptClassType from "./javascript/JavaScriptClassType.js"
-import $DataStore from "../../main/prompto/store/DataStore.ts"
-
+import { BooleanValue } from "./value";
+import { JavaScriptClassType } from "./javascript";
+import { AnnotationProcessors } from "./processor";
 export default function initAll() {
-    NullValue.init();
     BooleanValue.init();
-    $DataStore.init();
     JavaScriptClassType.init();
     AnnotationProcessors.init();
 }
+//# sourceMappingURL=init.js.map

@@ -188,7 +188,7 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
             let actualType = argument.checkActualType(context, requiredType, checkInstance)!.resolve(context);
             // retrieve actual runtime type
             if(checkInstance && (actualType instanceof CategoryType)) {
-                const value = argument.expression.interpret(context.getCallingContext()!);
+                const value = argument.expression.interpretExpression(context.getCallingContext()!);
                 if(value)
                     actualType = value.type;
             }

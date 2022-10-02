@@ -1,5 +1,5 @@
 import ObjectList from "../utils/ObjectList";
-import IAssertion from "../../../main/prompto/expression/IAssertion";
+import IAssertion from "../expression/IAssertion";
 import {Section} from "../parser";
 import {Transpiler} from "../runtime";
 

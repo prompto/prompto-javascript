@@ -22,7 +22,7 @@ export default class BreakStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretStatement(context: Context): IValue {
         return BreakResult.instance;
     }
 

@@ -91,7 +91,7 @@ export default abstract class Literal<T extends IValue> extends Section implemen
         this.transpile(transpiler);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         return this.value;
     }
 

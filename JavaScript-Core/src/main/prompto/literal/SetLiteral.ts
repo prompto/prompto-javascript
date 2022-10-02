@@ -37,9 +37,9 @@ export default class SetLiteral extends ContainerLiteral<SetValue> {
         transpiler.append("])");
     }
 
-    interpret(context: Context): SetValue {
+    interpretExpression(context: Context): SetValue {
         this.check(context); // force computation of itemType
-        const items = this.expressions.map(expression => this.interpretPromotion(expression.interpret(context)), this);
+        const items = this.expressions.map(expression => this.interpretPromotion(expression.interpretExpression(context)), this);
         return new SetValue(this.itemType!, items);
     }
 

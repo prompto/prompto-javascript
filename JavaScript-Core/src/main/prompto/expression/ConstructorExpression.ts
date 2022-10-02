@@ -139,14 +139,14 @@ export default class ConstructorExpression extends BaseExpression {
             context.problemListener.reportUnknownAttribute(id, id.name);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         const cd = context.getRegisteredCategoryDeclaration(this.type.id);
         if(cd) {
             this.checkFirstHomonym(context, cd);
             const instance = this.type.newInstance(context);
             instance.mutable = true;
             if (this.copyFrom != null) {
-                const copyObj = this.copyFrom.interpret(context);
+                const copyObj = this.copyFrom.interpretExpression(context);
                 if (copyObj instanceof Instance)
                     this.copyFromInstance(context, cd, instance, copyObj);
                 else if (copyObj instanceof DocumentValue)
@@ -154,7 +154,7 @@ export default class ConstructorExpression extends BaseExpression {
             }
             if (this.args != null) {
                 this.args.forEach(arg => {
-                    const value = arg.expression.interpret(context);
+                    const value = arg.expression.interpretExpression(context);
                     if (value != null && value.mutable && !this.type.mutable)
                         throw new NotMutableError();
                     instance.SetMemberValue(context, arg.id!, value);

@@ -5,14 +5,14 @@ import {ArgumentList, Identifier} from '../grammar'
 import { EnumeratedCategoryDeclaration } from '../declaration'
 import { SyntaxError } from '../error'
 import {Context, Transpiler} from "../runtime";
-import {TextValue, IValue} from "../value";
+import {TextValue, IValue, NullValue} from "../value";
 
 export class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration<IValue> {
 
     enumType: IType;
 
     constructor(enumType: IType) {
-        super( "symbolOf", new CategoryParameter(TextType.instance, new Identifier("name")));
+        super( "symbolOf", new CategoryParameter(new Identifier("name"), false, TextType.instance));
         this.enumType = enumType;
     }
 
@@ -25,7 +25,7 @@ export class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration<IValue> 
         if(decl instanceof EnumeratedCategoryDeclaration) {
             const value = context.getValue(new Identifier("name")) as TextValue;
             const name = value.getStorableData();
-            return decl.getSymbolByName(name);
+            return decl.getSymbolByName(name) || NullValue.instance;
         } else
             throw new SyntaxError(this.enumType.name + " is not an enumerated type!");
     }

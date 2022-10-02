@@ -62,13 +62,13 @@ export default class NotExpression extends BaseExpression implements IPredicate,
         transpiler.append(")");
     }
 
-    interpret(context: Context): IValue {
-        const val = this.expression.interpret(context);
+    interpretExpression(context: Context): IValue {
+        const val = this.expression.interpretExpression(context);
         return val.Not(context);
     }
 
     interpretAssert(context: Context, test: TestMethodDeclaration): boolean {
-        const result = this.interpret(context);
+        const result = this.interpretExpression(context);
         if(result==BooleanValue.TRUE)
             return true;
         const expected = this.getExpected(context, test.dialect, 0);

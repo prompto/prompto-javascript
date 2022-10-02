@@ -66,12 +66,12 @@ export default abstract class BaseExpression extends Section implements IExpress
         return null;
     }
 
-   interpret(context: Context): IValue {
+   interpretExpression(context: Context): IValue {
         throw new Error("interpret not implemented by " + this.constructor.name);
     }
 
     interpretReference(context: Context): IValue {
-       return this.interpret(context);
+       return this.interpretExpression(context);
     }
 
     declare(transpiler: Transpiler): void {

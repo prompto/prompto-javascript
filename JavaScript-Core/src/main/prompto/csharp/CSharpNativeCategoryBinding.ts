@@ -1,6 +1,6 @@
-import INativeCategoryBinding from '../../../main/prompto/grammar/INativeCategoryBinding'
 import {CodeWriter} from "../utils";
 import {CSharpIdentifierExpression} from "./index";
+import {INativeCategoryBinding} from "../grammar";
 
 export default class CSharpNativeCategoryBinding implements INativeCategoryBinding {
 

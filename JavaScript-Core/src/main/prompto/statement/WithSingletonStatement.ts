@@ -29,7 +29,7 @@ export default class WithSingletonStatement extends BaseStatement {
         return this.statements ? this.statements.check(childContext, null) : VoidType.instance;
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         // TODO synchronize
         const instance = context.loadSingleton(this.type);
         const instanceContext = context.newInstanceContext(instance, null, true);

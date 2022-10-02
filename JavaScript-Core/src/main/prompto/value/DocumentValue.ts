@@ -1,5 +1,5 @@
 import BaseValue from './BaseValue'
-import { IntegerValue, NullValue, TextValue, SetValue, ListValue } from './index'
+import { IValue, IntegerValue, NullValue, TextValue, SetValue, ListValue } from './index'
 import { DocumentType, AnyType, TextType } from '../type'
 import { Document, StrictSet } from '../intrinsic'
 import { SyntaxError } from '../error'
@@ -7,7 +7,6 @@ import { equalObjects } from '../utils'
 import {JsonNode, JsonObject, JsonParent} from '../json'
 import {Context, Transpiler} from '../runtime'
 import {Identifier} from "../grammar";
-import IValue from "../../../main/prompto/value/IValue";
 
 export default class DocumentValue extends BaseValue<Document<string, IValue>> {
 

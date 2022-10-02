@@ -62,12 +62,12 @@ export default class AssignVariableStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         if(context.getRegisteredInstance(this.id)==null) {
             const actualType = this.expression.check(context);
             context.registerInstance(new Variable(this.id, actualType), true);
         }
-        context.setValue(this.id, this.expression.interpret(context));
+        context.setValue(this.id, this.expression.interpretExpression(context));
         return null;
     }
 

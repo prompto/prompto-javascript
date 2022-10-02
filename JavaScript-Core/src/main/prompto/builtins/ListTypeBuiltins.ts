@@ -9,7 +9,7 @@ import {IntegerValue, ListValue, IValue} from "../value";
 export class IndexOfMethodDeclaration extends BuiltInMethodDeclaration<ListValue> {
 
     constructor() {
-        super("indexOf", new CategoryParameter(AnyType.instance, new Identifier("value")));
+        super("indexOf", new CategoryParameter(new Identifier("value"), false, AnyType.instance));
     }
 
     interpret(context: Context): IValue {
@@ -32,7 +32,7 @@ export class IndexOfMethodDeclaration extends BuiltInMethodDeclaration<ListValue
 export class RemoveItemMethodDeclaration extends BuiltInMethodDeclaration<ListValue> {
 
     constructor() {
-        super("removeItem", new CategoryParameter(IntegerType.instance, new Identifier("item")));
+        super("removeItem", new CategoryParameter(new Identifier("item"), false, IntegerType.instance));
     }
 
     interpret(context: Context): IValue | null {
@@ -59,7 +59,7 @@ export class RemoveItemMethodDeclaration extends BuiltInMethodDeclaration<ListVa
 export class RemoveValueMethodDeclaration extends BuiltInMethodDeclaration<ListValue> {
 
     constructor() {
-        super("removeValue", new CategoryParameter(AnyType.instance, new Identifier("value")));
+        super("removeValue", new CategoryParameter(new Identifier("value"), false, AnyType.instance));
     }
 
     interpret(context: Context): IValue | null {
@@ -85,7 +85,7 @@ export class RemoveValueMethodDeclaration extends BuiltInMethodDeclaration<ListV
 export class AddValueMethodDeclaration extends BuiltInMethodDeclaration<ListValue> {
 
     constructor() {
-        super("addValue", new CategoryParameter(AnyType.instance, new Identifier("value")));
+        super("addValue", new CategoryParameter(new Identifier("value"), false, AnyType.instance));
     }
 
     interpret(context: Context): IValue | null {
@@ -111,7 +111,8 @@ export class AddValueMethodDeclaration extends BuiltInMethodDeclaration<ListValu
 export class InsertValueMethodDeclaration extends BuiltInMethodDeclaration<ListValue> {
 
     constructor() {
-        super("insertValue", new CategoryParameter(AnyType.instance, new Identifier("value")), new CategoryParameter(IntegerType.instance, new Identifier("atIndex")));
+        super("insertValue", new CategoryParameter(new Identifier("value"), false, AnyType.instance),
+            new CategoryParameter(new Identifier("atIndex"), false, IntegerType.instance));
     }
 
     interpret(context: Context): IValue | null {

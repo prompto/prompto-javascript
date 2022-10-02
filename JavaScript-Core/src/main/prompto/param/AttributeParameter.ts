@@ -45,7 +45,7 @@ export default class AttributeParameter extends BaseParameter {
     register(context: Context): void {
         context.registerInstance(this, true);
         if(this.defaultExpression!=null) try {
-            context.setValue(this.id, this.defaultExpression.interpret(context));
+            context.setValue(this.id, this.defaultExpression.interpretExpression(context));
         } catch(error) {
             throw new SyntaxError("Unable to register default value: "+ this.defaultExpression.toString() + " for argument: " + this.name);
         }

@@ -31,7 +31,7 @@ export class SwapMethodDeclaration extends BuiltInMethodDeclaration<DictionaryVa
 export class RemoveKeyMethodDeclaration extends BuiltInMethodDeclaration<DictionaryValue> {
 
     constructor() {
-        super("removeKey", new CategoryParameter(TextType.instance, new Identifier("key")));
+        super("removeKey", new CategoryParameter(new Identifier("key"), false, TextType.instance));
 
     }
 
@@ -40,7 +40,7 @@ export class RemoveKeyMethodDeclaration extends BuiltInMethodDeclaration<Diction
         if(!dict.mutable)
             context.problemListener.reportNotMutable(new Identifier("dict"), "dict"); // TODO locate the incorrect code
         const key = context.getValue(new Identifier("key"));
-        dict.removeKey(key);
+        dict.removeItem(key!);
         return null;
     }
 
@@ -59,7 +59,7 @@ export class RemoveKeyMethodDeclaration extends BuiltInMethodDeclaration<Diction
 export class RemoveValueMethodDeclaration extends BuiltInMethodDeclaration<DictionaryValue> {
 
     constructor() {
-        super("removeValue", new CategoryParameter(AnyType.instance, new Identifier("value")));
+        super("removeValue", new CategoryParameter(new Identifier("value"), false, AnyType.instance));
 
     }
 
@@ -68,7 +68,7 @@ export class RemoveValueMethodDeclaration extends BuiltInMethodDeclaration<Dicti
         if(!dict.mutable)
             context.problemListener.reportNotMutable(new Identifier("dict"), "dict"); // TODO locate the incorrect code
         const value = context.getValue(new Identifier("value"));
-        dict.removeValue(value);
+        dict.removeValue(value!);
         return null;
     }
 

@@ -31,7 +31,7 @@ export default abstract class BaseParameter extends NamedInstance implements IWr
     abstract equals(other: IParameter): boolean;
 
     checkValue(context: Context, expression: IExpression): IValue {
-        const value = expression.interpret(context);
+        const value = expression.interpretExpression(context);
         if (value instanceof IntegerValue && this.getType(context)==DecimalType.instance) {
             return new DecimalValue(value.DecimalValue());
         } else if (value instanceof DecimalValue && this.getType(context)==IntegerType.instance) {

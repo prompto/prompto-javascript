@@ -10,7 +10,7 @@ export default interface IStatement {
     isSimple(): boolean;
     check(context: Context): IType;
     checkReference(context: Context): IType | null;
-    interpret(context: Context): IValue | null;
+    interpretStatement(context: Context): IValue | null;
     transpile(transpiler: Transpiler): void;
     declare(transpiler: Transpiler): void;
     declareParent(transpiler: Transpiler): void;

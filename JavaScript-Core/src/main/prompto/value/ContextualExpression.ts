@@ -2,7 +2,7 @@ import BaseValue from "./BaseValue";
 import {IType, MethodType, VoidType} from "../type";
 import {IExpression} from "../expression";
 import {Context, Transpiler} from "../runtime";
-import IValue from "../../../main/prompto/value/IValue";
+import IValue from "../value/IValue";
 import {AttributeDeclaration} from "../declaration";
 import {Section} from "../parser";
 import {CodeWriter} from "../utils";
@@ -34,8 +34,8 @@ export default class ContextualExpression extends BaseValue<any> implements IExp
         return this.expression.checkReference(this.calling);
     }
 
-    interpret(context: Context): IValue {
-        return this.expression.interpret(this.calling);
+    interpretExpression(context: Context): IValue {
+        return this.expression.interpretExpression(this.calling);
     }
 
     interpretReference(context: Context): IValue {
@@ -74,9 +74,9 @@ export default class ContextualExpression extends BaseValue<any> implements IExp
         // nothing to do
     }
 
-    toDialect = (writer: CodeWriter) => {
+    toDialect(writer: CodeWriter): void {
         // nothing to do
-    };
+    }
 
     asSection(): Section {
         return this.expression.asSection() || new Section();

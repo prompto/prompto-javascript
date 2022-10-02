@@ -8,7 +8,7 @@ import {Context, Transpiler} from "../runtime";
 export class FormatMethodDeclaration extends BuiltInMethodDeclaration<IntegerValue> {
 
     constructor() {
-        super("format", new CategoryParameter(TextType.instance, new Identifier("format")));
+        super("format", new CategoryParameter(new Identifier("format"), false,  TextType.instance));
     }
 
     interpret(context: Context): IValue {

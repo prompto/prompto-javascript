@@ -32,9 +32,9 @@ export default class IntDivideExpression extends BaseExpression {
         return lt.checkIntDivide(context, this, rt);
     }
 
-    interpret(context: Context): IValue {
-        const lval = this.left.interpret(context);
-        const rval = this.right.interpret(context);
+    interpretExpression(context: Context): IValue {
+        const lval = this.left.interpretExpression(context);
+        const rval = this.right.interpretExpression(context);
         return lval.IntDivide(context, rval);
     }
 

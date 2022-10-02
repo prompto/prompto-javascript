@@ -24,8 +24,8 @@ export default class MutableExpression extends BaseExpression {
         }
     }
 
-    interpret(context: Context): IValue {
-        const value = this.source.interpret(context);
+    interpretExpression(context: Context): IValue {
+        const value = this.source.interpretExpression(context);
         if(!value || value == NullValue.instance )
             return value;
         else if(value instanceof Instance)

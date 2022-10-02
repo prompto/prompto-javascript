@@ -22,8 +22,8 @@ export default class BlobExpression extends BaseExpression {
         return BlobType.instance;
     }
 
-    interpret(context: Context): IValue {
-        const value = this.source.interpret(context);
+    interpretExpression(context: Context): IValue {
+        const value = this.source.interpretExpression(context);
         try {
             const datas = BlobExpression.collectDatas(context, value);
             const zipped = BlobRef.zipDatas(datas);

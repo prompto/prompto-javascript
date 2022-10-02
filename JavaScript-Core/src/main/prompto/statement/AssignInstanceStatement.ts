@@ -39,7 +39,7 @@ export default class AssignInstanceStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         this.instance.assign(context, this.expression);
         return null;
     }

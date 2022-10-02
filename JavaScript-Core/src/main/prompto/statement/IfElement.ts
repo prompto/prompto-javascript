@@ -83,7 +83,7 @@ export default class IfElement extends BaseStatement {
         return context;
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         context = this.downcast(context, true);
         return this.statements.interpret(context);
     }

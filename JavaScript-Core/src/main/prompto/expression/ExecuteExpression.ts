@@ -47,7 +47,7 @@ export default class ExecuteExpression extends BaseExpression {
         return value.check(context);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         const value = this.getCodeValue(context);
         return value.interpret(context);
     }

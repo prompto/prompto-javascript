@@ -34,9 +34,9 @@ export default class TupleLiteral extends Literal<TupleValue> {
         transpiler.append("])");
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         if(this.expressions.length>0) {
-            const items = this.expressions.map(expression => expression.interpret(context), this);
+            const items = this.expressions.map(expression => expression.interpretExpression(context), this);
             return new TupleValue(this.mutable, items);
         } else
             return this.value;

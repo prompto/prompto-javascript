@@ -161,17 +161,4 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
         };
     }
 
-    toDialect = (writer: CodeWriter) => {
-        if(this.value.length>0) {
-            this.value.forEach(o => {
-                if(o.toDialect)
-                    o.toDialect(writer);
-                else
-                    writer.append(o.toString());
-                writer.append(", ");
-            });
-            writer.trimLast(2);
-        }
-    }
-
 }

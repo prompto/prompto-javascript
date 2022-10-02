@@ -25,11 +25,11 @@ export default class DocumentExpression extends BaseExpression {
         return "new Document()";
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         if(!this.source)
             return new DocumentValue();
         else {
-            const value = this.source.interpret(context);
+            const value = this.source.interpretExpression(context);
             return this.documentFromValue(context, value);
         }
     }

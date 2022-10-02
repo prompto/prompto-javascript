@@ -148,7 +148,7 @@ export default class StatementList extends ObjectList<IStatement> {
             const stmt = this[i];
             context.enterStatement(stmt);
             try {
-                let result = stmt.interpret(context);
+                let result = stmt.interpretStatement(context);
                 if (!stmt.canReturn())
                     result = null;
                 if (result != null)

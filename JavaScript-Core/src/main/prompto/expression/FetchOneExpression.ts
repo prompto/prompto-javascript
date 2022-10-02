@@ -104,7 +104,7 @@ export default class FetchOneExpression extends BaseExpression {
         return this.type || AnyType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         const store = $DataStore.instance;
         const query = this.buildFetchOneQuery(context, store) as IQuery;
         const stored = store.fetchOne (query);

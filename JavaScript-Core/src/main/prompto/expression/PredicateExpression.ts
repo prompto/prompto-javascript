@@ -40,7 +40,7 @@ export default abstract class PredicateExpression extends Section implements IEx
         throw new Error("Should never get there!");
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         throw new Error("Should never get there!");
     }
 

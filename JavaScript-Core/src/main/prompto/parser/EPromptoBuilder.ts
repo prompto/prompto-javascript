@@ -810,7 +810,7 @@ export default class EPromptoBuilder extends EParserListener {
     };
 
     exitMethodCallExpression = (ctx: MethodCallExpressionContext) => {
-        const exp = this.getNodeValue<BaseExpression>(ctx._exp1 || ctx._exp2);
+        const exp = this.getNodeValue<IExpression>(ctx._exp1 || ctx._exp2);
         const args = this.getNodeValue<ArgumentList>(ctx._args);
         const call = new UnresolvedCall(exp, args);
         this.setNodeValue(ctx, call);

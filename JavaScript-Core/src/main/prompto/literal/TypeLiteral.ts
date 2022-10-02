@@ -16,7 +16,7 @@ export default class TypeLiteral extends Literal<TypeValue> {
         return new TypeType(this.value.value);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         return this.value;
     }
 

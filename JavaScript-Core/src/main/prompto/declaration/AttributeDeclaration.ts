@@ -114,7 +114,7 @@ export default class AttributeDeclaration extends BaseDeclaration {
     }
 
     checkValue(context: Context, expression: IExpression): IValue {
-        const value = expression.interpret(context);
+        const value = expression.interpretExpression(context);
         if(this.constraint)
             this.constraint.checkValue(context, value);
         return value;

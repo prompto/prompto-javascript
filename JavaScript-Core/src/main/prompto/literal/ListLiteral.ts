@@ -27,10 +27,10 @@ export default class ListLiteral extends ContainerLiteral<ListValue> {
         return this.type!;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         if(this.expressions.length) {
             this.check(context); // force computation of itemType
-            const items = this.expressions.map(expression => this.interpretPromotion(expression.interpret(context)), this);
+            const items = this.expressions.map(expression => this.interpretPromotion(expression.interpretExpression(context)), this);
             return new ListValue(this.itemType!, this.mutable, items);
         } else
             return this.value;

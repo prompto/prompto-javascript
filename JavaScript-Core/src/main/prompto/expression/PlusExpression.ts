@@ -32,9 +32,9 @@ export default class PlusExpression extends BaseExpression {
         return lt.checkAdd(context, this, rt, true);
     }
 
-    interpret(context: Context): IValue {
-        const lval = this.left.interpret(context);
-        const rval = this.right.interpret(context);
+    interpretExpression(context: Context): IValue {
+        const lval = this.left.interpretExpression(context);
+        const rval = this.right.interpretExpression(context);
         return lval.Add(context, rval);
     }
 

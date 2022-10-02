@@ -66,12 +66,12 @@ export default class MethodExpression extends BaseExpression {
             throw new Error("Unsupported!");
     }
 
-    interpret(context: Context, asMethod?: boolean): IValue {
+    interpretExpression(context: Context, asMethod?: boolean): IValue {
         let expression = this.expression;
         if(expression instanceof UnresolvedSelector) {
             const parent = expression.parent;
             if(parent != null) {
-                const value = parent.interpret(context);
+                const value = parent.interpretExpression(context);
                 if(value instanceof Instance) {
                     expression = new UnresolvedIdentifier(expression.id);
                     context = context.newInstanceContext(value, null, true);

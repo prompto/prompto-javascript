@@ -77,15 +77,15 @@ export default class OrExpression extends BaseExpression implements IPredicate, 
         this.right.transpile(transpiler);
     }
 
-    interpret(context: Context): IValue {
-        const lval = this.left.interpret(context);
-        const rval = this.right.interpret(context);
+    interpretExpression(context: Context): IValue {
+        const lval = this.left.interpretExpression(context);
+        const rval = this.right.interpretExpression(context);
         return lval.Or(context, rval);
     }
 
     interpretAssert(context: Context, test: TestMethodDeclaration): boolean {
-        const lval = this.left.interpret(context);
-        const rval = this.right.interpret(context);
+        const lval = this.left.interpretExpression(context);
+        const rval = this.right.interpretExpression(context);
         const result = lval.Or(context, rval);
         if(result==BooleanValue.TRUE)
             return true;

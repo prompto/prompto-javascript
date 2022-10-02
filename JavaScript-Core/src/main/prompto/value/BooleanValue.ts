@@ -3,7 +3,7 @@ import { SyntaxError } from '../error'
 import BaseValue from "./BaseValue";
 import {Context} from "../runtime";
 import IValue from "./IValue";
-import {JsonObject, JsonParent} from "../json";
+import {JsonParent} from "../json";
 
 export default class BooleanValue extends BaseValue<boolean> {
 

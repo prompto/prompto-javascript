@@ -5,7 +5,7 @@ import {CodeWriter, getTypeName} from '../utils'
 import { $DataStore } from '../store'
 import {Context, Transpiler} from "../runtime";
 import {IValue} from "../value";
-import ITranspilable from "../runtime/ITranspilable";
+import {ITranspilable}  from "../runtime";
 
 export default class JavaScriptStatement {
 

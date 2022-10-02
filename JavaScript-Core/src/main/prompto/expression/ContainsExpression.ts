@@ -79,19 +79,19 @@ export default class ContainsExpression extends BaseExpression implements IPredi
         }
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         if (this.right instanceof PredicateExpression)
             return this.interpretPredicate(context);
         else {
-            const lval = this.left.interpret(context);
-            const rval = this.right.interpret(context);
+            const lval = this.left.interpretExpression(context);
+            const rval = this.right.interpretExpression(context);
             return this.interpretValues(context, lval, rval);
         }
     }
 
 
     interpretPredicate(context: Context): IValue {
-        const lval = this.left.interpret(context);
+        const lval = this.left.interpretExpression(context);
         if (lval instanceof Container)  {
             const itemType = lval.itemType;
             const arrow = (this.right as unknown as PredicateExpression).toArrowExpression();
@@ -205,8 +205,8 @@ export default class ContainsExpression extends BaseExpression implements IPredi
     }
 
     interpretAssert(context: Context, test: TestMethodDeclaration): boolean {
-        const lval = this.left.interpret(context);
-        const rval = this.right.interpret(context);
+        const lval = this.left.interpretExpression(context);
+        const rval = this.right.interpretExpression(context);
         const result = this.interpretValues(context, lval, rval);
         if (result == BooleanValue.TRUE)
             return true;
@@ -249,7 +249,7 @@ export default class ContainsExpression extends BaseExpression implements IPredi
         if (!decl || !decl.storable)
             throw new SyntaxError("Unable to interpret predicate");
         const info = decl.getAttributeInfo();
-        let value = this.right.interpret(context);
+        let value = this.right.interpretExpression(context);
         if (value instanceof Instance)
             value = value.GetMemberValue(context, Identifier.DB_ID, false);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

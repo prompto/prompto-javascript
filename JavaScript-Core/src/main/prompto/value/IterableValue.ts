@@ -46,7 +46,7 @@ export default class IterableValue extends BaseValue<IValueIterableWithCounts> i
             hasNext: () => iterator.hasNext(),
             next: () => {
                 child.setValue(this.name, iterator.next());
-                return this.expression.interpret(child);
+                return this.expression.interpretExpression(child);
             }
         };
     }

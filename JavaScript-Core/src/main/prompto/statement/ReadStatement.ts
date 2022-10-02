@@ -40,8 +40,8 @@ export default class ReadStatement extends ReadAllExpression {
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    interpret(context: Context): IValue | null {
-        const result = super.interpret(context);
+    interpretExpression(context: Context): IValue | null {
+        const result = super.interpretExpression(context);
         this.thenWith.interpret(context, result);
         return null;
     }

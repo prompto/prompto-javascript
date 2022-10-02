@@ -36,9 +36,9 @@ export default class ReadBlobExpression extends BaseExpression {
         return BlobType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         context = context.newResourceContext();
-        const value = this.resource.interpret(context);
+        const value = this.resource.interpretExpression(context);
         if(!value) {
             throw new NullReferenceError();
         }

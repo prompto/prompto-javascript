@@ -7,11 +7,9 @@ import {CmpOp, Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
 import {IMethodDeclaration} from "../declaration";
 import {ArrowExpression, IExpression} from "../expression";
-import {IValue} from "../value";
+import {IValue, NullValue} from "../value";
 import {TypeFamily} from "../store";
 import {JsonNode} from "../json";
-let NullValue: object;
-void import("../value/NullValue").then(res => NullValue = res.default);
 
 export default abstract class BaseType extends Section implements IType {
 
@@ -515,8 +513,7 @@ export default abstract class BaseType extends Section implements IType {
 
     convertJavaScriptValueToPromptoValue(context: Context, value: any, returnType: IType | null): IValue {
         if(value == null) {
-            const obj = NullValue;
-            return obj[ "instance" as keyof typeof obj] as IValue;
+            return NullValue.instance;
         } else
             throw new Error("Unsupported for type " + this.name);
     }

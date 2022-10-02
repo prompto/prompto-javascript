@@ -45,7 +45,7 @@ export default abstract class BaseStatement extends Section implements IStatemen
     }
 
     abstract check(context: Context): IType;
-    abstract interpret(context: Context): IValue | null;
+    abstract interpretStatement(context: Context): IValue | null;
     abstract toDialect(writer: CodeWriter): void;
 
 }

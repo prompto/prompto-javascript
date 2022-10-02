@@ -188,7 +188,7 @@ export default class MethodFinder {
                     const typ2 = arg2.getType(ctx2);
                     // try resolving runtime type
                     if(checkInstance && typ1 instanceof CategoryType && typ2 instanceof CategoryType) {
-                        const value = as1.expression.interpret(this.context); // in the named case as1==as2, so only evaluate 1
+                        const value = as1.expression.interpretExpression(this.context); // in the named case as1==as2, so only evaluate 1
                         if(value instanceof Instance) {
                             const actual = value.getType() as CategoryType;
                             const score = actual.compareSpecifity(this.context, typ1, typ2);

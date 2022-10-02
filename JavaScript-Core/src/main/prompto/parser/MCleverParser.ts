@@ -1,29 +1,28 @@
-import antlr4 from 'antlr4';
-import { CharStream, BufferedTokenStream, Lexer } from 'antlr4';
-import EParser from './EParser';
-import EIndentingLexer from './EIndentingLexer';
-import EPromptoBuilder from '../parser/EPromptoBuilder';
-import { IDeclaration, DeclarationList } from "../declaration";
-import { IStatement } from "../statement";
-import {IType} from "../type";
+import antlr4, {BufferedTokenStream, CharStream, Lexer} from 'antlr4';
+import MParser from './MParser.js'
+import MPromptoBuilder from './MPromptoBuilder.js'
 import {createParserInput} from "./ParserUtils";
+import {MIndentingLexer} from "./index";
+import {DeclarationList, IDeclaration} from "../declaration";
+import {IType} from "../type";
+import {IStatement} from "../statement";
 
 type ReplLine = IStatement | IDeclaration;
 
-export default class ECleverParser extends EParser {
+export default class MCleverParser extends MParser {
 
 	constructor(data?: string, stream?: CharStream, lexer?: Lexer, debug?: boolean) {
-		super(createParserInput(data, stream, lexer, (stream: CharStream) => new EIndentingLexer(stream)));
+		super(createParserInput(data, stream, lexer, (stream: CharStream) => new MIndentingLexer(stream)));
 		if(debug)
 			this._interp.debug = true;
 	}
 
 	equalToken(): number {
-		return EParser.EQ2;
+		return MParser.EQ2;
 	}
 
 	wsToken(): number {
-		return EParser.WS;
+		return MParser.WS;
 	}
 
 	parse(): DeclarationList | null {
@@ -44,13 +43,12 @@ export default class ECleverParser extends EParser {
 
 	doParse<T>(rule: () => antlr4.tree.ParseTree, addLF: boolean) {
 		const stream = this.getTokenStream() as BufferedTokenStream;
-		const lexer = stream.tokenSource as EIndentingLexer;
+		const lexer = stream.tokenSource as MIndentingLexer;
 		lexer.addLF = addLF;
 		const tree = (rule.bind(this) as () => antlr4.context.ParserRuleContext)();
-		const builder = new EPromptoBuilder(this);
+		const builder = new MPromptoBuilder(this);
 		const walker = new antlr4.tree.ParseTreeWalker();
 		walker.walk(builder, tree);
 		return builder.getNodeValue<T>(tree);
 	}
-
 }

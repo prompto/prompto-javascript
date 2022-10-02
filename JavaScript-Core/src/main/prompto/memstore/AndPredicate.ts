@@ -1,4 +1,4 @@
-import MemPredicate from "../../../main/prompto/memstore/MemPredicate";
+import MemPredicate from "../memstore/MemPredicate";
 import {IStored} from "../store";
 
 export default class AndPredicate implements MemPredicate {

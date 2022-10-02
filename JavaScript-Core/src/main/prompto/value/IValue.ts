@@ -1,6 +1,5 @@
 import {IType} from "../type";
 import {Context} from "../runtime";
-import {CodeWriter} from "../utils";
 import {IStorable} from "../store";
 import {JsonNode, JsonParent} from "../json";
 import {Identifier} from "../grammar";
@@ -11,7 +10,6 @@ export default interface IValue {
     type: IType;
     mutable: boolean;
     value: any; // should use generic but that's a lot of complexity for just 1 warning
-    toDialect?: (writer: CodeWriter) => void;
 
     // use uppercase methods for direct prompto equivalents
     GetMemberValue(context: Context, member: Identifier, autoCreate?: boolean): IValue;

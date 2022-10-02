@@ -52,13 +52,13 @@ export default class IfStatement extends BaseStatement {
         return types.inferType(context, section);
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         for(let i=0;i<this.elements.length;i++) {
             const element = this.elements[i];
             const condition = element.condition;
-            const test = condition==null ? BooleanValue.TRUE : condition.interpret(context);
+            const test = condition==null ? BooleanValue.TRUE : condition.interpretExpression(context);
             if(test instanceof BooleanValue && BooleanValue.TRUE.equals(test)) {
-                return element.interpret(context);
+                return element.interpretStatement(context);
             }
         }
         return null;

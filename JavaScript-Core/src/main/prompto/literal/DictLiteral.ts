@@ -54,13 +54,13 @@ export default class DictLiteral extends Literal<DictionaryValue> {
         return types.inferType(context, this);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         if(this.entries.length>0) {
             this.check(context); /// force computation of itemType
             const dict = new Dictionary<TextValue, IValue>();
             this.entries.forEach(entry => {
                 const key = entry.key.interpret(context) as TextValue;
-                let val = entry.value.interpret(context);
+                let val = entry.value.interpretExpression(context);
                 val = this.interpretPromotion(val);
                 dict.setItem(key, val);
             }, this);

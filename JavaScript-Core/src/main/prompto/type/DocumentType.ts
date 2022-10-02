@@ -310,16 +310,16 @@ export default class DocumentType extends NativeType {
         const cmp = (o1: IValue, o2: IValue) => {
             const argument = call.args![0];
             argument._expression = new ValueExpression(this, o1);
-            const value1 = call.interpret(context);
+            const value1 = call.interpretExpression(context);
             argument._expression = new ValueExpression(this, o2);
-            const value2 = call.interpret(context);
+            const value2 = call.interpretExpression(context);
             return compareValues(value1, value2);
         };
         return cmp.bind(this) as (o1: IValue, o2: IValue) => number;
     }
 
     getEntrySortedComparator(context: Context, desc: boolean, key: TextLiteral): (o1: IValue, o2: IValue) => number {
-        const id = new Identifier(key.value.getStorableData() as string);
+        const id = new Identifier(key.value.getStorableData());
         return (o1, o2) => {
             const value1 = o1.GetMemberValue(context, id);
             const value2 = o2.GetMemberValue(context, id);
@@ -330,9 +330,9 @@ export default class DocumentType extends NativeType {
     getExpressionSortedComparator(context: Context, desc: boolean, expression: IExpression): (o1: IValue, o2: IValue) => number {
         return (o1: DocumentValue, o2: DocumentValue) => {
             let ctx = context.newDocumentContext(o1, false);
-            const value1 = expression.interpret(ctx);
+            const value1 = expression.interpretExpression(ctx);
             ctx = context.newDocumentContext(o2, false);
-            const value2 = expression.interpret(ctx);
+            const value2 = expression.interpretExpression(ctx);
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
         };
     }

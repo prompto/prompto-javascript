@@ -32,10 +32,10 @@ export default class WithResourceStatement extends BaseStatement {
         return this.statements ? this.statements.check(context, null) : VoidType.instance;
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         context = context.newResourceContext();
         try {
-            this.resource.interpret(context);
+            this.resource.interpretStatement(context);
             return this.statements ? this.statements.interpret(context) : null;
         } finally {
             const res = context.getValue(this.resource.id) as unknown as IResource;

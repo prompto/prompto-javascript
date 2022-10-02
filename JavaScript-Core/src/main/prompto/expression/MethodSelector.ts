@@ -49,7 +49,7 @@ export default class MethodSelector extends MemberSelector {
     }
 
     checkSuperParent(context: Context): IType | null{
-        const value = this.parent!.interpret(context);
+        const value = this.parent!.interpretExpression(context);
         if(!value || value == NullValue.instance)
             throw new NullReferenceError();
         if(this.parent instanceof SuperExpression)
@@ -111,7 +111,7 @@ export default class MethodSelector extends MemberSelector {
     }
 
     newInstanceContext(context: Context): Context {
-        let value = this.parent!.interpret(context);
+        let value = this.parent!.interpretExpression(context);
         if(value == null || value == NullValue.instance) {
             throw new NullReferenceError();
         }
@@ -125,7 +125,7 @@ export default class MethodSelector extends MemberSelector {
             }
         }
         if(value instanceof CategorySymbol) {
-            value = value.interpret(context);
+            value = value.interpretExpression(context);
         }
         if(value instanceof TypeValue) {
             return context.newChildContext();

@@ -48,7 +48,7 @@ export default class NativeSymbol extends EnumSymbol<EnumeratedNativeType> {
         return this.type;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         return this;
     }
 
@@ -71,7 +71,7 @@ export default class NativeSymbol extends EnumSymbol<EnumeratedNativeType> {
         if("name" == member.name)
             return new TextValue(this.name);
         else if("value" == member.name)
-            return this.expression.interpret(context);
+            return this.expression.interpretExpression(context);
         else
             return super.GetMemberValue(context, member, autoCreate);
     }

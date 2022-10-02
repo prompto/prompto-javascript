@@ -1,8 +1,10 @@
 import ELexer from './ELexer'
 import { CharStream, Token } from 'antlr4';
+import {Dialect} from "./index";
 
 export default class EIndentingLexer extends ELexer {
 
+	dialect = Dialect.O;
 	tokens: Token[];
 	indents: number[];
 	wasLF: boolean;

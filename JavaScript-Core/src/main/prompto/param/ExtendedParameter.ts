@@ -30,7 +30,7 @@ export default class ExtendedParameter extends CategoryParameter {
         context.registerDeclaration(declaration);
         context.registerInstance(this, true);
         if(this.defaultExpression!=null)
-            context.setValue(this.id, this.defaultExpression.interpret(context));
+            context.setValue(this.id, this.defaultExpression.interpretExpression(context));
     }
 
     check(context: Context): IType {

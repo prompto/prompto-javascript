@@ -6,7 +6,7 @@ import {IterableValue, IValue} from '../value'
 import { UnresolvedCall } from '../statement'
 import { InternalError } from '../error'
 import { Identifier } from "../grammar";
- import IExpression from "../../../main/prompto/expression/IExpression";
+ import IExpression from "../expression/IExpression";
  import {CodeWriter} from "../utils";
  import {IIterator} from "../intrinsic";
  import IValueIterable from "../value/IValueIterable";
@@ -32,9 +32,9 @@ export default class IteratorExpression extends BaseExpression {
         return new IteratorType(itemType);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         const elemType = this.source.check(context).checkIterator(context, this, this.source);
-        const items = this.source.interpret(context);
+        const items = this.source.interpretExpression(context);
         const length = items.GetMemberValue(context, new Identifier("count")).getStorableData() as number;
         const iterable = {
             count: length,

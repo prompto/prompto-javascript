@@ -16,7 +16,7 @@ export default class NullLiteral extends Literal<NullValue> {
         return NullType.instance;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         return NullValue.instance;
     }
 

@@ -5,7 +5,7 @@ import { Dialect } from "../parser"
 import {Context, Variable} from "../runtime"
 import {IValue} from "../value";
 import {CodeWriter} from "../utils";
-import IExpression from "../../../main/prompto/expression/IExpression";
+import IExpression from "../expression/IExpression";
 import {ContainerType, IType} from "../type";
 
 export default class ExplicitPredicateExpression extends PredicateExpression {
@@ -76,8 +76,8 @@ export default class ExplicitPredicateExpression extends PredicateExpression {
         return this.predicate.check(child);
     }
 
-    interpret(context: Context): IValue {
-        return this.toArrowExpression().interpret(context);
+    interpretExpression(context: Context): IValue {
+        return this.toArrowExpression().interpretExpression(context);
     }
 
 

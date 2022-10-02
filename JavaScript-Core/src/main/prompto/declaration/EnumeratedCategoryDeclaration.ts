@@ -3,7 +3,7 @@ import {EnumeratedCategoryType, IType} from '../type'
 import { List } from '../intrinsic'
 import {CategorySymbolList, Identifier, IdentifierList} from '../grammar'
 import {CategorySymbol} from "../expression";
-import {Context, Transpilable, Transpiler} from "../runtime";
+import {Context, ITranspilable, Transpiler} from "../runtime";
 import {IEnumerationInfo} from "../runtime/Catalog";
 import {CodeWriter} from "../utils";
 
@@ -142,7 +142,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
         return this.derivedFrom ? this.derivedFrom.length == 1 ? this.derivedFrom[0].name == "Error" : false : false;
     }
 
-    ensureDeclarationOrder(context: Context, list: Transpilable[], set: Set<Transpilable>): void {
+    ensureDeclarationOrder(context: Context, list: ITranspilable[], set: Set<ITranspilable>): void {
         if(set.has(this))
             return;
         if (this.isUserError(context)) {

@@ -47,14 +47,14 @@ export default class TernaryExpression extends BaseExpression {
         return types.inferType(context, this);
     }
 
-    interpret(context: Context): IValue {
-        const test = this.condition.interpret(context);
+    interpretExpression(context: Context): IValue {
+        const test = this.condition.interpretExpression(context);
         if(this.condition instanceof EqualsExpression)
             context = this.condition.downcast(context, true);
         if(test == BooleanValue.TRUE)
-            return this.ifTrue.interpret(context);
+            return this.ifTrue.interpretExpression(context);
         else
-            return this.ifFalse.interpret(context);
+            return this.ifFalse.interpretExpression(context);
     }
 
     declare(transpiler: Transpiler): void {

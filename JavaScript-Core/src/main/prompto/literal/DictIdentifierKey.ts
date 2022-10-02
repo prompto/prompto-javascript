@@ -31,7 +31,7 @@ export default class DictIdentifierKey extends DictKey {
     }
 
     interpret(context: Context): IValue {
-        const value = new InstanceExpression(this.id).interpret(context);
+        const value = new InstanceExpression(this.id).interpretExpression(context);
         if(value instanceof TextValue)
             return value;
         else {

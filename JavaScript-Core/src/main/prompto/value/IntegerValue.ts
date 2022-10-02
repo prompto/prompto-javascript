@@ -24,7 +24,7 @@ export default class IntegerValue extends BaseValue<number> {
         return this.value;
     }
 
-    getStorableData(): any {
+    getStorableData(): number {
         return this.value;
     }
 

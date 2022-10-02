@@ -42,12 +42,12 @@ export default class FilteredExpression extends BaseExpression {
         return new ListType(itemType);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         const sourceType = this.source!.check(context);
         if(!(sourceType instanceof IterableType)) {
             throw new InternalError("Illegal source type: " + sourceType.name);
         }
-        const sourceValue = this.source!.interpret(context);
+        const sourceValue = this.source!.interpretExpression(context);
         if(!sourceValue) {
             throw new NullReferenceError();
         }

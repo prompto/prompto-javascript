@@ -20,7 +20,7 @@ export default class AtomicSwitchCase extends SwitchCase {
     }
 
     matches(context: Context, value: IValue) {
-        const thisValue = this.expression!.interpret(context);
+        const thisValue = this.expression!.interpretExpression(context);
         return value.equals(thisValue);
     }
 

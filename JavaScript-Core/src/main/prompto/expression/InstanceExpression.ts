@@ -126,7 +126,7 @@ export default class InstanceExpression extends BaseExpression {
         return this.check(context);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         if(context.hasValue(this.id)) {
             return context.readValue(this.id)!;
         } else {

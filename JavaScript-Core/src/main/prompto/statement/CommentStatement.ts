@@ -32,7 +32,7 @@ export default class CommentStatement extends BaseStatement {
         return VoidType.instance;
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         return null;
     }
 

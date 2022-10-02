@@ -24,7 +24,7 @@ export default class CollectionSwitchCase extends SwitchCase {
     }
 
     matches(context: Context, value: IValue) {
-        const thisValue = this.expression!.interpret(context);
+        const thisValue = this.expression!.interpretExpression(context);
         if(thisValue instanceof Container) {
             return thisValue.hasValue(context, value);
         } else {

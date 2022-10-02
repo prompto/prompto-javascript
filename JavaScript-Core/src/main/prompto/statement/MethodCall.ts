@@ -325,14 +325,18 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
         return (this.args || new ArgumentList()).makeArguments(context, declaration);
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
+        return this.interpretStatement(context) || NullValue.instance;
+    }
+
+    interpretStatement(context: Context): IValue | null {
         const finder = new MethodFinder(context, this);
         const declaration = finder.findBest(true);
         if(declaration) {
             const local = this.selector.newLocalContext(context, declaration);
             declaration.registerParameters(local);
             this.assignArguments(context, local, declaration);
-            return declaration.interpret(local) || NullValue.instance;
+            return declaration.interpret(local);
         } else {
             context.problemListener.reportUnknownMethod(this, this.toString());
             return NullValue.instance
@@ -358,7 +362,7 @@ export default class MethodCall extends SimpleStatement implements IAssertion {
     }
 
     interpretAssert(context: Context, testMethodDeclaration: TestMethodDeclaration) {
-        const value = this.interpret(context);
+        const value = this.interpretExpression(context);
         if(value instanceof BooleanValue)
             return value.value;
         else {

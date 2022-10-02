@@ -81,8 +81,8 @@ export default class CastExpression extends BaseExpression {
         return target; // don't propagate the issue
     }
 
-    interpret(context: Context): IValue {
-        let value = this.expression.interpret(context);
+    interpretExpression(context: Context): IValue {
+        let value = this.expression.interpretExpression(context);
         if(value && value != NullValue.instance) {
             const target = getTargetType(context, this.type, this.mutable);
             if(!target)

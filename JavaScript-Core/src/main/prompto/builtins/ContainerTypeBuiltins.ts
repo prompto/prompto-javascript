@@ -9,12 +9,12 @@ import {Context, Transpiler} from "../runtime";
 abstract class BaseJoinMethodDeclaration<T extends IValue> extends BuiltInMethodDeclaration<T> {
 
     constructor() {
-        super("join", new CategoryParameter(TextType.instance, new Identifier("delimiter"), new TextLiteral('","')) );
+        super("join", new CategoryParameter(new Identifier("delimiter"), false, TextType.instance, new TextLiteral('","')) );
     }
 
     interpret(context: Context): IValue {
         const value = context.getValue(new Identifier("delimiter")) as TextValue;
-        const delimiter = value.getStorableData() as string;
+        const delimiter = value.getStorableData();
         const joined = this.getItems(context)
                 .map(value => value.toString())
                 .join(delimiter);

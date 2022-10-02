@@ -215,7 +215,7 @@ export default class Argument extends Section {
         else
             actualType = expression.check(calling);
         if(checkInstance && actualType instanceof CategoryType) {
-            const value = expression.interpret(calling);
+            const value = expression.interpretExpression(calling);
             actualType = (value as Instance<never>).getType();
         }
         return actualType;

@@ -22,7 +22,7 @@ export default class ThisExpression extends BaseExpression {
             throw new SyntaxError ("Not in an instance context!");
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         if (context instanceof DocumentContext)
             return context.document!;
         let ctx: Context | null = context;

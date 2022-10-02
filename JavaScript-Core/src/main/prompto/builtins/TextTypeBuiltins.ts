@@ -93,7 +93,7 @@ export class ToCapitalizedMethodDeclaration extends BuiltInMethodDeclaration<Tex
 export class SplitMethodDeclaration extends BuiltInMethodDeclaration<TextValue> {
 
     constructor() {
-        super("split", new CategoryParameter(TextType.instance, new Identifier("separator"), new TextLiteral('" "')) );
+        super("split", new CategoryParameter(new Identifier("separator"), false, TextType.instance, new TextLiteral('" "')) );
     }
 
     interpret(context: Context): IValue {
@@ -127,7 +127,7 @@ export class SplitMethodDeclaration extends BuiltInMethodDeclaration<TextValue> 
 export class StartsWithMethodDeclaration extends BuiltInMethodDeclaration<TextValue> {
 
     constructor() {
-        super("startsWith", new CategoryParameter(TextType.instance, new Identifier("value")));
+        super("startsWith", new CategoryParameter(new Identifier("value"), false, TextType.instance));
     }
 
     interpret(context: Context): IValue {
@@ -154,7 +154,7 @@ export class EndsWithMethodDeclaration extends BuiltInMethodDeclaration<TextValu
     constructor() {
         super(
             "endsWith",
-            new CategoryParameter(TextType.instance, new Identifier("value"))
+            new CategoryParameter(new Identifier("value"), false, TextType.instance)
         );
     }
 
@@ -180,7 +180,8 @@ export class EndsWithMethodDeclaration extends BuiltInMethodDeclaration<TextValu
 export class ReplaceMethodDeclaration extends BuiltInMethodDeclaration<TextValue> {
 
     constructor() {
-        super("replace", new CategoryParameter(TextType.instance, new Identifier("toReplace")), new CategoryParameter(TextType.instance, new Identifier("replaceWith")));
+        super("replace", new CategoryParameter(new Identifier("toReplace"), false, TextType.instance),
+            new CategoryParameter(new Identifier("replaceWith"), false, TextType.instance));
     }
 
     interpret(context: Context): IValue {
@@ -209,7 +210,8 @@ export class ReplaceMethodDeclaration extends BuiltInMethodDeclaration<TextValue
 export class ReplaceAllMethodDeclaration extends BuiltInMethodDeclaration<TextValue> {
 
     constructor() {
-        super("replaceAll", new CategoryParameter(TextType.instance, new Identifier("toReplace")), new CategoryParameter(TextType.instance, new Identifier("replaceWith")));
+        super("replaceAll", new CategoryParameter(new Identifier("toReplace"), false, TextType.instance),
+            new CategoryParameter(new Identifier("replaceWith"), false, TextType.instance));
     }
 
     interpret(context: Context): IValue {
@@ -238,8 +240,8 @@ export class ReplaceAllMethodDeclaration extends BuiltInMethodDeclaration<TextVa
 export class IndexOfMethodDeclaration extends BuiltInMethodDeclaration<TextValue> {
 
     constructor() {
-        super( "indexOf", new CategoryParameter(TextType.instance, new Identifier("value")),
-            new CategoryParameter(IntegerType.instance, new Identifier("fromIndex"), new IntegerLiteral("1")));
+        super( "indexOf", new CategoryParameter(new Identifier("value"), false, TextType.instance),
+            new CategoryParameter(new Identifier("fromIndex"), false, IntegerType.instance, new IntegerLiteral("1")));
     }
 
     interpret(context: Context): IValue {

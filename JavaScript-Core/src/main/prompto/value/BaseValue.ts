@@ -1,4 +1,4 @@
-import IValue from "../../../main/prompto/value/IValue";
+import IValue from "./IValue";
 import {IResource, TextValue} from './index'
 import { SyntaxError } from '../error'
 import {IType} from "../type";
@@ -6,7 +6,6 @@ import {Context, Transpiler} from "../runtime";
 import {IStorable} from "../store";
 import {Identifier} from "../grammar";
 import {JsonNode, JsonParent} from "../json";
-import { CodeWriter } from "../utils";
 import IValueIterable from "./IValueIterable";
 
 export default abstract class BaseValue<T> implements IValue {
@@ -24,8 +23,6 @@ export default abstract class BaseValue<T> implements IValue {
         this.value = value;
         this.mutable = mutable;
     }
-
-    toDialect?: ((writer: CodeWriter) => void) | undefined;
 
     isIterable(): boolean {
         return false;
@@ -65,7 +62,7 @@ export default abstract class BaseValue<T> implements IValue {
             throw new SyntaxError("No member support for " + member.name + " in " + this.constructor.name);
     }
 
-    SetMemberValue(context: Context, member: Identifier, value: IValue) {
+    SetMemberValue(context: Context, member: Identifier, value: IValue): void {
         throw new SyntaxError("No member support for " + member.name + " in " + this.constructor.name);
     }
 
@@ -74,7 +71,7 @@ export default abstract class BaseValue<T> implements IValue {
         throw new SyntaxError("No item support for " + item.toString() + " in " + this.constructor.name);
     }
 
-    SetItemValue(context: Context, item: IValue, value: IValue) {
+    SetItemValue(context: Context, item: IValue, value: IValue): void {
         throw new SyntaxError("No item support for " + item.toString() + " in " + this.constructor.name);
     }
 

@@ -2,7 +2,7 @@ import BaseValue from './BaseValue'
 import {CodeType, IType} from '../type'
 import {CodeExpression} from "../expression";
 import {Context, Transpiler} from "../runtime";
-import IValue from "../../../main/prompto/value/IValue";
+import IValue from "../value/IValue";
 
 export default class CodeValue extends BaseValue<CodeExpression> {
 

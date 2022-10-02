@@ -21,7 +21,7 @@ class EDialect extends Dialect {
 
     constructor() {
         super("E");
-        this.parserFactory = new EParserFactory();
+        this.parserFactory = () => new EParserFactory();
         this.toDialect = (writer: CodeWriter, writable: IWritable) => writable.toEDialect(writer);
     }
 }
@@ -31,7 +31,7 @@ class ODialect extends Dialect {
 
     constructor() {
         super("O");
-        this.parserFactory = new OParserFactory();
+        this.parserFactory = () => new OParserFactory();
         this.toDialect = (writer: CodeWriter, writable: IWritable) => writable.toODialect(writer);
     }
 }
@@ -41,7 +41,7 @@ class MDialect extends Dialect {
 
     constructor() {
         super("O");
-        this.parserFactory = new MParserFactory();
+        this.parserFactory = () => new MParserFactory();
         this.toDialect = (writer: CodeWriter, writable: IWritable) => writable.toODialect(writer);
     }
 }

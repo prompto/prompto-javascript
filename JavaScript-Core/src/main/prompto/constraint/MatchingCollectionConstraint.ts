@@ -21,7 +21,7 @@ export default class MatchingCollectionConstraint implements IConstraint {
 
     checkValue(context: Context, value: IValue): void {
         if(!this.container) {
-            const container = this.collection.interpret(context);
+            const container = this.collection.interpretExpression(context);
             if (container instanceof Container<never>)
                 this.container = container as unknown as Container<never>;
             else

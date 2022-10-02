@@ -1,10 +1,11 @@
 import BaseType from './BaseType'
 import { Identifier } from '../grammar'
-import IType from "../../../main/prompto/type/IType";
+import { IType } from "../type";
 import {TypeFamily} from "../store";
 import {Section} from "../parser";
 import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
+import {IMethodDeclaration} from "../declaration";
 
 export default class TypeType extends BaseType {
 
@@ -13,6 +14,14 @@ export default class TypeType extends BaseType {
     constructor(type: IType) {
         super(new Identifier("Type"), TypeFamily.TYPE);
         this.type = type;
+    }
+
+    checkExists(context: Context) {
+        // nothing to do
+    }
+
+    isMoreSpecificThan(context: Context, other: IType): boolean {
+        return false;
     }
 
     toString() {
@@ -29,17 +38,17 @@ export default class TypeType extends BaseType {
         return this.type.checkStaticMember(context, section, id);
     }
 
-    declareMember(transpiler, id) {
+    declareMember(transpiler: Transpiler, member: Identifier) {
         this.type.declare(transpiler);
-        this.type.declareStaticMember(transpiler, id);
+        this.type.declareStaticMember(transpiler, member);
     }
 
-    transpileMember(transpiler: Transpiler, id: Identifier): void {
-        this.type.transpileStaticMember(transpiler, id);
+    transpileMember(transpiler: Transpiler, member: Identifier): void {
+        this.type.transpileStaticMember(transpiler, member);
     }
 
-    getMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration> {
-        return this.type.getStaticMemberMethods(context, id);
+    getMemberMethods(context: Context, member: Identifier): Set<IMethodDeclaration> {
+        return this.type.getStaticMemberMethods(context, member);
     }
 }
 

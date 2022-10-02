@@ -172,7 +172,7 @@ export default class FetchManyExpression extends FetchOneExpression {
         // TODO
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         const store = $DataStore.instance;
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const query = this.buildFetchManyQuery(context, store);
@@ -203,7 +203,7 @@ export default class FetchManyExpression extends FetchOneExpression {
     interpretLimit(context: Context, exp: IExpression | null) {
         if (exp == null)
             return null;
-        const value = exp.interpret(context);
+        const value = exp.interpretExpression(context);
         if(value.type!=IntegerType.instance)
             throw new InvalidDataError("Expecting an Integer, got:" + value.type.name);
         return value.getStorableData() as number;

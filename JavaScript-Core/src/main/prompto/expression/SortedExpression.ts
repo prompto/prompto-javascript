@@ -98,9 +98,9 @@ export default class SortedExpression extends BaseExpression {
         return type;
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         const itemType = this.getItemType(context);
-        const value = this.source.interpret(context);
+        const value = this.source.interpretExpression(context);
         if (!value || value==NullValue.instance) {
             throw new NullReferenceError();
         }

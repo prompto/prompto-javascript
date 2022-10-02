@@ -1,34 +1,47 @@
-import MLexer from './MLexer.js'
-import { Dialect } from "./index.ts";
+import MLexer from './MLexer'
+import { CharStream, Token } from 'antlr4';
+import {Dialect} from "./index";
 
 export default class MIndentingLexer extends MLexer {
 
-	constructor(input) {
+	dialect = Dialect.O;
+	tokens: Token[];
+	indents: number[];
+	wasLF: boolean;
+	addLF: boolean;
+
+	constructor(input: CharStream) {
 		super(input);
 		this.tokens = [];
 		this.indents = [0];
 		this.wasLF = false;
 		this.addLF = true;
-		this.dialect = Dialect.BOA;
-		this.nextLexerToken = this.nextToken;
-		this.nextToken = this.indentedNextToken;
 	}
 
-	indentedNextToken() {
+	nextToken(): Token {
+		return this.indentedNextToken();
+	}
+
+	nextLexerToken(): Token {
+		return super.nextToken();
+	}
+
+	indentedNextToken(): Token {
 		const t = this.getNextToken();
-		this.wasLF = t.type === MLexer.LF;
+		this.wasLF = t.type == MLexer.LF;
 		return t;
 	}
 
-	getNextToken() {
+	getNextToken(): Token {
 		if (this.tokens.length > 0) {
-			return this.tokens.shift();
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			return this.tokens.shift()!;
 		}
 		this.interpret(this.nextLexerToken());
 		return this.nextToken();
 	}
 
-	interpret(token) {
+	interpret(token: Token) {
 		switch (token.type) {
 			case MLexer.EOF:
 				this.interpretEOF(token);
@@ -41,7 +54,7 @@ export default class MIndentingLexer extends MLexer {
 		}
 	}
 
-	interpretEOF(eof) {
+	interpretEOF(eof: Token) {
 		// gracefully handle missing dedents
 		while (this.indents.length > 1) {
 			this.tokens.push(this.deriveToken(eof, MLexer.DEDENT));
@@ -56,15 +69,15 @@ export default class MIndentingLexer extends MLexer {
 		this.tokens.push(eof);
 	}
 
-	interpretLFTAB(lftab) {
+	interpretLFTAB(lftab: Token) {
 		// count TABs following LF
 		const indentCount = this.countIndents(lftab.text);
 		const next = this.nextLexerToken();
 		// if this was an empty line, simply skip it
-		if (next.type === MLexer.EOF || next.type === MLexer.LF_TAB) {
+		if (next.type == MLexer.EOF || next.type == MLexer.LF_TAB) {
 			this.tokens.push(this.deriveToken(lftab, MLexer.LF));
 			this.interpret(next);
-		} else if (indentCount === this.indents[this.indents.length - 1]) {
+		} else if (indentCount == this.indents[this.indents.length - 1]) {
 			this.tokens.push(this.deriveToken(lftab, MLexer.LF));
 			this.interpret(next);
 		} else if (indentCount > this.indents[this.indents.length - 1]) {
@@ -78,24 +91,19 @@ export default class MIndentingLexer extends MLexer {
 				this.tokens.push(this.deriveToken(lftab, MLexer.LF));
 				this.indents.pop();
 			}
-			/*jshint noempty:false*/
 			if (indentCount > this.indents[this.indents.length - 1]) {
 				// TODO, fire an error through token
 			}
 			this.interpret(next);
-			/*jshint noempty:true*/
 		}
 	}
 
-	deriveToken(token, type) {
-		const res = token.clone();
-		res.type = type;
-		if (token.type === MLexer.EOF)
-			res._text = ""
-		return res;
+	deriveToken(token: Token, type: number): Token {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-return
+		return token.cloneWithType(type);
 	}
 
-	countIndents(text) {
+	countIndents(text: string): number {
 		let count = 0;
 		for (let i = 0; i < text.length; i++) {
 			switch (text[i]) {
@@ -110,9 +118,8 @@ export default class MIndentingLexer extends MLexer {
 		return Math.floor(count / 4);
 	}
 
-	interpretAnyToken(token) {
+	interpretAnyToken(token: Token): void {
 		this.tokens.push(token);
 	}
+
 }
-
-

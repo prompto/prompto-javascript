@@ -33,10 +33,10 @@ export default class SymbolExpression extends BaseExpression {
         }
     }
 
-    interpret(context: Context): IValue {
+    interpretExpression(context: Context): IValue {
         const symbol = context.getRegisteredInstance(this.id);
         if(symbol instanceof EnumSymbol)
-            return symbol.interpret(context);
+            return symbol.interpretExpression(context);
         else {
             context.problemListener.reportUnknownIdentifier(this, this.name);
             return NullValue.instance;

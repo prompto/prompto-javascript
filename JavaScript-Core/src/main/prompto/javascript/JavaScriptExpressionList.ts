@@ -39,7 +39,7 @@ export default class JavaScriptExpressionList extends ObjectList<JavaScriptExpre
     computeArgument(context: Context, arg: any ) {
         // interpret expression in a loop (might be a wrapper)
         while(arg && arg instanceof BaseExpression && !(arg instanceof BaseValue)) {
-            arg = arg.interpret(context);
+            arg = arg.interpretExpression(context);
         }
         // convert value to JavaScript
         if(arg instanceof BaseValue)

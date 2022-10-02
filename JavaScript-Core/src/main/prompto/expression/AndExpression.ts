@@ -63,9 +63,9 @@ export default class AndExpression extends BaseExpression implements IPredicate,
             context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.right.toString());
     }
 
-    interpret(context: Context): IValue {
-        const lval = this.left.interpret(context);
-        const rval = this.right.interpret(context);
+    interpretExpression(context: Context): IValue {
+        const lval = this.left.interpretExpression(context);
+        const rval = this.right.interpretExpression(context);
         return lval.And(context, rval);
     }
 
@@ -81,10 +81,10 @@ export default class AndExpression extends BaseExpression implements IPredicate,
     }
 
     interpretAssert(context: Context, test: TestMethodDeclaration): boolean {
-        const lval = this.left.interpret(context);
+        const lval = this.left.interpretExpression(context);
         let rval = lval;
         if(lval instanceof BooleanValue && lval.value)
-            rval = this.right.interpret(context);
+            rval = this.right.interpretExpression(context);
         if(rval==BooleanValue.TRUE)
             return true;
         const expected = this.getExpected(context, test.dialect);

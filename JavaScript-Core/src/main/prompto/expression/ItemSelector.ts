@@ -32,14 +32,14 @@ export default class ItemSelector extends SelectorBase {
         return parentType.checkItem(context, this, itemType);
     }
 
-    interpret(context: Context): IValue {
-        const o = this.parent!.interpret(context);
+    interpretExpression(context: Context): IValue {
+        const o = this.parent!.interpretExpression(context);
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         if (o == null || o == NullValue.instance) {
             throw new NullReferenceError();
         }
-        const item = this.item.interpret(context);
+        const item = this.item.interpretExpression(context);
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         if (item == null || item == NullValue.instance) {

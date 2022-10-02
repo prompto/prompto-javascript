@@ -53,7 +53,7 @@ export default class ForEachStatement extends BaseStatement {
         return this.statements.check(child, null);
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         const srcType = this.source.check(context);
         const elemType = srcType.checkIterator(context, this, this.source);
         return this.interpretItemIterator(context, elemType);
@@ -86,7 +86,7 @@ export default class ForEachStatement extends BaseStatement {
     }
 
     getIterator(context: Context): IIterator<IValue> {
-        const src = this.source.interpret(context);
+        const src = this.source.interpretExpression(context);
         if(src.isIterable())
             return src.asIterable(context).getIterator(context);
         // is it an IIterable ?

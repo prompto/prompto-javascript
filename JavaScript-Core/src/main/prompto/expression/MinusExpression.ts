@@ -28,8 +28,8 @@ export default class MinusExpression extends BaseExpression {
         return type.checkMinus(context, this);
     }
 
-    interpret(context: Context): IValue {
-        const val = this.expression.interpret(context);
+    interpretExpression(context: Context): IValue {
+        const val = this.expression.interpretExpression(context);
         return val.Minus(context);
     }
 

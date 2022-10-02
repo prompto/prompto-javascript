@@ -40,8 +40,8 @@ export default class FetchOneStatement extends FetchOneExpression {
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    interpret(context: Context): IValue | null {
-        const record = super.interpret(context);
+    interpretExpression(context: Context): IValue | null {
+        const record = super.interpretExpression(context);
         this.thenWith.interpret(context, record);
         return null;
     }

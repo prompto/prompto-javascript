@@ -16,12 +16,6 @@ export default class TupleValue extends BaseValueList<TupleValue> {
         return "(" + this.items.join(", ") + ")";
     }
 
-    toDialect = (writer: CodeWriter) => {
-        writer.append('(');
-        super.toDialect(writer);
-        writer.append(')');
-    }
-
     Add(context: Context, value: IValue) {
         if (value instanceof BaseValueList) {
             const items = this.items.concat(value.items);

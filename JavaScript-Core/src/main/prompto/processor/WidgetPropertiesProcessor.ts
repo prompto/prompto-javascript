@@ -108,7 +108,7 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
             switch(name) {
                 case "required":
                     if(value instanceof BooleanLiteral) {
-                        prop.setRequired(value.interpret(context) == BooleanValue.TRUE);
+                        prop.setRequired(value.interpretExpression(context) == BooleanValue.TRUE);
                         break;
                     }
                     context.problemListener.reportIllegalAnnotation(child.key!, "Expected a Boolean value for 'required'.");
@@ -156,7 +156,7 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
     }
 
     loadPropertyFromSetLiteral(context: Context, annotation: Annotation | null, entry: DocEntry, prop: Property, literal: SetLiteral) {
-        const value = literal.interpret(context);
+        const value = literal.interpretExpression(context);
         const validator = this.newValidatorFromSetValue(context, annotation, value);
         if(validator) {
             prop.validator = validator;

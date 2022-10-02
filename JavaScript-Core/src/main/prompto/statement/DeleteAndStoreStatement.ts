@@ -130,12 +130,12 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         }
     }
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         const idsToDelete = this.getIdsToDelete(context);
         const storablesToAdd = this.getStorablesToAdd(context);
         let auditMeta: IAuditMetadata | null = null;
         if(this.meta) {
-            const docValue = this.meta.interpret(context);
+            const docValue = this.meta.interpretExpression(context);
             if(docValue instanceof DocumentValue )
                 auditMeta = docValue.getStorableData() as IAuditMetadata;
         }
@@ -214,7 +214,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         if(!this.toDel)
             return null;
         const valuesToDel = this.toDel
-            .map(exp => exp.interpret(context));
+            .map(exp => exp.interpretExpression(context));
         const instancesToDel = valuesToDel
             .filter(value => value instanceof Instance<never>)
             .map(value => value as Instance<never>)
@@ -240,7 +240,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
             return null;
         const storablesToAdd = new Set<IStorable>();
         this.toAdd
-            .map(exp => exp.interpret(context))
+            .map(exp => exp.interpretExpression(context))
             .forEach(value => value.collectStorables(storablesToAdd));
         return storablesToAdd.size ? Array.from(storablesToAdd) : null;
     }

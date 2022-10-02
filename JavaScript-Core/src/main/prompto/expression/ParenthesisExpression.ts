@@ -41,8 +41,8 @@ export default class ParenthesisExpression extends BaseExpression implements IPr
         return this.expression.check(context);
     }
 
-    interpret(context: Context): IValue {
-        return this.expression.interpret(context);
+    interpretExpression(context: Context): IValue {
+        return this.expression.interpretExpression(context);
     }
 
     checkQuery(context: Context) {

@@ -5,7 +5,7 @@ import {Context} from "../runtime";
 
 export default abstract class NativeCall extends SimpleStatement {
 
-    interpret(context: Context): IValue | null {
+    interpretStatement(context: Context): IValue | null {
         throw new Error("Should never get there!");
     }
 
