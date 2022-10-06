@@ -17,3 +17,5 @@ generated
 **/generated-saved/*
 **/prompto/perf/*
 **/.clinic/*
+init.js
+index-full.js

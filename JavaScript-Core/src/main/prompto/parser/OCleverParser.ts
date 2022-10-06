@@ -42,7 +42,7 @@ export default class OCleverParser extends OParser {
 	}
 
 	parse_document_literal(): DocumentLiteral | null {
-		return this.doParse(this.document_literal);
+		return this.doParse<DocumentLiteral>(() => this.document_literal(), false);
 	}
 
 	doParse<T>(rule: () => antlr4.tree.ParseTree, addLF: boolean) {

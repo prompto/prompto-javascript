@@ -1196,7 +1196,7 @@ export default class EPromptoBuilder extends EParserListener {
         const match = this.getNodeValue<IConstraint>(ctx._match);
         let indices: IdentifierList | null = null;
         if (ctx._indices != null)
-            indices = indices = this.getNodeValue(ctx._indices);
+            indices = this.getNodeValue(ctx._indices);
         else if (ctx.INDEX() != null)
             indices = new IdentifierList();
         if (ctx._index != null)
