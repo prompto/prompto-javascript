@@ -612,7 +612,6 @@ import {
     ParameterList,
     UnresolvedParameter
 } from "../param";
-import {ParserRuleContext} from "../../../../../../../antlr4/ericvergnaud/antlr4/runtime/JavaScript/src/antlr4/context";
 import {ItemInstance, MemberInstance, VariableInstance} from "../instance";
 import IAssignableSelector from "../instance/IAssignableSelector";
 import IAssignableInstance from "../instance/IAssignableInstance";
@@ -799,7 +798,52 @@ export default class EPromptoBuilder extends EParserListener {
         const comments = ctxs.map(csc => this.getNodeValue<CommentStatement>(csc)!, this);
         return (comments.length == 0) ? null : comments;
     }
-    
+
+    buildSection(node: antlr4.context.ParserRuleContext, section: Section) {
+        if(!section.dialect) {
+            const first = this.findFirstValidToken(node.start.tokenIndex, section instanceof JsxText);
+            const last = this.findLastValidToken(node.stop!.tokenIndex, section instanceof JsxText);
+            section.setSectionFrom(this.path, first!, last!, Dialect.E);
+        }
+    }
+
+    findFirstValidToken(idx: number, allowWS: boolean): Token | null {
+        if (idx == -1) { // happens because input.index() is called before any other read operation (bug?)
+            idx = 0;
+        }
+        do {
+            const token = this.readValidToken(idx++, allowWS);
+            if (token) {
+                return token;
+            }
+        } while (idx < this.input.size);
+        return null;
+    }
+
+    findLastValidToken(idx: number, allowWS: boolean): Token | null {
+        if (idx == -1) { // happens because input.index() is called before any other read operation (bug?)
+            idx = 0;
+        }
+        while (idx >= 0) {
+            const token = this.readValidToken(idx--, allowWS);
+            if (token != null) {
+                return token;
+            }
+        }
+        return null;
+    }
+
+    readValidToken(idx: number, allowWS: boolean): Token | null {
+        const token = this.input.get(idx);
+        const text = token.text;
+        // ignore trailing whitespace
+        if (text != null && (allowWS || text.replace(/(\n|\r|\t| )/g, "").length > 0)) {
+            return token;
+        } else {
+            return null;
+        }
+    }
+
     exitIdentifierExpression = (ctx: IdentifierExpressionContext) => {
         const exp = this.getNodeValue<Identifier>(ctx._exp);
         this.setNodeValue(ctx, new UnresolvedIdentifier(exp!));
@@ -1541,7 +1585,7 @@ export default class EPromptoBuilder extends EParserListener {
         const comments = this.readComments(ctx.comment_statement_list());
         const annotations = this.readAnnotations(ctx.annotation_constructor_list());
         const ctx_ = ctx.children![ctx.getChildCount() - 1];
-        const decl = this.getNodeValue<IDeclaration>(ctx_ as ParserRuleContext);
+        const decl = this.getNodeValue<IDeclaration>(ctx_ as antlr4.context.ParserRuleContext);
         if (decl) {
             decl.comments = comments;
             decl.annotations = annotations;
@@ -1583,7 +1627,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitMethod_declaration = (ctx: Method_declarationContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitMethodCallStatement = (ctx: MethodCallStatementContext) => {
@@ -1591,7 +1635,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitMethod_identifier = (ctx: Method_identifierContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitConstructorFrom = (ctx: ConstructorFromContext) => {
@@ -1719,7 +1763,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitJavascript_primary_expression = (ctx: Javascript_primary_expressionContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitJavascript_this_expression = (ctx: Javascript_this_expressionContext) => {
@@ -1803,7 +1847,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitJava_primary_expression = (ctx: Java_primary_expressionContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitJava_item_expression = (ctx: Java_item_expressionContext) => {
@@ -1929,7 +1973,7 @@ export default class EPromptoBuilder extends EParserListener {
     exitDeclaration = (ctx: DeclarationContext) => {
         const comments = this.readComments(ctx.comment_statement_list());
         const annotations = this.readAnnotations(ctx.annotation_constructor_list());
-        const ctx_ = ctx.children![ctx.getChildCount() - 1] as ParserRuleContext;
+        const ctx_ = ctx.children![ctx.getChildCount() - 1] as antlr4.context.ParserRuleContext;
         const decl = this.getNodeValue<IDeclaration>(ctx_);
         if (decl) {
             decl.comments = comments;
@@ -2237,7 +2281,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitCollection_literal = (ctx: Collection_literalContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitCollectionSwitchCase = (ctx: CollectionSwitchCaseContext) => {
@@ -2377,7 +2421,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitOperator_argument = (ctx: Operator_argumentContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitOperatorArgument = (ctx: OperatorArgumentContext) => {
@@ -2415,7 +2459,7 @@ export default class EPromptoBuilder extends EParserListener {
     exitNative_member_method_declaration = (ctx: Native_member_method_declarationContext) => {
         const comments = this.readComments(ctx.comment_statement_list());
         const annotations = this.readAnnotations(ctx.annotation_constructor_list());
-        const ctx_ = ctx.children![ctx.getChildCount() - 1] as ParserRuleContext;
+        const ctx_ = ctx.children![ctx.getChildCount() - 1] as antlr4.context.ParserRuleContext;
         const decl = this.getNodeValue<IMethodDeclaration>(ctx_);
         if (decl) {
             decl.comments = comments;
@@ -2543,7 +2587,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitSorted_key = (ctx: Sorted_keyContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitSortedExpression = (ctx: SortedExpressionContext) => {
@@ -2681,7 +2725,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitCategory_or_any_type = (ctx: Category_or_any_typeContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitCategory_symbol = (ctx: Category_symbolContext) => {
@@ -2707,7 +2751,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitEnum_declaration = (ctx: Enum_declarationContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitRead_all_expression = (ctx: Read_all_expressionContext) => {
@@ -2748,7 +2792,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitRepl = (ctx: ReplContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitWith_singleton_statement = (ctx: With_singleton_statementContext) => {
@@ -2919,7 +2963,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitCsharp_primary_expression = (ctx: Csharp_primary_expressionContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitCsharp_this_expression = (ctx: Csharp_this_expressionContext) => {
@@ -3211,7 +3255,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitJsx_expression = (ctx: Jsx_expressionContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
     }
 
     exitJsx_identifier = (ctx: Jsx_identifierContext) => {
@@ -3275,49 +3319,5 @@ export default class EPromptoBuilder extends EParserListener {
         this.setNodeValue(ctx, new CssCode(exp!));
     }
 
-    buildSection(node: antlr4.context.ParserRuleContext, section: Section) {
-        if(!section.dialect) {
-            const first = this.findFirstValidToken(node.start.tokenIndex, section instanceof JsxText);
-            const last = this.findLastValidToken(node.stop!.tokenIndex, section instanceof JsxText);
-            section.setSectionFrom(this.path, first!, last!, Dialect.E);
-        }
-    }
-
-    findFirstValidToken(idx: number, allowWS: boolean): Token | null {
-        if (idx == -1) { // happens because input.index() is called before any other read operation (bug?)
-            idx = 0;
-        }
-        do {
-            const token = this.readValidToken(idx++, allowWS);
-            if (token) {
-                return token;
-            }
-        } while (idx < this.input.size);
-        return null;
-    }
-
-    findLastValidToken(idx: number, allowWS: boolean): Token | null {
-        if (idx == -1) { // happens because input.index() is called before any other read operation (bug?)
-            idx = 0;
-        }
-        while (idx >= 0) {
-            const token = this.readValidToken(idx--, allowWS);
-            if (token != null) {
-                return token;
-            }
-        }
-        return null;
-    }
-
-    readValidToken(idx: number, allowWS: boolean): Token | null {
-        const token = this.input.get(idx);
-        const text = token.text;
-        // ignore trailing whitespace
-        if (text != null && (allowWS || text.replace(/(\n|\r|\t| )/g, "").length > 0)) {
-            return token;
-        } else {
-            return null;
-        }
-    }
 
 }

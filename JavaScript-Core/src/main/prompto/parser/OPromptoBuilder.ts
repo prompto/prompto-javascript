@@ -91,12 +91,12 @@ export default class OPromptoBuilder extends OParserListener {
         return (comments.length == 0) ? null : comments;
     }
 
-    exitSelectableExpression = (ctx: contexts.SelectableExpressionContext) => {
+    exitSelectableExpression = (ctx: SelectableExpressionContext) => {
         const e = this.getNodeValue(ctx.parent);
         this.setNodeValue(ctx, e);
     }
 
-    exitSelectorExpression = (ctx: contexts.SelectorExpressionContext) => {
+    exitSelectorExpression = (ctx: SelectorExpressionContext) => {
         const selector = this.getNodeValue(ctx.selector);
         if (selector) {
             const parent = this.getNodeValue(ctx.parent);
@@ -108,17 +108,17 @@ export default class OPromptoBuilder extends OParserListener {
         }
     }
 
-    exitSet_literal = (ctx: contexts.Set_literalContext) => {
+    exitSet_literal = (ctx: Set_literalContext) => {
         const items = this.getNodeValue(ctx.expression_list());
         const set_ = new literal.SetLiteral(items);
         this.setNodeValue(ctx, set_);
     }
 
-    exitStoreStatement = (ctx: contexts.StoreStatementContext) => {
+    exitStoreStatement = (ctx: StoreStatementContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
     }
 
-    exitStore_statement = (ctx: contexts.Store_statementContext) => {
+    exitStore_statement = (ctx: Store_statementContext) => {
         const del = this.getNodeValue(ctx.to_del);
         const add = this.getNodeValue(ctx.to_add);
         const meta = this.getNodeValue(ctx.with_meta);
@@ -127,84 +127,84 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, stmt);
     }
 
-    exitAtomicLiteral = (ctx: contexts.AtomicLiteralContext) => {
+    exitAtomicLiteral = (ctx: AtomicLiteralContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-    exitCollectionLiteral = (ctx: contexts.CollectionLiteralContext) => {
+    exitCollectionLiteral = (ctx: CollectionLiteralContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-    exitCommentStatement = (ctx: contexts.CommentStatementContext) => {
+    exitCommentStatement = (ctx: CommentStatementContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.comment_statement()));
     }
 
-    exitComment_statement = (ctx: contexts.Comment_statementContext) => {
+    exitComment_statement = (ctx: Comment_statementContext) => {
         this.setNodeValue(ctx, new statement.CommentStatement(ctx.getText()));
     }
 
-    exitListLiteral = (ctx: contexts.ListLiteralContext) => {
+    exitListLiteral = (ctx: ListLiteralContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-    exitBlob_expression = (ctx: contexts.Blob_expressionContext) => {
+    exitBlob_expression = (ctx: Blob_expressionContext) => {
         const exp = this.getNodeValue(ctx.expression());
         this.setNodeValue(ctx, new expression.BlobExpression(exp));
     }
 
-   exitBooleanLiteral = (ctx: contexts.BooleanLiteralContext) => {
+   exitBooleanLiteral = (ctx: BooleanLiteralContext) => {
         this.setNodeValue(ctx, new literal.BooleanLiteral(ctx.getText()));
     }
 
-    exitBreakStatement = (ctx: contexts.BreakStatementContext) => {
+    exitBreakStatement = (ctx: BreakStatementContext) => {
         this.setNodeValue(ctx, new statement.BreakStatement());
     }
 
-    exitMinIntegerLiteral = (ctx: contexts.MinIntegerLiteralContext) => {
+    exitMinIntegerLiteral = (ctx: MinIntegerLiteralContext) => {
         this.setNodeValue(ctx, new literal.MinIntegerLiteral());
     }
 
-    exitMaxIntegerLiteral = (ctx: contexts.MaxIntegerLiteralContext) => {
+    exitMaxIntegerLiteral = (ctx: MaxIntegerLiteralContext) => {
         this.setNodeValue(ctx, new literal.MaxIntegerLiteral());
     }
 
-    exitInclude_list = (ctx: contexts.Include_listContext) => {
+    exitInclude_list = (ctx: Include_listContext) => {
         const include = ctx.variable_identifier().map(c => this.getNodeValue(c), this);
         this.setNodeValue(ctx, include)
     }
 
-    exitIntegerLiteral = (ctx: contexts.IntegerLiteralContext) => {
+    exitIntegerLiteral = (ctx: IntegerLiteralContext) => {
         this.setNodeValue(ctx, new literal.IntegerLiteral(ctx.getText()));
     }
 
-    exitDecimalLiteral = (ctx: contexts.DecimalLiteralContext) => {
+    exitDecimalLiteral = (ctx: DecimalLiteralContext) => {
         this.setNodeValue(ctx, new literal.DecimalLiteral(ctx.getText()));
     }
 
-    exitHexadecimalLiteral = (ctx: contexts.HexadecimalLiteralContext) => {
+    exitHexadecimalLiteral = (ctx: HexadecimalLiteralContext) => {
         this.setNodeValue(ctx, new literal.HexaLiteral(ctx.getText()));
     }
 
-    exitCharacterLiteral = (ctx: contexts.CharacterLiteralContext) => {
+    exitCharacterLiteral = (ctx: CharacterLiteralContext) => {
         this.setNodeValue(ctx, new literal.CharacterLiteral(ctx.getText()));
     }
 
-    exitDateLiteral = (ctx: contexts.DateLiteralContext) => {
+    exitDateLiteral = (ctx: DateLiteralContext) => {
         this.setNodeValue(ctx, new literal.DateLiteral(ctx.getText()));
     }
 
-    exitDateTimeLiteral = (ctx: contexts.DateTimeLiteralContext) => {
+    exitDateTimeLiteral = (ctx: DateTimeLiteralContext) => {
         this.setNodeValue(ctx, new literal.DateTimeLiteral(ctx.getText()));
     }
 
-    exitDbIdType = (ctx: contexts.DbIdTypeContext) => {
+    exitDbIdType = (ctx: DbIdTypeContext) => {
         this.setNodeValue(ctx, type.DbIdType.instance);
     }
 
-    exitTernaryExpression = (ctx: contexts.TernaryExpressionContext) => {
+    exitTernaryExpression = (ctx: TernaryExpressionContext) => {
         const condition = this.getNodeValue(ctx.test);
         const ifTrue = this.getNodeValue(ctx.ifTrue);
         const ifFalse = this.getNodeValue(ctx.ifFalse);
@@ -212,7 +212,7 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, exp);
     }
 
-    exitTest_method_declaration = (ctx: contexts.Test_method_declarationContext) => {
+    exitTest_method_declaration = (ctx: Test_method_declarationContext) => {
         const name = new grammar.Identifier(ctx.name.text);
         name.setSectionFrom(this.path, ctx.name, ctx.name, parser.Dialect.O);
         const stmts = this.getNodeValue(ctx.stmts);
@@ -223,49 +223,49 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitTextLiteral = (ctx: contexts.TextLiteralContext) => {
+    exitTextLiteral = (ctx: TextLiteralContext) => {
         this.setNodeValue(ctx, new literal.TextLiteral(ctx.getText()));
     }
 
 
-    exitTimeLiteral = (ctx: contexts.TimeLiteralContext) => {
+    exitTimeLiteral = (ctx: TimeLiteralContext) => {
         this.setNodeValue(ctx, new literal.TimeLiteral(ctx.getText()));
     }
 
 
-    exitPeriodLiteral = (ctx: contexts.PeriodLiteralContext) => {
+    exitPeriodLiteral = (ctx: PeriodLiteralContext) => {
         this.setNodeValue(ctx, new literal.PeriodLiteral(ctx.getText()));
     }
 
 
-    exitPeriodType = (ctx: contexts.PeriodTypeContext) => {
+    exitPeriodType = (ctx: PeriodTypeContext) => {
         this.setNodeValue(ctx, type.PeriodType.instance);
     }
 
 
-    exitVersionLiteral = (ctx: contexts.VersionLiteralContext) => {
+    exitVersionLiteral = (ctx: VersionLiteralContext) => {
         this.setNodeValue(ctx, new literal.VersionLiteral(ctx.getText()));
     }
 
 
-    exitVersionType = (ctx: contexts.VersionTypeContext) => {
+    exitVersionType = (ctx: VersionTypeContext) => {
         this.setNodeValue(ctx, type.VersionType.instance);
     }
 
 
-    exitAttribute_identifier = (ctx: contexts.Attribute_identifierContext) => {
+    exitAttribute_identifier = (ctx: Attribute_identifierContext) => {
         const name = new grammar.Identifier(ctx.getText());
         this.setNodeValue(ctx, name);
     }
 
 
-    exitVariable_identifier = (ctx: contexts.Variable_identifierContext) => {
+    exitVariable_identifier = (ctx: Variable_identifierContext) => {
         const name = new grammar.Identifier(ctx.getText());
         this.setNodeValue(ctx, name);
     }
 
 
-    exitList_literal = (ctx: contexts.List_literalContext) => {
+    exitList_literal = (ctx: List_literalContext) => {
         const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue(ctx.expression_list()) || null;
         const value = new literal.ListLiteral(mutable, items);
@@ -273,7 +273,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitDict_literal = (ctx: contexts.Dict_literalContext) => {
+    exitDict_literal = (ctx: Dict_literalContext) => {
         const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue(ctx.dict_entry_list()) || null;
         const value = new literal.DictLiteral(mutable, items);
@@ -281,7 +281,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitTuple_literal = (ctx: contexts.Tuple_literalContext) => {
+    exitTuple_literal = (ctx: Tuple_literalContext) => {
         const mutable = ctx.MUTABLE() != null;
         const items = this.getNodeValue(ctx.expression_tuple()) || null;
         const value = new literal.TupleLiteral(mutable, items);
@@ -289,20 +289,20 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitRange_literal = (ctx: contexts.Range_literalContext) => {
+    exitRange_literal = (ctx: Range_literalContext) => {
         const low = this.getNodeValue(ctx.low);
         const high = this.getNodeValue(ctx.high);
         this.setNodeValue(ctx, new literal.RangeLiteral(low, high));
     }
 
 
-    exitRangeLiteral = (ctx: contexts.RangeLiteralContext) => {
+    exitRangeLiteral = (ctx: RangeLiteralContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitDict_entry_list = (ctx: contexts.Dict_entry_listContext) => {
+    exitDict_entry_list = (ctx: Dict_entry_listContext) => {
         const items = new literal.DictEntryList(null, null);
         ctx.dict_entry().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -312,7 +312,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitDict_entry = (ctx: contexts.Dict_entryContext) => {
+    exitDict_entry = (ctx: Dict_entryContext) => {
         const key = this.getNodeValue(ctx.key);
         const value = this.getNodeValue(ctx.value);
         const entry = new literal.DictEntry(key, value);
@@ -320,7 +320,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitDoc_entry_list = (ctx: contexts.Doc_entry_listContext) => {
+    exitDoc_entry_list = (ctx: Doc_entry_listContext) => {
         const items = new literal.DocEntryList(null, null);
         ctx.doc_entry().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -330,7 +330,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitDoc_entry = (ctx: contexts.Doc_entryContext) => {
+    exitDoc_entry = (ctx: Doc_entryContext) => {
         const key = this.getNodeValue(ctx.key);
         const value = this.getNodeValue(ctx.value);
         const entry = new literal.DocEntry(key, value);
@@ -338,151 +338,151 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitDocKeyIdentifier = (ctx: contexts.DocKeyIdentifierContext) => {
+    exitDocKeyIdentifier = (ctx: DocKeyIdentifierContext) => {
         const text = ctx.name.getText();
         this.setNodeValue(ctx, new literal.IDocIdentifierKey(new grammar.Identifier(text)));
     }
 
 
-    exitDocKeyText = (ctx: contexts.DocKeyTextContext) => {
+    exitDocKeyText = (ctx: DocKeyTextContext) => {
         const text = ctx.name.text;
         this.setNodeValue(ctx, new literal.DocTextKey(text));
     }
 
 
-    exitLiteral_expression = (ctx: contexts.Literal_expressionContext) => {
+    exitLiteral_expression = (ctx: Literal_expressionContext) => {
         const exp = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitLiteralExpression = (ctx: contexts.LiteralExpressionContext) => {
+    exitLiteralExpression = (ctx: LiteralExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitIdentifierExpression = (ctx: contexts.IdentifierExpressionContext) => {
+    exitIdentifierExpression = (ctx: IdentifierExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitVariableIdentifier = (ctx: contexts.VariableIdentifierContext) => {
+    exitVariableIdentifier = (ctx: VariableIdentifierContext) => {
         const id = this.getNodeValue(ctx.variable_identifier());
         this.setNodeValue(ctx, new expression.InstanceExpression(id));
     }
 
 
-    exitInstanceExpression = (ctx: contexts.InstanceExpressionContext) => {
+    exitInstanceExpression = (ctx: InstanceExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitSymbol_identifier = (ctx: contexts.Symbol_identifierContext) => {
+    exitSymbol_identifier = (ctx: Symbol_identifierContext) => {
         const name = new grammar.Identifier(ctx.getText());
         this.setNodeValue(ctx, name);
     }
 
 
-    exitNative_symbol = (ctx: contexts.Native_symbolContext) => {
+    exitNative_symbol = (ctx: Native_symbolContext) => {
         const name = this.getNodeValue(ctx.name);
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new expression.NativeSymbol(name, exp));
     }
 
 
-    exitTypeIdentifier = (ctx: contexts.TypeIdentifierContext) => {
+    exitTypeIdentifier = (ctx: TypeIdentifierContext) => {
         const name = this.getNodeValue(ctx.type_identifier());
         this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
     }
 
 
-    exitSymbolIdentifier = (ctx: contexts.SymbolIdentifierContext) => {
+    exitSymbolIdentifier = (ctx: SymbolIdentifierContext) => {
         const name = this.getNodeValue(ctx.symbol_identifier());
         this.setNodeValue(ctx, new expression.SymbolExpression(name));
     }
 
 
-    exitSymbolLiteral = (ctx: contexts.SymbolLiteralContext) => {
+    exitSymbolLiteral = (ctx: SymbolLiteralContext) => {
         const name = ctx.getText();
         this.setNodeValue(ctx, new expression.SymbolExpression(new grammar.Identifier(name)));
     }
 
 
-    exitBlobType = (ctx: contexts.BlobTypeContext) => {
+    exitBlobType = (ctx: BlobTypeContext) => {
         this.setNodeValue(ctx, type.BlobType.instance);
     }
 
 
-    exitBooleanType = (ctx: contexts.BooleanTypeContext) => {
+    exitBooleanType = (ctx: BooleanTypeContext) => {
         this.setNodeValue(ctx, type.BooleanType.instance);
     }
 
 
-    exitCharacterType = (ctx: contexts.CharacterTypeContext) => {
+    exitCharacterType = (ctx: CharacterTypeContext) => {
         this.setNodeValue(ctx, type.CharacterType.instance);
     }
 
 
-    exitImageType = (ctx: contexts.ImageTypeContext) => {
+    exitImageType = (ctx: ImageTypeContext) => {
         this.setNodeValue(ctx, type.ImageType.instance);
     }
 
 
-    exitTextType = (ctx: contexts.TextTypeContext) => {
+    exitTextType = (ctx: TextTypeContext) => {
         this.setNodeValue(ctx, type.TextType.instance);
     }
 
 
-    exitHtmlType = (ctx: contexts.HtmlTypeContext) => {
+    exitHtmlType = (ctx: HtmlTypeContext) => {
         this.setNodeValue(ctx, type.HtmlType.instance);
     }
 
 
-    exitThisExpression = (ctx: contexts.ThisExpressionContext) => {
+    exitThisExpression = (ctx: ThisExpressionContext) => {
         this.setNodeValue(ctx, new expression.ThisExpression());
     }
 
 
-    exitIntegerType = (ctx: contexts.IntegerTypeContext) => {
+    exitIntegerType = (ctx: IntegerTypeContext) => {
         this.setNodeValue(ctx, type.IntegerType.instance);
     }
 
 
-    exitDecimalType = (ctx: contexts.DecimalTypeContext) => {
+    exitDecimalType = (ctx: DecimalTypeContext) => {
         this.setNodeValue(ctx, type.DecimalType.instance);
     }
 
 
-    exitDateType = (ctx: contexts.DateTypeContext) => {
+    exitDateType = (ctx: DateTypeContext) => {
         this.setNodeValue(ctx, type.DateType.instance);
     }
 
 
-    exitDateTimeType = (ctx: contexts.DateTimeTypeContext) => {
+    exitDateTimeType = (ctx: DateTimeTypeContext) => {
         this.setNodeValue(ctx, type.DateTimeType.instance);
     }
 
 
-    exitTimeType = (ctx: contexts.TimeTypeContext) => {
+    exitTimeType = (ctx: TimeTypeContext) => {
         this.setNodeValue(ctx, type.TimeType.instance);
     }
 
 
-    exitCodeType = (ctx: contexts.CodeTypeContext) => {
+    exitCodeType = (ctx: CodeTypeContext) => {
         this.setNodeValue(ctx, type.CodeType.instance);
     }
 
 
-    exitPrimaryType = (ctx: contexts.PrimaryTypeContext) => {
+    exitPrimaryType = (ctx: PrimaryTypeContext) => {
         const type = this.getNodeValue(ctx.p);
         this.setNodeValue(ctx, type);
     }
 
 
-    exitAttribute_declaration = (ctx: contexts.Attribute_declarationContext) => {
+    exitAttribute_declaration = (ctx: Attribute_declarationContext) => {
         const id = this.getNodeValue(ctx.name);
         const type = this.getNodeValue(ctx.typ);
         const match = this.getNodeValue(ctx.match);
@@ -497,48 +497,48 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitNativeType = (ctx: contexts.NativeTypeContext) => {
+    exitNativeType = (ctx: NativeTypeContext) => {
         const type = this.getNodeValue(ctx.n);
         this.setNodeValue(ctx, type);
     }
 
 
-    exitCategoryType = (ctx: contexts.CategoryTypeContext) => {
+    exitCategoryType = (ctx: CategoryTypeContext) => {
         const type = this.getNodeValue(ctx.c);
         this.setNodeValue(ctx, type);
     }
 
 
-    exitCategory_type = (ctx: contexts.Category_typeContext) => {
+    exitCategory_type = (ctx: Category_typeContext) => {
         const name = new grammar.Identifier(ctx.getText());
         this.buildSection(ctx, name);
         this.setNodeValue(ctx, new type.CategoryType(name));
     }
 
 
-    exitListType = (ctx: contexts.ListTypeContext) => {
+    exitListType = (ctx: ListTypeContext) => {
         const typ = this.getNodeValue(ctx.l);
         this.setNodeValue(ctx, new type.ListType(typ));
     }
 
 
-    exitDictKeyIdentifier = (ctx: contexts.DictKeyIdentifierContext) => {
+    exitDictKeyIdentifier = (ctx: DictKeyIdentifierContext) => {
         const text = ctx.name.getText();
         this.setNodeValue(ctx, new literal.DictIdentifierKey(new grammar.Identifier(text)));
     }
 
-    exitDictKeyText = (ctx: contexts.DictKeyTextContext) => {
+    exitDictKeyText = (ctx: DictKeyTextContext) => {
         const text = ctx.name.text;
         this.setNodeValue(ctx, new literal.DictTextKey(text));
     }
 
-    exitDictType = (ctx: contexts.DictTypeContext) => {
+    exitDictType = (ctx: DictTypeContext) => {
         const typ = this.getNodeValue(ctx.d);
         this.setNodeValue(ctx, new type.DictionaryType(typ));
     }
 
 
-    exitAttribute_identifier_list = (ctx: contexts.Attribute_identifier_listContext) => {
+    exitAttribute_identifier_list = (ctx: Attribute_identifier_listContext) => {
         const list = new grammar.IdentifierList();
         const rules = ctx.attribute_identifier();
         rules.forEach(function (rule) {
@@ -549,7 +549,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitVariable_identifier_list = (ctx: contexts.Variable_identifier_listContext) => {
+    exitVariable_identifier_list = (ctx: Variable_identifier_listContext) => {
         const list = new grammar.IdentifierList();
         const rules = ctx.variable_identifier();
         rules.forEach(function (rule) {
@@ -560,7 +560,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitConcrete_category_declaration = (ctx: contexts.Concrete_category_declarationContext) => {
+    exitConcrete_category_declaration = (ctx: Concrete_category_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const attrs = this.getNodeValue(ctx.attrs);
         const derived = this.getNodeValue(ctx.derived);
@@ -571,7 +571,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitConcrete_widget_declaration = (ctx: contexts.Concrete_widget_declarationContext) => {
+    exitConcrete_widget_declaration = (ctx: Concrete_widget_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const derived = this.getNodeValue(ctx.derived);
         const methods = this.getNodeValue(ctx.methods);
@@ -580,31 +580,31 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitConcreteCategoryDeclaration = (ctx: contexts.ConcreteCategoryDeclarationContext) => {
+    exitConcreteCategoryDeclaration = (ctx: ConcreteCategoryDeclarationContext) => {
         const decl = this.getNodeValue(ctx.decl);
         this.setNodeValue(ctx, decl);
     }
 
 
-    exitConcreteWidgetDeclaration = (ctx: contexts.ConcreteWidgetDeclarationContext) => {
+    exitConcreteWidgetDeclaration = (ctx: ConcreteWidgetDeclarationContext) => {
         const decl = this.getNodeValue(ctx.decl);
         this.setNodeValue(ctx, decl);
     }
 
 
-    exitNativeWidgetDeclaration = (ctx: contexts.NativeWidgetDeclarationContext) => {
+    exitNativeWidgetDeclaration = (ctx: NativeWidgetDeclarationContext) => {
         const decl = this.getNodeValue(ctx.decl);
         this.setNodeValue(ctx, decl);
     }
 
 
-    exitDerivedList = (ctx: contexts.DerivedListContext) => {
+    exitDerivedList = (ctx: DerivedListContext) => {
         const item = this.getNodeValue(ctx.item);
         this.setNodeValue(ctx, new grammar.IdentifierList(item));
     }
 
 
-    exitDerivedListItem = (ctx: contexts.DerivedListItemContext) => {
+    exitDerivedListItem = (ctx: DerivedListItemContext) => {
         const items = this.getNodeValue(ctx.items);
         const item = this.getNodeValue(ctx.item);
         items.add(item);
@@ -612,13 +612,13 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitType_identifier = (ctx: contexts.Type_identifierContext) => {
+    exitType_identifier = (ctx: Type_identifierContext) => {
         const name = new grammar.Identifier(ctx.getText());
         this.setNodeValue(ctx, name);
     }
 
 
-    exitType_identifier_list = (ctx: contexts.Type_identifier_listContext) => {
+    exitType_identifier_list = (ctx: Type_identifier_listContext) => {
         const items = new grammar.IdentifierList();
         ctx.type_identifier().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -628,40 +628,40 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitType_literal = (ctx: contexts.Type_literalContext) => {
+    exitType_literal = (ctx: Type_literalContext) => {
         const typ = this.getNodeValue(ctx.category_or_any_type());
         this.setNodeValue(ctx, new literal.TypeLiteral(typ));
     }
 
 
-    exitTypeLiteral = (ctx: contexts.TypeLiteralContext) => {
+    exitTypeLiteral = (ctx: TypeLiteralContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.type_literal()));
     }
 
 
-    exitTypeType = (ctx: contexts.TypeTypeContext) => {
+    exitTypeType = (ctx: TypeTypeContext) => {
         const typ = this.getNodeValue(ctx.t);
         this.setNodeValue(ctx, new type.TypeType(typ));
     }
 
 
-    exitMember_identifier = (ctx: contexts.Member_identifierContext) => {
+    exitMember_identifier = (ctx: Member_identifierContext) => {
         const name = new grammar.Identifier(ctx.getText());
         this.setNodeValue(ctx, name);
     }
 
 
-    exitMemberSelector = (ctx: contexts.MemberSelectorContext) => {
+    exitMemberSelector = (ctx: MemberSelectorContext) => {
         const name = this.getNodeValue(ctx.name);
         this.setNodeValue(ctx, new expression.MemberSelector(null, name));
     }
 
-    exitAn_expression = (ctx: contexts.An_expressionContext) => {
+    exitAn_expression = (ctx: An_expressionContext) => {
         const typ = this.getNodeValue(ctx.typ);
         this.setNodeValue(ctx, typ);
     }
 
-    exitIsAnExpression = (ctx: contexts.IsAnExpressionContext) => {
+    exitIsAnExpression = (ctx: IsAnExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const type = this.getNodeValue(ctx.right);
         const right = new expression.TypeExpression(type);
@@ -669,26 +669,26 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, new expression.EqualsExpression(left, op, right))
     }
 
-    exitIsExpression = (ctx: contexts.IsExpressionContext) => {
+    exitIsExpression = (ctx: IsExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         const op = ctx.NOT() ? grammar.EqOp.IS_NOT : grammar.EqOp.IS;
         this.setNodeValue(ctx, new expression.EqualsExpression(left, op, right));
     }
 
-    exitItemSelector = (ctx: contexts.ItemSelectorContext) => {
+    exitItemSelector = (ctx: ItemSelectorContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new expression.ItemSelector(null, exp));
     }
 
 
-    exitSliceSelector = (ctx: contexts.SliceSelectorContext) => {
+    exitSliceSelector = (ctx: SliceSelectorContext) => {
         const slice = this.getNodeValue(ctx.xslice);
         this.setNodeValue(ctx, slice);
     }
 
 
-    exitTyped_argument = (ctx: contexts.Typed_argumentContext) => {
+    exitTyped_argument = (ctx: Typed_argumentContext) => {
         const typ = this.getNodeValue(ctx.typ);
         const name = this.getNodeValue(ctx.name);
         const attrs = this.getNodeValue(ctx.attrs);
@@ -701,13 +701,13 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitCodeArgument = (ctx: contexts.CodeArgumentContext) => {
+    exitCodeArgument = (ctx: CodeArgumentContext) => {
         const arg = this.getNodeValue(ctx.arg);
         this.setNodeValue(ctx, arg);
     }
 
 
-    exitArgument_list = (ctx: contexts.Argument_listContext) => {
+    exitArgument_list = (ctx: Argument_listContext) => {
         const items = new param.ParameterList();
         ctx.argument().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -717,7 +717,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitExpressionAssignmentList = (ctx: contexts.ExpressionAssignmentListContext) => {
+    exitExpressionAssignmentList = (ctx: ExpressionAssignmentListContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const assign = new grammar.Argument(null, exp);
         if(exp instanceof parser.Section)
@@ -726,7 +726,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitArgument_assignment = (ctx: contexts.Argument_assignmentContext) => {
+    exitArgument_assignment = (ctx: Argument_assignmentContext) => {
         const name = this.getNodeValue(ctx.name);
         const exp = this.getNodeValue(ctx.exp);
         const arg = new param.UnresolvedParameter(name);
@@ -734,13 +734,13 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitArgumentAssignmentList = (ctx: contexts.ArgumentAssignmentListContext) => {
+    exitArgumentAssignmentList = (ctx: ArgumentAssignmentListContext) => {
         const item = this.getNodeValue(ctx.item);
         this.setNodeValue(ctx, new grammar.ArgumentList([item]));
     }
 
 
-    exitArgumentAssignmentListItem = (ctx: contexts.ArgumentAssignmentListItemContext) => {
+    exitArgumentAssignmentListItem = (ctx: ArgumentAssignmentListItemContext) => {
         const item = this.getNodeValue(ctx.item);
         const items = this.getNodeValue(ctx.items);
         items.add(item);
@@ -748,7 +748,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitArrow_prefix = (ctx: contexts.Arrow_prefixContext) => {
+    exitArrow_prefix = (ctx: Arrow_prefixContext) => {
         const args = this.getNodeValue(ctx.arrow_args());
         const argsSuite = this.getHiddenTokensBeforeNode(ctx.EGT());
         const arrowSuite = this.getHiddenTokensAfterNode(ctx.EGT());
@@ -756,12 +756,12 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitArrowExpression = (ctx: contexts.ArrowExpressionContext) => {
+    exitArrowExpression = (ctx: ArrowExpressionContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
     }
 
 
-    exitArrowExpressionBody = (ctx: contexts.ArrowExpressionBodyContext) => {
+    exitArrowExpressionBody = (ctx: ArrowExpressionBodyContext) => {
         const arrow = this.getNodeValue(ctx.arrow_prefix());
         const exp = this.getNodeValue(ctx.expression());
         arrow.setExpression(exp);
@@ -769,19 +769,19 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitArrowListArg = (ctx: contexts.ArrowListArgContext) => {
+    exitArrowListArg = (ctx: ArrowListArgContext) => {
         const list = this.getNodeValue(ctx.variable_identifier_list());
         this.setNodeValue(ctx, list);
     }
 
 
-    exitArrowSingleArg = (ctx: contexts.ArrowSingleArgContext) => {
+    exitArrowSingleArg = (ctx: ArrowSingleArgContext) => {
         const arg = this.getNodeValue(ctx.variable_identifier());
         this.setNodeValue(ctx, new grammar.IdentifierList(arg));
     }
 
 
-    exitArrowStatementsBody = (ctx: contexts.ArrowStatementsBodyContext) => {
+    exitArrowStatementsBody = (ctx: ArrowStatementsBodyContext) => {
         const arrow = this.getNodeValue(ctx.arrow_prefix());
         const stmts = this.getNodeValue(ctx.statement_list());
         arrow.setStatements(stmts);
@@ -789,7 +789,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitMethod_call_expression = (ctx: contexts.Method_call_expressionContext) => {
+    exitMethod_call_expression = (ctx: Method_call_expressionContext) => {
         const name = this.getNodeValue(ctx.name);
         const caller = new expression.UnresolvedIdentifier(name);
         caller.copySectionFrom(name);
@@ -798,7 +798,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitMethod_call_statement = (ctx: contexts.Method_call_statementContext) => {
+    exitMethod_call_statement = (ctx: Method_call_statementContext) => {
         const parent = this.getNodeValue(ctx.parent);
         const call = this.getNodeValue(ctx.method);
         call && call.setParent(parent);
@@ -811,7 +811,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitMethodSelector = (ctx: contexts.MethodSelectorContext) => {
+    exitMethodSelector = (ctx: MethodSelectorContext) => {
         const call = this.getNodeValue(ctx.method);
         if (call.callable instanceof expression.UnresolvedIdentifier) {
             const callable = new expression.UnresolvedSelector(null, call.callable.id);
@@ -822,7 +822,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitAddExpression = (ctx: contexts.AddExpressionContext) => {
+    exitAddExpression = (ctx: AddExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         const exp = ctx.op.type == parser.OParser.PLUS ?
@@ -832,7 +832,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitMember_method_declaration_list = (ctx: contexts.Member_method_declaration_listContext) => {
+    exitMember_method_declaration_list = (ctx: Member_method_declaration_listContext) => {
         const items = new grammar.MethodDeclarationList();
         ctx.member_method_declaration().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -842,7 +842,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitNative_member_method_declaration_list = (ctx: contexts.Native_member_method_declaration_listContext) => {
+    exitNative_member_method_declaration_list = (ctx: Native_member_method_declaration_listContext) => {
         const items = new grammar.MethodDeclarationList();
         ctx.native_member_method_declaration().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -852,51 +852,51 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitEmptyCategoryMethodList = (ctx: contexts.EmptyCategoryMethodListContext) => {
+    exitEmptyCategoryMethodList = (ctx: EmptyCategoryMethodListContext) => {
         this.setNodeValue(ctx, new grammar.MethodDeclarationList);
     }
 
 
-    exitCurlyCategoryMethodList = (ctx: contexts.CurlyCategoryMethodListContext) => {
+    exitCurlyCategoryMethodList = (ctx: CurlyCategoryMethodListContext) => {
         const items = this.getNodeValue(ctx.items);
         this.setNodeValue(ctx, items);
     }
 
 
-    exitSetter_method_declaration = (ctx: contexts.Setter_method_declarationContext) => {
+    exitSetter_method_declaration = (ctx: Setter_method_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const stmts = this.getNodeValue(ctx.stmts);
         this.setNodeValue(ctx, new declaration.SetterMethodDeclaration(name, stmts));
     }
 
 
-    exitSetType = (ctx: contexts.SetTypeContext) => {
+    exitSetType = (ctx: SetTypeContext) => {
         const typ = this.getNodeValue(ctx.s);
         this.setNodeValue(ctx, new type.SetType(typ));
     }
 
 
-    exitGetter_method_declaration = (ctx: contexts.Getter_method_declarationContext) => {
+    exitGetter_method_declaration = (ctx: Getter_method_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const stmts = this.getNodeValue(ctx.stmts);
         this.setNodeValue(ctx, new declaration.GetterMethodDeclaration(name, stmts));
     }
 
-    exitNative_setter_declaration = (ctx: contexts.Native_setter_declarationContext) => {
+    exitNative_setter_declaration = (ctx: Native_setter_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const stmts = this.getNodeValue(ctx.stmts);
         this.setNodeValue(ctx, new declaration.NativeSetterMethodDeclaration(name, stmts));
     }
 
 
-    exitNative_getter_declaration = (ctx: contexts.Native_getter_declarationContext) => {
+    exitNative_getter_declaration = (ctx: Native_getter_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const stmts = this.getNodeValue(ctx.stmts);
         this.setNodeValue(ctx, new declaration.NativeGetterMethodDeclaration(name, stmts));
     }
 
 
-    exitMember_method_declaration = (ctx: contexts.Member_method_declarationContext) => {
+    exitMember_method_declaration = (ctx: Member_method_declarationContext) => {
         const comments = this.readComments(ctx.comment_statement());
         const annotations = this.readAnnotations(ctx.annotation_constructor());
         const ctx_ = ctx.children[ctx.getChildCount() - 1];
@@ -908,24 +908,24 @@ export default class OPromptoBuilder extends OParserListener {
         }
     }
 
-    exitConcreteMemberMethod = (ctx: contexts.ConcreteMemberMethodContext) => {
+    exitConcreteMemberMethod = (ctx: ConcreteMemberMethodContext) => {
         const decl = this.getNodeValue(ctx.decl);
         this.setNodeValue(ctx, decl);
     }
 
-    exitSingleStatement = (ctx: contexts.SingleStatementContext) => {
+    exitSingleStatement = (ctx: SingleStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, new statement.StatementList(stmt));
     }
 
 
-    exitCurlyStatementList = (ctx: contexts.CurlyStatementListContext) => {
+    exitCurlyStatementList = (ctx: CurlyStatementListContext) => {
         const items = this.getNodeValue(ctx.items);
         this.setNodeValue(ctx, items);
     }
 
 
-    exitStatement_list = (ctx: contexts.Statement_listContext) => {
+    exitStatement_list = (ctx: Statement_listContext) => {
         const items = new statement.StatementList();
         ctx.statement().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -935,7 +935,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitAbstract_global_method_declaration = (ctx: contexts.Abstract_global_method_declarationContext) => {
+    exitAbstract_global_method_declaration = (ctx: Abstract_global_method_declarationContext) => {
         const typ = this.getNodeValue(ctx.typ);
         if (typ instanceof type.CategoryType)
             typ.mutable = ctx.MUTABLE() != null;
@@ -944,7 +944,7 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, new declaration.AbstractMethodDeclaration(name, args, typ));
     }
 
-    exitAbstract_member_method_declaration = (ctx: contexts.Abstract_member_method_declarationContext) => {
+    exitAbstract_member_method_declaration = (ctx: Abstract_member_method_declarationContext) => {
         const typ = this.getNodeValue(ctx.typ);
         if (typ instanceof type.CategoryType)
             typ.mutable = ctx.MUTABLE() != null;
@@ -953,7 +953,7 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, new declaration.AbstractMethodDeclaration(name, args, typ));
     }
 
-    exitConcrete_method_declaration = (ctx: contexts.Concrete_method_declarationContext) => {
+    exitConcrete_method_declaration = (ctx: Concrete_method_declarationContext) => {
         const typ = this.getNodeValue(ctx.typ);
         if (typ instanceof type.CategoryType)
             typ.mutable = ctx.MUTABLE() != null;
@@ -964,25 +964,25 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitMethod_declaration = (ctx: contexts.Method_declarationContext) => {
+    exitMethod_declaration = (ctx: Method_declarationContext) => {
         const value = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, value);
     }
 
 
-    exitMethodCallStatement = (ctx: contexts.MethodCallStatementContext) => {
+    exitMethodCallStatement = (ctx: MethodCallStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitMethod_identifier = (ctx: contexts.Method_identifierContext) => {
+    exitMethod_identifier = (ctx: Method_identifierContext) => {
         const value = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, value);
     }
 
 
-    exitConstructorFrom = (ctx: contexts.ConstructorFromContext) => {
+    exitConstructorFrom = (ctx: ConstructorFromContext) => {
         const type = this.getNodeValue(ctx.typ);
         const copyFrom = this.getNodeValue(ctx.copyExp) || null;
         const args = this.getNodeValue(ctx.args) || null;
@@ -990,25 +990,25 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitConstructorNoFrom = (ctx: contexts.ConstructorNoFromContext) => {
+    exitConstructorNoFrom = (ctx: ConstructorNoFromContext) => {
         const type = this.getNodeValue(ctx.typ);
         const args = this.getNodeValue(ctx.args) || null;
         this.setNodeValue(ctx, new expression.ConstructorExpression(type, null, args, true));
     }
 
 
-    exitCopy_from = (ctx: contexts.Copy_fromContext) => {
+    exitCopy_from = (ctx: Copy_fromContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
     }
 
 
-    exitAssertion = (ctx: contexts.AssertionContext) => {
+    exitAssertion = (ctx: AssertionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new parser.Assertion(exp));
     }
 
 
-    exitAssertion_list = (ctx: contexts.Assertion_listContext) => {
+    exitAssertion_list = (ctx: Assertion_listContext) => {
         const items = new expression.ExpressionList();
         ctx.assertion().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -1018,40 +1018,40 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitAssign_instance_statement = (ctx: contexts.Assign_instance_statementContext) => {
+    exitAssign_instance_statement = (ctx: Assign_instance_statementContext) => {
         const inst = this.getNodeValue(ctx.inst);
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new statement.AssignInstanceStatement(inst, exp));
     }
 
 
-    exitAssignInstanceStatement = (ctx: contexts.AssignInstanceStatementContext) => {
+    exitAssignInstanceStatement = (ctx: AssignInstanceStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitAssign_variable_statement = (ctx: contexts.Assign_variable_statementContext) => {
+    exitAssign_variable_statement = (ctx: Assign_variable_statementContext) => {
         const name = this.getNodeValue(ctx.variable_identifier());
         const exp = this.getNodeValue(ctx.expression());
         this.setNodeValue(ctx, new statement.AssignVariableStatement(name, exp));
     }
 
 
-    exitAssign_tuple_statement = (ctx: contexts.Assign_tuple_statementContext) => {
+    exitAssign_tuple_statement = (ctx: Assign_tuple_statementContext) => {
         const items = this.getNodeValue(ctx.items);
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new statement.AssignTupleStatement(items, exp));
     }
 
 
-    exitRootInstance = (ctx: contexts.RootInstanceContext) => {
+    exitRootInstance = (ctx: RootInstanceContext) => {
         const name = this.getNodeValue(ctx.variable_identifier());
         this.setNodeValue(ctx, new instance.VariableInstance(name));
     }
 
 
-    exitChildInstance = (ctx: contexts.ChildInstanceContext) => {
+    exitChildInstance = (ctx: ChildInstanceContext) => {
         const parent = this.getNodeValue(ctx.assignable_instance());
         const child = this.getNodeValue(ctx.child_instance());
         child.parent = parent;
@@ -1059,31 +1059,31 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitMemberInstance = (ctx: contexts.MemberInstanceContext) => {
+    exitMemberInstance = (ctx: MemberInstanceContext) => {
         const name = this.getNodeValue(ctx.name);
         this.setNodeValue(ctx, new instance.MemberInstance(name));
     }
 
 
-    exitItemInstance = (ctx: contexts.ItemInstanceContext) => {
+    exitItemInstance = (ctx: ItemInstanceContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new instance.ItemInstance(exp));
     }
 
 
-    exitMethod_expression = (ctx: contexts.Method_expressionContext) => {
+    exitMethod_expression = (ctx: Method_expressionContext) => {
         const exp = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitMethodExpression = (ctx: contexts.MethodExpressionContext) => {
+    exitMethodExpression = (ctx: MethodExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitNative_statement_list = (ctx: contexts.Native_statement_listContext) => {
+    exitNative_statement_list = (ctx: Native_statement_listContext) => {
         const items = new statement.StatementList();
         ctx.native_statement().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -1093,181 +1093,181 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitJava_identifier = (ctx: contexts.Java_identifierContext) => {
+    exitJava_identifier = (ctx: Java_identifierContext) => {
         this.setNodeValue(ctx, ctx.getText());
     }
 
-    exitJavascript_identifier = (ctx: contexts.Javascript_identifierContext) => {
+    exitJavascript_identifier = (ctx: Javascript_identifierContext) => {
         const id = new grammar.Identifier(ctx.getText());
         this.setNodeValue(ctx, id);
     }
 
-    exitJavascript_member_expression = (ctx: contexts.Javascript_member_expressionContext) => {
+    exitJavascript_member_expression = (ctx: Javascript_member_expressionContext) => {
         const name = ctx.name.getText();
         this.setNodeValue(ctx, new javascript.JavaScriptMemberExpression(name));
     }
 
-    exitJavascript_primary_expression = (ctx: contexts.Javascript_primary_expressionContext) => {
+    exitJavascript_primary_expression = (ctx: Javascript_primary_expressionContext) => {
         const exp = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, exp);
     }
 
-    exitJavascript_new_expression = (ctx: contexts.Javascript_new_expressionContext) => {
+    exitJavascript_new_expression = (ctx: Javascript_new_expressionContext) => {
         const method = this.getNodeValue(ctx.javascript_method_expression());
         this.setNodeValue(ctx, new javascript.JavaScriptNewExpression(method));
     }
 
 
-    exitJavascript_this_expression = (ctx: contexts.Javascript_this_expressionContext) => {
+    exitJavascript_this_expression = (ctx: Javascript_this_expressionContext) => {
         this.setNodeValue(ctx, new javascript.JavaScriptThisExpression());
     }
 
 
-    exitJavaIdentifier = (ctx: contexts.JavaIdentifierContext) => {
+    exitJavaIdentifier = (ctx: JavaIdentifierContext) => {
         const name = this.getNodeValue(ctx.name);
         this.setNodeValue(ctx, new java.JavaIdentifierExpression(null, name));
     }
 
-    exitJavaIdentifierExpression = (ctx: contexts.JavaIdentifierExpressionContext) => {
+    exitJavaIdentifierExpression = (ctx: JavaIdentifierExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitJavaChildIdentifier = (ctx: contexts.JavaChildIdentifierContext) => {
+    exitJavaChildIdentifier = (ctx: JavaChildIdentifierContext) => {
         const parent = this.getNodeValue(ctx.parent);
         const name = this.getNodeValue(ctx.name);
         const child = new java.JavaIdentifierExpression(parent, name);
         this.setNodeValue(ctx, child);
     }
 
-    exitJavascriptBooleanLiteral = (ctx: contexts.JavascriptBooleanLiteralContext) => {
+    exitJavascriptBooleanLiteral = (ctx: JavascriptBooleanLiteralContext) => {
         this.setNodeValue(ctx, new javascript.JavaScriptBooleanLiteral(ctx.getText()));
     }
 
-    exitJavascriptCharacterLiteral = (ctx: contexts.JavascriptCharacterLiteralContext) => {
+    exitJavascriptCharacterLiteral = (ctx: JavascriptCharacterLiteralContext) => {
         this.setNodeValue(ctx, new javascript.JavaScriptCharacterLiteral(ctx.getText()));
     }
 
-    exitJavascriptTextLiteral = (ctx: contexts.JavascriptTextLiteralContext) => {
+    exitJavascriptTextLiteral = (ctx: JavascriptTextLiteralContext) => {
         this.setNodeValue(ctx, new javascript.JavaScriptTextLiteral(ctx.getText()));
     }
 
-    exitJavascriptIntegerLiteral = (ctx: contexts.JavascriptIntegerLiteralContext) => {
+    exitJavascriptIntegerLiteral = (ctx: JavascriptIntegerLiteralContext) => {
         this.setNodeValue(ctx, new javascript.JavaScriptIntegerLiteral(ctx.getText()));
     }
 
 
-    exitJavascriptDecimalLiteral = (ctx: contexts.JavascriptDecimalLiteralContext) => {
+    exitJavascriptDecimalLiteral = (ctx: JavascriptDecimalLiteralContext) => {
         this.setNodeValue(ctx, new javascript.JavaScriptDecimalLiteral(ctx.getText()));
     }
 
 
-    exitJavaClassIdentifier = (ctx: contexts.JavaClassIdentifierContext) => {
+    exitJavaClassIdentifier = (ctx: JavaClassIdentifierContext) => {
         const klass = this.getNodeValue(ctx.klass);
         this.setNodeValue(ctx, klass);
     }
 
 
-    exitJavaChildClassIdentifier = (ctx: contexts.JavaChildClassIdentifierContext) => {
+    exitJavaChildClassIdentifier = (ctx: JavaChildClassIdentifierContext) => {
         const parent = this.getNodeValue(ctx.parent);
         const child = new java.JavaIdentifierExpression(parent, ctx.name.getText());
         this.setNodeValue(ctx, child);
     }
 
 
-    exitJavaPrimaryExpression = (ctx: contexts.JavaPrimaryExpressionContext) => {
+    exitJavaPrimaryExpression = (ctx: JavaPrimaryExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitJavascriptPrimaryExpression = (ctx: contexts.JavascriptPrimaryExpressionContext) => {
+    exitJavascriptPrimaryExpression = (ctx: JavascriptPrimaryExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-    exitJavascript_identifier_expression = (ctx: contexts.Javascript_identifier_expressionContext) => {
+    exitJavascript_identifier_expression = (ctx: Javascript_identifier_expressionContext) => {
         const id = this.getNodeValue(ctx.name);
         this.setNodeValue(ctx, new javascript.JavaScriptIdentifierExpression(id));
     }
 
-    exitJavaSelectorExpression = (ctx: contexts.JavaSelectorExpressionContext) => {
+    exitJavaSelectorExpression = (ctx: JavaSelectorExpressionContext) => {
         const parent = this.getNodeValue(ctx.parent);
         const child = this.getNodeValue(ctx.child);
         child.parent = parent;
         this.setNodeValue(ctx, child);
     }
 
-    exitJavascriptSelectorExpression = (ctx: contexts.JavascriptSelectorExpressionContext) => {
+    exitJavascriptSelectorExpression = (ctx: JavascriptSelectorExpressionContext) => {
         const parent = this.getNodeValue(ctx.parent);
         const child = this.getNodeValue(ctx.child);
         child.parent = parent;
         this.setNodeValue(ctx, child);
     }
 
-    exitJavascriptMemberExpression = (ctx: contexts.JavascriptMemberExpressionContext) => {
+    exitJavascriptMemberExpression = (ctx: JavascriptMemberExpressionContext) => {
         const id = this.getNodeValue(ctx.name);
         this.setNodeValue(ctx, new javascript.JavaScriptMemberExpression(id));
     }
 
-    exitJava_primary_expression = (ctx: contexts.Java_primary_expressionContext) => {
+    exitJava_primary_expression = (ctx: Java_primary_expressionContext) => {
         const exp = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, exp);
     }
 
-    exitJava_item_expression = (ctx: contexts.Java_item_expressionContext) => {
+    exitJava_item_expression = (ctx: Java_item_expressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new java.JavaItemExpression(exp));
     }
 
-    exitJavascript_item_expression = (ctx: contexts.Javascript_item_expressionContext) => {
+    exitJavascript_item_expression = (ctx: Javascript_item_expressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new javascript.JavaScriptItemExpression(exp));
     }
 
-    exitJavascriptItemExpression = (ctx: contexts.JavascriptItemExpressionContext) => {
+    exitJavascriptItemExpression = (ctx: JavascriptItemExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-    exitJavaStatement = (ctx: contexts.JavaStatementContext) => {
+    exitJavaStatement = (ctx: JavaStatementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const stmt = new java.JavaStatement(exp, false);
         this.setNodeValue(ctx, stmt);
     }
 
-    exitJavascriptStatement = (ctx: contexts.JavascriptStatementContext) => {
+    exitJavascriptStatement = (ctx: JavascriptStatementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const stmt = new javascript.JavaScriptStatement(exp, false);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitJavaReturnStatement = (ctx: contexts.JavaReturnStatementContext) => {
+    exitJavaReturnStatement = (ctx: JavaReturnStatementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new java.JavaStatement(exp, true));
     }
 
 
-    exitJavascriptReturnStatement = (ctx: contexts.JavascriptReturnStatementContext) => {
+    exitJavascriptReturnStatement = (ctx: JavascriptReturnStatementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new javascript.JavaScriptStatement(exp, true));
     }
 
 
-    exitJavaNativeStatement = (ctx: contexts.JavaNativeStatementContext) => {
+    exitJavaNativeStatement = (ctx: JavaNativeStatementContext) => {
         const stmt = this.getNodeValue(ctx.java_statement());
         this.setNodeValue(ctx, new java.JavaNativeCall(stmt));
     }
 
 
-    exitJavascriptNativeStatement = (ctx: contexts.JavascriptNativeStatementContext) => {
+    exitJavascriptNativeStatement = (ctx: JavascriptNativeStatementContext) => {
         const stmt = this.getNodeValue(ctx.javascript_native_statement());
         this.setNodeValue(ctx, stmt);
     }
 
-    exitJavascript_native_statement = (ctx: contexts.Javascript_native_statementContext) => {
+    exitJavascript_native_statement = (ctx: Javascript_native_statementContext) => {
         const stmt = this.getNodeValue(ctx.javascript_statement());
         const module = this.getNodeValue(ctx.javascript_module());
         stmt.module = module || null;
@@ -1275,7 +1275,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitNative_method_declaration = (ctx: contexts.Native_method_declarationContext) => {
+    exitNative_method_declaration = (ctx: Native_method_declarationContext) => {
         const type = this.getNodeValue(ctx.typ);
         const name = this.getNodeValue(ctx.name);
         const params = this.getNodeValue(ctx.args);
@@ -1284,74 +1284,74 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitJavaArgumentList = (ctx: contexts.JavaArgumentListContext) => {
+    exitJavaArgumentList = (ctx: JavaArgumentListContext) => {
         const item = this.getNodeValue(ctx.item);
         this.setNodeValue(ctx, new java.JavaExpressionList(item));
     }
 
-    exitJavascriptArgumentList = (ctx: contexts.JavascriptArgumentListContext) => {
+    exitJavascriptArgumentList = (ctx: JavascriptArgumentListContext) => {
         const item = this.getNodeValue(ctx.item);
         this.setNodeValue(ctx, new javascript.JavaScriptExpressionList(item));
     }
 
-    exitJavaArgumentListItem = (ctx: contexts.JavaArgumentListItemContext) => {
+    exitJavaArgumentListItem = (ctx: JavaArgumentListItemContext) => {
         const item = this.getNodeValue(ctx.item);
         const items = this.getNodeValue(ctx.items);
         items.add(item);
         this.setNodeValue(ctx, items);
     }
 
-    exitJavascriptArgumentListItem = (ctx: contexts.JavascriptArgumentListItemContext) => {
+    exitJavascriptArgumentListItem = (ctx: JavascriptArgumentListItemContext) => {
         const item = this.getNodeValue(ctx.item);
         const items = this.getNodeValue(ctx.items);
         items.add(item);
         this.setNodeValue(ctx, items);
     }
 
-    exitJava_method_expression = (ctx: contexts.Java_method_expressionContext) => {
+    exitJava_method_expression = (ctx: Java_method_expressionContext) => {
         const name = this.getNodeValue(ctx.name);
         const args = this.getNodeValue(ctx.args);
         this.setNodeValue(ctx, new java.JavaMethodExpression(name, args));
     }
 
-    exitJava_this_expression = (ctx: contexts.Java_this_expressionContext) => {
+    exitJava_this_expression = (ctx: Java_this_expressionContext) => {
         this.setNodeValue(ctx, new java.JavaThisExpression());
     }
 
-    exitJavascriptMethodExpression = (ctx: contexts.JavascriptMethodExpressionContext) => {
+    exitJavascriptMethodExpression = (ctx: JavascriptMethodExpressionContext) => {
         const method = this.getNodeValue(ctx.method);
         this.setNodeValue(ctx, method);
     }
 
-    exitJavascript_method_expression = (ctx: contexts.Javascript_method_expressionContext) => {
+    exitJavascript_method_expression = (ctx: Javascript_method_expressionContext) => {
         const id = this.getNodeValue(ctx.name);
         const args = this.getNodeValue(ctx.args);
         this.setNodeValue(ctx, new javascript.JavaScriptMethodExpression(id, args));
     }
 
-    exitJavaMethodExpression = (ctx: contexts.JavaMethodExpressionContext) => {
+    exitJavaMethodExpression = (ctx: JavaMethodExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitFlush_statement = (ctx: contexts.Flush_statementContext) => {
+    exitFlush_statement = (ctx: Flush_statementContext) => {
         this.setNodeValue(ctx, new statement.FlushStatement());
     }
 
 
-    exitFlushStatement = (ctx: contexts.FlushStatementContext) => {
+    exitFlushStatement = (ctx: FlushStatementContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
     }
 
 
-    exitFullDeclarationList = (ctx: contexts.FullDeclarationListContext) => {
+    exitFullDeclarationList = (ctx: FullDeclarationListContext) => {
         const items = this.getNodeValue(ctx.declarations()) || new declaration.DeclarationList();
         this.setNodeValue(ctx, items);
     }
 
 
-    exitDeclaration = (ctx: contexts.DeclarationContext) => {
+    exitDeclaration = (ctx: DeclarationContext) => {
         const comments = this.readComments(ctx.comment_statement());
         const annotations = this.readAnnotations(ctx.annotation_constructor());
         const ctx_ = ctx.children[ctx.getChildCount() - 1];
@@ -1364,7 +1364,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitDeclarations = (ctx: contexts.DeclarationsContext) => {
+    exitDeclarations = (ctx: DeclarationsContext) => {
         const items = new declaration.DeclarationList();
         ctx.declaration().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -1374,7 +1374,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitIteratorExpression = (ctx: contexts.IteratorExpressionContext) => {
+    exitIteratorExpression = (ctx: IteratorExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const name = this.getNodeValue(ctx.name);
         const source = this.getNodeValue(ctx.source);
@@ -1382,48 +1382,48 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitIteratorType = (ctx: contexts.IteratorTypeContext) => {
+    exitIteratorType = (ctx: IteratorTypeContext) => {
         const typ = this.getNodeValue(ctx.i);
         this.setNodeValue(ctx, new type.IteratorType(typ));
     }
 
 
-    exitJavaBooleanLiteral = (ctx: contexts.JavaBooleanLiteralContext) => {
+    exitJavaBooleanLiteral = (ctx: JavaBooleanLiteralContext) => {
         this.setNodeValue(ctx, new java.JavaBooleanLiteral(ctx.getText()));
     }
 
 
-    exitJavaIntegerLiteral = (ctx: contexts.JavaIntegerLiteralContext) => {
+    exitJavaIntegerLiteral = (ctx: JavaIntegerLiteralContext) => {
         this.setNodeValue(ctx, new java.JavaIntegerLiteral(ctx.getText()));
     }
 
 
-    exitJavaDecimalLiteral = (ctx: contexts.JavaDecimalLiteralContext) => {
+    exitJavaDecimalLiteral = (ctx: JavaDecimalLiteralContext) => {
         this.setNodeValue(ctx, new java.JavaDecimalLiteral(ctx.getText()));
     }
 
 
-    exitJavaCharacterLiteral = (ctx: contexts.JavaCharacterLiteralContext) => {
+    exitJavaCharacterLiteral = (ctx: JavaCharacterLiteralContext) => {
         this.setNodeValue(ctx, new java.JavaCharacterLiteral(ctx.getText()));
     }
 
 
-    exitJavaTextLiteral = (ctx: contexts.JavaTextLiteralContext) => {
+    exitJavaTextLiteral = (ctx: JavaTextLiteralContext) => {
         this.setNodeValue(ctx, new java.JavaTextLiteral(ctx.getText()));
     }
 
 
-    exitJavaCategoryBinding = (ctx: contexts.JavaCategoryBindingContext) => {
+    exitJavaCategoryBinding = (ctx: JavaCategoryBindingContext) => {
         const map = this.getNodeValue(ctx.binding);
         this.setNodeValue(ctx, new java.JavaNativeCategoryBinding(map));
     }
 
-    exitJavascriptCategoryBinding = (ctx: contexts.JavascriptCategoryBindingContext) => {
+    exitJavascriptCategoryBinding = (ctx: JavascriptCategoryBindingContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.binding));
     }
 
 
-    exitJavascript_category_binding = (ctx: contexts.Javascript_category_bindingContext) => {
+    exitJavascript_category_binding = (ctx: Javascript_category_bindingContext) => {
         const identifier = ctx.javascript_identifier().map(cx => cx.getText()).join(".");
         const module = this.getNodeValue(ctx.javascript_module()) || null;
         const map = new javascript.JavaScriptNativeCategoryBinding(identifier, module);
@@ -1431,21 +1431,21 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitJavascript_module = (ctx: contexts.Javascript_moduleContext) => {
+    exitJavascript_module = (ctx: Javascript_moduleContext) => {
         const ids = ctx.javascript_identifier().map(rule => rule.getText());
         const module = new javascript.JavaScriptModule(ids);
         this.setNodeValue(ctx, module);
     }
 
 
-    exitNativeCategoryBindingList = (ctx: contexts.NativeCategoryBindingListContext) => {
+    exitNativeCategoryBindingList = (ctx: NativeCategoryBindingListContext) => {
         const item = this.getNodeValue(ctx.item);
         const items = new grammar.NativeCategoryBindingList(item);
         this.setNodeValue(ctx, items);
     }
 
 
-    exitNativeCategoryBindingListItem = (ctx: contexts.NativeCategoryBindingListItemContext) => {
+    exitNativeCategoryBindingListItem = (ctx: NativeCategoryBindingListItemContext) => {
         const item = this.getNodeValue(ctx.item);
         const items = this.getNodeValue(ctx.items);
         items.add(item);
@@ -1453,13 +1453,13 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitNative_category_bindings = (ctx: contexts.Native_category_bindingsContext) => {
+    exitNative_category_bindings = (ctx: Native_category_bindingsContext) => {
         const items = this.getNodeValue(ctx.items);
         this.setNodeValue(ctx, items);
     }
 
 
-    exitNative_category_declaration = (ctx: contexts.Native_category_declarationContext) => {
+    exitNative_category_declaration = (ctx: Native_category_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const attrs = this.getNodeValue(ctx.attrs);
         const bindings = this.getNodeValue(ctx.bindings);
@@ -1470,7 +1470,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitNative_widget_declaration = (ctx: contexts.Native_widget_declarationContext) => {
+    exitNative_widget_declaration = (ctx: Native_widget_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const bindings = this.getNodeValue(ctx.bindings);
         const methods = this.getNodeValue(ctx.methods);
@@ -1479,13 +1479,13 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitNativeCategoryDeclaration = (ctx: contexts.NativeCategoryDeclarationContext) => {
+    exitNativeCategoryDeclaration = (ctx: NativeCategoryDeclarationContext) => {
         const decl = this.getNodeValue(ctx.decl);
         this.setNodeValue(ctx, decl);
     }
 
 
-    exitNative_resource_declaration = (ctx: contexts.Native_resource_declarationContext) => {
+    exitNative_resource_declaration = (ctx: Native_resource_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const attrs = this.getNodeValue(ctx.attrs);
         const bindings = this.getNodeValue(ctx.bindings);
@@ -1496,25 +1496,25 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitResource_declaration = (ctx: contexts.Resource_declarationContext) => {
+    exitResource_declaration = (ctx: Resource_declarationContext) => {
         const decl = this.getNodeValue(ctx.native_resource_declaration());
         this.setNodeValue(ctx, decl);
     }
 
 
-    exitParenthesis_expression = (ctx: contexts.Parenthesis_expressionContext) => {
+    exitParenthesis_expression = (ctx: Parenthesis_expressionContext) => {
         const exp = this.getNodeValue(ctx.expression());
         this.setNodeValue(ctx, new expression.ParenthesisExpression(exp));
     }
 
 
-    exitParenthesisExpression = (ctx: contexts.ParenthesisExpressionContext) => {
+    exitParenthesisExpression = (ctx: ParenthesisExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitNative_symbol_list = (ctx: contexts.Native_symbol_listContext) => {
+    exitNative_symbol_list = (ctx: Native_symbol_listContext) => {
         const items = new grammar.NativeSymbolList();
         ctx.native_symbol().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -1524,7 +1524,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitEnum_native_declaration = (ctx: contexts.Enum_native_declarationContext) => {
+    exitEnum_native_declaration = (ctx: Enum_native_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const type = this.getNodeValue(ctx.typ);
         const symbols = this.getNodeValue(ctx.symbols);
@@ -1532,7 +1532,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitFor_each_statement = (ctx: contexts.For_each_statementContext) => {
+    exitFor_each_statement = (ctx: For_each_statementContext) => {
         const name1 = this.getNodeValue(ctx.name1);
         const name2 = this.getNodeValue(ctx.name2);
         const source = this.getNodeValue(ctx.source);
@@ -1541,33 +1541,33 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitForEachStatement = (ctx: contexts.ForEachStatementContext) => {
+    exitForEachStatement = (ctx: ForEachStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitKey_token = (ctx: contexts.Key_tokenContext) => {
+    exitKey_token = (ctx: Key_tokenContext) => {
         this.setNodeValue(ctx, ctx.getText());
     }
 
 
-    exitUUIDLiteral = (ctx: contexts.UUIDLiteralContext) => {
+    exitUUIDLiteral = (ctx: UUIDLiteralContext) => {
         this.setNodeValue(ctx, new literal.UUIDLiteral(ctx.getText()));
     }
 
 
-    exitUUIDType = (ctx: contexts.UUIDTypeContext) => {
+    exitUUIDType = (ctx: UUIDTypeContext) => {
         this.setNodeValue(ctx, type.UUIDType.instance);
     }
 
 
-    exitValue_token = (ctx: contexts.Value_tokenContext) => {
+    exitValue_token = (ctx: Value_tokenContext) => {
         this.setNodeValue(ctx, ctx.getText());
     }
 
 
-    exitNamed_argument = (ctx: contexts.Named_argumentContext) => {
+    exitNamed_argument = (ctx: Named_argumentContext) => {
         const name = this.getNodeValue(ctx.variable_identifier());
         const arg = new param.UnresolvedParameter(name);
         const exp = this.getNodeValue(ctx.literal_expression());
@@ -1576,37 +1576,37 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitClosureStatement = (ctx: contexts.ClosureStatementContext) => {
+    exitClosureStatement = (ctx: ClosureStatementContext) => {
         const decl = this.getNodeValue(ctx.decl);
         this.setNodeValue(ctx, new statement.DeclarationStatement(decl));
     }
 
 
-    exitReturn_statement = (ctx: contexts.Return_statementContext) => {
+    exitReturn_statement = (ctx: Return_statementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new statement.ReturnStatement(exp));
     }
 
 
-    exitReturnStatement = (ctx: contexts.ReturnStatementContext) => {
+    exitReturnStatement = (ctx: ReturnStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitType_expression = (ctx: contexts.Type_expressionContext) => {
+    exitType_expression = (ctx: Type_expressionContext) => {
         const name = this.getNodeValue(ctx.name);
         this.setNodeValue(ctx, new expression.TypeExpression(new type.CategoryType(name)))
     }
 
 
-    exitTypeExpression = (ctx: contexts.TypeExpressionContext) => {
+    exitTypeExpression = (ctx: TypeExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitIf_statement = (ctx: contexts.If_statementContext) => {
+    exitIf_statement = (ctx: If_statementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const stmts = this.getNodeValue(ctx.stmts);
         const elseIfs = this.getNodeValue(ctx.elseIfs);
@@ -1615,7 +1615,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitElseIfStatementList = (ctx: contexts.ElseIfStatementListContext) => {
+    exitElseIfStatementList = (ctx: ElseIfStatementListContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const stmts = this.getNodeValue(ctx.stmts);
         const elem = new statement.IfElement(exp, stmts);
@@ -1623,7 +1623,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitElseIfStatementListItem = (ctx: contexts.ElseIfStatementListItemContext) => {
+    exitElseIfStatementListItem = (ctx: ElseIfStatementListItemContext) => {
         const items = this.getNodeValue(ctx.items);
         const exp = this.getNodeValue(ctx.exp);
         const stmts = this.getNodeValue(ctx.stmts);
@@ -1633,66 +1633,66 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitIfStatement = (ctx: contexts.IfStatementContext) => {
+    exitIfStatement = (ctx: IfStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitSuperExpression = (ctx: contexts.SuperExpressionContext) => {
+    exitSuperExpression = (ctx: SuperExpressionContext) => {
         this.setNodeValue(ctx, new expression.SuperExpression());
     }
 
 
-    exitSwitchStatement = (ctx: contexts.SwitchStatementContext) => {
+    exitSwitchStatement = (ctx: SwitchStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitAssignTupleStatement = (ctx: contexts.AssignTupleStatementContext) => {
+    exitAssignTupleStatement = (ctx: AssignTupleStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitRaiseStatement = (ctx: contexts.RaiseStatementContext) => {
+    exitRaiseStatement = (ctx: RaiseStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitWriteStatement = (ctx: contexts.WriteStatementContext) => {
+    exitWriteStatement = (ctx: WriteStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitWithResourceStatement = (ctx: contexts.WithResourceStatementContext) => {
+    exitWithResourceStatement = (ctx: WithResourceStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitWhileStatement = (ctx: contexts.WhileStatementContext) => {
+    exitWhileStatement = (ctx: WhileStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitDoWhileStatement = (ctx: contexts.DoWhileStatementContext) => {
+    exitDoWhileStatement = (ctx: DoWhileStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitTryStatement = (ctx: contexts.TryStatementContext) => {
+    exitTryStatement = (ctx: TryStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
 
-    exitEqualsExpression = (ctx: contexts.EqualsExpressionContext) => {
+    exitEqualsExpression = (ctx: EqualsExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         let op = null;
@@ -1713,7 +1713,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitCompareExpression = (ctx: contexts.CompareExpressionContext) => {
+    exitCompareExpression = (ctx: CompareExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         let op = null;
@@ -1737,27 +1737,27 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitAtomicSwitchCase = (ctx: contexts.AtomicSwitchCaseContext) => {
+    exitAtomicSwitchCase = (ctx: AtomicSwitchCaseContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const stmts = this.getNodeValue(ctx.stmts);
         this.setNodeValue(ctx, new statement.AtomicSwitchCase(exp, stmts));
     }
 
 
-    exitCollection_literal = (ctx: contexts.Collection_literalContext) => {
+    exitCollection_literal = (ctx: Collection_literalContext) => {
         const value = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, value);
     }
 
 
-    exitCollectionSwitchCase = (ctx: contexts.CollectionSwitchCaseContext) => {
+    exitCollectionSwitchCase = (ctx: CollectionSwitchCaseContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const stmts = this.getNodeValue(ctx.stmts);
         this.setNodeValue(ctx, new statement.CollectionSwitchCase(exp, stmts));
     }
 
 
-    exitSwitch_case_statement_list = (ctx: contexts.Switch_case_statement_listContext) => {
+    exitSwitch_case_statement_list = (ctx: Switch_case_statement_listContext) => {
         const items = new statement.SwitchCaseList();
         ctx.switch_case_statement().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -1767,7 +1767,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitSwitch_statement = (ctx: contexts.Switch_statementContext) => {
+    exitSwitch_statement = (ctx: Switch_statementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const cases = this.getNodeValue(ctx.cases);
         const stmts = this.getNodeValue(ctx.stmts);
@@ -1776,20 +1776,20 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitLiteralRangeLiteral = (ctx: contexts.LiteralRangeLiteralContext) => {
+    exitLiteralRangeLiteral = (ctx: LiteralRangeLiteralContext) => {
         const low = this.getNodeValue(ctx.low);
         const high = this.getNodeValue(ctx.high);
         this.setNodeValue(ctx, new literal.RangeLiteral(low, high));
     }
 
 
-    exitLiteralListLiteral = (ctx: contexts.LiteralListLiteralContext) => {
+    exitLiteralListLiteral = (ctx: LiteralListLiteralContext) => {
         const exp = this.getNodeValue(ctx.literal_list_literal());
         this.setNodeValue(ctx, new literal.ListLiteral(false, exp));
     }
 
 
-    exitLiteral_list_literal = (ctx: contexts.Literal_list_literalContext) => {
+    exitLiteral_list_literal = (ctx: Literal_list_literalContext) => {
         const items = new expression.ExpressionList();
         ctx.atomic_literal().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -1799,7 +1799,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitInExpression = (ctx: contexts.InExpressionContext) => {
+    exitInExpression = (ctx: InExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         const op = ctx.NOT() ? grammar.ContOp.NOT_IN : grammar.ContOp.IN;
@@ -1807,12 +1807,12 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitCssType = (ctx: contexts.CssTypeContext) => {
+    exitCssType = (ctx: CssTypeContext) => {
         this.setNodeValue(ctx, type.CssType.instance);
     }
 
 
-    exitHasExpression = (ctx: contexts.HasExpressionContext) => {
+    exitHasExpression = (ctx: HasExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         const op = ctx.NOT() ? grammar.ContOp.NOT_HAS : grammar.ContOp.HAS;
@@ -1821,7 +1821,7 @@ export default class OPromptoBuilder extends OParserListener {
 
 
 
-    exitHasAllExpression = (ctx: contexts.HasAllExpressionContext) => {
+    exitHasAllExpression = (ctx: HasAllExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         const op = ctx.NOT() ? grammar.ContOp.NOT_HAS_ALL : grammar.ContOp.HAS_ALL;
@@ -1829,7 +1829,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitHasAnyExpression = (ctx: contexts.HasAnyExpressionContext) => {
+    exitHasAnyExpression = (ctx: HasAnyExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         const op = ctx.NOT() ? grammar.ContOp.NOT_HAS_ANY : grammar.ContOp.HAS_ANY;
@@ -1837,7 +1837,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitContainsExpression = (ctx: contexts.ContainsExpressionContext) => {
+    exitContainsExpression = (ctx: ContainsExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         const op = ctx.NOT() ? grammar.EqOp.NOT_CONTAINS : grammar.EqOp.CONTAINS;
@@ -1845,28 +1845,28 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitDivideExpression = (ctx: contexts.DivideExpressionContext) => {
+    exitDivideExpression = (ctx: DivideExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         this.setNodeValue(ctx, new expression.DivideExpression(left, right));
     }
 
 
-    exitIntDivideExpression = (ctx: contexts.IntDivideExpressionContext) => {
+    exitIntDivideExpression = (ctx: IntDivideExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         this.setNodeValue(ctx, new expression.IntDivideExpression(left, right));
     }
 
 
-    exitModuloExpression = (ctx: contexts.ModuloExpressionContext) => {
+    exitModuloExpression = (ctx: ModuloExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         this.setNodeValue(ctx, new expression.ModuloExpression(left, right));
     }
 
 
-    exitAnnotation_constructor = (ctx: contexts.Annotation_constructorContext) => {
+    exitAnnotation_constructor = (ctx: Annotation_constructorContext) => {
         const name = this.getNodeValue(ctx.name);
         const args = new literal.DocEntryList();
         const exp = this.getNodeValue(ctx.exp);
@@ -1881,90 +1881,90 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitAnnotation_argument = (ctx: contexts.Annotation_argumentContext) => {
+    exitAnnotation_argument = (ctx: Annotation_argumentContext) => {
         const name = this.getNodeValue(ctx.name);
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new literal.DocEntry(name, exp));
     }
 
 
-    exitAnnotation_identifier = (ctx: contexts.Annotation_identifierContext) => {
+    exitAnnotation_identifier = (ctx: Annotation_identifierContext) => {
         this.setNodeValue(ctx, new grammar.Identifier(ctx.getText()));
     }
 
 
-    exitAnnotation_argument_name = (ctx: contexts.Annotation_argument_nameContext) => {
+    exitAnnotation_argument_name = (ctx: Annotation_argument_nameContext) => {
         this.setNodeValue(ctx, ctx.getText());
     }
 
 
-    exitAnnotationLiteralValue = (ctx: contexts.AnnotationLiteralValueContext) => {
+    exitAnnotationLiteralValue = (ctx: AnnotationLiteralValueContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitAnnotationTypeValue = (ctx: contexts.AnnotationTypeValueContext) => {
+    exitAnnotationTypeValue = (ctx: AnnotationTypeValueContext) => {
         const typ = this.getNodeValue(ctx.typ);
         this.setNodeValue(ctx, new expression.TypeExpression(typ));
     }
 
 
-    exitAndExpression = (ctx: contexts.AndExpressionContext) => {
+    exitAndExpression = (ctx: AndExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         this.setNodeValue(ctx, new expression.AndExpression(left, right));
     }
 
-    exitNullLiteral = (ctx: contexts.NullLiteralContext) => {
+    exitNullLiteral = (ctx: NullLiteralContext) => {
         this.setNodeValue(ctx, literal.NullLiteral.instance);
     }
 
 
-    exitOperator_argument = (ctx: contexts.Operator_argumentContext) => {
+    exitOperator_argument = (ctx: Operator_argumentContext) => {
         const value = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, value);
     }
 
 
-    exitOperatorArgument = (ctx: contexts.OperatorArgumentContext) => {
+    exitOperatorArgument = (ctx: OperatorArgumentContext) => {
         const arg = this.getNodeValue(ctx.arg);
         arg.setMutable(ctx.MUTABLE() != null);
         this.setNodeValue(ctx, arg);
     }
 
 
-    exitOperatorPlus = (ctx: contexts.OperatorPlusContext) => {
+    exitOperatorPlus = (ctx: OperatorPlusContext) => {
         this.setNodeValue(ctx, grammar.Operator.PLUS);
     }
 
 
-    exitOperatorMinus = (ctx: contexts.OperatorMinusContext) => {
+    exitOperatorMinus = (ctx: OperatorMinusContext) => {
         this.setNodeValue(ctx, grammar.Operator.MINUS);
     }
 
 
-    exitOperatorMultiply = (ctx: contexts.OperatorMultiplyContext) => {
+    exitOperatorMultiply = (ctx: OperatorMultiplyContext) => {
         this.setNodeValue(ctx, grammar.Operator.MULTIPLY);
     }
 
 
-    exitOperatorDivide = (ctx: contexts.OperatorDivideContext) => {
+    exitOperatorDivide = (ctx: OperatorDivideContext) => {
         this.setNodeValue(ctx, grammar.Operator.DIVIDE);
     }
 
 
-    exitOperatorIDivide = (ctx: contexts.OperatorIDivideContext) => {
+    exitOperatorIDivide = (ctx: OperatorIDivideContext) => {
         this.setNodeValue(ctx, grammar.Operator.IDIVIDE);
     }
 
 
-    exitOperatorModulo = (ctx: contexts.OperatorModuloContext) => {
+    exitOperatorModulo = (ctx: OperatorModuloContext) => {
         this.setNodeValue(ctx, grammar.Operator.MODULO);
     }
 
 
-    exitNative_member_method_declaration = (ctx: contexts.Native_member_method_declarationContext) => {
+    exitNative_member_method_declaration = (ctx: Native_member_method_declarationContext) => {
         const comments = this.readComments(ctx.comment_statement());
         const annotations = this.readAnnotations(ctx.annotation_constructor());
         const ctx_ = ctx.children[ctx.getChildCount() - 1];
@@ -1977,7 +1977,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitOperator_method_declaration = (ctx: contexts.Operator_method_declarationContext) => {
+    exitOperator_method_declaration = (ctx: Operator_method_declarationContext) => {
         const op = this.getNodeValue(ctx.op);
         const arg = this.getNodeValue(ctx.arg);
         const typ = this.getNodeValue(ctx.typ);
@@ -1987,7 +1987,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitOrder_by = (ctx: contexts.Order_byContext) => {
+    exitOrder_by = (ctx: Order_byContext) => {
         const ids = new grammar.IdentifierList();
         ctx.variable_identifier().map(function (ctx_) {
             ids.push(this.getNodeValue(ctx_));
@@ -1996,7 +1996,7 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, clause);
     }
 
-    exitOrder_by_list = (ctx: contexts.Order_by_listContext) => {
+    exitOrder_by_list = (ctx: Order_by_listContext) => {
         const list = new grammar.OrderByClauseList();
         ctx.order_by().map(function (ctx_) {
             list.add(this.getNodeValue(ctx_));
@@ -2004,39 +2004,39 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, list);
     }
 
-    exitOrExpression = (ctx: contexts.OrExpressionContext) => {
+    exitOrExpression = (ctx: OrExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         this.setNodeValue(ctx, new expression.OrExpression(left, right));
     }
 
 
-    exitMultiplyExpression = (ctx: contexts.MultiplyExpressionContext) => {
+    exitMultiplyExpression = (ctx: MultiplyExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
         this.setNodeValue(ctx, new expression.MultiplyExpression(left, right));
     }
 
 
-    exitMutable_category_type = (ctx: contexts.Mutable_category_typeContext) => {
+    exitMutable_category_type = (ctx: Mutable_category_typeContext) => {
         const typ = this.getNodeValue(ctx.category_type());
         typ.mutable = ctx.MUTABLE() != null;
         this.setNodeValue(ctx, typ);
     }
 
 
-    exitMutableInstanceExpression = (ctx: contexts.MutableInstanceExpressionContext) => {
+    exitMutableInstanceExpression = (ctx: MutableInstanceExpressionContext) => {
         const source = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new expression.MutableExpression(source));
     }
 
 
-    exitMutableSelectableExpression = (ctx: contexts.MutableSelectableExpressionContext) => {
+    exitMutableSelectableExpression = (ctx: MutableSelectableExpressionContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
     }
 
 
-    exitMutableSelectorExpression = (ctx: contexts.MutableSelectorExpressionContext) => {
+    exitMutableSelectorExpression = (ctx: MutableSelectorExpressionContext) => {
         const parent = this.getNodeValue(ctx.parent);
         const selector = this.getNodeValue(ctx.selector);
         selector.parent = parent;
@@ -2044,63 +2044,63 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitMinusExpression = (ctx: contexts.MinusExpressionContext) => {
+    exitMinusExpression = (ctx: MinusExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new expression.MinusExpression(exp));
     }
 
 
-    exitNotExpression = (ctx: contexts.NotExpressionContext) => {
+    exitNotExpression = (ctx: NotExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new expression.NotExpression(exp));
     }
 
 
-    exitWhile_statement = (ctx: contexts.While_statementContext) => {
+    exitWhile_statement = (ctx: While_statementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const stmts = this.getNodeValue(ctx.stmts);
         this.setNodeValue(ctx, new statement.WhileStatement(exp, stmts));
     }
 
 
-    exitDo_while_statement = (ctx: contexts.Do_while_statementContext) => {
+    exitDo_while_statement = (ctx: Do_while_statementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const stmts = this.getNodeValue(ctx.stmts);
         this.setNodeValue(ctx, new statement.DoWhileStatement(exp, stmts));
     }
 
-    exitSingleton_category_declaration = (ctx: contexts.Singleton_category_declarationContext) => {
+    exitSingleton_category_declaration = (ctx: Singleton_category_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const attrs = this.getNodeValue(ctx.attrs);
         const methods = this.getNodeValue(ctx.methods);
         this.setNodeValue(ctx, new declaration.SingletonCategoryDeclaration(name, attrs, methods));
     }
 
-    exitSingletonCategoryDeclaration = (ctx: contexts.SingletonCategoryDeclarationContext) => {
+    exitSingletonCategoryDeclaration = (ctx: SingletonCategoryDeclarationContext) => {
         const decl = this.getNodeValue(ctx.decl);
         this.setNodeValue(ctx, decl);
     }
 
-    exitSliceFirstAndLast = (ctx: contexts.SliceFirstAndLastContext) => {
+    exitSliceFirstAndLast = (ctx: SliceFirstAndLastContext) => {
         const first = this.getNodeValue(ctx.first);
         const last = this.getNodeValue(ctx.last);
         this.setNodeValue(ctx, new expression.SelectorExpression(null, first, last));
     }
 
 
-    exitSliceFirstOnly = (ctx: contexts.SliceFirstOnlyContext) => {
+    exitSliceFirstOnly = (ctx: SliceFirstOnlyContext) => {
         const first = this.getNodeValue(ctx.first);
         this.setNodeValue(ctx, new expression.SelectorExpression(null, first, null));
     }
 
 
-    exitSliceLastOnly = (ctx: contexts.SliceLastOnlyContext) => {
+    exitSliceLastOnly = (ctx: SliceLastOnlyContext) => {
         const last = this.getNodeValue(ctx.last);
         this.setNodeValue(ctx, new expression.SelectorExpression(null, null, last));
     }
 
 
-    exitSorted_expression = (ctx: contexts.Sorted_expressionContext) => {
+    exitSorted_expression = (ctx: Sorted_expressionContext) => {
         const source = this.getNodeValue(ctx.source);
         const desc = ctx.DESC() != null;
         const key = this.getNodeValue(ctx.key);
@@ -2108,35 +2108,35 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitSorted_key = (ctx: contexts.Sorted_keyContext) => {
+    exitSorted_key = (ctx: Sorted_keyContext) => {
         const exp = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitDocument_expression = (ctx: contexts.Document_expressionContext) => {
+    exitDocument_expression = (ctx: Document_expressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new expression.DocumentExpression(exp));
     }
 
 
-    exitDocumentType = (ctx: contexts.DocumentTypeContext) => {
+    exitDocumentType = (ctx: DocumentTypeContext) => {
         this.setNodeValue(ctx, type.DocumentType.instance);
     }
 
 
-    exitDocument_literal = (ctx: contexts.Document_literalContext) => {
+    exitDocument_literal = (ctx: Document_literalContext) => {
         const entries = this.getNodeValue(ctx.doc_entry_list()) || new literal.DocEntryList();
         this.setNodeValue(ctx, new literal.DocumentLiteral(entries));
     }
 
 
-    exitFetchStatement = (ctx: contexts.FetchStatementContext) => {
+    exitFetchStatement = (ctx: FetchStatementContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
     }
 
 
-    exitFetchMany = (ctx: contexts.FetchManyContext) => {
+    exitFetchMany = (ctx: FetchManyContext) => {
         const category = this.getNodeValue(ctx.typ);
         const predicate = this.getNodeValue(ctx.predicate);
         const start = this.getNodeValue(ctx.xstart);
@@ -2147,7 +2147,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitFetchManyAsync = (ctx: contexts.FetchManyAsyncContext) => {
+    exitFetchManyAsync = (ctx: FetchManyAsyncContext) => {
         const category = this.getNodeValue(ctx.typ);
         const predicate = this.getNodeValue(ctx.predicate);
         const start = this.getNodeValue(ctx.xstart);
@@ -2159,7 +2159,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitFetchOne = (ctx: contexts.FetchOneContext) => {
+    exitFetchOne = (ctx: FetchOneContext) => {
         const category = this.getNodeValue(ctx.typ);
         const predicate = this.getNodeValue(ctx.predicate);
         const include = this.getNodeValue(ctx.include);
@@ -2167,7 +2167,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitFetchOneAsync = (ctx: contexts.FetchOneAsyncContext) => {
+    exitFetchOneAsync = (ctx: FetchOneAsyncContext) => {
         const category = this.getNodeValue(ctx.typ);
         const predicate = this.getNodeValue(ctx.predicate);
         const include = this.getNodeValue(ctx.include);
@@ -2176,14 +2176,14 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitThen = (ctx: contexts.ThenContext) => {
+    exitThen = (ctx: ThenContext) => {
         const name = this.getNodeValue(ctx.name);
         const stmts = this.getNodeValue(ctx.stmts);
         this.setNodeValue(ctx, new grammar.ThenWith(name, stmts));
     }
 
 
-    exitFiltered_list_expression = (ctx: contexts.Filtered_list_expressionContext) => {
+    exitFiltered_list_expression = (ctx: Filtered_list_expressionContext) => {
         const source = this.getNodeValue(ctx.source);
         const itemName = this.getNodeValue(ctx.name);
         const predicate = this.getNodeValue(ctx.predicate);
@@ -2198,35 +2198,35 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitArrowFilterExpression = (ctx: contexts.ArrowFilterExpressionContext) => {
+    exitArrowFilterExpression = (ctx: ArrowFilterExpressionContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.arrow_expression()));
     }
 
 
-    exitExplicitFilterExpression = (ctx: contexts.ExplicitFilterExpressionContext) => {
+    exitExplicitFilterExpression = (ctx: ExplicitFilterExpressionContext) => {
         const name = this.getNodeValue(ctx.variable_identifier());
         const predicate = this.getNodeValue(ctx.expression());
         this.setNodeValue(ctx, new expression.ExplicitPredicateExpression(name, predicate));
     }
 
 
-    exitOtherFilterExpression = (ctx: contexts.OtherFilterExpressionContext) => {
+    exitOtherFilterExpression = (ctx: OtherFilterExpressionContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.expression()));
     }
 
 
-    exitCode_type = (ctx: contexts.Code_typeContext) => {
+    exitCode_type = (ctx: Code_typeContext) => {
         this.setNodeValue(ctx, type.CodeType.instance);
     }
 
 
-    exitExecuteExpression = (ctx: contexts.ExecuteExpressionContext) => {
+    exitExecuteExpression = (ctx: ExecuteExpressionContext) => {
         const name = this.getNodeValue(ctx.name);
         this.setNodeValue(ctx, new expression.ExecuteExpression(name));
     }
 
 
-    exitExpression_list = (ctx: contexts.Expression_listContext) => {
+    exitExpression_list = (ctx: Expression_listContext) => {
         const items = new expression.ExpressionList();
         ctx.expression().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -2236,7 +2236,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitExpression_tuple = (ctx: contexts.Expression_tupleContext) => {
+    exitExpression_tuple = (ctx: Expression_tupleContext) => {
         const items = new expression.ExpressionList();
         ctx.expression().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -2246,32 +2246,32 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitCodeExpression = (ctx: contexts.CodeExpressionContext) => {
+    exitCodeExpression = (ctx: CodeExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new expression.CodeExpression(exp));
     }
 
 
-    exitCategory_or_any_type = (ctx: contexts.Category_or_any_typeContext) => {
+    exitCategory_or_any_type = (ctx: Category_or_any_typeContext) => {
         const exp = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitCode_argument = (ctx: contexts.Code_argumentContext) => {
+    exitCode_argument = (ctx: Code_argumentContext) => {
         const name = this.getNodeValue(ctx.name);
         this.setNodeValue(ctx, new param.CodeParameter(name));
     }
 
 
-    exitCategory_symbol = (ctx: contexts.Category_symbolContext) => {
+    exitCategory_symbol = (ctx: Category_symbolContext) => {
         const name = this.getNodeValue(ctx.name);
         const args = this.getNodeValue(ctx.args);
         this.setNodeValue(ctx, new expression.CategorySymbol(name, args));
     }
 
 
-    exitCategory_symbol_list = (ctx: contexts.Category_symbol_listContext) => {
+    exitCategory_symbol_list = (ctx: Category_symbol_listContext) => {
         const items = new grammar.CategorySymbolList();
         ctx.category_symbol().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -2281,7 +2281,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitEnum_category_declaration = (ctx: contexts.Enum_category_declarationContext) => {
+    exitEnum_category_declaration = (ctx: Enum_category_declarationContext) => {
         const name = this.getNodeValue(ctx.name);
         const attrs = this.getNodeValue(ctx.attrs);
         const parent = this.getNodeValue(ctx.derived);
@@ -2291,49 +2291,49 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitEnum_declaration = (ctx: contexts.Enum_declarationContext) => {
+    exitEnum_declaration = (ctx: Enum_declarationContext) => {
         const value = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, value);
     }
 
 
-    exitRead_all_expression = (ctx: contexts.Read_all_expressionContext) => {
+    exitRead_all_expression = (ctx: Read_all_expressionContext) => {
         const source = this.getNodeValue(ctx.source);
         this.setNodeValue(ctx, new expression.ReadAllExpression(source));
     }
 
 
-    exitRead_blob_expression = (ctx: contexts.Read_blob_expressionContext) => {
+    exitRead_blob_expression = (ctx: Read_blob_expressionContext) => {
         const source = this.getNodeValue(ctx.source);
         this.setNodeValue(ctx, new expression.ReadBlobExpression(source));
     }
 
 
-    exitRead_one_expression = (ctx: contexts.Read_one_expressionContext) => {
+    exitRead_one_expression = (ctx: Read_one_expressionContext) => {
         const source = this.getNodeValue(ctx.source);
         this.setNodeValue(ctx, new expression.ReadOneExpression(source));
     }
 
 
-    exitRead_statement = (ctx: contexts.Read_statementContext) => {
+    exitRead_statement = (ctx: Read_statementContext) => {
         const source = this.getNodeValue(ctx.source);
         const thenWith = grammar.ThenWith.OrEmpty(this.getNodeValue(ctx.then()));
         this.setNodeValue(ctx, new statement.ReadStatement(source, thenWith));
     }
 
 
-    exitReadStatement = (ctx: contexts.ReadStatementContext) => {
+    exitReadStatement = (ctx: ReadStatementContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
     }
 
 
-    exitRepl = (ctx: contexts.ReplContext) => {
+    exitRepl = (ctx: ReplContext) => {
         const value = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, value);
     }
 
 
-    exitWith_singleton_statement = (ctx: contexts.With_singleton_statementContext) => {
+    exitWith_singleton_statement = (ctx: With_singleton_statementContext) => {
         const name = this.getNodeValue(ctx.typ);
         const typ = new type.CategoryType(name);
         const stmts = this.getNodeValue(ctx.stmts);
@@ -2341,12 +2341,12 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitWithSingletonStatement = (ctx: contexts.WithSingletonStatementContext) => {
+    exitWithSingletonStatement = (ctx: WithSingletonStatementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         this.setNodeValue(ctx, stmt);
     }
 
-    exitWrite_statement = (ctx: contexts.Write_statementContext) => {
+    exitWrite_statement = (ctx: Write_statementContext) => {
         const what = this.getNodeValue(ctx.what);
         const target = this.getNodeValue(ctx.target);
         const thenWith = this.getNodeValue(ctx.then());
@@ -2354,38 +2354,38 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitWith_resource_statement = (ctx: contexts.With_resource_statementContext) => {
+    exitWith_resource_statement = (ctx: With_resource_statementContext) => {
         const stmt = this.getNodeValue(ctx.stmt);
         const stmts = this.getNodeValue(ctx.stmts);
         this.setNodeValue(ctx, new statement.WithResourceStatement(stmt, stmts));
     }
 
 
-    exitAnyType = (ctx: contexts.AnyTypeContext) => {
+    exitAnyType = (ctx: AnyTypeContext) => {
         this.setNodeValue(ctx, type.AnyType.instance);
     }
 
 
-    exitAnyListType = (ctx: contexts.AnyListTypeContext) => {
+    exitAnyListType = (ctx: AnyListTypeContext) => {
         const typ = this.getNodeValue(ctx.any_type());
         this.setNodeValue(ctx, new type.ListType(typ));
     }
 
 
-    exitAnyDictType = (ctx: contexts.AnyDictTypeContext) => {
+    exitAnyDictType = (ctx: AnyDictTypeContext) => {
         const typ = this.getNodeValue(ctx.any_type());
         this.setNodeValue(ctx, new type.DictionaryType(typ));
     }
 
 
-    exitCastExpression = (ctx: contexts.CastExpressionContext) => {
+    exitCastExpression = (ctx: CastExpressionContext) => {
         const left = this.getNodeValue(ctx.left);
         const type = this.getNodeValue(ctx.right);
         this.setNodeValue(ctx, new expression.CastExpression(left, type, ctx.MUTABLE() != null));
     }
 
 
-    exitCatchAtomicStatement = (ctx: contexts.CatchAtomicStatementContext) => {
+    exitCatchAtomicStatement = (ctx: CatchAtomicStatementContext) => {
         const name = this.getNodeValue(ctx.name);
         const stmts = this.getNodeValue(ctx.stmts);
         const symbol = new expression.SymbolExpression(name);
@@ -2394,14 +2394,14 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitCatchCollectionStatement = (ctx: contexts.CatchCollectionStatementContext) => {
+    exitCatchCollectionStatement = (ctx: CatchCollectionStatementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const stmts = this.getNodeValue(ctx.stmts);
         this.setNodeValue(ctx, new statement.CollectionSwitchCase(exp, stmts));
     }
 
 
-    exitCatch_statement_list = (ctx: contexts.Catch_statement_listContext) => {
+    exitCatch_statement_list = (ctx: Catch_statement_listContext) => {
         const items = new statement.SwitchCaseList();
         ctx.catch_statement().forEach(function (r) {
             const item = this.getNodeValue(r);
@@ -2411,7 +2411,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitTry_statement = (ctx: contexts.Try_statementContext) => {
+    exitTry_statement = (ctx: Try_statementContext) => {
         const name = this.getNodeValue(ctx.name);
         const stmts = this.getNodeValue(ctx.stmts);
         const handlers = this.getNodeValue(ctx.handlers);
@@ -2422,239 +2422,239 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitRaise_statement = (ctx: contexts.Raise_statementContext) => {
+    exitRaise_statement = (ctx: Raise_statementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new statement.RaiseStatement(exp));
     }
 
 
-    exitMatchingList = (ctx: contexts.MatchingListContext) => {
+    exitMatchingList = (ctx: MatchingListContext) => {
         const exp = this.getNodeValue(ctx.source);
         this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
     }
 
 
-    exitMatchingRange = (ctx: contexts.MatchingRangeContext) => {
+    exitMatchingRange = (ctx: MatchingRangeContext) => {
         const exp = this.getNodeValue(ctx.source);
         this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
     }
 
 
-    exitMatchingExpression = (ctx: contexts.MatchingExpressionContext) => {
+    exitMatchingExpression = (ctx: MatchingExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new constraint.MatchingExpressionConstraint(exp));
     }
 
 
-    exitMatchingPattern = (ctx: contexts.MatchingPatternContext) => {
+    exitMatchingPattern = (ctx: MatchingPatternContext) => {
         this.setNodeValue(ctx, new constraint.MatchingPatternConstraint(new literal.TextLiteral(ctx.text.text)));
     }
 
-    exitLiteralSetLiteral = (ctx: contexts.LiteralSetLiteralContext) => {
+    exitLiteralSetLiteral = (ctx: LiteralSetLiteralContext) => {
         const items = this.getNodeValue(ctx.literal_list_literal());
         this.setNodeValue(ctx, new literal.SetLiteral(items));
     }
 
-    exitCsharp_identifier = (ctx: contexts.Csharp_identifierContext) => {
+    exitCsharp_identifier = (ctx: Csharp_identifierContext) => {
         this.setNodeValue(ctx, ctx.getText());
     }
 
-    exitCSharpIdentifier = (ctx: contexts.CSharpIdentifierContext) => {
+    exitCSharpIdentifier = (ctx: CSharpIdentifierContext) => {
         const name = this.getNodeValue(ctx.name);
         this.setNodeValue(ctx, new csharp.CSharpIdentifierExpression(null, name));
     }
 
-    exitCSharpChildIdentifier = (ctx: contexts.CSharpChildIdentifierContext) => {
+    exitCSharpChildIdentifier = (ctx: CSharpChildIdentifierContext) => {
         const parent = this.getNodeValue(ctx.parent);
         const name = this.getNodeValue(ctx.name);
         const child = new csharp.CSharpIdentifierExpression(parent, name);
         this.setNodeValue(ctx, child);
     }
 
-    exitCSharpBooleanLiteral = (ctx: contexts.CSharpBooleanLiteralContext) => {
+    exitCSharpBooleanLiteral = (ctx: CSharpBooleanLiteralContext) => {
         this.setNodeValue(ctx, new csharp.CSharpBooleanLiteral(ctx.getText()));
     }
 
 
-    exitCSharpIntegerLiteral = (ctx: contexts.CSharpIntegerLiteralContext) => {
+    exitCSharpIntegerLiteral = (ctx: CSharpIntegerLiteralContext) => {
         this.setNodeValue(ctx, new csharp.CSharpIntegerLiteral(ctx.getText()));
     }
 
 
-    exitCSharpDecimalLiteral = (ctx: contexts.CSharpDecimalLiteralContext) => {
+    exitCSharpDecimalLiteral = (ctx: CSharpDecimalLiteralContext) => {
         this.setNodeValue(ctx, new csharp.CSharpDecimalLiteral(ctx.getText()));
     }
 
 
-    exitCSharpCharacterLiteral = (ctx: contexts.CSharpCharacterLiteralContext) => {
+    exitCSharpCharacterLiteral = (ctx: CSharpCharacterLiteralContext) => {
         this.setNodeValue(ctx, new csharp.CSharpCharacterLiteral(ctx.getText()));
     }
 
 
-    exitCSharpTextLiteral = (ctx: contexts.CSharpTextLiteralContext) => {
+    exitCSharpTextLiteral = (ctx: CSharpTextLiteralContext) => {
         this.setNodeValue(ctx, new csharp.CSharpTextLiteral(ctx.getText()));
     }
 
 
-    exitCSharpCategoryBinding = (ctx: contexts.CSharpCategoryBindingContext) => {
+    exitCSharpCategoryBinding = (ctx: CSharpCategoryBindingContext) => {
         const binding = this.getNodeValue(ctx.binding);
         this.setNodeValue(ctx, new csharp.CSharpNativeCategoryBinding(binding));
     }
 
-    exitCsharp_primary_expression = (ctx: contexts.Csharp_primary_expressionContext) => {
+    exitCsharp_primary_expression = (ctx: Csharp_primary_expressionContext) => {
         const value = this.getNodeValue(ctx.getChild(0));
         this.setNodeValue(ctx, value);
     }
 
-    exitCsharp_this_expression = (ctx: contexts.Csharp_this_expressionContext) => {
+    exitCsharp_this_expression = (ctx: Csharp_this_expressionContext) => {
         this.setNodeValue(ctx, new csharp.CSharpThisExpression());
     }
 
-    exitCsharp_method_expression = (ctx: contexts.Csharp_method_expressionContext) => {
+    exitCsharp_method_expression = (ctx: Csharp_method_expressionContext) => {
         const name = this.getNodeValue(ctx.name);
         const args = this.getNodeValue(ctx.args);
         this.setNodeValue(ctx, new csharp.CSharpMethodExpression(name, args));
     }
 
-    exitCSharpMethodExpression = (ctx: contexts.CSharpMethodExpressionContext) => {
+    exitCSharpMethodExpression = (ctx: CSharpMethodExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-    exitCSharpArgumentList = (ctx: contexts.CSharpArgumentListContext) => {
+    exitCSharpArgumentList = (ctx: CSharpArgumentListContext) => {
         const item = this.getNodeValue(ctx.item);
         this.setNodeValue(ctx, new csharp.CSharpExpressionList(item));
     }
 
-    exitCSharpArgumentListItem = (ctx: contexts.CSharpArgumentListItemContext) => {
+    exitCSharpArgumentListItem = (ctx: CSharpArgumentListItemContext) => {
         const item = this.getNodeValue(ctx.item);
         const items = this.getNodeValue(ctx.items);
         items.add(item);
         this.setNodeValue(ctx, items);
     }
 
-    exitCSharpNativeStatement = (ctx: contexts.CSharpNativeStatementContext) => {
+    exitCSharpNativeStatement = (ctx: CSharpNativeStatementContext) => {
         const stmt = this.getNodeValue(ctx.csharp_statement());
         const call = new csharp.CSharpNativeCall(stmt);
         this.setNodeValue(ctx, call);
     }
 
 
-    exitCSharpPromptoIdentifier = (ctx: contexts.CSharpPromptoIdentifierContext) => {
+    exitCSharpPromptoIdentifier = (ctx: CSharpPromptoIdentifierContext) => {
         const name = ctx.DOLLAR_IDENTIFIER().getText();
         this.setNodeValue(ctx, new csharp.CSharpIdentifierExpression(null, name));
     }
 
 
-    exitCSharpPrimaryExpression = (ctx: contexts.CSharpPrimaryExpressionContext) => {
+    exitCSharpPrimaryExpression = (ctx: CSharpPrimaryExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-    exitCSharpSelectorExpression = (ctx: contexts.CSharpSelectorExpressionContext) => {
+    exitCSharpSelectorExpression = (ctx: CSharpSelectorExpressionContext) => {
         const parent = this.getNodeValue(ctx.parent);
         const child = this.getNodeValue(ctx.child);
         child.parent = parent;
         this.setNodeValue(ctx, child);
     }
 
-    exitCSharpStatement = (ctx: contexts.CSharpStatementContext) => {
+    exitCSharpStatement = (ctx: CSharpStatementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const stmt = new csharp.CSharpStatement(exp, false);
         this.setNodeValue(ctx, stmt);
     }
 
-    exitCSharpReturnStatement = (ctx: contexts.CSharpReturnStatementContext) => {
+    exitCSharpReturnStatement = (ctx: CSharpReturnStatementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new csharp.CSharpStatement(exp, true));
     }
 
 
-    exitPythonStatement = (ctx: contexts.PythonStatementContext) => {
+    exitPythonStatement = (ctx: PythonStatementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new python.PythonStatement(exp, false));
     }
 
-    exitPythonReturnStatement = (ctx: contexts.PythonReturnStatementContext) => {
+    exitPythonReturnStatement = (ctx: PythonReturnStatementContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new python.PythonStatement(exp, true));
     }
 
-    exitPython2CategoryBinding = (ctx: contexts.Python2CategoryBindingContext) => {
+    exitPython2CategoryBinding = (ctx: Python2CategoryBindingContext) => {
         const map = this.getNodeValue(ctx.binding);
         this.setNodeValue(ctx, new python.Python2NativeCategoryBinding(map));
     }
 
 
-    exitPython3CategoryBinding = (ctx: contexts.Python3CategoryBindingContext) => {
+    exitPython3CategoryBinding = (ctx: Python3CategoryBindingContext) => {
         const map = this.getNodeValue(ctx.binding);
         this.setNodeValue(ctx, new python.Python3NativeCategoryBinding(map));
     }
 
 
-    exitPython_category_binding = (ctx: contexts.Python_category_bindingContext) => {
+    exitPython_category_binding = (ctx: Python_category_bindingContext) => {
         const identifier = ctx.identifier().getText();
         const module = this.getNodeValue(ctx.python_module());
         const map = new python.PythonNativeCategoryBinding(identifier, module);
         this.setNodeValue(ctx, map);
     }
 
-    exitPython_method_expression = (ctx: contexts.Python_method_expressionContext) => {
+    exitPython_method_expression = (ctx: Python_method_expressionContext) => {
         const name = this.getNodeValue(ctx.name);
         const args = this.getNodeValue(ctx.args);
         const method = new python.PythonMethodExpression(name, args);
         this.setNodeValue(ctx, method);
     }
 
-    exitPythonGlobalMethodExpression = (ctx: contexts.PythonGlobalMethodExpressionContext) => {
+    exitPythonGlobalMethodExpression = (ctx: PythonGlobalMethodExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-    exitPythonMethodExpression = (ctx: contexts.PythonMethodExpressionContext) => {
+    exitPythonMethodExpression = (ctx: PythonMethodExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-    exitPython_module = (ctx: contexts.Python_moduleContext) => {
+    exitPython_module = (ctx: Python_moduleContext) => {
         const ids = ctx.python_identifier().map(rule => rule.getText());
         const module = new python.PythonModule(ids);
         this.setNodeValue(ctx, module);
     }
 
-    exitPython2NativeStatement = (ctx: contexts.Python2NativeStatementContext) => {
+    exitPython2NativeStatement = (ctx: Python2NativeStatementContext) => {
         const stmt = this.getNodeValue(ctx.python_native_statement());
         this.setNodeValue(ctx, new python.Python2NativeCall(stmt));
     }
 
 
-    exitPython3NativeStatement = (ctx: contexts.Python3NativeStatementContext) => {
+    exitPython3NativeStatement = (ctx: Python3NativeStatementContext) => {
         const stmt = this.getNodeValue(ctx.python_native_statement());
         this.setNodeValue(ctx, new python.Python3NativeCall(stmt));
     }
 
-    exitPython_native_statement = (ctx: contexts.Python_native_statementContext) => {
+    exitPython_native_statement = (ctx: Python_native_statementContext) => {
         const stmt = this.getNodeValue(ctx.python_statement());
         const module = this.getNodeValue(ctx.python_module());
         stmt.module = module || null;
         this.setNodeValue(ctx, new python.PythonNativeCall(stmt));
     }
 
-    exitPython_identifier = (ctx: contexts.Python_identifierContext) => {
+    exitPython_identifier = (ctx: Python_identifierContext) => {
         this.setNodeValue(ctx, ctx.getText());
     }
 
-    exitPythonIdentifier = (ctx: contexts.PythonIdentifierContext) => {
+    exitPythonIdentifier = (ctx: PythonIdentifierContext) => {
         const name = this.getNodeValue(ctx.name);
         this.setNodeValue(ctx, new python.PythonIdentifierExpression(null, name));
     }
 
-    exitPythonIdentifierExpression = (ctx: contexts.PythonIdentifierExpressionContext) => {
+    exitPythonIdentifierExpression = (ctx: PythonIdentifierExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-    exitPythonChildIdentifier = (ctx: contexts.PythonChildIdentifierContext) => {
+    exitPythonChildIdentifier = (ctx: PythonChildIdentifierContext) => {
         const parent = this.getNodeValue(ctx.parent);
         const name = this.getNodeValue(ctx.name);
         const child = new python.PythonIdentifierExpression(parent, name);
@@ -2662,46 +2662,46 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitPythonBooleanLiteral = (ctx: contexts.PythonBooleanLiteralContext) => {
+    exitPythonBooleanLiteral = (ctx: PythonBooleanLiteralContext) => {
         this.setNodeValue(ctx, new python.PythonBooleanLiteral(ctx.getText()));
     }
 
-    exitPythonIntegerLiteral = (ctx: contexts.PythonIntegerLiteralContext) => {
+    exitPythonIntegerLiteral = (ctx: PythonIntegerLiteralContext) => {
         this.setNodeValue(ctx, new python.PythonIntegerLiteral(ctx.getText()));
     }
 
 
-    exitPythonDecimalLiteral = (ctx: contexts.PythonDecimalLiteralContext) => {
+    exitPythonDecimalLiteral = (ctx: PythonDecimalLiteralContext) => {
         this.setNodeValue(ctx, new python.PythonDecimalLiteral(ctx.getText()));
     }
 
-    exitPythonCharacterLiteral = (ctx: contexts.PythonCharacterLiteralContext) => {
+    exitPythonCharacterLiteral = (ctx: PythonCharacterLiteralContext) => {
         this.setNodeValue(ctx, new python.PythonCharacterLiteral(ctx.getText()));
     }
 
 
-    exitPythonTextLiteral = (ctx: contexts.PythonTextLiteralContext) => {
+    exitPythonTextLiteral = (ctx: PythonTextLiteralContext) => {
         this.setNodeValue(ctx, new python.PythonTextLiteral(ctx.getText()));
     }
 
-    exitPythonLiteralExpression = (ctx: contexts.PythonLiteralExpressionContext) => {
+    exitPythonLiteralExpression = (ctx: PythonLiteralExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
 
-    exitPythonPromptoIdentifier = (ctx: contexts.PythonPromptoIdentifierContext) => {
+    exitPythonPromptoIdentifier = (ctx: PythonPromptoIdentifierContext) => {
         const name = ctx.DOLLAR_IDENTIFIER().getText();
         this.setNodeValue(ctx, new python.PythonIdentifierExpression(null, name));
     }
 
 
-    exitPythonPrimaryExpression = (ctx: contexts.PythonPrimaryExpressionContext) => {
+    exitPythonPrimaryExpression = (ctx: PythonPrimaryExpressionContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-    exitPythonArgumentList = (ctx: contexts.PythonArgumentListContext) => {
+    exitPythonArgumentList = (ctx: PythonArgumentListContext) => {
         const ordinal = this.getNodeValue(ctx.ordinal);
         const named = this.getNodeValue(ctx.named);
         ordinal.addAll(named);
@@ -2709,19 +2709,19 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitPythonNamedOnlyArgumentList = (ctx: contexts.PythonNamedOnlyArgumentListContext) => {
+    exitPythonNamedOnlyArgumentList = (ctx: PythonNamedOnlyArgumentListContext) => {
         const named = this.getNodeValue(ctx.named);
         this.setNodeValue(ctx, named);
     }
 
-    exitPythonNamedArgumentList = (ctx: contexts.PythonNamedArgumentListContext) => {
+    exitPythonNamedArgumentList = (ctx: PythonNamedArgumentListContext) => {
         const name = this.getNodeValue(ctx.name);
         const exp = this.getNodeValue(ctx.exp);
         const arg = new python.PythonNamedArgument(name, exp);
         this.setNodeValue(ctx, new python.PythonArgumentList(arg));
     }
 
-    exitPythonNamedArgumentListItem = (ctx: contexts.PythonNamedArgumentListItemContext) => {
+    exitPythonNamedArgumentListItem = (ctx: PythonNamedArgumentListItemContext) => {
         const name = this.getNodeValue(ctx.name);
         const exp = this.getNodeValue(ctx.exp);
         const arg = new python.PythonNamedArgument(name, exp);
@@ -2730,18 +2730,18 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, items);
     }
 
-    exitPythonOrdinalOnlyArgumentList = (ctx: contexts.PythonOrdinalOnlyArgumentListContext) => {
+    exitPythonOrdinalOnlyArgumentList = (ctx: PythonOrdinalOnlyArgumentListContext) => {
         const ordinal = this.getNodeValue(ctx.ordinal);
         this.setNodeValue(ctx, ordinal);
     }
 
-    exitPythonOrdinalArgumentList = (ctx: contexts.PythonOrdinalArgumentListContext) => {
+    exitPythonOrdinalArgumentList = (ctx: PythonOrdinalArgumentListContext) => {
         const item = this.getNodeValue(ctx.item);
         const arg = new python.PythonOrdinalArgument(item);
         this.setNodeValue(ctx, new python.PythonArgumentList(arg));
     }
 
-    exitPythonOrdinalArgumentListItem = (ctx: contexts.PythonOrdinalArgumentListItemContext) => {
+    exitPythonOrdinalArgumentListItem = (ctx: PythonOrdinalArgumentListItemContext) => {
         const item = this.getNodeValue(ctx.item);
         const arg = new python.PythonOrdinalArgument(item);
         const items = this.getNodeValue(ctx.items);
@@ -2749,7 +2749,7 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, items);
     }
 
-    exitPythonSelectorExpression = (ctx: contexts.PythonSelectorExpressionContext) => {
+    exitPythonSelectorExpression = (ctx: PythonSelectorExpressionContext) => {
         const parent = this.getNodeValue(ctx.parent);
         const selector = this.getNodeValue(ctx.child);
         selector.parent = parent;
@@ -2757,29 +2757,29 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitPythonSelfExpression = (ctx: contexts.PythonSelfExpressionContext) => {
+    exitPythonSelfExpression = (ctx: PythonSelfExpressionContext) => {
         this.setNodeValue(ctx, new python.PythonSelfExpression());
     }
 
 
-    exitJsxChild = (ctx: contexts.JsxChildContext) => {
+    exitJsxChild = (ctx: JsxChildContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.jsx));
     }
 
 
-    exitJsxCode = (ctx: contexts.JsxCodeContext) => {
+    exitJsxCode = (ctx: JsxCodeContext) => {
         const exp = this.getNodeValue(ctx.exp);
         const suite = this.getHiddenTokensAfterNode(ctx.RCURL());
         this.setNodeValue(ctx, new jsx.JsxCode(exp, suite));
     }
 
 
-    exitJsxExpression = (ctx: contexts.JsxExpressionContext) => {
+    exitJsxExpression = (ctx: JsxExpressionContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
     }
 
 
-    exitJsxElement = (ctx: contexts.JsxElementContext) => {
+    exitJsxElement = (ctx: JsxElementContext) => {
         const elem = this.getNodeValue(ctx.opening);
         const closing = this.getNodeValue(ctx.closing);
         elem.setClosing(closing);
@@ -2789,24 +2789,24 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitJsxSelfClosing = (ctx: contexts.JsxSelfClosingContext) => {
+    exitJsxSelfClosing = (ctx: JsxSelfClosingContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.jsx));
     }
 
 
-    exitJsxText = (ctx: contexts.JsxTextContext) => {
+    exitJsxText = (ctx: JsxTextContext) => {
         const text = parser.getFullText(ctx.text);
         this.setNodeValue(ctx, new jsx.JsxText(text));
     }
 
 
-    exitJsxValue = (ctx: contexts.JsxValueContext) => {
+    exitJsxValue = (ctx: JsxValueContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new jsx.JsxExpression(exp));
     }
 
 
-    exitJsx_attribute = (ctx: contexts.Jsx_attributeContext) => {
+    exitJsx_attribute = (ctx: Jsx_attributeContext) => {
         const name = this.getNodeValue(ctx.name);
         const value = this.getNodeValue(ctx.value);
         const stop = value != null ? ctx.value.stop : ctx.name.stop;
@@ -2815,31 +2815,31 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitJsx_children = (ctx: contexts.Jsx_childrenContext) => {
+    exitJsx_children = (ctx: Jsx_childrenContext) => {
         const list = ctx.jsx_child()
             .map(cx => this.getNodeValue(cx), this);
         this.setNodeValue(ctx, list);
     }
 
 
-    exitJsx_element_name = (ctx: contexts.Jsx_element_nameContext) => {
+    exitJsx_element_name = (ctx: Jsx_element_nameContext) => {
         const name = ctx.getText();
         this.setNodeValue(ctx, new grammar.Identifier(name));
     }
 
 
-    exitJsx_expression = (ctx: contexts.Jsx_expressionContext) => {
+    exitJsx_expression = (ctx: Jsx_expressionContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0)));
     }
 
 
-    exitJsx_identifier = (ctx: contexts.Jsx_identifierContext) => {
+    exitJsx_identifier = (ctx: Jsx_identifierContext) => {
         const name = ctx.getText();
         this.setNodeValue(ctx, new grammar.Identifier(name));
     }
 
 
-    exitJsx_fragment = (ctx: contexts.Jsx_fragmentContext) => {
+    exitJsx_fragment = (ctx: Jsx_fragmentContext) => {
         const openingSuite = this.getHiddenTokensAfterToken(ctx.jsx_fragment_start().stop);
         const fragment = new jsx.JsxFragment(openingSuite);
         fragment.children = this.getNodeValue(ctx.children_);
@@ -2847,13 +2847,13 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitJsxLiteral = (ctx: contexts.JsxLiteralContext) => {
+    exitJsxLiteral = (ctx: JsxLiteralContext) => {
         const text = ctx.getText();
         this.setNodeValue(ctx, new jsx.JsxLiteral(text));
     }
 
 
-    exitJsx_opening = (ctx: contexts.Jsx_openingContext) => {
+    exitJsx_opening = (ctx: Jsx_openingContext) => {
         const name = this.getNodeValue(ctx.name);
         const nameSuite = this.getHiddenTokensAfterToken(ctx.name.stop);
         const attributes = ctx.jsx_attribute()
@@ -2863,14 +2863,14 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitJsx_closing = (ctx: contexts.Jsx_closingContext) => {
+    exitJsx_closing = (ctx: Jsx_closingContext) => {
         const name = this.getNodeValue(ctx.name);
         const suite = this.getHiddenTokensAfterNode(ctx.GT());
         this.setNodeValue(ctx, new jsx.JsxClosing(name, suite));
     }
 
 
-    exitJsx_self_closing = (ctx: contexts.Jsx_self_closingContext) => {
+    exitJsx_self_closing = (ctx: Jsx_self_closingContext) => {
         const name = this.getNodeValue(ctx.name);
         const nameSuite = this.getHiddenTokensAfterToken(ctx.name.stop);
         const attributes = ctx.jsx_attribute()
@@ -2880,12 +2880,12 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitCssExpression = (ctx: contexts.CssExpressionContext) => {
+    exitCssExpression = (ctx: CssExpressionContext) => {
         this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
     }
 
 
-    exitCss_expression = (ctx: contexts.Css_expressionContext) => {
+    exitCss_expression = (ctx: Css_expressionContext) => {
         const exp = new css.CssExpression();
         ctx.css_field().forEach(function (cx) {
             const field = this.getNodeValue(cx);
@@ -2895,20 +2895,20 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitCss_field = (ctx: contexts.Css_fieldContext) => {
+    exitCss_field = (ctx: Css_fieldContext) => {
         const name = ctx.name.getText();
         const values = ctx.css_value().map(x => this.getNodeValue(x), this);
         this.setNodeValue(ctx, new css.CssField(name, values));
     }
 
 
-    exitCssText = (ctx: contexts.CssTextContext) => {
+    exitCssText = (ctx: CssTextContext) => {
         const text = this.input.getText({start: ctx.text.start, stop: ctx.text.stop});
         this.setNodeValue(ctx, new css.CssText(text));
     }
 
 
-    exitCssValue = (ctx: contexts.CssValueContext) => {
+    exitCssValue = (ctx: CssValueContext) => {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, new css.CssCode(exp));
     }
