@@ -5,20 +5,10 @@
   "description": "prompto runtime for javascript",
   "repository": "prompto/prompto-javascript.git",
   "devDependencies": {
-    "@babel/core": "^7.19.1",
-    "@babel/preset-typescript": "^7.18.6",
-    "@typescript-eslint/eslint-plugin": "^5.37.0",
-    "@typescript-eslint/parser": "^5.37.0",
-    "@types/node": "^18.7.23",
-    "compression-webpack-plugin": "^10.0.0",
-    "eslint": "^8.23.1",
-    "eslint-webpack-plugin": "^3.2.0",
-    "terser-webpack-plugin": "^5.3.6",
-    "ts-loader": "^9.3.1",
-    "typescript": "^4.8.3",
-    "webpack": "5.66.0",
-    "webpack-cli": "^4.10.0",
-    "y18n": "^5.0.8"
+    "ts-loader": "^9.4.1",
+    "ts-node": "^10.9.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   },
   "dependencies": {
     "antlr4": "4.9.3",
@@ -27,8 +17,7 @@
     "sync-request": "3.0.1"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.cjs",
-    "test": "jest"
+    "build": "webpack --config webpack.config.cjs"
   },
   "author": "Eric Vergnaud",
   "license": "ISC"
