@@ -1,5 +1,5 @@
 import List from './List.js';
-import { convertToJson, convertToJsonNode } from '../../../main/prompto/utils/Utils.ts';
+import { convertToJsonString, convertToJsonNode } from '../../../main/prompto/utils/Utils.ts';
 
 export default function StrictSet(values) {
     this.set = new Set(values);
@@ -25,7 +25,7 @@ StrictSet.prototype.join = function(separator) {
 StrictSet.prototype.getText = StrictSet.prototype.toString;
 
 StrictSet.prototype.toJson = function() {
-    return convertToJson(this);
+    return convertToJsonString(this);
 };
 
 StrictSet.prototype.toJsonNode = function() {

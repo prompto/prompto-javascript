@@ -1,7 +1,17 @@
-// Generated from OParser.g4 by ANTLR 4.11.2-SNAPSHOT
+// Generated from OParser.g4 by ANTLR 4.11.1
+// noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 
-import antlr4 from 'antlr4';
-import OParserListener from "./OParserListener";
+import {
+	ATN,
+	ATNDeserializer, DecisionState, DFA, FailedPredicateException,
+	RecognitionException, NoViableAltException, BailErrorStrategy,
+	Parser, ParserATNSimulator,
+	RuleContext, ParserRuleContext, PredictionMode, PredictionContextCache,
+	TerminalNode, RuleNode,
+	Token, TokenStream,
+	Interval, IntervalSet
+} from 'antlr4';
+import OParserListener from "./OParserListener.js";
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
 // eslint-disable-next-line no-unused-vars
 type int = number;
@@ -192,7 +202,7 @@ export default class OParser extends AbstractParser {
 	public static readonly DATE_LITERAL = 181;
 	public static readonly PERIOD_LITERAL = 182;
 	public static readonly JSX_TEXT = 183;
-	public static readonly EOF = antlr4.Token.EOF;
+	public static readonly EOF = Token.EOF;
 	public static readonly RULE_enum_category_declaration = 0;
 	public static readonly RULE_enum_native_declaration = 1;
 	public static readonly RULE_category_symbol = 2;
@@ -456,109 +466,149 @@ export default class OParser extends AbstractParser {
 	public static readonly RULE_css_identifier = 260;
 	public static readonly RULE_css_value = 261;
 	public static readonly RULE_css_text = 262;
-	public static readonly literalNames = [ null, "' '", null, null, null, 
-                                         "'Java:'", "'C#:'", "'Python2:'", 
-                                         "'Python3:'", "'JavaScript:'", 
-                                         "'Swift:'", "':'", "';'", null, 
-                                         "'..'", null, null, null, null, 
-                                         null, null, null, null, "'!'", 
-                                         "'&'", "'&&'", "'|'", "'||'", null, 
-                                         "'-'", "'*'", "'/'", "'\\'", "'%'", 
-                                         "'#'", "'>'", "'>='", "'<'", "'<='", 
-                                         "'<>'", "'<:>'", "'='", "'!='", 
-                                         "'=='", "'~='", "'~'", "'<-'", 
-                                         "'->'", "'=>'", "'Boolean'", "'Css'", 
-                                         "'Character'", "'Text'", "'Integer'", 
-                                         "'Decimal'", "'Date'", "'Time'", 
-                                         "'DateTime'", "'Period'", "'Version'", 
-                                         "'Method:'", "'Code'", "'Document'", 
-                                         "'Blob'", "'Image'", "'Uuid'", 
-                                         "'DbId'", "'Iterator'", "'Cursor'", 
-                                         "'Html'", "'Type'", "'abstract'", 
-                                         "'all'", "'always'", "'and'", "'any'", 
-                                         "'as'", null, "'attr'", "'attribute'", 
-                                         "'attributes'", "'bindings'", "'break'", 
-                                         "'by'", "'case'", "'catch'", "'category'", 
-                                         "'class'", "'contains'", "'def'", 
-                                         "'default'", "'define'", "'delete'", 
-                                         null, "'do'", "'doing'", "'each'", 
-                                         "'else'", "'enum'", "'enumerated'", 
-                                         "'except'", "'execute'", "'expecting'", 
-                                         "'extends'", "'fetch'", "'filtered'", 
-                                         "'finally'", "'flush'", "'for'", 
-                                         "'from'", "'getter'", "'has'", 
-                                         "'if'", "'in'", "'include'", "'index'", 
-                                         "'invoke:'", "'is'", "'matching'", 
-                                         "'method'", "'methods'", "'modulo'", 
-                                         "'mutable'", "'native'", "'None'", 
-                                         "'not'", null, "'null'", "'on'", 
-                                         "'one'", "'operator'", "'or'", 
-                                         "'order'", "'otherwise'", "'pass'", 
-                                         "'raise'", "'read'", "'receiving'", 
-                                         "'resource'", "'return'", "'returning'", 
-                                         "'rows'", "'self'", "'setter'", 
-                                         "'singleton'", "'sorted'", "'storable'", 
-                                         "'store'", "'super'", "'switch'", 
-                                         "'test'", "'then'", "'this'", "'throw'", 
-                                         "'to'", "'try'", "'verifying'", 
-                                         "'widget'", "'with'", "'when'", 
-                                         "'where'", "'while'", "'write'", 
-                                         null, null, "'MIN_INTEGER'", "'MAX_INTEGER'" ];
-	public static readonly symbolicNames = [ null, "SPACE", "WS", "LF", "COMMENT", 
-                                          "JAVA", "CSHARP", "PYTHON2", "PYTHON3", 
-                                          "JAVASCRIPT", "SWIFT", "COLON", 
-                                          "SEMI", "COMMA", "RANGE", "DOT", 
-                                          "LPAR", "RPAR", "LBRAK", "RBRAK", 
-                                          "LCURL", "RCURL", "QMARK", "XMARK", 
-                                          "AMP", "AMP2", "PIPE", "PIPE2", 
-                                          "PLUS", "MINUS", "STAR", "SLASH", 
-                                          "BSLASH", "PERCENT", "SHARP", 
-                                          "GT", "GTE", "LT", "LTE", "LTGT", 
-                                          "LTCOLONGT", "EQ", "XEQ", "EQ2", 
-                                          "TEQ", "TILDE", "LARROW", "RARROW", 
-                                          "EGT", "BOOLEAN", "CSS", "CHARACTER", 
-                                          "TEXT", "INTEGER", "DECIMAL", 
-                                          "DATE", "TIME", "DATETIME", "PERIOD", 
-                                          "VERSION", "METHOD_COLON", "CODE", 
-                                          "DOCUMENT", "BLOB", "IMAGE", "UUID", 
-                                          "DBID", "ITERATOR", "CURSOR", 
-                                          "HTML", "TYPE", "ABSTRACT", "ALL", 
-                                          "ALWAYS", "AND", "ANY", "AS", 
-                                          "ASC", "ATTR", "ATTRIBUTE", "ATTRIBUTES", 
-                                          "BINDINGS", "BREAK", "BY", "CASE", 
-                                          "CATCH", "CATEGORY", "CLASS", 
-                                          "CONTAINS", "DEF", "DEFAULT", 
-                                          "DEFINE", "DELETE", "DESC", "DO", 
-                                          "DOING", "EACH", "ELSE", "ENUM", 
-                                          "ENUMERATED", "EXCEPT", "EXECUTE", 
-                                          "EXPECTING", "EXTENDS", "FETCH", 
-                                          "FILTERED", "FINALLY", "FLUSH", 
-                                          "FOR", "FROM", "GETTER", "HAS", 
-                                          "IF", "IN", "INCLUDE", "INDEX", 
-                                          "INVOKE_COLON", "IS", "MATCHING", 
-                                          "METHOD", "METHODS", "MODULO", 
-                                          "MUTABLE", "NATIVE", "NONE", "NOT", 
-                                          "NOTHING", "NULL", "ON", "ONE", 
-                                          "OPERATOR", "OR", "ORDER", "OTHERWISE", 
-                                          "PASS", "RAISE", "READ", "RECEIVING", 
-                                          "RESOURCE", "RETURN", "RETURNING", 
-                                          "ROWS", "SELF", "SETTER", "SINGLETON", 
-                                          "SORTED", "STORABLE", "STORE", 
-                                          "SUPER", "SWITCH", "TEST", "THEN", 
-                                          "THIS", "THROW", "TO", "TRY", 
-                                          "VERIFYING", "WIDGET", "WITH", 
-                                          "WHEN", "WHERE", "WHILE", "WRITE", 
-                                          "BOOLEAN_LITERAL", "CHAR_LITERAL", 
-                                          "MIN_INTEGER", "MAX_INTEGER", 
-                                          "SYMBOL_IDENTIFIER", "TYPE_IDENTIFIER", 
-                                          "VARIABLE_IDENTIFIER", "NATIVE_IDENTIFIER", 
-                                          "DOLLAR_IDENTIFIER", "ARONDBASE_IDENTIFIER", 
-                                          "TEXT_LITERAL", "UUID_LITERAL", 
-                                          "VERSION_LITERAL", "INTEGER_LITERAL", 
-                                          "HEXA_LITERAL", "DECIMAL_LITERAL", 
-                                          "DATETIME_LITERAL", "TIME_LITERAL", 
-                                          "DATE_LITERAL", "PERIOD_LITERAL", 
-                                          "JSX_TEXT" ];
+	public static readonly literalNames: string[] = [ null, "' '", null, null, 
+                                                   null, "'Java:'", "'C#:'", 
+                                                   "'Python2:'", "'Python3:'", 
+                                                   "'JavaScript:'", "'Swift:'", 
+                                                   "':'", "';'", null, "'..'", 
+                                                   null, null, null, null, 
+                                                   null, null, null, null, 
+                                                   "'!'", "'&'", "'&&'", 
+                                                   "'|'", "'||'", null, 
+                                                   "'-'", "'*'", "'/'", 
+                                                   "'\\'", "'%'", "'#'", 
+                                                   "'>'", "'>='", "'<'", 
+                                                   "'<='", "'<>'", "'<:>'", 
+                                                   "'='", "'!='", "'=='", 
+                                                   "'~='", "'~'", "'<-'", 
+                                                   "'->'", "'=>'", "'Boolean'", 
+                                                   "'Css'", "'Character'", 
+                                                   "'Text'", "'Integer'", 
+                                                   "'Decimal'", "'Date'", 
+                                                   "'Time'", "'DateTime'", 
+                                                   "'Period'", "'Version'", 
+                                                   "'Method:'", "'Code'", 
+                                                   "'Document'", "'Blob'", 
+                                                   "'Image'", "'Uuid'", 
+                                                   "'DbId'", "'Iterator'", 
+                                                   "'Cursor'", "'Html'", 
+                                                   "'Type'", "'abstract'", 
+                                                   "'all'", "'always'", 
+                                                   "'and'", "'any'", "'as'", 
+                                                   null, "'attr'", "'attribute'", 
+                                                   "'attributes'", "'bindings'", 
+                                                   "'break'", "'by'", "'case'", 
+                                                   "'catch'", "'category'", 
+                                                   "'class'", "'contains'", 
+                                                   "'def'", "'default'", 
+                                                   "'define'", "'delete'", 
+                                                   null, "'do'", "'doing'", 
+                                                   "'each'", "'else'", "'enum'", 
+                                                   "'enumerated'", "'except'", 
+                                                   "'execute'", "'expecting'", 
+                                                   "'extends'", "'fetch'", 
+                                                   "'filtered'", "'finally'", 
+                                                   "'flush'", "'for'", "'from'", 
+                                                   "'getter'", "'has'", 
+                                                   "'if'", "'in'", "'include'", 
+                                                   "'index'", "'invoke:'", 
+                                                   "'is'", "'matching'", 
+                                                   "'method'", "'methods'", 
+                                                   "'modulo'", "'mutable'", 
+                                                   "'native'", "'None'", 
+                                                   "'not'", null, "'null'", 
+                                                   "'on'", "'one'", "'operator'", 
+                                                   "'or'", "'order'", "'otherwise'", 
+                                                   "'pass'", "'raise'", 
+                                                   "'read'", "'receiving'", 
+                                                   "'resource'", "'return'", 
+                                                   "'returning'", "'rows'", 
+                                                   "'self'", "'setter'", 
+                                                   "'singleton'", "'sorted'", 
+                                                   "'storable'", "'store'", 
+                                                   "'super'", "'switch'", 
+                                                   "'test'", "'then'", "'this'", 
+                                                   "'throw'", "'to'", "'try'", 
+                                                   "'verifying'", "'widget'", 
+                                                   "'with'", "'when'", "'where'", 
+                                                   "'while'", "'write'", 
+                                                   null, null, "'MIN_INTEGER'", 
+                                                   "'MAX_INTEGER'" ];
+	public static readonly symbolicNames: string[] = [ null, "SPACE", "WS", 
+                                                    "LF", "COMMENT", "JAVA", 
+                                                    "CSHARP", "PYTHON2", 
+                                                    "PYTHON3", "JAVASCRIPT", 
+                                                    "SWIFT", "COLON", "SEMI", 
+                                                    "COMMA", "RANGE", "DOT", 
+                                                    "LPAR", "RPAR", "LBRAK", 
+                                                    "RBRAK", "LCURL", "RCURL", 
+                                                    "QMARK", "XMARK", "AMP", 
+                                                    "AMP2", "PIPE", "PIPE2", 
+                                                    "PLUS", "MINUS", "STAR", 
+                                                    "SLASH", "BSLASH", "PERCENT", 
+                                                    "SHARP", "GT", "GTE", 
+                                                    "LT", "LTE", "LTGT", 
+                                                    "LTCOLONGT", "EQ", "XEQ", 
+                                                    "EQ2", "TEQ", "TILDE", 
+                                                    "LARROW", "RARROW", 
+                                                    "EGT", "BOOLEAN", "CSS", 
+                                                    "CHARACTER", "TEXT", 
+                                                    "INTEGER", "DECIMAL", 
+                                                    "DATE", "TIME", "DATETIME", 
+                                                    "PERIOD", "VERSION", 
+                                                    "METHOD_COLON", "CODE", 
+                                                    "DOCUMENT", "BLOB", 
+                                                    "IMAGE", "UUID", "DBID", 
+                                                    "ITERATOR", "CURSOR", 
+                                                    "HTML", "TYPE", "ABSTRACT", 
+                                                    "ALL", "ALWAYS", "AND", 
+                                                    "ANY", "AS", "ASC", 
+                                                    "ATTR", "ATTRIBUTE", 
+                                                    "ATTRIBUTES", "BINDINGS", 
+                                                    "BREAK", "BY", "CASE", 
+                                                    "CATCH", "CATEGORY", 
+                                                    "CLASS", "CONTAINS", 
+                                                    "DEF", "DEFAULT", "DEFINE", 
+                                                    "DELETE", "DESC", "DO", 
+                                                    "DOING", "EACH", "ELSE", 
+                                                    "ENUM", "ENUMERATED", 
+                                                    "EXCEPT", "EXECUTE", 
+                                                    "EXPECTING", "EXTENDS", 
+                                                    "FETCH", "FILTERED", 
+                                                    "FINALLY", "FLUSH", 
+                                                    "FOR", "FROM", "GETTER", 
+                                                    "HAS", "IF", "IN", "INCLUDE", 
+                                                    "INDEX", "INVOKE_COLON", 
+                                                    "IS", "MATCHING", "METHOD", 
+                                                    "METHODS", "MODULO", 
+                                                    "MUTABLE", "NATIVE", 
+                                                    "NONE", "NOT", "NOTHING", 
+                                                    "NULL", "ON", "ONE", 
+                                                    "OPERATOR", "OR", "ORDER", 
+                                                    "OTHERWISE", "PASS", 
+                                                    "RAISE", "READ", "RECEIVING", 
+                                                    "RESOURCE", "RETURN", 
+                                                    "RETURNING", "ROWS", 
+                                                    "SELF", "SETTER", "SINGLETON", 
+                                                    "SORTED", "STORABLE", 
+                                                    "STORE", "SUPER", "SWITCH", 
+                                                    "TEST", "THEN", "THIS", 
+                                                    "THROW", "TO", "TRY", 
+                                                    "VERIFYING", "WIDGET", 
+                                                    "WITH", "WHEN", "WHERE", 
+                                                    "WHILE", "WRITE", "BOOLEAN_LITERAL", 
+                                                    "CHAR_LITERAL", "MIN_INTEGER", 
+                                                    "MAX_INTEGER", "SYMBOL_IDENTIFIER", 
+                                                    "TYPE_IDENTIFIER", "VARIABLE_IDENTIFIER", 
+                                                    "NATIVE_IDENTIFIER", 
+                                                    "DOLLAR_IDENTIFIER", 
+                                                    "ARONDBASE_IDENTIFIER", 
+                                                    "TEXT_LITERAL", "UUID_LITERAL", 
+                                                    "VERSION_LITERAL", "INTEGER_LITERAL", 
+                                                    "HEXA_LITERAL", "DECIMAL_LITERAL", 
+                                                    "DATETIME_LITERAL", 
+                                                    "TIME_LITERAL", "DATE_LITERAL", 
+                                                    "PERIOD_LITERAL", "JSX_TEXT" ];
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
 		"enum_category_declaration", "enum_native_declaration", "category_symbol", 
@@ -638,13 +688,13 @@ export default class OParser extends AbstractParser {
 	public get ruleNames(): string[] { return OParser.ruleNames; }
 	public get serializedATN(): number[] { return OParser._serializedATN; }
 
-	protected createFailedPredicateException(predicate?: string, message?: string): antlr4.error.FailedPredicateException {
-		return new antlr4.error.FailedPredicateException(this, predicate, message);
+	protected createFailedPredicateException(predicate?: string, message?: string): FailedPredicateException {
+		return new FailedPredicateException(this, predicate, message);
 	}
 
-	constructor(input: antlr4.TokenStream) {
+	constructor(input: TokenStream) {
 		super(input);
-		this._interp = new antlr4.atn.ParserATNSimulator(this, OParser._ATN, OParser.DecisionsToDFA, new antlr4.atn.PredictionContextCache());
+		this._interp = new ParserATNSimulator(this, OParser._ATN, OParser.DecisionsToDFA, new PredictionContextCache());
 	}
 	// @RuleVersion(0)
 	public enum_category_declaration(): Enum_category_declarationContext {
@@ -663,7 +713,7 @@ export default class OParser extends AbstractParser {
 			this.state = 533;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==16) {
+			if (_la===16) {
 				{
 				this.state = 529;
 				this.match(OParser.LPAR);
@@ -677,7 +727,7 @@ export default class OParser extends AbstractParser {
 			this.state = 537;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==103) {
+			if (_la===103) {
 				{
 				this.state = 535;
 				this.match(OParser.EXTENDS);
@@ -695,7 +745,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -734,7 +784,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -767,7 +817,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -798,7 +848,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -822,7 +872,7 @@ export default class OParser extends AbstractParser {
 			this.state = 564;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==146) {
+			if (_la===146) {
 				{
 				this.state = 563;
 				this.match(OParser.STORABLE);
@@ -840,7 +890,7 @@ export default class OParser extends AbstractParser {
 			this.state = 571;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==113 || _la==118) {
+			if (_la===113 || _la===118) {
 				{
 				this.state = 570;
 				localctx._match = this.attribute_constraint();
@@ -850,7 +900,7 @@ export default class OParser extends AbstractParser {
 			this.state = 581;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==158) {
+			if (_la===158) {
 				{
 				this.state = 573;
 				this.match(OParser.WITH);
@@ -859,7 +909,7 @@ export default class OParser extends AbstractParser {
 				this.state = 579;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==16) {
+				if (_la===16) {
 					{
 					this.state = 575;
 					this.match(OParser.LPAR);
@@ -878,7 +928,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -906,7 +956,7 @@ export default class OParser extends AbstractParser {
 			this.state = 589;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==103) {
+			if (_la===103) {
 				{
 				this.state = 587;
 				this.match(OParser.EXTENDS);
@@ -920,7 +970,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -957,7 +1007,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -981,7 +1031,7 @@ export default class OParser extends AbstractParser {
 			this.state = 602;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==146) {
+			if (_la===146) {
 				{
 				this.state = 601;
 				this.match(OParser.STORABLE);
@@ -995,7 +1045,7 @@ export default class OParser extends AbstractParser {
 			this.state = 610;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==16) {
+			if (_la===16) {
 				{
 				this.state = 606;
 				this.match(OParser.LPAR);
@@ -1009,7 +1059,7 @@ export default class OParser extends AbstractParser {
 			this.state = 614;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==103) {
+			if (_la===103) {
 				{
 				this.state = 612;
 				this.match(OParser.EXTENDS);
@@ -1023,7 +1073,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1051,7 +1101,7 @@ export default class OParser extends AbstractParser {
 			this.state = 624;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==16) {
+			if (_la===16) {
 				{
 				this.state = 620;
 				this.match(OParser.LPAR);
@@ -1067,7 +1117,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1085,11 +1135,11 @@ export default class OParser extends AbstractParser {
 	public derived_list(_p: number): Derived_listContext;
 	// @RuleVersion(0)
 	public derived_list(_p?: number): Derived_listContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Derived_listContext = new Derived_listContext(this, this._ctx, _parentState);
 		let _prevctx: Derived_listContext = localctx;
@@ -1111,8 +1161,8 @@ export default class OParser extends AbstractParser {
 			this.state = 636;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 11, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -1140,7 +1190,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1179,7 +1229,7 @@ export default class OParser extends AbstractParser {
 				this.state = 642;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==4 || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 8386559) != 0) || ((((_la - 110)) & ~0x1F) == 0 && ((1 << (_la - 110)) & 1053185) != 0) || ((((_la - 143)) & ~0x1F) == 0 && ((1 << (_la - 143)) & 570425345) != 0)) {
+				if (_la===4 || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 8386559) !== 0) || ((((_la - 110)) & ~0x1F) === 0 && ((1 << (_la - 110)) & 1053185) !== 0) || ((((_la - 143)) & ~0x1F) === 0 && ((1 << (_la - 143)) & 570425345) !== 0)) {
 					{
 					this.state = 641;
 					(localctx as CurlyCategoryMethodListContext)._items = this.member_method_declaration_list();
@@ -1191,11 +1241,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1219,7 +1269,7 @@ export default class OParser extends AbstractParser {
 			this.state = 648;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4192255) != 0) || _la==168) {
+			if (((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4192255) !== 0) || _la===168) {
 				{
 				this.state = 647;
 				localctx._typ = this.typedef(0);
@@ -1241,7 +1291,7 @@ export default class OParser extends AbstractParser {
 			this.state = 657;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 				{
 				this.state = 656;
 				localctx._stmts = this.statement_list();
@@ -1253,7 +1303,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1283,7 +1333,7 @@ export default class OParser extends AbstractParser {
 			this.state = 665;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 				{
 				this.state = 664;
 				localctx._stmts = this.statement_list();
@@ -1295,7 +1345,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1319,7 +1369,7 @@ export default class OParser extends AbstractParser {
 			this.state = 670;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==123) {
+			if (_la===123) {
 				{
 				this.state = 669;
 				this.match(OParser.NATIVE);
@@ -1335,7 +1385,7 @@ export default class OParser extends AbstractParser {
 			this.state = 676;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 992) != 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 992) !== 0)) {
 				{
 				this.state = 675;
 				localctx._stmts = this.native_statement_list();
@@ -1347,7 +1397,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1377,7 +1427,7 @@ export default class OParser extends AbstractParser {
 			this.state = 684;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 				{
 				this.state = 683;
 				localctx._stmts = this.statement_list();
@@ -1389,7 +1439,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1413,7 +1463,7 @@ export default class OParser extends AbstractParser {
 			this.state = 689;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==123) {
+			if (_la===123) {
 				{
 				this.state = 688;
 				this.match(OParser.NATIVE);
@@ -1429,7 +1479,7 @@ export default class OParser extends AbstractParser {
 			this.state = 695;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 992) != 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 992) !== 0)) {
 				{
 				this.state = 694;
 				localctx._stmts = this.native_statement_list();
@@ -1441,7 +1491,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1465,7 +1515,7 @@ export default class OParser extends AbstractParser {
 			this.state = 700;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==146) {
+			if (_la===146) {
 				{
 				this.state = 699;
 				this.match(OParser.STORABLE);
@@ -1481,7 +1531,7 @@ export default class OParser extends AbstractParser {
 			this.state = 709;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==16) {
+			if (_la===16) {
 				{
 				this.state = 705;
 				this.match(OParser.LPAR);
@@ -1499,7 +1549,7 @@ export default class OParser extends AbstractParser {
 			this.state = 714;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==4 || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 110)) & ~0x1F) == 0 && ((1 << (_la - 110)) & 8705) != 0) || ((((_la - 143)) & ~0x1F) == 0 && ((1 << (_la - 143)) & 570425345) != 0)) {
+			if (_la===4 || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 110)) & ~0x1F) === 0 && ((1 << (_la - 110)) & 8705) !== 0) || ((((_la - 143)) & ~0x1F) === 0 && ((1 << (_la - 143)) & 570425345) !== 0)) {
 				{
 				this.state = 713;
 				localctx._methods = this.native_member_method_declaration_list();
@@ -1511,7 +1561,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1535,7 +1585,7 @@ export default class OParser extends AbstractParser {
 			this.state = 719;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==146) {
+			if (_la===146) {
 				{
 				this.state = 718;
 				this.match(OParser.STORABLE);
@@ -1551,7 +1601,7 @@ export default class OParser extends AbstractParser {
 			this.state = 728;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==16) {
+			if (_la===16) {
 				{
 				this.state = 724;
 				this.match(OParser.LPAR);
@@ -1569,7 +1619,7 @@ export default class OParser extends AbstractParser {
 			this.state = 733;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==4 || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 110)) & ~0x1F) == 0 && ((1 << (_la - 110)) & 8705) != 0) || ((((_la - 143)) & ~0x1F) == 0 && ((1 << (_la - 143)) & 570425345) != 0)) {
+			if (_la===4 || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 110)) & ~0x1F) === 0 && ((1 << (_la - 110)) & 8705) !== 0) || ((((_la - 143)) & ~0x1F) === 0 && ((1 << (_la - 143)) & 570425345) !== 0)) {
 				{
 				this.state = 732;
 				localctx._methods = this.native_member_method_declaration_list();
@@ -1581,7 +1631,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1614,7 +1664,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1632,11 +1682,11 @@ export default class OParser extends AbstractParser {
 	public native_category_binding_list(_p: number): Native_category_binding_listContext;
 	// @RuleVersion(0)
 	public native_category_binding_list(_p?: number): Native_category_binding_listContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Native_category_binding_listContext = new Native_category_binding_listContext(this, this._ctx, _parentState);
 		let _prevctx: Native_category_binding_listContext = localctx;
@@ -1660,8 +1710,8 @@ export default class OParser extends AbstractParser {
 			this.state = 753;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 28, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -1689,7 +1739,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1715,12 +1765,12 @@ export default class OParser extends AbstractParser {
 			this.state = 761;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4192255) != 0) || _la==122 || _la==168) {
+			if (((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4192255) !== 0) || _la===122 || _la===168) {
 				{
 				this.state = 758;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==122) {
+				if (_la===122) {
 					{
 					this.state = 757;
 					this.match(OParser.MUTABLE);
@@ -1741,7 +1791,7 @@ export default class OParser extends AbstractParser {
 			this.state = 767;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || _la==86 || _la==122 || _la==138 || _la==168 || _la==169) {
+			if (((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || _la===86 || _la===122 || _la===138 || _la===168 || _la===169) {
 				{
 				this.state = 766;
 				localctx._args = this.argument_list();
@@ -1755,7 +1805,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1781,12 +1831,12 @@ export default class OParser extends AbstractParser {
 			this.state = 777;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4192255) != 0) || _la==122 || _la==168) {
+			if (((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4192255) !== 0) || _la===122 || _la===168) {
 				{
 				this.state = 774;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==122) {
+				if (_la===122) {
 					{
 					this.state = 773;
 					this.match(OParser.MUTABLE);
@@ -1807,7 +1857,7 @@ export default class OParser extends AbstractParser {
 			this.state = 783;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || _la==86 || _la==122 || _la==138 || _la==168 || _la==169) {
+			if (((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || _la===86 || _la===122 || _la===138 || _la===168 || _la===169) {
 				{
 				this.state = 782;
 				localctx._args = this.argument_list();
@@ -1821,7 +1871,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1845,12 +1895,12 @@ export default class OParser extends AbstractParser {
 			this.state = 792;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4192255) != 0) || _la==122 || _la==168) {
+			if (((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4192255) !== 0) || _la===122 || _la===168) {
 				{
 				this.state = 789;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==122) {
+				if (_la===122) {
 					{
 					this.state = 788;
 					this.match(OParser.MUTABLE);
@@ -1871,7 +1921,7 @@ export default class OParser extends AbstractParser {
 			this.state = 798;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || _la==86 || _la==122 || _la==138 || _la==168 || _la==169) {
+			if (((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || _la===86 || _la===122 || _la===138 || _la===168 || _la===169) {
 				{
 				this.state = 797;
 				localctx._args = this.argument_list();
@@ -1885,7 +1935,7 @@ export default class OParser extends AbstractParser {
 			this.state = 803;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 				{
 				this.state = 802;
 				localctx._stmts = this.statement_list();
@@ -1897,7 +1947,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -1921,7 +1971,7 @@ export default class OParser extends AbstractParser {
 			this.state = 808;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || _la==168) {
+			if (((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || _la===168) {
 				{
 				this.state = 807;
 				localctx._typ = this.category_or_any_type();
@@ -1931,7 +1981,7 @@ export default class OParser extends AbstractParser {
 			this.state = 811;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==123) {
+			if (_la===123) {
 				{
 				this.state = 810;
 				this.match(OParser.NATIVE);
@@ -1947,7 +1997,7 @@ export default class OParser extends AbstractParser {
 			this.state = 817;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || _la==86 || _la==122 || _la==138 || _la==168 || _la==169) {
+			if (((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || _la===86 || _la===122 || _la===138 || _la===168 || _la===169) {
 				{
 				this.state = 816;
 				localctx._args = this.argument_list();
@@ -1965,7 +2015,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2029,12 +2079,12 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2061,7 +2111,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2087,7 +2137,7 @@ export default class OParser extends AbstractParser {
 			this.state = 850;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==16) {
+			if (_la===16) {
 				{
 				this.state = 846;
 				this.match(OParser.LPAR);
@@ -2103,7 +2153,7 @@ export default class OParser extends AbstractParser {
 			this.state = 855;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==41) {
+			if (_la===41) {
 				{
 				this.state = 853;
 				this.match(OParser.EQ);
@@ -2115,7 +2165,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2167,7 +2217,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2359,7 +2409,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2390,7 +2440,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2427,7 +2477,7 @@ export default class OParser extends AbstractParser {
 				this.state = 904;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==74) {
+				if (_la===74) {
 					{
 					this.state = 898;
 					this.match(OParser.AND);
@@ -2457,12 +2507,12 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 			this.state = 919;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==158) {
+			if (_la===158) {
 				{
 				this.state = 913;
 				this.match(OParser.WITH);
@@ -2501,12 +2551,12 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2539,7 +2589,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2572,7 +2622,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2608,7 +2658,7 @@ export default class OParser extends AbstractParser {
 			this.state = 952;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==90) {
+			if (_la===90) {
 				{
 				this.state = 947;
 				this.match(OParser.DEFAULT);
@@ -2617,7 +2667,7 @@ export default class OParser extends AbstractParser {
 				this.state = 950;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 					{
 					this.state = 949;
 					localctx._stmts = this.statement_list();
@@ -2632,7 +2682,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2686,7 +2736,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2718,7 +2768,7 @@ export default class OParser extends AbstractParser {
 			this.state = 975;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==13) {
+			if (_la===13) {
 				{
 				this.state = 973;
 				this.match(OParser.COMMA);
@@ -2738,7 +2788,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2766,7 +2816,7 @@ export default class OParser extends AbstractParser {
 			this.state = 985;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 				{
 				this.state = 984;
 				localctx._stmts = this.statement_list();
@@ -2788,7 +2838,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2821,7 +2871,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2876,7 +2926,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2894,11 +2944,11 @@ export default class OParser extends AbstractParser {
 	public else_if_statement_list(_p: number): Else_if_statement_listContext;
 	// @RuleVersion(0)
 	public else_if_statement_list(_p?: number): Else_if_statement_listContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Else_if_statement_listContext = new Else_if_statement_listContext(this, this._ctx, _parentState);
 		let _prevctx: Else_if_statement_listContext = localctx;
@@ -2930,8 +2980,8 @@ export default class OParser extends AbstractParser {
 			this.state = 1030;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 59, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -2967,7 +3017,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -2996,7 +3046,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -3030,7 +3080,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1043;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 				{
 				this.state = 1042;
 				localctx._stmts = this.statement_list();
@@ -3067,7 +3117,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1055;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 					{
 					this.state = 1054;
 					localctx._anyStmts = this.statement_list();
@@ -3091,7 +3141,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1063;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 					{
 					this.state = 1062;
 					localctx._finalStmts = this.statement_list();
@@ -3106,7 +3156,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -3145,7 +3195,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1074;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 					{
 					this.state = 1073;
 					(localctx as CatchAtomicStatementContext)._stmts = this.statement_list();
@@ -3175,7 +3225,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1085;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 					{
 					this.state = 1084;
 					(localctx as CatchCollectionStatementContext)._stmts = this.statement_list();
@@ -3189,7 +3239,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -3216,7 +3266,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -3242,7 +3292,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1096;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 16)) & ~0x1F) == 0 && ((1 << (_la - 16)) & 27271317) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 819201) != 0) || ((((_la - 122)) & ~0x1F) == 0 && ((1 << (_la - 122)) & 1150369825) != 0) || ((((_la - 163)) & ~0x1F) == 0 && ((1 << (_la - 163)) & 1047679) != 0)) {
+			if (((((_la - 16)) & ~0x1F) === 0 && ((1 << (_la - 16)) & 27271317) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 819201) !== 0) || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & 1150369825) !== 0) || ((((_la - 163)) & ~0x1F) === 0 && ((1 << (_la - 163)) & 1047679) !== 0)) {
 				{
 				this.state = 1095;
 				localctx._exp = this.expression(0);
@@ -3254,7 +3304,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -3282,7 +3332,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1103;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 16)) & ~0x1F) == 0 && ((1 << (_la - 16)) & 27271317) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 819201) != 0) || ((((_la - 122)) & ~0x1F) == 0 && ((1 << (_la - 122)) & 1150369825) != 0) || ((((_la - 163)) & ~0x1F) == 0 && ((1 << (_la - 163)) & 1047679) != 0)) {
+			if (((((_la - 16)) & ~0x1F) === 0 && ((1 << (_la - 16)) & 27271317) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 819201) !== 0) || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & 1150369825) !== 0) || ((((_la - 163)) & ~0x1F) === 0 && ((1 << (_la - 163)) & 1047679) !== 0)) {
 				{
 				this.state = 1102;
 				localctx._args = this.argument_assignment_list(0);
@@ -3294,7 +3344,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -3340,7 +3390,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1116;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==158) {
+				if (_la===158) {
 					{
 					this.state = 1114;
 					this.match(OParser.WITH);
@@ -3365,12 +3415,12 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -3395,7 +3445,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -3413,11 +3463,11 @@ export default class OParser extends AbstractParser {
 	public expression(_p: number): ExpressionContext;
 	// @RuleVersion(0)
 	public expression(_p?: number): ExpressionContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: ExpressionContext = new ExpressionContext(this, this._ctx, _parentState);
 		let _prevctx: ExpressionContext = localctx;
@@ -3509,7 +3559,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1139;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==122) {
+				if (_la===122) {
 					{
 					this.state = 1138;
 					this.match(OParser.MUTABLE);
@@ -3568,8 +3618,8 @@ export default class OParser extends AbstractParser {
 			this.state = 1250;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 84, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -3650,7 +3700,7 @@ export default class OParser extends AbstractParser {
 						this.state = 1175;
 						(localctx as AddExpressionContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
-						if(!(_la==28 || _la==29)) {
+						if(!(_la===28 || _la===29)) {
 						    (localctx as AddExpressionContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
@@ -3673,7 +3723,7 @@ export default class OParser extends AbstractParser {
 						this.state = 1178;
 						(localctx as CompareExpressionContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
-						if(!(((((_la - 35)) & ~0x1F) == 0 && ((1 << (_la - 35)) & 15) != 0))) {
+						if(!(((((_la - 35)) & ~0x1F) === 0 && ((1 << (_la - 35)) & 15) !== 0))) {
 						    (localctx as CompareExpressionContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
@@ -3698,7 +3748,7 @@ export default class OParser extends AbstractParser {
 						this.state = 1183;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la==125) {
+						if (_la===125) {
 							{
 							this.state = 1182;
 							this.match(OParser.NOT);
@@ -3721,7 +3771,7 @@ export default class OParser extends AbstractParser {
 						this.state = 1187;
 						(localctx as EqualsExpressionContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
-						if(!(((((_la - 42)) & ~0x1F) == 0 && ((1 << (_la - 42)) & 7) != 0))) {
+						if(!(((((_la - 42)) & ~0x1F) === 0 && ((1 << (_la - 42)) & 7) !== 0))) {
 						    (localctx as EqualsExpressionContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
@@ -3744,7 +3794,7 @@ export default class OParser extends AbstractParser {
 						this.state = 1191;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la==125) {
+						if (_la===125) {
 							{
 							this.state = 1190;
 							this.match(OParser.NOT);
@@ -3769,7 +3819,7 @@ export default class OParser extends AbstractParser {
 						this.state = 1197;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la==125) {
+						if (_la===125) {
 							{
 							this.state = 1196;
 							this.match(OParser.NOT);
@@ -3794,7 +3844,7 @@ export default class OParser extends AbstractParser {
 						this.state = 1203;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la==125) {
+						if (_la===125) {
 							{
 							this.state = 1202;
 							this.match(OParser.NOT);
@@ -3893,7 +3943,7 @@ export default class OParser extends AbstractParser {
 						this.state = 1227;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la==125) {
+						if (_la===125) {
 							{
 							this.state = 1226;
 							this.match(OParser.NOT);
@@ -3920,7 +3970,7 @@ export default class OParser extends AbstractParser {
 						this.state = 1234;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if (_la==125) {
+						if (_la===125) {
 							{
 							this.state = 1233;
 							this.match(OParser.NOT);
@@ -3970,7 +4020,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4036,7 +4086,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4067,7 +4117,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4092,7 +4142,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4164,7 +4214,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4182,11 +4232,11 @@ export default class OParser extends AbstractParser {
 	public instance_expression(_p: number): Instance_expressionContext;
 	// @RuleVersion(0)
 	public instance_expression(_p?: number): Instance_expressionContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Instance_expressionContext = new Instance_expressionContext(this, this._ctx, _parentState);
 		let _prevctx: Instance_expressionContext = localctx;
@@ -4208,8 +4258,8 @@ export default class OParser extends AbstractParser {
 			this.state = 1290;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 87, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -4235,7 +4285,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4253,11 +4303,11 @@ export default class OParser extends AbstractParser {
 	public mutable_instance_expression(_p: number): Mutable_instance_expressionContext;
 	// @RuleVersion(0)
 	public mutable_instance_expression(_p?: number): Mutable_instance_expressionContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Mutable_instance_expressionContext = new Mutable_instance_expressionContext(this, this._ctx, _parentState);
 		let _prevctx: Mutable_instance_expressionContext = localctx;
@@ -4281,8 +4331,8 @@ export default class OParser extends AbstractParser {
 			this.state = 1301;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 88, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -4308,7 +4358,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4402,7 +4452,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4433,7 +4483,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4461,7 +4511,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1326;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==109) {
+			if (_la===109) {
 				{
 				this.state = 1323;
 				this.match(OParser.FROM);
@@ -4477,7 +4527,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4525,12 +4575,12 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4562,7 +4612,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1349;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==158) {
+			if (_la===158) {
 				{
 				this.state = 1344;
 				this.match(OParser.WITH);
@@ -4586,7 +4636,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4619,7 +4669,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1362;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==16) {
+				if (_la===16) {
 					{
 					this.state = 1358;
 					this.match(OParser.LPAR);
@@ -4694,7 +4744,7 @@ export default class OParser extends AbstractParser {
 					this.state = 1387;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					if (_la==16) {
+					if (_la===16) {
 						{
 						this.state = 1383;
 						this.match(OParser.LPAR);
@@ -4721,7 +4771,7 @@ export default class OParser extends AbstractParser {
 					}
 					break;
 				default:
-					throw new antlr4.error.NoViableAltException(this);
+					throw new NoViableAltException(this);
 				}
 				this.state = 1403;
 				this._errHandler.sync(this);
@@ -4778,7 +4828,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -4811,7 +4861,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1428;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==16) {
+				if (_la===16) {
 					{
 					this.state = 1424;
 					this.match(OParser.LPAR);
@@ -4833,7 +4883,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1439;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==114) {
+				if (_la===114) {
 					{
 					this.state = 1434;
 					this.match(OParser.INCLUDE);
@@ -4867,7 +4917,7 @@ export default class OParser extends AbstractParser {
 					this.state = 1449;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					if (_la==16) {
+					if (_la===16) {
 						{
 						this.state = 1445;
 						this.match(OParser.LPAR);
@@ -4888,7 +4938,7 @@ export default class OParser extends AbstractParser {
 					this.state = 1455;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					if (_la==16) {
+					if (_la===16) {
 						{
 						this.state = 1451;
 						this.match(OParser.LPAR);
@@ -4915,12 +4965,12 @@ export default class OParser extends AbstractParser {
 					}
 					break;
 				default:
-					throw new antlr4.error.NoViableAltException(this);
+					throw new NoViableAltException(this);
 				}
 				this.state = 1471;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==160) {
+				if (_la===160) {
 					{
 					this.state = 1466;
 					this.match(OParser.WHERE);
@@ -4936,7 +4986,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1478;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==114) {
+				if (_la===114) {
 					{
 					this.state = 1473;
 					this.match(OParser.INCLUDE);
@@ -4952,7 +5002,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1486;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==132) {
+				if (_la===132) {
 					{
 					this.state = 1480;
 					this.match(OParser.ORDER);
@@ -4974,7 +5024,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5009,7 +5059,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5042,7 +5092,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5068,7 +5118,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1506;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==93) {
+			if (_la===93) {
 				{
 				this.state = 1505;
 				this.match(OParser.DESC);
@@ -5082,7 +5132,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1515;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==13) {
+			if (_la===13) {
 				{
 				this.state = 1510;
 				this.match(OParser.COMMA);
@@ -5100,7 +5150,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5168,7 +5218,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5203,7 +5253,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1538;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==13) {
+				if (_la===13) {
 					{
 					this.state = 1536;
 					this.match(OParser.COMMA);
@@ -5227,7 +5277,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1545;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (((((_la - 16)) & ~0x1F) == 0 && ((1 << (_la - 16)) & 27271317) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 819201) != 0) || ((((_la - 122)) & ~0x1F) == 0 && ((1 << (_la - 122)) & 1150369825) != 0) || ((((_la - 163)) & ~0x1F) == 0 && ((1 << (_la - 163)) & 1047679) != 0)) {
+				if (((((_la - 16)) & ~0x1F) === 0 && ((1 << (_la - 16)) & 27271317) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 819201) !== 0) || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & 1150369825) !== 0) || ((((_la - 163)) & ~0x1F) === 0 && ((1 << (_la - 163)) & 1047679) !== 0)) {
 					{
 					this.state = 1544;
 					(localctx as ConstructorNoFromContext)._args = this.argument_assignment_list(0);
@@ -5241,7 +5291,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5274,7 +5324,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5292,11 +5342,11 @@ export default class OParser extends AbstractParser {
 	public argument_assignment_list(_p: number): Argument_assignment_listContext;
 	// @RuleVersion(0)
 	public argument_assignment_list(_p?: number): Argument_assignment_listContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Argument_assignment_listContext = new Argument_assignment_listContext(this, this._ctx, _parentState);
 		let _prevctx: Argument_assignment_listContext = localctx;
@@ -5337,8 +5387,8 @@ export default class OParser extends AbstractParser {
 			this.state = 1568;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 118, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -5366,7 +5416,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5403,7 +5453,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5434,7 +5484,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5478,11 +5528,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5513,7 +5563,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5538,7 +5588,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5563,7 +5613,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5588,13 +5638,13 @@ export default class OParser extends AbstractParser {
 			this.state = 1602;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 121, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					{
 					{
 					this.state = 1599;
 					_la = this._input.LA(1);
-					if(!(_la==2 || _la==3)) {
+					if(!(_la===2 || _la===3)) {
 					this._errHandler.recoverInline(this);
 					}
 					else {
@@ -5611,7 +5661,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5656,7 +5706,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5683,7 +5733,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1612;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==4 || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 1149237247) != 0) || _la==86 || _la==99 || ((((_la - 119)) & ~0x1F) == 0 && ((1 << (_la - 119)) & 2315255833) != 0) || ((((_la - 157)) & ~0x1F) == 0 && ((1 << (_la - 157)) & 34817) != 0)) {
+			if (_la===4 || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 1149237247) !== 0) || _la===86 || _la===99 || ((((_la - 119)) & ~0x1F) === 0 && ((1 << (_la - 119)) & 2315255833) !== 0) || ((((_la - 157)) & ~0x1F) === 0 && ((1 << (_la - 157)) & 34817) !== 0)) {
 				{
 				this.state = 1611;
 				this.declarations();
@@ -5697,7 +5747,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5723,7 +5773,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1623;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==4 || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 1149237247) != 0) || _la==86 || _la==99 || ((((_la - 119)) & ~0x1F) == 0 && ((1 << (_la - 119)) & 2315255833) != 0) || ((((_la - 157)) & ~0x1F) == 0 && ((1 << (_la - 157)) & 34817) != 0)) {
+			while (_la===4 || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 1149237247) !== 0) || _la===86 || _la===99 || ((((_la - 119)) & ~0x1F) === 0 && ((1 << (_la - 119)) & 2315255833) !== 0) || ((((_la - 157)) & ~0x1F) === 0 && ((1 << (_la - 157)) & 34817) !== 0)) {
 				{
 				{
 				this.state = 1618;
@@ -5739,7 +5789,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5763,7 +5813,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1631;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==4) {
+			while (_la===4) {
 				{
 				{
 				this.state = 1626;
@@ -5779,7 +5829,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1639;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==172) {
+			while (_la===172) {
 				{
 				{
 				this.state = 1634;
@@ -5835,7 +5885,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5861,7 +5911,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1665;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==16) {
+			if (_la===16) {
 				{
 				this.state = 1651;
 				this.match(OParser.LPAR);
@@ -5929,7 +5979,7 @@ export default class OParser extends AbstractParser {
 					this.state = 1658;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					while (_la==13) {
+					while (_la===13) {
 						{
 						{
 						this.state = 1654;
@@ -5946,7 +5996,7 @@ export default class OParser extends AbstractParser {
 					}
 					break;
 				default:
-					throw new antlr4.error.NoViableAltException(this);
+					throw new NoViableAltException(this);
 				}
 				this.state = 1663;
 				this.match(OParser.RPAR);
@@ -5956,7 +6006,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -5981,7 +6031,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6010,7 +6060,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6033,7 +6083,7 @@ export default class OParser extends AbstractParser {
 			{
 			this.state = 1673;
 			_la = this._input.LA(1);
-			if(!(_la==110 || _la==143 || _la==169)) {
+			if(!(_la===110 || _la===143 || _la===169)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -6043,7 +6093,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6083,7 +6133,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6108,7 +6158,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6146,7 +6196,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6172,7 +6222,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1691;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==167) {
+			while (_la===167) {
 				{
 				{
 				this.state = 1686;
@@ -6188,7 +6238,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6214,7 +6264,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1700;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==167) {
+			while (_la===167) {
 				{
 				{
 				this.state = 1695;
@@ -6230,7 +6280,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6256,7 +6306,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1708;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==13) {
+			while (_la===13) {
 				{
 				{
 				this.state = 1704;
@@ -6272,7 +6322,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6346,7 +6396,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6370,7 +6420,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1724;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==122) {
+			if (_la===122) {
 				{
 				this.state = 1723;
 				this.match(OParser.MUTABLE);
@@ -6382,7 +6432,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1728;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 16)) & ~0x1F) == 0 && ((1 << (_la - 16)) & 27271317) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 819201) != 0) || ((((_la - 122)) & ~0x1F) == 0 && ((1 << (_la - 122)) & 1150369825) != 0) || ((((_la - 163)) & ~0x1F) == 0 && ((1 << (_la - 163)) & 1047679) != 0)) {
+			if (((((_la - 16)) & ~0x1F) === 0 && ((1 << (_la - 16)) & 27271317) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 819201) !== 0) || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & 1150369825) !== 0) || ((((_la - 163)) & ~0x1F) === 0 && ((1 << (_la - 163)) & 1047679) !== 0)) {
 				{
 				this.state = 1727;
 				this.expression_list();
@@ -6394,7 +6444,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6418,7 +6468,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1733;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==122) {
+			if (_la===122) {
 				{
 				this.state = 1732;
 				this.match(OParser.MUTABLE);
@@ -6430,7 +6480,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1737;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 16)) & ~0x1F) == 0 && ((1 << (_la - 16)) & 27271317) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 819201) != 0) || ((((_la - 122)) & ~0x1F) == 0 && ((1 << (_la - 122)) & 1150369825) != 0) || ((((_la - 163)) & ~0x1F) == 0 && ((1 << (_la - 163)) & 1047679) != 0)) {
+			if (((((_la - 16)) & ~0x1F) === 0 && ((1 << (_la - 16)) & 27271317) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 819201) !== 0) || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & 1150369825) !== 0) || ((((_la - 163)) & ~0x1F) === 0 && ((1 << (_la - 163)) & 1047679) !== 0)) {
 				{
 				this.state = 1736;
 				this.expression_list();
@@ -6442,7 +6492,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6468,7 +6518,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1746;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==13) {
+			while (_la===13) {
 				{
 				{
 				this.state = 1742;
@@ -6484,7 +6534,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6517,7 +6567,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6535,11 +6585,11 @@ export default class OParser extends AbstractParser {
 	public typedef(_p: number): TypedefContext;
 	// @RuleVersion(0)
 	public typedef(_p?: number): TypedefContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: TypedefContext = new TypedefContext(this, this._ctx, _parentState);
 		let _prevctx: TypedefContext = localctx;
@@ -6626,14 +6676,14 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 			this._ctx.stop = this._input.LT(-1);
 			this.state = 1783;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 144, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -6693,7 +6743,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6748,11 +6798,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6918,11 +6968,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6947,7 +6997,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -6971,7 +7021,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1813;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==122) {
+			if (_la===122) {
 				{
 				this.state = 1812;
 				this.match(OParser.MUTABLE);
@@ -6983,7 +7033,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7008,7 +7058,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7056,7 +7106,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7094,11 +7144,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7124,7 +7174,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1833;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==13) {
+			while (_la===13) {
 				{
 				{
 				this.state = 1829;
@@ -7140,7 +7190,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7178,11 +7228,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7220,7 +7270,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7251,7 +7301,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7280,7 +7330,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7328,11 +7378,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7355,7 +7405,7 @@ export default class OParser extends AbstractParser {
 			{
 			this.state = 1856;
 			_la = this._input.LA(1);
-			if(!(_la==86 || ((((_la - 122)) & ~0x1F) == 0 && ((1 << (_la - 122)) & 16842753) != 0) || _la==169)) {
+			if(!(_la===86 || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & 16842753) !== 0) || _la===169)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -7365,7 +7415,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7388,7 +7438,7 @@ export default class OParser extends AbstractParser {
 			{
 			this.state = 1858;
 			_la = this._input.LA(1);
-			if(!(_la==86 || _la==138 || _la==169)) {
+			if(!(_la===86 || _la===138 || _la===169)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -7398,7 +7448,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7421,7 +7471,7 @@ export default class OParser extends AbstractParser {
 			{
 			this.state = 1860;
 			_la = this._input.LA(1);
-			if(!(((((_la - 138)) & ~0x1F) == 0 && ((1 << (_la - 138)) & 2147483905) != 0))) {
+			if(!(((((_la - 138)) & ~0x1F) === 0 && ((1 << (_la - 138)) & 2147483905) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -7431,7 +7481,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7456,7 +7506,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7481,7 +7531,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7507,7 +7557,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1871;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==13) {
+			while (_la===13) {
 				{
 				{
 				this.state = 1867;
@@ -7523,7 +7573,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7560,7 +7610,7 @@ export default class OParser extends AbstractParser {
 				this.state = 1876;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==122) {
+				if (_la===122) {
 					{
 					this.state = 1875;
 					this.match(OParser.MUTABLE);
@@ -7574,7 +7624,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7634,11 +7684,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7664,7 +7714,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1888;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==41) {
+			if (_la===41) {
 				{
 				this.state = 1886;
 				this.match(OParser.EQ);
@@ -7676,7 +7726,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7703,7 +7753,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7760,11 +7810,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7782,11 +7832,11 @@ export default class OParser extends AbstractParser {
 	public any_type(_p: number): Any_typeContext;
 	// @RuleVersion(0)
 	public any_type(_p?: number): Any_typeContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Any_typeContext = new Any_typeContext(this, this._ctx, _parentState);
 		let _prevctx: Any_typeContext = localctx;
@@ -7808,8 +7858,8 @@ export default class OParser extends AbstractParser {
 			this.state = 1908;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 161, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -7856,7 +7906,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7882,7 +7932,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1917;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==4 || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 8386559) != 0) || ((((_la - 110)) & ~0x1F) == 0 && ((1 << (_la - 110)) & 1053185) != 0) || ((((_la - 143)) & ~0x1F) == 0 && ((1 << (_la - 143)) & 570425345) != 0)) {
+			while (_la===4 || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 8386559) !== 0) || ((((_la - 110)) & ~0x1F) === 0 && ((1 << (_la - 110)) & 1053185) !== 0) || ((((_la - 143)) & ~0x1F) === 0 && ((1 << (_la - 143)) & 570425345) !== 0)) {
 				{
 				{
 				this.state = 1912;
@@ -7898,7 +7948,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -7922,7 +7972,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1925;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==4) {
+			while (_la===4) {
 				{
 				{
 				this.state = 1920;
@@ -7938,7 +7988,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1933;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==172) {
+			while (_la===172) {
 				{
 				{
 				this.state = 1928;
@@ -7988,7 +8038,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8014,7 +8064,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1949;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==4 || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 110)) & ~0x1F) == 0 && ((1 << (_la - 110)) & 8705) != 0) || ((((_la - 143)) & ~0x1F) == 0 && ((1 << (_la - 143)) & 570425345) != 0)) {
+			while (_la===4 || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 110)) & ~0x1F) === 0 && ((1 << (_la - 110)) & 8705) !== 0) || ((((_la - 143)) & ~0x1F) === 0 && ((1 << (_la - 143)) & 570425345) !== 0)) {
 				{
 				{
 				this.state = 1944;
@@ -8030,7 +8080,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8054,7 +8104,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1957;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==4) {
+			while (_la===4) {
 				{
 				{
 				this.state = 1952;
@@ -8070,7 +8120,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1965;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==172) {
+			while (_la===172) {
 				{
 				{
 				this.state = 1960;
@@ -8108,7 +8158,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8180,11 +8230,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8210,7 +8260,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1987;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==109) {
+			if (_la===109) {
 				{
 				this.state = 1986;
 				this.python_module();
@@ -8220,7 +8270,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8252,7 +8302,7 @@ export default class OParser extends AbstractParser {
 			this.state = 1997;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==15) {
+			while (_la===15) {
 				{
 				{
 				this.state = 1993;
@@ -8268,7 +8318,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8294,7 +8344,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2005;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==15) {
+			while (_la===15) {
 				{
 				{
 				this.state = 2001;
@@ -8310,7 +8360,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2009;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==109) {
+			if (_la===109) {
 				{
 				this.state = 2008;
 				this.javascript_module();
@@ -8320,7 +8370,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8350,7 +8400,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2015;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==31) {
+			if (_la===31) {
 				{
 				this.state = 2014;
 				this.match(OParser.SLASH);
@@ -8362,7 +8412,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2022;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==31) {
+			while (_la===31) {
 				{
 				{
 				this.state = 2018;
@@ -8378,7 +8428,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2027;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==15) {
+			if (_la===15) {
 				{
 				this.state = 2025;
 				this.match(OParser.DOT);
@@ -8390,7 +8440,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8416,7 +8466,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2034;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==13) {
+			while (_la===13) {
 				{
 				{
 				this.state = 2030;
@@ -8432,7 +8482,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8458,7 +8508,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2042;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==13) {
+			while (_la===13) {
 				{
 				{
 				this.state = 2038;
@@ -8474,7 +8524,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8526,7 +8576,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8551,7 +8601,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8577,7 +8627,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2059;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) == 0 && ((1 << _la) & 992) != 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 992) !== 0)) {
 				{
 				{
 				this.state = 2054;
@@ -8593,7 +8643,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8665,11 +8715,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8695,7 +8745,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2076;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==12) {
+			if (_la===12) {
 				{
 				this.state = 2075;
 				this.match(OParser.SEMI);
@@ -8705,7 +8755,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2079;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==109) {
+			if (_la===109) {
 				{
 				this.state = 2078;
 				this.python_module();
@@ -8715,7 +8765,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8741,7 +8791,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2083;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==12) {
+			if (_la===12) {
 				{
 				this.state = 2082;
 				this.match(OParser.SEMI);
@@ -8751,7 +8801,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2086;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==109) {
+			if (_la===109) {
 				{
 				this.state = 2085;
 				this.javascript_module();
@@ -8761,7 +8811,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8787,7 +8837,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2094;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) == 0 && ((1 << _la) & 538247184) != 0) || ((((_la - 37)) & ~0x1F) == 0 && ((1 << (_la - 37)) & 4286574601) != 0) || ((((_la - 69)) & ~0x1F) == 0 && ((1 << (_la - 69)) & 42082371) != 0) || ((((_la - 104)) & ~0x1F) == 0 && ((1 << (_la - 104)) & 8683803) != 0) || ((((_la - 136)) & ~0x1F) == 0 && ((1 << (_la - 136)) & 4266342989) != 0) || ((((_la - 168)) & ~0x1F) == 0 && ((1 << (_la - 168)) & 32739) != 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 538247184) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 4286574601) !== 0) || ((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & 42082371) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 8683803) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4266342989) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 32739) !== 0)) {
 				{
 				{
 				this.state = 2089;
@@ -8803,7 +8853,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8829,7 +8879,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2103;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (((((_la - 16)) & ~0x1F) == 0 && ((1 << (_la - 16)) & 27271317) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 819201) != 0) || ((((_la - 122)) & ~0x1F) == 0 && ((1 << (_la - 122)) & 1150369825) != 0) || ((((_la - 163)) & ~0x1F) == 0 && ((1 << (_la - 163)) & 1047679) != 0)) {
+			while (((((_la - 16)) & ~0x1F) === 0 && ((1 << (_la - 16)) & 27271317) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 819201) !== 0) || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & 1150369825) !== 0) || ((((_la - 163)) & ~0x1F) === 0 && ((1 << (_la - 163)) & 1047679) !== 0)) {
 				{
 				{
 				this.state = 2098;
@@ -8845,7 +8895,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8871,7 +8921,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2112;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==84) {
+			while (_la===84) {
 				{
 				{
 				this.state = 2107;
@@ -8887,7 +8937,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8913,8 +8963,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2121;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 190, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					{
 					{
 					this.state = 2116;
@@ -8931,7 +8981,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -8995,7 +9045,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9040,7 +9090,7 @@ export default class OParser extends AbstractParser {
 				this.state = 2143;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==29) {
+				if (_la===29) {
 					{
 					this.state = 2142;
 					this.match(OParser.MINUS);
@@ -9098,7 +9148,7 @@ export default class OParser extends AbstractParser {
 				this.state = 2152;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==29) {
+				if (_la===29) {
 					{
 					this.state = 2151;
 					this.match(OParser.MINUS);
@@ -9176,7 +9226,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9202,7 +9252,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2170;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==13) {
+			while (_la===13) {
 				{
 				{
 				this.state = 2166;
@@ -9218,7 +9268,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9241,7 +9291,7 @@ export default class OParser extends AbstractParser {
 			{
 			this.state = 2173;
 			_la = this._input.LA(1);
-			if(!(_la==142 || _la==152)) {
+			if(!(_la===142 || _la===152)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -9251,7 +9301,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9275,7 +9325,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2178;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==168) {
+			if (_la===168) {
 				{
 				this.state = 2175;
 				this.category_type();
@@ -9289,7 +9339,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9318,7 +9368,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9398,11 +9448,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9468,7 +9518,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9492,7 +9542,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2199;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==122) {
+			if (_la===122) {
 				{
 				this.state = 2198;
 				this.match(OParser.MUTABLE);
@@ -9504,7 +9554,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2203;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 16)) & ~0x1F) == 0 && ((1 << (_la - 16)) & 27271317) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 819201) != 0) || ((((_la - 122)) & ~0x1F) == 0 && ((1 << (_la - 122)) & 1150369825) != 0) || ((((_la - 163)) & ~0x1F) == 0 && ((1 << (_la - 163)) & 1047679) != 0)) {
+			if (((((_la - 16)) & ~0x1F) === 0 && ((1 << (_la - 16)) & 27271317) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 819201) !== 0) || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & 1150369825) !== 0) || ((((_la - 163)) & ~0x1F) === 0 && ((1 << (_la - 163)) & 1047679) !== 0)) {
 				{
 				this.state = 2202;
 				this.expression_tuple();
@@ -9516,7 +9566,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9540,7 +9590,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2208;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==122) {
+			if (_la===122) {
 				{
 				this.state = 2207;
 				this.match(OParser.MUTABLE);
@@ -9584,7 +9634,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9610,7 +9660,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2222;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 2016) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4292868093) != 0) || ((((_la - 81)) & ~0x1F) == 0 && ((1 << (_la - 81)) & 4294967295) != 0) || ((((_la - 113)) & ~0x1F) == 0 && ((1 << (_la - 113)) & 4294967285) != 0) || ((((_la - 145)) & ~0x1F) == 0 && ((1 << (_la - 145)) & 298057663) != 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 2016) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4292868093) !== 0) || ((((_la - 81)) & ~0x1F) === 0 && ((1 << (_la - 81)) & 4294967295) !== 0) || ((((_la - 113)) & ~0x1F) === 0 && ((1 << (_la - 113)) & 4294967285) !== 0) || ((((_la - 145)) & ~0x1F) === 0 && ((1 << (_la - 145)) & 298057663) !== 0)) {
 				{
 				this.state = 2221;
 				this.doc_entry_list();
@@ -9622,7 +9672,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9650,14 +9700,14 @@ export default class OParser extends AbstractParser {
 			this.state = 2236;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 16)) & ~0x1F) == 0 && ((1 << (_la - 16)) & 27271317) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 819201) != 0) || ((((_la - 122)) & ~0x1F) == 0 && ((1 << (_la - 122)) & 1150369825) != 0) || ((((_la - 163)) & ~0x1F) == 0 && ((1 << (_la - 163)) & 1047679) != 0)) {
+			if (((((_la - 16)) & ~0x1F) === 0 && ((1 << (_la - 16)) & 27271317) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 819201) !== 0) || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & 1150369825) !== 0) || ((((_la - 163)) & ~0x1F) === 0 && ((1 << (_la - 163)) & 1047679) !== 0)) {
 				{
 				this.state = 2228;
 				this.expression(0);
 				this.state = 2233;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la==13) {
+				while (_la===13) {
 					{
 					{
 					this.state = 2229;
@@ -9676,7 +9726,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9702,7 +9752,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2243;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==13) {
+			while (_la===13) {
 				{
 				{
 				this.state = 2239;
@@ -9718,7 +9768,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9747,7 +9797,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9901,11 +9951,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9931,7 +9981,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2259;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==13) {
+			while (_la===13) {
 				{
 				{
 				this.state = 2255;
@@ -9947,7 +9997,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -9976,7 +10026,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10130,11 +10180,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10190,7 +10240,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10219,7 +10269,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10237,11 +10287,11 @@ export default class OParser extends AbstractParser {
 	public assignable_instance(_p: number): Assignable_instanceContext;
 	// @RuleVersion(0)
 	public assignable_instance(_p?: number): Assignable_instanceContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Assignable_instanceContext = new Assignable_instanceContext(this, this._ctx, _parentState);
 		let _prevctx: Assignable_instanceContext = localctx;
@@ -10263,8 +10313,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2292;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 211, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -10289,7 +10339,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10335,7 +10385,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10364,7 +10414,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10412,7 +10462,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10443,7 +10493,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10484,7 +10534,7 @@ export default class OParser extends AbstractParser {
 				this.state = 2322;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la==86 || _la==138 || _la==169) {
+				if (_la===86 || _la===138 || _la===169) {
 					{
 					this.state = 2321;
 					this.variable_identifier_list();
@@ -10496,11 +10546,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10538,7 +10588,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10569,7 +10619,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10600,7 +10650,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10631,7 +10681,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10657,7 +10707,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2351;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==13) {
+			while (_la===13) {
 				{
 				{
 				this.state = 2347;
@@ -10673,7 +10723,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10699,7 +10749,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2359;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==15) {
+			while (_la===15) {
 				{
 				{
 				this.state = 2355;
@@ -10715,11 +10765,11 @@ export default class OParser extends AbstractParser {
 			this.state = 2363;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==77 || _la==93) {
+			if (_la===77 || _la===93) {
 				{
 				this.state = 2362;
 				_la = this._input.LA(1);
-				if(!(_la==77 || _la==93)) {
+				if(!(_la===77 || _la===93)) {
 				this._errHandler.recoverInline(this);
 				}
 				else {
@@ -10732,7 +10782,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10758,7 +10808,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2370;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==13) {
+			while (_la===13) {
 				{
 				{
 				this.state = 2366;
@@ -10774,7 +10824,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10845,11 +10895,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10872,7 +10922,7 @@ export default class OParser extends AbstractParser {
 			{
 			this.state = 2381;
 			_la = this._input.LA(1);
-			if(!((((_la) & ~0x1F) == 0 && ((1 << _la) & 2016) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4292868093) != 0) || ((((_la - 81)) & ~0x1F) == 0 && ((1 << (_la - 81)) & 4294967295) != 0) || ((((_la - 113)) & ~0x1F) == 0 && ((1 << (_la - 113)) & 4294967285) != 0) || ((((_la - 145)) & ~0x1F) == 0 && ((1 << (_la - 145)) & 262079) != 0))) {
+			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 2016) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4292868093) !== 0) || ((((_la - 81)) & ~0x1F) === 0 && ((1 << (_la - 81)) & 4294967295) !== 0) || ((((_la - 113)) & ~0x1F) === 0 && ((1 << (_la - 113)) & 4294967285) !== 0) || ((((_la - 145)) & ~0x1F) === 0 && ((1 << (_la - 145)) & 262079) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -10882,7 +10932,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10911,7 +10961,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10940,7 +10990,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10969,7 +11019,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -10998,7 +11048,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11027,7 +11077,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11052,7 +11102,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11077,7 +11127,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11102,7 +11152,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11127,7 +11177,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11150,7 +11200,7 @@ export default class OParser extends AbstractParser {
 			{
 			this.state = 2406;
 			_la = this._input.LA(1);
-			if(!(_la==33 || _la==121)) {
+			if(!(_la===33 || _la===121)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -11160,7 +11210,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11184,7 +11234,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11208,7 +11258,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11254,7 +11304,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11272,11 +11322,11 @@ export default class OParser extends AbstractParser {
 	public javascript_expression(_p: number): Javascript_expressionContext;
 	// @RuleVersion(0)
 	public javascript_expression(_p?: number): Javascript_expressionContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Javascript_expressionContext = new Javascript_expressionContext(this, this._ctx, _parentState);
 		let _prevctx: Javascript_expressionContext = localctx;
@@ -11298,8 +11348,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2428;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 223, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -11325,7 +11375,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11398,7 +11448,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11423,7 +11473,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11450,7 +11500,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11502,7 +11552,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11530,7 +11580,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2455;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 329696) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4292868093) != 0) || ((((_la - 81)) & ~0x1F) == 0 && ((1 << (_la - 81)) & 4294967295) != 0) || ((((_la - 113)) & ~0x1F) == 0 && ((1 << (_la - 113)) & 4294967285) != 0) || ((((_la - 145)) & ~0x1F) == 0 && ((1 << (_la - 145)) & 2513436607) != 0) || _la==178) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 329696) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4292868093) !== 0) || ((((_la - 81)) & ~0x1F) === 0 && ((1 << (_la - 81)) & 4294967295) !== 0) || ((((_la - 113)) & ~0x1F) === 0 && ((1 << (_la - 113)) & 4294967285) !== 0) || ((((_la - 145)) & ~0x1F) === 0 && ((1 << (_la - 145)) & 2513436607) !== 0) || _la===178) {
 				{
 				this.state = 2454;
 				localctx._args = this.javascript_arguments(0);
@@ -11542,7 +11592,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11560,11 +11610,11 @@ export default class OParser extends AbstractParser {
 	public javascript_arguments(_p: number): Javascript_argumentsContext;
 	// @RuleVersion(0)
 	public javascript_arguments(_p?: number): Javascript_argumentsContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Javascript_argumentsContext = new Javascript_argumentsContext(this, this._ctx, _parentState);
 		let _prevctx: Javascript_argumentsContext = localctx;
@@ -11586,8 +11636,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2467;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 227, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -11615,7 +11665,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11644,7 +11694,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11673,7 +11723,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11698,7 +11748,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11760,11 +11810,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11934,11 +11984,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11980,7 +12030,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -11998,11 +12048,11 @@ export default class OParser extends AbstractParser {
 	public python_expression(_p: number): Python_expressionContext;
 	// @RuleVersion(0)
 	public python_expression(_p?: number): Python_expressionContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Python_expressionContext = new Python_expressionContext(this, this._ctx, _parentState);
 		let _prevctx: Python_expressionContext = localctx;
@@ -12024,8 +12074,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2506;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 231, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -12051,7 +12101,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12115,7 +12165,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12140,7 +12190,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12184,11 +12234,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12216,7 +12266,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2529;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 67552) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4292868093) != 0) || ((((_la - 81)) & ~0x1F) == 0 && ((1 << (_la - 81)) & 4294967295) != 0) || ((((_la - 113)) & ~0x1F) == 0 && ((1 << (_la - 113)) & 4294967285) != 0) || ((((_la - 145)) & ~0x1F) == 0 && ((1 << (_la - 145)) & 2513436607) != 0) || _la==178) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 67552) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4292868093) !== 0) || ((((_la - 81)) & ~0x1F) === 0 && ((1 << (_la - 81)) & 4294967295) !== 0) || ((((_la - 113)) & ~0x1F) === 0 && ((1 << (_la - 113)) & 4294967285) !== 0) || ((((_la - 145)) & ~0x1F) === 0 && ((1 << (_la - 145)) & 2513436607) !== 0) || _la===178) {
 				{
 				this.state = 2528;
 				localctx._args = this.python_argument_list();
@@ -12228,7 +12278,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12280,7 +12330,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12298,11 +12348,11 @@ export default class OParser extends AbstractParser {
 	public python_ordinal_argument_list(_p: number): Python_ordinal_argument_listContext;
 	// @RuleVersion(0)
 	public python_ordinal_argument_list(_p?: number): Python_ordinal_argument_listContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Python_ordinal_argument_listContext = new Python_ordinal_argument_listContext(this, this._ctx, _parentState);
 		let _prevctx: Python_ordinal_argument_listContext = localctx;
@@ -12324,8 +12374,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2549;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 236, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -12353,7 +12403,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12371,11 +12421,11 @@ export default class OParser extends AbstractParser {
 	public python_named_argument_list(_p: number): Python_named_argument_listContext;
 	// @RuleVersion(0)
 	public python_named_argument_list(_p?: number): Python_named_argument_listContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Python_named_argument_listContext = new Python_named_argument_listContext(this, this._ctx, _parentState);
 		let _prevctx: Python_named_argument_listContext = localctx;
@@ -12401,8 +12451,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2565;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 237, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -12434,7 +12484,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12463,7 +12513,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12481,11 +12531,11 @@ export default class OParser extends AbstractParser {
 	public python_identifier_expression(_p: number): Python_identifier_expressionContext;
 	// @RuleVersion(0)
 	public python_identifier_expression(_p?: number): Python_identifier_expressionContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Python_identifier_expressionContext = new Python_identifier_expressionContext(this, this._ctx, _parentState);
 		let _prevctx: Python_identifier_expressionContext = localctx;
@@ -12522,8 +12572,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2582;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 239, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -12551,7 +12601,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12613,11 +12663,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12787,11 +12837,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12837,7 +12887,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12855,11 +12905,11 @@ export default class OParser extends AbstractParser {
 	public java_expression(_p: number): Java_expressionContext;
 	// @RuleVersion(0)
 	public java_expression(_p?: number): Java_expressionContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Java_expressionContext = new Java_expressionContext(this, this._ctx, _parentState);
 		let _prevctx: Java_expressionContext = localctx;
@@ -12881,8 +12931,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2615;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 243, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -12908,7 +12958,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12967,7 +13017,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -12992,7 +13042,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13019,7 +13069,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13059,11 +13109,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13091,7 +13141,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2638;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 67552) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4292868093) != 0) || ((((_la - 81)) & ~0x1F) == 0 && ((1 << (_la - 81)) & 4294967295) != 0) || ((((_la - 113)) & ~0x1F) == 0 && ((1 << (_la - 113)) & 4294967285) != 0) || ((((_la - 145)) & ~0x1F) == 0 && ((1 << (_la - 145)) & 2513436607) != 0) || _la==178) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 67552) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4292868093) !== 0) || ((((_la - 81)) & ~0x1F) === 0 && ((1 << (_la - 81)) & 4294967295) !== 0) || ((((_la - 113)) & ~0x1F) === 0 && ((1 << (_la - 113)) & 4294967285) !== 0) || ((((_la - 145)) & ~0x1F) === 0 && ((1 << (_la - 145)) & 2513436607) !== 0) || _la===178) {
 				{
 				this.state = 2637;
 				localctx._args = this.java_arguments(0);
@@ -13103,7 +13153,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13121,11 +13171,11 @@ export default class OParser extends AbstractParser {
 	public java_arguments(_p: number): Java_argumentsContext;
 	// @RuleVersion(0)
 	public java_arguments(_p?: number): Java_argumentsContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Java_argumentsContext = new Java_argumentsContext(this, this._ctx, _parentState);
 		let _prevctx: Java_argumentsContext = localctx;
@@ -13147,8 +13197,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2650;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 247, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -13176,7 +13226,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13205,7 +13255,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13234,7 +13284,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13252,11 +13302,11 @@ export default class OParser extends AbstractParser {
 	public java_identifier_expression(_p: number): Java_identifier_expressionContext;
 	// @RuleVersion(0)
 	public java_identifier_expression(_p?: number): Java_identifier_expressionContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Java_identifier_expressionContext = new Java_identifier_expressionContext(this, this._ctx, _parentState);
 		let _prevctx: Java_identifier_expressionContext = localctx;
@@ -13278,8 +13328,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2669;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 248, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -13307,7 +13357,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13325,11 +13375,11 @@ export default class OParser extends AbstractParser {
 	public java_class_identifier_expression(_p: number): Java_class_identifier_expressionContext;
 	// @RuleVersion(0)
 	public java_class_identifier_expression(_p?: number): Java_class_identifier_expressionContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Java_class_identifier_expressionContext = new Java_class_identifier_expressionContext(this, this._ctx, _parentState);
 		let _prevctx: Java_class_identifier_expressionContext = localctx;
@@ -13351,8 +13401,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2679;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 249, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -13378,7 +13428,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13440,11 +13490,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13614,11 +13664,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13664,7 +13714,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13682,11 +13732,11 @@ export default class OParser extends AbstractParser {
 	public csharp_expression(_p: number): Csharp_expressionContext;
 	// @RuleVersion(0)
 	public csharp_expression(_p?: number): Csharp_expressionContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Csharp_expressionContext = new Csharp_expressionContext(this, this._ctx, _parentState);
 		let _prevctx: Csharp_expressionContext = localctx;
@@ -13708,8 +13758,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2712;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 253, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -13735,7 +13785,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13794,7 +13844,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13819,7 +13869,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13846,7 +13896,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13886,11 +13936,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13918,7 +13968,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2735;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) == 0 && ((1 << _la) & 67552) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4292868093) != 0) || ((((_la - 81)) & ~0x1F) == 0 && ((1 << (_la - 81)) & 4294967295) != 0) || ((((_la - 113)) & ~0x1F) == 0 && ((1 << (_la - 113)) & 4294967285) != 0) || ((((_la - 145)) & ~0x1F) == 0 && ((1 << (_la - 145)) & 2513436607) != 0) || _la==178) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 67552) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4292868093) !== 0) || ((((_la - 81)) & ~0x1F) === 0 && ((1 << (_la - 81)) & 4294967295) !== 0) || ((((_la - 113)) & ~0x1F) === 0 && ((1 << (_la - 113)) & 4294967285) !== 0) || ((((_la - 145)) & ~0x1F) === 0 && ((1 << (_la - 145)) & 2513436607) !== 0) || _la===178) {
 				{
 				this.state = 2734;
 				localctx._args = this.csharp_arguments(0);
@@ -13930,7 +13980,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -13948,11 +13998,11 @@ export default class OParser extends AbstractParser {
 	public csharp_arguments(_p: number): Csharp_argumentsContext;
 	// @RuleVersion(0)
 	public csharp_arguments(_p?: number): Csharp_argumentsContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Csharp_argumentsContext = new Csharp_argumentsContext(this, this._ctx, _parentState);
 		let _prevctx: Csharp_argumentsContext = localctx;
@@ -13974,8 +14024,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2747;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 257, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -14003,7 +14053,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14032,7 +14082,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14061,7 +14111,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14079,11 +14129,11 @@ export default class OParser extends AbstractParser {
 	public csharp_identifier_expression(_p: number): Csharp_identifier_expressionContext;
 	// @RuleVersion(0)
 	public csharp_identifier_expression(_p?: number): Csharp_identifier_expressionContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Csharp_identifier_expressionContext = new Csharp_identifier_expressionContext(this, this._ctx, _parentState);
 		let _prevctx: Csharp_identifier_expressionContext = localctx;
@@ -14120,8 +14170,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2768;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 259, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -14149,7 +14199,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14211,11 +14261,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14385,11 +14435,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14427,7 +14477,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14479,7 +14529,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14520,7 +14570,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14558,11 +14608,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14591,7 +14641,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14621,7 +14671,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2821;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) == 0 && ((1 << _la) & 2016) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4292868093) != 0) || ((((_la - 81)) & ~0x1F) == 0 && ((1 << (_la - 81)) & 4294967295) != 0) || ((((_la - 113)) & ~0x1F) == 0 && ((1 << (_la - 113)) & 4294967285) != 0) || ((((_la - 145)) & ~0x1F) == 0 && ((1 << (_la - 145)) & 29622207) != 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 2016) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4292868093) !== 0) || ((((_la - 81)) & ~0x1F) === 0 && ((1 << (_la - 81)) & 4294967295) !== 0) || ((((_la - 113)) & ~0x1F) === 0 && ((1 << (_la - 113)) & 4294967285) !== 0) || ((((_la - 145)) & ~0x1F) === 0 && ((1 << (_la - 145)) & 29622207) !== 0)) {
 				{
 				{
 				this.state = 2818;
@@ -14639,7 +14689,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14669,7 +14719,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2833;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) == 0 && ((1 << _la) & 2016) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4292868093) != 0) || ((((_la - 81)) & ~0x1F) == 0 && ((1 << (_la - 81)) & 4294967295) != 0) || ((((_la - 113)) & ~0x1F) == 0 && ((1 << (_la - 113)) & 4294967285) != 0) || ((((_la - 145)) & ~0x1F) == 0 && ((1 << (_la - 145)) & 29622207) != 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 2016) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4292868093) !== 0) || ((((_la - 81)) & ~0x1F) === 0 && ((1 << (_la - 81)) & 4294967295) !== 0) || ((((_la - 113)) & ~0x1F) === 0 && ((1 << (_la - 113)) & 4294967285) !== 0) || ((((_la - 145)) & ~0x1F) === 0 && ((1 << (_la - 145)) & 29622207) !== 0)) {
 				{
 				{
 				this.state = 2830;
@@ -14685,7 +14735,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14716,7 +14766,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14742,7 +14792,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2848;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la==15) {
+			while (_la===15) {
 				{
 				{
 				this.state = 2844;
@@ -14758,7 +14808,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14784,8 +14834,8 @@ export default class OParser extends AbstractParser {
 			this.state = 2855;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 270, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					{
 					{
 					this.state = 2852;
@@ -14800,7 +14850,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14826,7 +14876,7 @@ export default class OParser extends AbstractParser {
 			this.state = 2861;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la==41) {
+			if (_la===41) {
 				{
 				this.state = 2859;
 				this.match(OParser.EQ);
@@ -14840,7 +14890,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14879,7 +14929,7 @@ export default class OParser extends AbstractParser {
 				this.state = 2868;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (((((_la - 16)) & ~0x1F) == 0 && ((1 << (_la - 16)) & 27271317) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 819201) != 0) || ((((_la - 122)) & ~0x1F) == 0 && ((1 << (_la - 122)) & 1150369825) != 0) || ((((_la - 163)) & ~0x1F) == 0 && ((1 << (_la - 163)) & 1047679) != 0)) {
+				if (((((_la - 16)) & ~0x1F) === 0 && ((1 << (_la - 16)) & 27271317) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 819201) !== 0) || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & 1150369825) !== 0) || ((((_la - 163)) & ~0x1F) === 0 && ((1 << (_la - 163)) & 1047679) !== 0)) {
 					{
 					this.state = 2867;
 					(localctx as JsxValueContext)._exp = this.expression(0);
@@ -14891,11 +14941,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -14930,16 +14980,16 @@ export default class OParser extends AbstractParser {
 					}
 					break;
 				default:
-					throw new antlr4.error.NoViableAltException(this);
+					throw new NoViableAltException(this);
 				}
 				this.state = 2876;
 				this._errHandler.sync(this);
 				_alt = this._interp.adaptivePredict(this._input, 274, this._ctx);
-			} while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
+			} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -15164,7 +15214,7 @@ export default class OParser extends AbstractParser {
 				this.state = 2882;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (((((_la - 16)) & ~0x1F) == 0 && ((1 << (_la - 16)) & 27271317) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 71301119) != 0) || ((((_la - 86)) & ~0x1F) == 0 && ((1 << (_la - 86)) & 819201) != 0) || ((((_la - 122)) & ~0x1F) == 0 && ((1 << (_la - 122)) & 1150369825) != 0) || ((((_la - 163)) & ~0x1F) == 0 && ((1 << (_la - 163)) & 1047679) != 0)) {
+				if (((((_la - 16)) & ~0x1F) === 0 && ((1 << (_la - 16)) & 27271317) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 71301119) !== 0) || ((((_la - 86)) & ~0x1F) === 0 && ((1 << (_la - 86)) & 819201) !== 0) || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & 1150369825) !== 0) || ((((_la - 163)) & ~0x1F) === 0 && ((1 << (_la - 163)) & 1047679) !== 0)) {
 					{
 					this.state = 2881;
 					(localctx as JsxCodeContext)._exp = this.expression(0);
@@ -15176,11 +15226,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -15215,16 +15265,16 @@ export default class OParser extends AbstractParser {
 					}
 					break;
 				default:
-					throw new antlr4.error.NoViableAltException(this);
+					throw new NoViableAltException(this);
 				}
 				this.state = 2890;
 				this._errHandler.sync(this);
 				_alt = this._interp.adaptivePredict(this._input, 277, this._ctx);
-			} while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
+			} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -15251,7 +15301,7 @@ export default class OParser extends AbstractParser {
 				{
 				this.state = 2892;
 				_la = this._input.LA(1);
-				if(_la<=0 || ((((_la - 20)) & ~0x1F) == 0 && ((1 << (_la - 20)) & 163843) != 0)) {
+				if(_la<=0 || ((((_la - 20)) & ~0x1F) === 0 && ((1 << (_la - 20)) & 163843) !== 0)) {
 				this._errHandler.recoverInline(this);
 				}
 				else {
@@ -15270,7 +15320,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -15306,13 +15356,13 @@ export default class OParser extends AbstractParser {
 				this.state = 2900;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while ((((_la) & ~0x1F) == 0 && ((1 << _la) & 536872928) != 0) || ((((_la - 49)) & ~0x1F) == 0 && ((1 << (_la - 49)) & 4292868093) != 0) || ((((_la - 81)) & ~0x1F) == 0 && ((1 << (_la - 81)) & 4294967295) != 0) || ((((_la - 113)) & ~0x1F) == 0 && ((1 << (_la - 113)) & 4294967285) != 0) || ((((_la - 145)) & ~0x1F) == 0 && ((1 << (_la - 145)) & 29622207) != 0));
+			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 536872928) !== 0) || ((((_la - 49)) & ~0x1F) === 0 && ((1 << (_la - 49)) & 4292868093) !== 0) || ((((_la - 81)) & ~0x1F) === 0 && ((1 << (_la - 81)) & 4294967295) !== 0) || ((((_la - 113)) & ~0x1F) === 0 && ((1 << (_la - 113)) & 4294967285) !== 0) || ((((_la - 145)) & ~0x1F) === 0 && ((1 << (_la - 145)) & 29622207) !== 0));
 			this.state = 2902;
 			this.match(OParser.RCURL);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -15350,13 +15400,13 @@ export default class OParser extends AbstractParser {
 				this.state = 2909;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while ((((_la) & ~0x1F) == 0 && ((1 << _la) & 4292866046) != 0) || ((((_la - 32)) & ~0x1F) == 0 && ((1 << (_la - 32)) & 4294967295) != 0) || ((((_la - 64)) & ~0x1F) == 0 && ((1 << (_la - 64)) & 4294967295) != 0) || ((((_la - 96)) & ~0x1F) == 0 && ((1 << (_la - 96)) & 4294967295) != 0) || ((((_la - 128)) & ~0x1F) == 0 && ((1 << (_la - 128)) & 4294967295) != 0) || ((((_la - 160)) & ~0x1F) == 0 && ((1 << (_la - 160)) & 16777215) != 0));
+			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4292866046) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 4294967295) !== 0) || ((((_la - 128)) & ~0x1F) === 0 && ((1 << (_la - 128)) & 4294967295) !== 0) || ((((_la - 160)) & ~0x1F) === 0 && ((1 << (_la - 160)) & 16777215) !== 0));
 			this.state = 2911;
 			this.match(OParser.SEMI);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -15374,11 +15424,11 @@ export default class OParser extends AbstractParser {
 	public css_identifier(_p: number): Css_identifierContext;
 	// @RuleVersion(0)
 	public css_identifier(_p?: number): Css_identifierContext {
-		if (_p == undefined) {
+		if (_p === undefined) {
 			_p = 0;
 		}
 
-		let _parentctx: antlr4.context.ParserRuleContext = this._ctx;
+		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Css_identifierContext = new Css_identifierContext(this, this._ctx, _parentState);
 		let _prevctx: Css_identifierContext = localctx;
@@ -15522,14 +15572,14 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 			this._ctx.stop = this._input.LT(-1);
 			this.state = 2927;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 283, this._ctx);
-			while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-				if (_alt == 1) {
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
@@ -15556,12 +15606,12 @@ export default class OParser extends AbstractParser {
 							}
 							break;
 						default:
-							throw new antlr4.error.NoViableAltException(this);
+							throw new NoViableAltException(this);
 						}
 						this.state = 2923;
 						this._errHandler.sync(this);
 						_alt = this._interp.adaptivePredict(this._input, 282, this._ctx);
-					} while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
+					} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 					}
 					}
 				}
@@ -15572,7 +15622,7 @@ export default class OParser extends AbstractParser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -15793,11 +15843,11 @@ export default class OParser extends AbstractParser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -15829,7 +15879,7 @@ export default class OParser extends AbstractParser {
 					{
 					this.state = 2937;
 					_la = this._input.LA(1);
-					if(_la<=0 || (((_la) & ~0x1F) == 0 && ((1 << _la) & 3149824) != 0)) {
+					if(_la<=0 || (((_la) & ~0x1F) === 0 && ((1 << _la) & 3149824) !== 0)) {
 					this._errHandler.recoverInline(this);
 					}
 					else {
@@ -15840,16 +15890,16 @@ export default class OParser extends AbstractParser {
 					}
 					break;
 				default:
-					throw new antlr4.error.NoViableAltException(this);
+					throw new NoViableAltException(this);
 				}
 				this.state = 2940;
 				this._errHandler.sync(this);
 				_alt = this._interp.adaptivePredict(this._input, 285, this._ctx);
-			} while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
+			} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -15863,7 +15913,7 @@ export default class OParser extends AbstractParser {
 		return localctx;
 	}
 
-	public sempred(localctx: antlr4.context.RuleContext, ruleIndex: number, predIndex: number): boolean {
+	public sempred(localctx: RuleContext, ruleIndex: number, predIndex: number): boolean {
 		switch (ruleIndex) {
 		case 9:
 			return this.derived_list_sempred(localctx as Derived_listContext, predIndex);
@@ -17315,39 +17365,39 @@ export default class OParser extends AbstractParser {
 	2855,2861,2868,2871,2876,2882,2885,2890,2894,2900,2909,2917,2923,2927,2935,
 	2940];
 
-	private static __ATN: antlr4.atn.ATN;
-	public static get _ATN(): antlr4.atn.ATN {
+	private static __ATN: ATN;
+	public static get _ATN(): ATN {
 		if (!OParser.__ATN) {
-			OParser.__ATN = new antlr4.atn.ATNDeserializer().deserialize(OParser._serializedATN);
+			OParser.__ATN = new ATNDeserializer().deserialize(OParser._serializedATN);
 		}
 
 		return OParser.__ATN;
 	}
 
 
-	static DecisionsToDFA = OParser._ATN.decisionToState.map( (ds, index) => new antlr4.dfa.DFA(ds, index) );
+	static DecisionsToDFA = OParser._ATN.decisionToState.map( (ds: DecisionState, index: number) => new DFA(ds, index) );
 
 }
 
-export class Enum_category_declarationContext extends antlr4.context.ParserRuleContext {
+export class Enum_category_declarationContext extends ParserRuleContext {
 	public _name!: Type_identifierContext;
 	public _attrs!: Attribute_identifier_listContext;
 	public _derived!: Type_identifierContext;
 	public _symbols!: Category_symbol_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public ENUMERATED(): antlr4.tree.TerminalNode {
+	public ENUMERATED(): TerminalNode {
 		return this.getToken(OParser.ENUMERATED, 0);
 	}
-	public CATEGORY(): antlr4.tree.TerminalNode {
+	public CATEGORY(): TerminalNode {
 		return this.getToken(OParser.CATEGORY, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public type_identifier_list(): Type_identifierContext[] {
@@ -17359,13 +17409,13 @@ export class Enum_category_declarationContext extends antlr4.context.ParserRuleC
 	public category_symbol_list(): Category_symbol_listContext {
 		return this.getTypedRuleContext(Category_symbol_listContext, 0) as Category_symbol_listContext;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public EXTENDS(): antlr4.tree.TerminalNode {
+	public EXTENDS(): TerminalNode {
 		return this.getToken(OParser.EXTENDS, 0);
 	}
 	public attribute_identifier_list(): Attribute_identifier_listContext {
@@ -17387,27 +17437,27 @@ export class Enum_category_declarationContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Enum_native_declarationContext extends antlr4.context.ParserRuleContext {
+export class Enum_native_declarationContext extends ParserRuleContext {
 	public _name!: Type_identifierContext;
 	public _typ!: Native_typeContext;
 	public _symbols!: Native_symbol_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public ENUMERATED(): antlr4.tree.TerminalNode {
+	public ENUMERATED(): TerminalNode {
 		return this.getToken(OParser.ENUMERATED, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public type_identifier(): Type_identifierContext {
@@ -17435,20 +17485,20 @@ export class Enum_native_declarationContext extends antlr4.context.ParserRuleCon
 }
 
 
-export class Category_symbolContext extends antlr4.context.ParserRuleContext {
+export class Category_symbolContext extends ParserRuleContext {
 	public _name!: Symbol_identifierContext;
 	public _args!: Argument_assignment_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public symbol_identifier(): Symbol_identifierContext {
@@ -17473,17 +17523,17 @@ export class Category_symbolContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Native_symbolContext extends antlr4.context.ParserRuleContext {
+export class Native_symbolContext extends ParserRuleContext {
 	public _name!: Symbol_identifierContext;
 	public _exp!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public EQ(): antlr4.tree.TerminalNode {
+	public EQ(): TerminalNode {
 		return this.getToken(OParser.EQ, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public symbol_identifier(): Symbol_identifierContext {
@@ -17508,22 +17558,22 @@ export class Native_symbolContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Attribute_declarationContext extends antlr4.context.ParserRuleContext {
+export class Attribute_declarationContext extends ParserRuleContext {
 	public _name!: Attribute_identifierContext;
 	public _typ!: TypedefContext;
 	public _match!: Attribute_constraintContext;
 	public _indices!: Variable_identifier_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public ATTRIBUTE(): antlr4.tree.TerminalNode {
+	public ATTRIBUTE(): TerminalNode {
 		return this.getToken(OParser.ATTRIBUTE, 0);
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public attribute_identifier(): Attribute_identifierContext {
@@ -17532,22 +17582,22 @@ export class Attribute_declarationContext extends antlr4.context.ParserRuleConte
 	public typedef(): TypedefContext {
 		return this.getTypedRuleContext(TypedefContext, 0) as TypedefContext;
 	}
-	public STORABLE(): antlr4.tree.TerminalNode {
+	public STORABLE(): TerminalNode {
 		return this.getToken(OParser.STORABLE, 0);
 	}
-	public WITH(): antlr4.tree.TerminalNode {
+	public WITH(): TerminalNode {
 		return this.getToken(OParser.WITH, 0);
 	}
-	public INDEX(): antlr4.tree.TerminalNode {
+	public INDEX(): TerminalNode {
 		return this.getToken(OParser.INDEX, 0);
 	}
 	public attribute_constraint(): Attribute_constraintContext {
 		return this.getTypedRuleContext(Attribute_constraintContext, 0) as Attribute_constraintContext;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public variable_identifier_list(): Variable_identifier_listContext {
@@ -17569,15 +17619,15 @@ export class Attribute_declarationContext extends antlr4.context.ParserRuleConte
 }
 
 
-export class Concrete_widget_declarationContext extends antlr4.context.ParserRuleContext {
+export class Concrete_widget_declarationContext extends ParserRuleContext {
 	public _name!: Type_identifierContext;
 	public _derived!: Type_identifierContext;
 	public _methods!: Category_method_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public WIDGET(): antlr4.tree.TerminalNode {
+	public WIDGET(): TerminalNode {
 		return this.getToken(OParser.WIDGET, 0);
 	}
 	public type_identifier_list(): Type_identifierContext[] {
@@ -17589,7 +17639,7 @@ export class Concrete_widget_declarationContext extends antlr4.context.ParserRul
 	public category_method_list(): Category_method_listContext {
 		return this.getTypedRuleContext(Category_method_listContext, 0) as Category_method_listContext;
 	}
-	public EXTENDS(): antlr4.tree.TerminalNode {
+	public EXTENDS(): TerminalNode {
 		return this.getToken(OParser.EXTENDS, 0);
 	}
     public get ruleIndex(): number {
@@ -17608,24 +17658,24 @@ export class Concrete_widget_declarationContext extends antlr4.context.ParserRul
 }
 
 
-export class Native_widget_declarationContext extends antlr4.context.ParserRuleContext {
+export class Native_widget_declarationContext extends ParserRuleContext {
 	public _name!: Type_identifierContext;
 	public _bindings!: Native_category_bindingsContext;
 	public _methods!: Native_member_method_declaration_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public NATIVE(): antlr4.tree.TerminalNode {
+	public NATIVE(): TerminalNode {
 		return this.getToken(OParser.NATIVE, 0);
 	}
-	public WIDGET(): antlr4.tree.TerminalNode {
+	public WIDGET(): TerminalNode {
 		return this.getToken(OParser.WIDGET, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public type_identifier(): Type_identifierContext {
@@ -17653,16 +17703,16 @@ export class Native_widget_declarationContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Concrete_category_declarationContext extends antlr4.context.ParserRuleContext {
+export class Concrete_category_declarationContext extends ParserRuleContext {
 	public _name!: Type_identifierContext;
 	public _attrs!: Attribute_identifier_listContext;
 	public _derived!: Derived_listContext;
 	public _methods!: Category_method_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public CATEGORY(): antlr4.tree.TerminalNode {
+	public CATEGORY(): TerminalNode {
 		return this.getToken(OParser.CATEGORY, 0);
 	}
 	public type_identifier(): Type_identifierContext {
@@ -17671,16 +17721,16 @@ export class Concrete_category_declarationContext extends antlr4.context.ParserR
 	public category_method_list(): Category_method_listContext {
 		return this.getTypedRuleContext(Category_method_listContext, 0) as Category_method_listContext;
 	}
-	public STORABLE(): antlr4.tree.TerminalNode {
+	public STORABLE(): TerminalNode {
 		return this.getToken(OParser.STORABLE, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public EXTENDS(): antlr4.tree.TerminalNode {
+	public EXTENDS(): TerminalNode {
 		return this.getToken(OParser.EXTENDS, 0);
 	}
 	public attribute_identifier_list(): Attribute_identifier_listContext {
@@ -17705,15 +17755,15 @@ export class Concrete_category_declarationContext extends antlr4.context.ParserR
 }
 
 
-export class Singleton_category_declarationContext extends antlr4.context.ParserRuleContext {
+export class Singleton_category_declarationContext extends ParserRuleContext {
 	public _name!: Type_identifierContext;
 	public _attrs!: Attribute_identifier_listContext;
 	public _methods!: Category_method_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public SINGLETON(): antlr4.tree.TerminalNode {
+	public SINGLETON(): TerminalNode {
 		return this.getToken(OParser.SINGLETON, 0);
 	}
 	public type_identifier(): Type_identifierContext {
@@ -17722,10 +17772,10 @@ export class Singleton_category_declarationContext extends antlr4.context.Parser
 	public category_method_list(): Category_method_listContext {
 		return this.getTypedRuleContext(Category_method_listContext, 0) as Category_method_listContext;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public attribute_identifier_list(): Attribute_identifier_listContext {
@@ -17747,8 +17797,8 @@ export class Singleton_category_declarationContext extends antlr4.context.Parser
 }
 
 
-export class Derived_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Derived_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -17766,7 +17816,7 @@ export class DerivedListItemContext extends Derived_listContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public COMMA(): antlr4.tree.TerminalNode {
+	public COMMA(): TerminalNode {
 		return this.getToken(OParser.COMMA, 0);
 	}
 	public derived_list(): Derived_listContext {
@@ -17808,8 +17858,8 @@ export class DerivedListContext extends Derived_listContext {
 }
 
 
-export class Category_method_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Category_method_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -17825,7 +17875,7 @@ export class EmptyCategoryMethodListContext extends Category_method_listContext 
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -17845,10 +17895,10 @@ export class CurlyCategoryMethodListContext extends Category_method_listContext 
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public member_method_declaration_list(): Member_method_declaration_listContext {
@@ -17867,28 +17917,28 @@ export class CurlyCategoryMethodListContext extends Category_method_listContext 
 }
 
 
-export class Operator_method_declarationContext extends antlr4.context.ParserRuleContext {
+export class Operator_method_declarationContext extends ParserRuleContext {
 	public _typ!: TypedefContext;
 	public _op!: OperatorContext;
 	public _arg!: Operator_argumentContext;
 	public _stmts!: Statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public OPERATOR(): antlr4.tree.TerminalNode {
+	public OPERATOR(): TerminalNode {
 		return this.getToken(OParser.OPERATOR, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public operator(): OperatorContext {
@@ -17919,20 +17969,20 @@ export class Operator_method_declarationContext extends antlr4.context.ParserRul
 }
 
 
-export class Setter_method_declarationContext extends antlr4.context.ParserRuleContext {
+export class Setter_method_declarationContext extends ParserRuleContext {
 	public _name!: Variable_identifierContext;
 	public _stmts!: Statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public SETTER(): antlr4.tree.TerminalNode {
+	public SETTER(): TerminalNode {
 		return this.getToken(OParser.SETTER, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public variable_identifier(): Variable_identifierContext {
@@ -17957,26 +18007,26 @@ export class Setter_method_declarationContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Native_setter_declarationContext extends antlr4.context.ParserRuleContext {
+export class Native_setter_declarationContext extends ParserRuleContext {
 	public _name!: Variable_identifierContext;
 	public _stmts!: Native_statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public SETTER(): antlr4.tree.TerminalNode {
+	public SETTER(): TerminalNode {
 		return this.getToken(OParser.SETTER, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public variable_identifier(): Variable_identifierContext {
 		return this.getTypedRuleContext(Variable_identifierContext, 0) as Variable_identifierContext;
 	}
-	public NATIVE(): antlr4.tree.TerminalNode {
+	public NATIVE(): TerminalNode {
 		return this.getToken(OParser.NATIVE, 0);
 	}
 	public native_statement_list(): Native_statement_listContext {
@@ -17998,20 +18048,20 @@ export class Native_setter_declarationContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Getter_method_declarationContext extends antlr4.context.ParserRuleContext {
+export class Getter_method_declarationContext extends ParserRuleContext {
 	public _name!: Variable_identifierContext;
 	public _stmts!: Statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public GETTER(): antlr4.tree.TerminalNode {
+	public GETTER(): TerminalNode {
 		return this.getToken(OParser.GETTER, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public variable_identifier(): Variable_identifierContext {
@@ -18036,26 +18086,26 @@ export class Getter_method_declarationContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Native_getter_declarationContext extends antlr4.context.ParserRuleContext {
+export class Native_getter_declarationContext extends ParserRuleContext {
 	public _name!: Variable_identifierContext;
 	public _stmts!: Native_statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public GETTER(): antlr4.tree.TerminalNode {
+	public GETTER(): TerminalNode {
 		return this.getToken(OParser.GETTER, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public variable_identifier(): Variable_identifierContext {
 		return this.getTypedRuleContext(Variable_identifierContext, 0) as Variable_identifierContext;
 	}
-	public NATIVE(): antlr4.tree.TerminalNode {
+	public NATIVE(): TerminalNode {
 		return this.getToken(OParser.NATIVE, 0);
 	}
 	public native_statement_list(): Native_statement_listContext {
@@ -18077,25 +18127,25 @@ export class Native_getter_declarationContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Native_resource_declarationContext extends antlr4.context.ParserRuleContext {
+export class Native_resource_declarationContext extends ParserRuleContext {
 	public _name!: Type_identifierContext;
 	public _attrs!: Attribute_identifier_listContext;
 	public _bindings!: Native_category_bindingsContext;
 	public _methods!: Native_member_method_declaration_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public NATIVE(): antlr4.tree.TerminalNode {
+	public NATIVE(): TerminalNode {
 		return this.getToken(OParser.NATIVE, 0);
 	}
-	public RESOURCE(): antlr4.tree.TerminalNode {
+	public RESOURCE(): TerminalNode {
 		return this.getToken(OParser.RESOURCE, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public type_identifier(): Type_identifierContext {
@@ -18104,13 +18154,13 @@ export class Native_resource_declarationContext extends antlr4.context.ParserRul
 	public native_category_bindings(): Native_category_bindingsContext {
 		return this.getTypedRuleContext(Native_category_bindingsContext, 0) as Native_category_bindingsContext;
 	}
-	public STORABLE(): antlr4.tree.TerminalNode {
+	public STORABLE(): TerminalNode {
 		return this.getToken(OParser.STORABLE, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public attribute_identifier_list(): Attribute_identifier_listContext {
@@ -18135,25 +18185,25 @@ export class Native_resource_declarationContext extends antlr4.context.ParserRul
 }
 
 
-export class Native_category_declarationContext extends antlr4.context.ParserRuleContext {
+export class Native_category_declarationContext extends ParserRuleContext {
 	public _name!: Type_identifierContext;
 	public _attrs!: Attribute_identifier_listContext;
 	public _bindings!: Native_category_bindingsContext;
 	public _methods!: Native_member_method_declaration_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public NATIVE(): antlr4.tree.TerminalNode {
+	public NATIVE(): TerminalNode {
 		return this.getToken(OParser.NATIVE, 0);
 	}
-	public CATEGORY(): antlr4.tree.TerminalNode {
+	public CATEGORY(): TerminalNode {
 		return this.getToken(OParser.CATEGORY, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public type_identifier(): Type_identifierContext {
@@ -18162,13 +18212,13 @@ export class Native_category_declarationContext extends antlr4.context.ParserRul
 	public native_category_bindings(): Native_category_bindingsContext {
 		return this.getTypedRuleContext(Native_category_bindingsContext, 0) as Native_category_bindingsContext;
 	}
-	public STORABLE(): antlr4.tree.TerminalNode {
+	public STORABLE(): TerminalNode {
 		return this.getToken(OParser.STORABLE, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public attribute_identifier_list(): Attribute_identifier_listContext {
@@ -18193,22 +18243,22 @@ export class Native_category_declarationContext extends antlr4.context.ParserRul
 }
 
 
-export class Native_category_bindingsContext extends antlr4.context.ParserRuleContext {
+export class Native_category_bindingsContext extends ParserRuleContext {
 	public _items!: Native_category_binding_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public CATEGORY(): antlr4.tree.TerminalNode {
+	public CATEGORY(): TerminalNode {
 		return this.getToken(OParser.CATEGORY, 0);
 	}
-	public BINDINGS(): antlr4.tree.TerminalNode {
+	public BINDINGS(): TerminalNode {
 		return this.getToken(OParser.BINDINGS, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public native_category_binding_list(): Native_category_binding_listContext {
@@ -18230,8 +18280,8 @@ export class Native_category_bindingsContext extends antlr4.context.ParserRuleCo
 }
 
 
-export class Native_category_binding_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Native_category_binding_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -18249,7 +18299,7 @@ export class NativeCategoryBindingListItemContext extends Native_category_bindin
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public native_category_binding_list(): Native_category_binding_listContext {
@@ -18275,7 +18325,7 @@ export class NativeCategoryBindingListContext extends Native_category_binding_li
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public native_category_binding(): Native_category_bindingContext {
@@ -18294,27 +18344,27 @@ export class NativeCategoryBindingListContext extends Native_category_binding_li
 }
 
 
-export class Abstract_global_method_declarationContext extends antlr4.context.ParserRuleContext {
+export class Abstract_global_method_declarationContext extends ParserRuleContext {
 	public _typ!: TypedefContext;
 	public _name!: Type_identifierContext;
 	public _args!: Argument_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public ABSTRACT(): antlr4.tree.TerminalNode {
+	public ABSTRACT(): TerminalNode {
 		return this.getToken(OParser.ABSTRACT, 0);
 	}
-	public METHOD(): antlr4.tree.TerminalNode {
+	public METHOD(): TerminalNode {
 		return this.getToken(OParser.METHOD, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public type_identifier(): Type_identifierContext {
@@ -18326,7 +18376,7 @@ export class Abstract_global_method_declarationContext extends antlr4.context.Pa
 	public argument_list(): Argument_listContext {
 		return this.getTypedRuleContext(Argument_listContext, 0) as Argument_listContext;
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
     public get ruleIndex(): number {
@@ -18345,27 +18395,27 @@ export class Abstract_global_method_declarationContext extends antlr4.context.Pa
 }
 
 
-export class Abstract_member_method_declarationContext extends antlr4.context.ParserRuleContext {
+export class Abstract_member_method_declarationContext extends ParserRuleContext {
 	public _typ!: TypedefContext;
 	public _name!: Method_identifierContext;
 	public _args!: Argument_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public ABSTRACT(): antlr4.tree.TerminalNode {
+	public ABSTRACT(): TerminalNode {
 		return this.getToken(OParser.ABSTRACT, 0);
 	}
-	public METHOD(): antlr4.tree.TerminalNode {
+	public METHOD(): TerminalNode {
 		return this.getToken(OParser.METHOD, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public method_identifier(): Method_identifierContext {
@@ -18377,7 +18427,7 @@ export class Abstract_member_method_declarationContext extends antlr4.context.Pa
 	public argument_list(): Argument_listContext {
 		return this.getTypedRuleContext(Argument_listContext, 0) as Argument_listContext;
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
     public get ruleIndex(): number {
@@ -18396,28 +18446,28 @@ export class Abstract_member_method_declarationContext extends antlr4.context.Pa
 }
 
 
-export class Concrete_method_declarationContext extends antlr4.context.ParserRuleContext {
+export class Concrete_method_declarationContext extends ParserRuleContext {
 	public _typ!: TypedefContext;
 	public _name!: Method_identifierContext;
 	public _args!: Argument_listContext;
 	public _stmts!: Statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public METHOD(): antlr4.tree.TerminalNode {
+	public METHOD(): TerminalNode {
 		return this.getToken(OParser.METHOD, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public method_identifier(): Method_identifierContext {
@@ -18432,7 +18482,7 @@ export class Concrete_method_declarationContext extends antlr4.context.ParserRul
 	public statement_list(): Statement_listContext {
 		return this.getTypedRuleContext(Statement_listContext, 0) as Statement_listContext;
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
     public get ruleIndex(): number {
@@ -18451,28 +18501,28 @@ export class Concrete_method_declarationContext extends antlr4.context.ParserRul
 }
 
 
-export class Native_method_declarationContext extends antlr4.context.ParserRuleContext {
+export class Native_method_declarationContext extends ParserRuleContext {
 	public _typ!: Category_or_any_typeContext;
 	public _name!: Method_identifierContext;
 	public _args!: Argument_listContext;
 	public _stmts!: Native_statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public METHOD(): antlr4.tree.TerminalNode {
+	public METHOD(): TerminalNode {
 		return this.getToken(OParser.METHOD, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public method_identifier(): Method_identifierContext {
@@ -18481,7 +18531,7 @@ export class Native_method_declarationContext extends antlr4.context.ParserRuleC
 	public native_statement_list(): Native_statement_listContext {
 		return this.getTypedRuleContext(Native_statement_listContext, 0) as Native_statement_listContext;
 	}
-	public NATIVE(): antlr4.tree.TerminalNode {
+	public NATIVE(): TerminalNode {
 		return this.getToken(OParser.NATIVE, 0);
 	}
 	public category_or_any_type(): Category_or_any_typeContext {
@@ -18506,49 +18556,49 @@ export class Native_method_declarationContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Test_method_declarationContext extends antlr4.context.ParserRuleContext {
-	public _name!: antlr4.Token;
+export class Test_method_declarationContext extends ParserRuleContext {
+	public _name!: Token;
 	public _stmts!: Statement_listContext;
 	public _exps!: Assertion_listContext;
 	public _error!: Symbol_identifierContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public TEST(): antlr4.tree.TerminalNode {
+	public TEST(): TerminalNode {
 		return this.getToken(OParser.TEST, 0);
 	}
-	public METHOD(): antlr4.tree.TerminalNode {
+	public METHOD(): TerminalNode {
 		return this.getToken(OParser.METHOD, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public LCURL_list(): antlr4.tree.TerminalNode[] {
+	public LCURL_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LCURL);
 	}
-	public LCURL(i: number): antlr4.tree.TerminalNode {
+	public LCURL(i: number): TerminalNode {
 		return this.getToken(OParser.LCURL, i);
 	}
-	public RCURL_list(): antlr4.tree.TerminalNode[] {
+	public RCURL_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.RCURL);
 	}
-	public RCURL(i: number): antlr4.tree.TerminalNode {
+	public RCURL(i: number): TerminalNode {
 		return this.getToken(OParser.RCURL, i);
 	}
-	public VERIFYING(): antlr4.tree.TerminalNode {
+	public VERIFYING(): TerminalNode {
 		return this.getToken(OParser.VERIFYING, 0);
 	}
-	public TEXT_LITERAL(): antlr4.tree.TerminalNode {
+	public TEXT_LITERAL(): TerminalNode {
 		return this.getToken(OParser.TEXT_LITERAL, 0);
 	}
 	public statement_list(): Statement_listContext {
 		return this.getTypedRuleContext(Statement_listContext, 0) as Statement_listContext;
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public assertion_list(): Assertion_listContext {
@@ -18573,13 +18623,13 @@ export class Test_method_declarationContext extends antlr4.context.ParserRuleCon
 }
 
 
-export class AssertionContext extends antlr4.context.ParserRuleContext {
+export class AssertionContext extends ParserRuleContext {
 	public _exp!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public expression(): ExpressionContext {
@@ -18601,12 +18651,12 @@ export class AssertionContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Typed_argumentContext extends antlr4.context.ParserRuleContext {
+export class Typed_argumentContext extends ParserRuleContext {
 	public _typ!: Category_or_any_typeContext;
 	public _attrs!: Attribute_identifier_listContext;
 	public _name!: Variable_identifierContext;
 	public _value!: Literal_expressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -18616,13 +18666,13 @@ export class Typed_argumentContext extends antlr4.context.ParserRuleContext {
 	public variable_identifier(): Variable_identifierContext {
 		return this.getTypedRuleContext(Variable_identifierContext, 0) as Variable_identifierContext;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public EQ(): antlr4.tree.TerminalNode {
+	public EQ(): TerminalNode {
 		return this.getToken(OParser.EQ, 0);
 	}
 	public attribute_identifier_list(): Attribute_identifier_listContext {
@@ -18647,8 +18697,8 @@ export class Typed_argumentContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Statement_or_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Statement_or_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -18665,10 +18715,10 @@ export class CurlyStatementListContext extends Statement_or_listContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public statement_list(): Statement_listContext {
@@ -18707,8 +18757,8 @@ export class SingleStatementContext extends Statement_or_listContext {
 }
 
 
-export class StatementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class StatementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -19141,21 +19191,21 @@ export class ForEachStatementContext extends StatementContext {
 }
 
 
-export class Flush_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Flush_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public FLUSH(): antlr4.tree.TerminalNode {
+	public FLUSH(): TerminalNode {
 		return this.getToken(OParser.FLUSH, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
     public get ruleIndex(): number {
@@ -19174,34 +19224,34 @@ export class Flush_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Store_statementContext extends antlr4.context.ParserRuleContext {
+export class Store_statementContext extends ParserRuleContext {
 	public _to_del!: Expression_listContext;
 	public _to_add!: Expression_listContext;
 	public _with_meta!: ExpressionContext;
 	public _stmts!: Statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public DELETE(): antlr4.tree.TerminalNode {
+	public DELETE(): TerminalNode {
 		return this.getToken(OParser.DELETE, 0);
 	}
-	public LPAR_list(): antlr4.tree.TerminalNode[] {
+	public LPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LPAR);
 	}
-	public LPAR(i: number): antlr4.tree.TerminalNode {
+	public LPAR(i: number): TerminalNode {
 		return this.getToken(OParser.LPAR, i);
 	}
-	public RPAR_list(): antlr4.tree.TerminalNode[] {
+	public RPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.RPAR);
 	}
-	public RPAR(i: number): antlr4.tree.TerminalNode {
+	public RPAR(i: number): TerminalNode {
 		return this.getToken(OParser.RPAR, i);
 	}
-	public STORE(): antlr4.tree.TerminalNode {
+	public STORE(): TerminalNode {
 		return this.getToken(OParser.STORE, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public expression_list_list(): Expression_listContext[] {
@@ -19210,7 +19260,7 @@ export class Store_statementContext extends antlr4.context.ParserRuleContext {
 	public expression_list(i: number): Expression_listContext {
 		return this.getTypedRuleContext(Expression_listContext, i) as Expression_listContext;
 	}
-	public WITH(): antlr4.tree.TerminalNode {
+	public WITH(): TerminalNode {
 		return this.getToken(OParser.WITH, 0);
 	}
 	public metadata(): MetadataContext {
@@ -19219,16 +19269,16 @@ export class Store_statementContext extends antlr4.context.ParserRuleContext {
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public THEN(): antlr4.tree.TerminalNode {
+	public THEN(): TerminalNode {
 		return this.getToken(OParser.THEN, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
-	public AND(): antlr4.tree.TerminalNode {
+	public AND(): TerminalNode {
 		return this.getToken(OParser.AND, 0);
 	}
 	public statement_list(): Statement_listContext {
@@ -19250,20 +19300,20 @@ export class Store_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class With_resource_statementContext extends antlr4.context.ParserRuleContext {
+export class With_resource_statementContext extends ParserRuleContext {
 	public _stmt!: Assign_variable_statementContext;
 	public _stmts!: Statement_or_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public WITH(): antlr4.tree.TerminalNode {
+	public WITH(): TerminalNode {
 		return this.getToken(OParser.WITH, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public assign_variable_statement(): Assign_variable_statementContext {
@@ -19288,20 +19338,20 @@ export class With_resource_statementContext extends antlr4.context.ParserRuleCon
 }
 
 
-export class With_singleton_statementContext extends antlr4.context.ParserRuleContext {
+export class With_singleton_statementContext extends ParserRuleContext {
 	public _typ!: Type_identifierContext;
 	public _stmts!: Statement_or_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public WITH(): antlr4.tree.TerminalNode {
+	public WITH(): TerminalNode {
 		return this.getToken(OParser.WITH, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public type_identifier(): Type_identifierContext {
@@ -19326,27 +19376,27 @@ export class With_singleton_statementContext extends antlr4.context.ParserRuleCo
 }
 
 
-export class Switch_statementContext extends antlr4.context.ParserRuleContext {
+export class Switch_statementContext extends ParserRuleContext {
 	public _exp!: ExpressionContext;
 	public _cases!: Switch_case_statement_listContext;
 	public _stmts!: Statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public SWITCH(): antlr4.tree.TerminalNode {
+	public SWITCH(): TerminalNode {
 		return this.getToken(OParser.SWITCH, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public expression(): ExpressionContext {
@@ -19355,10 +19405,10 @@ export class Switch_statementContext extends antlr4.context.ParserRuleContext {
 	public switch_case_statement_list(): Switch_case_statement_listContext {
 		return this.getTypedRuleContext(Switch_case_statement_listContext, 0) as Switch_case_statement_listContext;
 	}
-	public DEFAULT(): antlr4.tree.TerminalNode {
+	public DEFAULT(): TerminalNode {
 		return this.getToken(OParser.DEFAULT, 0);
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
 	public statement_list(): Statement_listContext {
@@ -19380,8 +19430,8 @@ export class Switch_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Switch_case_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Switch_case_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -19399,10 +19449,10 @@ export class AtomicSwitchCaseContext extends Switch_case_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CASE(): antlr4.tree.TerminalNode {
+	public CASE(): TerminalNode {
 		return this.getToken(OParser.CASE, 0);
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
 	public atomic_literal(): Atomic_literalContext {
@@ -19429,13 +19479,13 @@ export class CollectionSwitchCaseContext extends Switch_case_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CASE(): antlr4.tree.TerminalNode {
+	public CASE(): TerminalNode {
 		return this.getToken(OParser.CASE, 0);
 	}
-	public IN(): antlr4.tree.TerminalNode {
+	public IN(): TerminalNode {
 		return this.getToken(OParser.IN, 0);
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
 	public literal_collection(): Literal_collectionContext {
@@ -19457,28 +19507,28 @@ export class CollectionSwitchCaseContext extends Switch_case_statementContext {
 }
 
 
-export class For_each_statementContext extends antlr4.context.ParserRuleContext {
+export class For_each_statementContext extends ParserRuleContext {
 	public _name1!: Variable_identifierContext;
 	public _name2!: Variable_identifierContext;
 	public _source!: ExpressionContext;
 	public _stmts!: Statement_or_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public FOR(): antlr4.tree.TerminalNode {
+	public FOR(): TerminalNode {
 		return this.getToken(OParser.FOR, 0);
 	}
-	public EACH(): antlr4.tree.TerminalNode {
+	public EACH(): TerminalNode {
 		return this.getToken(OParser.EACH, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public IN(): antlr4.tree.TerminalNode {
+	public IN(): TerminalNode {
 		return this.getToken(OParser.IN, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public variable_identifier_list(): Variable_identifierContext[] {
@@ -19493,7 +19543,7 @@ export class For_each_statementContext extends antlr4.context.ParserRuleContext 
 	public statement_or_list(): Statement_or_listContext {
 		return this.getTypedRuleContext(Statement_or_listContext, 0) as Statement_or_listContext;
 	}
-	public COMMA(): antlr4.tree.TerminalNode {
+	public COMMA(): TerminalNode {
 		return this.getToken(OParser.COMMA, 0);
 	}
     public get ruleIndex(): number {
@@ -19512,32 +19562,32 @@ export class For_each_statementContext extends antlr4.context.ParserRuleContext 
 }
 
 
-export class Do_while_statementContext extends antlr4.context.ParserRuleContext {
+export class Do_while_statementContext extends ParserRuleContext {
 	public _stmts!: Statement_listContext;
 	public _exp!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public DO(): antlr4.tree.TerminalNode {
+	public DO(): TerminalNode {
 		return this.getToken(OParser.DO, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
-	public WHILE(): antlr4.tree.TerminalNode {
+	public WHILE(): TerminalNode {
 		return this.getToken(OParser.WHILE, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public expression(): ExpressionContext {
@@ -19562,20 +19612,20 @@ export class Do_while_statementContext extends antlr4.context.ParserRuleContext 
 }
 
 
-export class While_statementContext extends antlr4.context.ParserRuleContext {
+export class While_statementContext extends ParserRuleContext {
 	public _exp!: ExpressionContext;
 	public _stmts!: Statement_or_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public WHILE(): antlr4.tree.TerminalNode {
+	public WHILE(): TerminalNode {
 		return this.getToken(OParser.WHILE, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public expression(): ExpressionContext {
@@ -19600,22 +19650,22 @@ export class While_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class If_statementContext extends antlr4.context.ParserRuleContext {
+export class If_statementContext extends ParserRuleContext {
 	public _exp!: ExpressionContext;
 	public _stmts!: Statement_or_listContext;
 	public _elseIfs!: Else_if_statement_listContext;
 	public _elseStmts!: Statement_or_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public IF(): antlr4.tree.TerminalNode {
+	public IF(): TerminalNode {
 		return this.getToken(OParser.IF, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public expression(): ExpressionContext {
@@ -19627,7 +19677,7 @@ export class If_statementContext extends antlr4.context.ParserRuleContext {
 	public statement_or_list(i: number): Statement_or_listContext {
 		return this.getTypedRuleContext(Statement_or_listContext, i) as Statement_or_listContext;
 	}
-	public ELSE(): antlr4.tree.TerminalNode {
+	public ELSE(): TerminalNode {
 		return this.getToken(OParser.ELSE, 0);
 	}
 	public else_if_statement_list(): Else_if_statement_listContext {
@@ -19649,8 +19699,8 @@ export class If_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Else_if_statement_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Else_if_statement_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -19668,16 +19718,16 @@ export class ElseIfStatementListContext extends Else_if_statement_listContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public ELSE(): antlr4.tree.TerminalNode {
+	public ELSE(): TerminalNode {
 		return this.getToken(OParser.ELSE, 0);
 	}
-	public IF(): antlr4.tree.TerminalNode {
+	public IF(): TerminalNode {
 		return this.getToken(OParser.IF, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public expression(): ExpressionContext {
@@ -19705,16 +19755,16 @@ export class ElseIfStatementListItemContext extends Else_if_statement_listContex
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public ELSE(): antlr4.tree.TerminalNode {
+	public ELSE(): TerminalNode {
 		return this.getToken(OParser.ELSE, 0);
 	}
-	public IF(): antlr4.tree.TerminalNode {
+	public IF(): TerminalNode {
 		return this.getToken(OParser.IF, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public else_if_statement_list(): Else_if_statement_listContext {
@@ -19739,16 +19789,16 @@ export class ElseIfStatementListItemContext extends Else_if_statement_listContex
 }
 
 
-export class Raise_statementContext extends antlr4.context.ParserRuleContext {
+export class Raise_statementContext extends ParserRuleContext {
 	public _exp!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public THROW(): antlr4.tree.TerminalNode {
+	public THROW(): TerminalNode {
 		return this.getToken(OParser.THROW, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public expression(): ExpressionContext {
@@ -19770,53 +19820,53 @@ export class Raise_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Try_statementContext extends antlr4.context.ParserRuleContext {
+export class Try_statementContext extends ParserRuleContext {
 	public _name!: Variable_identifierContext;
 	public _stmts!: Statement_listContext;
 	public _handlers!: Catch_statement_listContext;
 	public _anyStmts!: Statement_listContext;
 	public _finalStmts!: Statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public TRY(): antlr4.tree.TerminalNode {
+	public TRY(): TerminalNode {
 		return this.getToken(OParser.TRY, 0);
 	}
-	public LPAR_list(): antlr4.tree.TerminalNode[] {
+	public LPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LPAR);
 	}
-	public LPAR(i: number): antlr4.tree.TerminalNode {
+	public LPAR(i: number): TerminalNode {
 		return this.getToken(OParser.LPAR, i);
 	}
-	public RPAR_list(): antlr4.tree.TerminalNode[] {
+	public RPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.RPAR);
 	}
-	public RPAR(i: number): antlr4.tree.TerminalNode {
+	public RPAR(i: number): TerminalNode {
 		return this.getToken(OParser.RPAR, i);
 	}
-	public LCURL_list(): antlr4.tree.TerminalNode[] {
+	public LCURL_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LCURL);
 	}
-	public LCURL(i: number): antlr4.tree.TerminalNode {
+	public LCURL(i: number): TerminalNode {
 		return this.getToken(OParser.LCURL, i);
 	}
-	public RCURL_list(): antlr4.tree.TerminalNode[] {
+	public RCURL_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.RCURL);
 	}
-	public RCURL(i: number): antlr4.tree.TerminalNode {
+	public RCURL(i: number): TerminalNode {
 		return this.getToken(OParser.RCURL, i);
 	}
 	public variable_identifier(): Variable_identifierContext {
 		return this.getTypedRuleContext(Variable_identifierContext, 0) as Variable_identifierContext;
 	}
-	public CATCH(): antlr4.tree.TerminalNode {
+	public CATCH(): TerminalNode {
 		return this.getToken(OParser.CATCH, 0);
 	}
-	public ANY(): antlr4.tree.TerminalNode {
+	public ANY(): TerminalNode {
 		return this.getToken(OParser.ANY, 0);
 	}
-	public FINALLY(): antlr4.tree.TerminalNode {
+	public FINALLY(): TerminalNode {
 		return this.getToken(OParser.FINALLY, 0);
 	}
 	public statement_list_list(): Statement_listContext[] {
@@ -19844,8 +19894,8 @@ export class Try_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Catch_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Catch_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -19863,19 +19913,19 @@ export class CatchAtomicStatementContext extends Catch_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CATCH(): antlr4.tree.TerminalNode {
+	public CATCH(): TerminalNode {
 		return this.getToken(OParser.CATCH, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public symbol_identifier(): Symbol_identifierContext {
@@ -19902,22 +19952,22 @@ export class CatchCollectionStatementContext extends Catch_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CATCH(): antlr4.tree.TerminalNode {
+	public CATCH(): TerminalNode {
 		return this.getToken(OParser.CATCH, 0);
 	}
-	public IN(): antlr4.tree.TerminalNode {
+	public IN(): TerminalNode {
 		return this.getToken(OParser.IN, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public symbol_list(): Symbol_listContext {
@@ -19939,15 +19989,15 @@ export class CatchCollectionStatementContext extends Catch_statementContext {
 }
 
 
-export class Break_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Break_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public BREAK(): antlr4.tree.TerminalNode {
+	public BREAK(): TerminalNode {
 		return this.getToken(OParser.BREAK, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
     public get ruleIndex(): number {
@@ -19966,16 +20016,16 @@ export class Break_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Return_statementContext extends antlr4.context.ParserRuleContext {
+export class Return_statementContext extends ParserRuleContext {
 	public _exp!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public RETURN(): antlr4.tree.TerminalNode {
+	public RETURN(): TerminalNode {
 		return this.getToken(OParser.RETURN, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public expression(): ExpressionContext {
@@ -19997,17 +20047,17 @@ export class Return_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Method_call_expressionContext extends antlr4.context.ParserRuleContext {
+export class Method_call_expressionContext extends ParserRuleContext {
 	public _name!: Method_identifierContext;
 	public _args!: Argument_assignment_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public method_identifier(): Method_identifierContext {
@@ -20032,40 +20082,40 @@ export class Method_call_expressionContext extends antlr4.context.ParserRuleCont
 }
 
 
-export class Method_call_statementContext extends antlr4.context.ParserRuleContext {
+export class Method_call_statementContext extends ParserRuleContext {
 	public _parent!: Instance_expressionContext;
 	public _method!: Method_call_expressionContext;
 	public _name!: Variable_identifierContext;
 	public _stmts!: Statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public method_call_expression(): Method_call_expressionContext {
 		return this.getTypedRuleContext(Method_call_expressionContext, 0) as Method_call_expressionContext;
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public instance_expression(): Instance_expressionContext {
 		return this.getTypedRuleContext(Instance_expressionContext, 0) as Instance_expressionContext;
 	}
-	public THEN(): antlr4.tree.TerminalNode {
+	public THEN(): TerminalNode {
 		return this.getToken(OParser.THEN, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public statement_list(): Statement_listContext {
 		return this.getTypedRuleContext(Statement_listContext, 0) as Statement_listContext;
 	}
-	public WITH(): antlr4.tree.TerminalNode {
+	public WITH(): TerminalNode {
 		return this.getToken(OParser.WITH, 0);
 	}
 	public variable_identifier(): Variable_identifierContext {
@@ -20087,8 +20137,8 @@ export class Method_call_statementContext extends antlr4.context.ParserRuleConte
 }
 
 
-export class X_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class X_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -20111,8 +20161,8 @@ export class X_expressionContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class ExpressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class ExpressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -20157,10 +20207,10 @@ export class HasAnyExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public HAS(): antlr4.tree.TerminalNode {
+	public HAS(): TerminalNode {
 		return this.getToken(OParser.HAS, 0);
 	}
-	public ANY(): antlr4.tree.TerminalNode {
+	public ANY(): TerminalNode {
 		return this.getToken(OParser.ANY, 0);
 	}
 	public expression(): ExpressionContext {
@@ -20169,7 +20219,7 @@ export class HasAnyExpressionContext extends ExpressionContext {
 	public filter_expression(): Filter_expressionContext {
 		return this.getTypedRuleContext(Filter_expressionContext, 0) as Filter_expressionContext;
 	}
-	public NOT(): antlr4.tree.TerminalNode {
+	public NOT(): TerminalNode {
 		return this.getToken(OParser.NOT, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -20190,7 +20240,7 @@ export class HasExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public HAS(): antlr4.tree.TerminalNode {
+	public HAS(): TerminalNode {
 		return this.getToken(OParser.HAS, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -20199,7 +20249,7 @@ export class HasExpressionContext extends ExpressionContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public NOT(): antlr4.tree.TerminalNode {
+	public NOT(): TerminalNode {
 		return this.getToken(OParser.NOT, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -20221,10 +20271,10 @@ export class TernaryExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public QMARK(): antlr4.tree.TerminalNode {
+	public QMARK(): TerminalNode {
 		return this.getToken(OParser.QMARK, 0);
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -20251,7 +20301,7 @@ export class InExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public IN(): antlr4.tree.TerminalNode {
+	public IN(): TerminalNode {
 		return this.getToken(OParser.IN, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -20260,7 +20310,7 @@ export class InExpressionContext extends ExpressionContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public NOT(): antlr4.tree.TerminalNode {
+	public NOT(): TerminalNode {
 		return this.getToken(OParser.NOT, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -20281,7 +20331,7 @@ export class IsAnExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public IS(): antlr4.tree.TerminalNode {
+	public IS(): TerminalNode {
 		return this.getToken(OParser.IS, 0);
 	}
 	public expression(): ExpressionContext {
@@ -20290,7 +20340,7 @@ export class IsAnExpressionContext extends ExpressionContext {
 	public an_expression(): An_expressionContext {
 		return this.getTypedRuleContext(An_expressionContext, 0) as An_expressionContext;
 	}
-	public NOT(): antlr4.tree.TerminalNode {
+	public NOT(): TerminalNode {
 		return this.getToken(OParser.NOT, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -20330,7 +20380,7 @@ export class NotExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public XMARK(): antlr4.tree.TerminalNode {
+	public XMARK(): TerminalNode {
 		return this.getToken(OParser.XMARK, 0);
 	}
 	public expression(): ExpressionContext {
@@ -20349,7 +20399,7 @@ export class NotExpressionContext extends ExpressionContext {
 }
 export class CompareExpressionContext extends ExpressionContext {
 	public _left!: ExpressionContext;
-	public _op!: antlr4.Token;
+	public _op!: Token;
 	public _right!: ExpressionContext;
 	constructor(parser: OParser, ctx: ExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
@@ -20361,16 +20411,16 @@ export class CompareExpressionContext extends ExpressionContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
-	public LTE(): antlr4.tree.TerminalNode {
+	public LTE(): TerminalNode {
 		return this.getToken(OParser.LTE, 0);
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
-	public GTE(): antlr4.tree.TerminalNode {
+	public GTE(): TerminalNode {
 		return this.getToken(OParser.GTE, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -20391,7 +20441,7 @@ export class OrExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public PIPE2(): antlr4.tree.TerminalNode {
+	public PIPE2(): TerminalNode {
 		return this.getToken(OParser.PIPE2, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -20417,13 +20467,13 @@ export class CodeExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CODE(): antlr4.tree.TerminalNode {
+	public CODE(): TerminalNode {
 		return this.getToken(OParser.CODE, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public expression(): ExpressionContext {
@@ -20447,7 +20497,7 @@ export class AndExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public AMP2(): antlr4.tree.TerminalNode {
+	public AMP2(): TerminalNode {
 		return this.getToken(OParser.AMP2, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -20494,7 +20544,7 @@ export class ContainsExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CONTAINS(): antlr4.tree.TerminalNode {
+	public CONTAINS(): TerminalNode {
 		return this.getToken(OParser.CONTAINS, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -20503,7 +20553,7 @@ export class ContainsExpressionContext extends ExpressionContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public NOT(): antlr4.tree.TerminalNode {
+	public NOT(): TerminalNode {
 		return this.getToken(OParser.NOT, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -20570,13 +20620,13 @@ export class ExecuteExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public EXECUTE(): antlr4.tree.TerminalNode {
+	public EXECUTE(): TerminalNode {
 		return this.getToken(OParser.EXECUTE, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public variable_identifier(): Variable_identifierContext {
@@ -20601,19 +20651,19 @@ export class IteratorExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public FOR(): antlr4.tree.TerminalNode {
+	public FOR(): TerminalNode {
 		return this.getToken(OParser.FOR, 0);
 	}
-	public EACH(): antlr4.tree.TerminalNode {
+	public EACH(): TerminalNode {
 		return this.getToken(OParser.EACH, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public IN(): antlr4.tree.TerminalNode {
+	public IN(): TerminalNode {
 		return this.getToken(OParser.IN, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -20670,7 +20720,7 @@ export class IsExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public IS(): antlr4.tree.TerminalNode {
+	public IS(): TerminalNode {
 		return this.getToken(OParser.IS, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -20679,7 +20729,7 @@ export class IsExpressionContext extends ExpressionContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public NOT(): antlr4.tree.TerminalNode {
+	public NOT(): TerminalNode {
 		return this.getToken(OParser.NOT, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -20699,7 +20749,7 @@ export class MinusExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public MINUS(): antlr4.tree.TerminalNode {
+	public MINUS(): TerminalNode {
 		return this.getToken(OParser.MINUS, 0);
 	}
 	public expression(): ExpressionContext {
@@ -20718,7 +20768,7 @@ export class MinusExpressionContext extends ExpressionContext {
 }
 export class AddExpressionContext extends ExpressionContext {
 	public _left!: ExpressionContext;
-	public _op!: antlr4.Token;
+	public _op!: Token;
 	public _right!: ExpressionContext;
 	constructor(parser: OParser, ctx: ExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
@@ -20730,10 +20780,10 @@ export class AddExpressionContext extends ExpressionContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public PLUS(): antlr4.tree.TerminalNode {
+	public PLUS(): TerminalNode {
 		return this.getToken(OParser.PLUS, 0);
 	}
-	public MINUS(): antlr4.tree.TerminalNode {
+	public MINUS(): TerminalNode {
 		return this.getToken(OParser.MINUS, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -20754,10 +20804,10 @@ export class HasAllExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public HAS(): antlr4.tree.TerminalNode {
+	public HAS(): TerminalNode {
 		return this.getToken(OParser.HAS, 0);
 	}
-	public ALL(): antlr4.tree.TerminalNode {
+	public ALL(): TerminalNode {
 		return this.getToken(OParser.ALL, 0);
 	}
 	public expression(): ExpressionContext {
@@ -20766,7 +20816,7 @@ export class HasAllExpressionContext extends ExpressionContext {
 	public filter_expression(): Filter_expressionContext {
 		return this.getTypedRuleContext(Filter_expressionContext, 0) as Filter_expressionContext;
 	}
-	public NOT(): antlr4.tree.TerminalNode {
+	public NOT(): TerminalNode {
 		return this.getToken(OParser.NOT, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -20847,10 +20897,10 @@ export class CastExpressionContext extends ExpressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public category_or_any_type(): Category_or_any_typeContext {
@@ -20859,7 +20909,7 @@ export class CastExpressionContext extends ExpressionContext {
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -20902,7 +20952,7 @@ export class ModuloExpressionContext extends ExpressionContext {
 }
 export class EqualsExpressionContext extends ExpressionContext {
 	public _left!: ExpressionContext;
-	public _op!: antlr4.Token;
+	public _op!: Token;
 	public _right!: ExpressionContext;
 	constructor(parser: OParser, ctx: ExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
@@ -20914,13 +20964,13 @@ export class EqualsExpressionContext extends ExpressionContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public EQ2(): antlr4.tree.TerminalNode {
+	public EQ2(): TerminalNode {
 		return this.getToken(OParser.EQ2, 0);
 	}
-	public XEQ(): antlr4.tree.TerminalNode {
+	public XEQ(): TerminalNode {
 		return this.getToken(OParser.XEQ, 0);
 	}
-	public TEQ(): antlr4.tree.TerminalNode {
+	public TEQ(): TerminalNode {
 		return this.getToken(OParser.TEQ, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -20936,8 +20986,8 @@ export class EqualsExpressionContext extends ExpressionContext {
 }
 
 
-export class Filter_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Filter_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -20953,22 +21003,22 @@ export class ExplicitFilterExpressionContext extends Filter_expressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LPAR_list(): antlr4.tree.TerminalNode[] {
+	public LPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LPAR);
 	}
-	public LPAR(i: number): antlr4.tree.TerminalNode {
+	public LPAR(i: number): TerminalNode {
 		return this.getToken(OParser.LPAR, i);
 	}
 	public variable_identifier(): Variable_identifierContext {
 		return this.getTypedRuleContext(Variable_identifierContext, 0) as Variable_identifierContext;
 	}
-	public RPAR_list(): antlr4.tree.TerminalNode[] {
+	public RPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.RPAR);
 	}
-	public RPAR(i: number): antlr4.tree.TerminalNode {
+	public RPAR(i: number): TerminalNode {
 		return this.getToken(OParser.RPAR, i);
 	}
-	public WHERE(): antlr4.tree.TerminalNode {
+	public WHERE(): TerminalNode {
 		return this.getToken(OParser.WHERE, 0);
 	}
 	public expression(): ExpressionContext {
@@ -21009,16 +21059,16 @@ export class ArrowFilterExpressionContext extends Filter_expressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public WHERE(): antlr4.tree.TerminalNode {
+	public WHERE(): TerminalNode {
 		return this.getToken(OParser.WHERE, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
 	public arrow_expression(): Arrow_expressionContext {
 		return this.getTypedRuleContext(Arrow_expressionContext, 0) as Arrow_expressionContext;
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -21034,13 +21084,13 @@ export class ArrowFilterExpressionContext extends Filter_expressionContext {
 }
 
 
-export class An_expressionContext extends antlr4.context.ParserRuleContext {
+export class An_expressionContext extends ParserRuleContext {
 	public _typ!: Category_or_any_typeContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
 	public category_or_any_type(): Category_or_any_typeContext {
@@ -21062,9 +21112,9 @@ export class An_expressionContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Type_expressionContext extends antlr4.context.ParserRuleContext {
+export class Type_expressionContext extends ParserRuleContext {
 	public _name!: Type_identifierContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -21087,8 +21137,8 @@ export class Type_expressionContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Selectable_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Selectable_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -21221,8 +21271,8 @@ export class IdentifierExpressionContext extends Selectable_expressionContext {
 }
 
 
-export class Instance_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Instance_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -21279,8 +21329,8 @@ export class SelectableExpressionContext extends Instance_expressionContext {
 }
 
 
-export class Mutable_instance_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Mutable_instance_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -21297,7 +21347,7 @@ export class MutableSelectableExpressionContext extends Mutable_instance_express
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
 	public identifier(): IdentifierContext {
@@ -21340,8 +21390,8 @@ export class MutableSelectorExpressionContext extends Mutable_instance_expressio
 }
 
 
-export class Method_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Method_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -21391,21 +21441,21 @@ export class Method_expressionContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Blob_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Blob_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public BLOB(): antlr4.tree.TerminalNode {
+	public BLOB(): TerminalNode {
 		return this.getToken(OParser.BLOB, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
     public get ruleIndex(): number {
@@ -21424,25 +21474,25 @@ export class Blob_expressionContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Document_expressionContext extends antlr4.context.ParserRuleContext {
+export class Document_expressionContext extends ParserRuleContext {
 	public _exp!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public DOCUMENT(): antlr4.tree.TerminalNode {
+	public DOCUMENT(): TerminalNode {
 		return this.getToken(OParser.DOCUMENT, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public FROM(): antlr4.tree.TerminalNode {
+	public FROM(): TerminalNode {
 		return this.getToken(OParser.FROM, 0);
 	}
-	public EQ(): antlr4.tree.TerminalNode {
+	public EQ(): TerminalNode {
 		return this.getToken(OParser.EQ, 0);
 	}
 	public expression(): ExpressionContext {
@@ -21464,23 +21514,23 @@ export class Document_expressionContext extends antlr4.context.ParserRuleContext
 }
 
 
-export class Write_statementContext extends antlr4.context.ParserRuleContext {
+export class Write_statementContext extends ParserRuleContext {
 	public _what!: ExpressionContext;
 	public _target!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public WRITE(): antlr4.tree.TerminalNode {
+	public WRITE(): TerminalNode {
 		return this.getToken(OParser.WRITE, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public TO(): antlr4.tree.TerminalNode {
+	public TO(): TerminalNode {
 		return this.getToken(OParser.TO, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -21492,7 +21542,7 @@ export class Write_statementContext extends antlr4.context.ParserRuleContext {
 	public then(): ThenContext {
 		return this.getTypedRuleContext(ThenContext, 0) as ThenContext;
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
     public get ruleIndex(): number {
@@ -21511,30 +21561,30 @@ export class Write_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Filtered_list_expressionContext extends antlr4.context.ParserRuleContext {
+export class Filtered_list_expressionContext extends ParserRuleContext {
 	public _source!: ExpressionContext;
 	public _name!: Variable_identifierContext;
 	public _predicate!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public FILTERED(): antlr4.tree.TerminalNode {
+	public FILTERED(): TerminalNode {
 		return this.getToken(OParser.FILTERED, 0);
 	}
-	public LPAR_list(): antlr4.tree.TerminalNode[] {
+	public LPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LPAR);
 	}
-	public LPAR(i: number): antlr4.tree.TerminalNode {
+	public LPAR(i: number): TerminalNode {
 		return this.getToken(OParser.LPAR, i);
 	}
-	public RPAR_list(): antlr4.tree.TerminalNode[] {
+	public RPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.RPAR);
 	}
-	public RPAR(i: number): antlr4.tree.TerminalNode {
+	public RPAR(i: number): TerminalNode {
 		return this.getToken(OParser.RPAR, i);
 	}
-	public WHERE(): antlr4.tree.TerminalNode {
+	public WHERE(): TerminalNode {
 		return this.getToken(OParser.WHERE, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -21543,7 +21593,7 @@ export class Filtered_list_expressionContext extends antlr4.context.ParserRuleCo
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public WITH(): antlr4.tree.TerminalNode {
+	public WITH(): TerminalNode {
 		return this.getToken(OParser.WITH, 0);
 	}
 	public variable_identifier(): Variable_identifierContext {
@@ -21565,8 +21615,8 @@ export class Filtered_list_expressionContext extends antlr4.context.ParserRuleCo
 }
 
 
-export class Fetch_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Fetch_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -21585,31 +21635,31 @@ export class FetchOneContext extends Fetch_expressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public FETCH(): antlr4.tree.TerminalNode {
+	public FETCH(): TerminalNode {
 		return this.getToken(OParser.FETCH, 0);
 	}
-	public ONE(): antlr4.tree.TerminalNode {
+	public ONE(): TerminalNode {
 		return this.getToken(OParser.ONE, 0);
 	}
-	public WHERE(): antlr4.tree.TerminalNode {
+	public WHERE(): TerminalNode {
 		return this.getToken(OParser.WHERE, 0);
 	}
-	public LPAR_list(): antlr4.tree.TerminalNode[] {
+	public LPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LPAR);
 	}
-	public LPAR(i: number): antlr4.tree.TerminalNode {
+	public LPAR(i: number): TerminalNode {
 		return this.getToken(OParser.LPAR, i);
 	}
-	public RPAR_list(): antlr4.tree.TerminalNode[] {
+	public RPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.RPAR);
 	}
-	public RPAR(i: number): antlr4.tree.TerminalNode {
+	public RPAR(i: number): TerminalNode {
 		return this.getToken(OParser.RPAR, i);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public INCLUDE(): antlr4.tree.TerminalNode {
+	public INCLUDE(): TerminalNode {
 		return this.getToken(OParser.INCLUDE, 0);
 	}
 	public mutable_category_type(): Mutable_category_typeContext {
@@ -21640,40 +21690,40 @@ export class FetchManyContext extends Fetch_expressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public FETCH(): antlr4.tree.TerminalNode {
+	public FETCH(): TerminalNode {
 		return this.getToken(OParser.FETCH, 0);
 	}
-	public WHERE(): antlr4.tree.TerminalNode {
+	public WHERE(): TerminalNode {
 		return this.getToken(OParser.WHERE, 0);
 	}
-	public LPAR_list(): antlr4.tree.TerminalNode[] {
+	public LPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LPAR);
 	}
-	public LPAR(i: number): antlr4.tree.TerminalNode {
+	public LPAR(i: number): TerminalNode {
 		return this.getToken(OParser.LPAR, i);
 	}
-	public RPAR_list(): antlr4.tree.TerminalNode[] {
+	public RPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.RPAR);
 	}
-	public RPAR(i: number): antlr4.tree.TerminalNode {
+	public RPAR(i: number): TerminalNode {
 		return this.getToken(OParser.RPAR, i);
 	}
-	public INCLUDE(): antlr4.tree.TerminalNode {
+	public INCLUDE(): TerminalNode {
 		return this.getToken(OParser.INCLUDE, 0);
 	}
-	public ORDER(): antlr4.tree.TerminalNode {
+	public ORDER(): TerminalNode {
 		return this.getToken(OParser.ORDER, 0);
 	}
-	public BY(): antlr4.tree.TerminalNode {
+	public BY(): TerminalNode {
 		return this.getToken(OParser.BY, 0);
 	}
-	public ALL(): antlr4.tree.TerminalNode {
+	public ALL(): TerminalNode {
 		return this.getToken(OParser.ALL, 0);
 	}
-	public ROWS(): antlr4.tree.TerminalNode {
+	public ROWS(): TerminalNode {
 		return this.getToken(OParser.ROWS, 0);
 	}
-	public TO(): antlr4.tree.TerminalNode {
+	public TO(): TerminalNode {
 		return this.getToken(OParser.TO, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -21704,8 +21754,8 @@ export class FetchManyContext extends Fetch_expressionContext {
 }
 
 
-export class Fetch_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Fetch_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -21727,43 +21777,43 @@ export class FetchManyAsyncContext extends Fetch_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public FETCH(): antlr4.tree.TerminalNode {
+	public FETCH(): TerminalNode {
 		return this.getToken(OParser.FETCH, 0);
 	}
 	public then(): ThenContext {
 		return this.getTypedRuleContext(ThenContext, 0) as ThenContext;
 	}
-	public WHERE(): antlr4.tree.TerminalNode {
+	public WHERE(): TerminalNode {
 		return this.getToken(OParser.WHERE, 0);
 	}
-	public LPAR_list(): antlr4.tree.TerminalNode[] {
+	public LPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LPAR);
 	}
-	public LPAR(i: number): antlr4.tree.TerminalNode {
+	public LPAR(i: number): TerminalNode {
 		return this.getToken(OParser.LPAR, i);
 	}
-	public RPAR_list(): antlr4.tree.TerminalNode[] {
+	public RPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.RPAR);
 	}
-	public RPAR(i: number): antlr4.tree.TerminalNode {
+	public RPAR(i: number): TerminalNode {
 		return this.getToken(OParser.RPAR, i);
 	}
-	public INCLUDE(): antlr4.tree.TerminalNode {
+	public INCLUDE(): TerminalNode {
 		return this.getToken(OParser.INCLUDE, 0);
 	}
-	public ORDER(): antlr4.tree.TerminalNode {
+	public ORDER(): TerminalNode {
 		return this.getToken(OParser.ORDER, 0);
 	}
-	public BY(): antlr4.tree.TerminalNode {
+	public BY(): TerminalNode {
 		return this.getToken(OParser.BY, 0);
 	}
-	public ALL(): antlr4.tree.TerminalNode {
+	public ALL(): TerminalNode {
 		return this.getToken(OParser.ALL, 0);
 	}
-	public ROWS(): antlr4.tree.TerminalNode {
+	public ROWS(): TerminalNode {
 		return this.getToken(OParser.ROWS, 0);
 	}
-	public TO(): antlr4.tree.TerminalNode {
+	public TO(): TerminalNode {
 		return this.getToken(OParser.TO, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -21800,25 +21850,25 @@ export class FetchOneAsyncContext extends Fetch_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public FETCH(): antlr4.tree.TerminalNode {
+	public FETCH(): TerminalNode {
 		return this.getToken(OParser.FETCH, 0);
 	}
-	public ONE(): antlr4.tree.TerminalNode {
+	public ONE(): TerminalNode {
 		return this.getToken(OParser.ONE, 0);
 	}
-	public WHERE(): antlr4.tree.TerminalNode {
+	public WHERE(): TerminalNode {
 		return this.getToken(OParser.WHERE, 0);
 	}
-	public LPAR_list(): antlr4.tree.TerminalNode[] {
+	public LPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LPAR);
 	}
-	public LPAR(i: number): antlr4.tree.TerminalNode {
+	public LPAR(i: number): TerminalNode {
 		return this.getToken(OParser.LPAR, i);
 	}
-	public RPAR_list(): antlr4.tree.TerminalNode[] {
+	public RPAR_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.RPAR);
 	}
-	public RPAR(i: number): antlr4.tree.TerminalNode {
+	public RPAR(i: number): TerminalNode {
 		return this.getToken(OParser.RPAR, i);
 	}
 	public then(): ThenContext {
@@ -21827,7 +21877,7 @@ export class FetchOneAsyncContext extends Fetch_statementContext {
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public INCLUDE(): antlr4.tree.TerminalNode {
+	public INCLUDE(): TerminalNode {
 		return this.getToken(OParser.INCLUDE, 0);
 	}
 	public mutable_category_type(): Mutable_category_typeContext {
@@ -21849,23 +21899,23 @@ export class FetchOneAsyncContext extends Fetch_statementContext {
 }
 
 
-export class ThenContext extends antlr4.context.ParserRuleContext {
+export class ThenContext extends ParserRuleContext {
 	public _name!: Variable_identifierContext;
 	public _stmts!: Statement_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public THEN(): antlr4.tree.TerminalNode {
+	public THEN(): TerminalNode {
 		return this.getToken(OParser.THEN, 0);
 	}
-	public WITH(): antlr4.tree.TerminalNode {
+	public WITH(): TerminalNode {
 		return this.getToken(OParser.WITH, 0);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public variable_identifier(): Variable_identifierContext {
@@ -21890,19 +21940,19 @@ export class ThenContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Read_statementContext extends antlr4.context.ParserRuleContext {
+export class Read_statementContext extends ParserRuleContext {
 	public _source!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public READ(): antlr4.tree.TerminalNode {
+	public READ(): TerminalNode {
 		return this.getToken(OParser.READ, 0);
 	}
-	public ALL(): antlr4.tree.TerminalNode {
+	public ALL(): TerminalNode {
 		return this.getToken(OParser.ALL, 0);
 	}
-	public FROM(): antlr4.tree.TerminalNode {
+	public FROM(): TerminalNode {
 		return this.getToken(OParser.FROM, 0);
 	}
 	public then(): ThenContext {
@@ -21927,35 +21977,35 @@ export class Read_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Sorted_expressionContext extends antlr4.context.ParserRuleContext {
+export class Sorted_expressionContext extends ParserRuleContext {
 	public _source!: Instance_expressionContext;
 	public _key!: Sorted_keyContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public SORTED(): antlr4.tree.TerminalNode {
+	public SORTED(): TerminalNode {
 		return this.getToken(OParser.SORTED, 0);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public instance_expression(): Instance_expressionContext {
 		return this.getTypedRuleContext(Instance_expressionContext, 0) as Instance_expressionContext;
 	}
-	public DESC(): antlr4.tree.TerminalNode {
+	public DESC(): TerminalNode {
 		return this.getToken(OParser.DESC, 0);
 	}
-	public COMMA(): antlr4.tree.TerminalNode {
+	public COMMA(): TerminalNode {
 		return this.getToken(OParser.COMMA, 0);
 	}
 	public key_token(): Key_tokenContext {
 		return this.getTypedRuleContext(Key_tokenContext, 0) as Key_tokenContext;
 	}
-	public EQ(): antlr4.tree.TerminalNode {
+	public EQ(): TerminalNode {
 		return this.getToken(OParser.EQ, 0);
 	}
 	public sorted_key(): Sorted_keyContext {
@@ -21977,8 +22027,8 @@ export class Sorted_expressionContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Instance_selectorContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Instance_selectorContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -21995,10 +22045,10 @@ export class SliceSelectorContext extends Instance_selectorContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public slice_arguments(): Slice_argumentsContext {
@@ -22021,7 +22071,7 @@ export class MethodSelectorContext extends Instance_selectorContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public method_call_expression(): Method_call_expressionContext {
@@ -22044,7 +22094,7 @@ export class MemberSelectorContext extends Instance_selectorContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public member_identifier(): Member_identifierContext {
@@ -22067,10 +22117,10 @@ export class ItemSelectorContext extends Instance_selectorContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public expression(): ExpressionContext {
@@ -22089,8 +22139,8 @@ export class ItemSelectorContext extends Instance_selectorContext {
 }
 
 
-export class Constructor_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Constructor_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22109,10 +22159,10 @@ export class ConstructorFromContext extends Constructor_expressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public mutable_category_type(): Mutable_category_typeContext {
@@ -22121,7 +22171,7 @@ export class ConstructorFromContext extends Constructor_expressionContext {
 	public copy_from(): Copy_fromContext {
 		return this.getTypedRuleContext(Copy_fromContext, 0) as Copy_fromContext;
 	}
-	public COMMA(): antlr4.tree.TerminalNode {
+	public COMMA(): TerminalNode {
 		return this.getToken(OParser.COMMA, 0);
 	}
 	public argument_assignment_list(): Argument_assignment_listContext {
@@ -22145,10 +22195,10 @@ export class ConstructorNoFromContext extends Constructor_expressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public mutable_category_type(): Mutable_category_typeContext {
@@ -22170,13 +22220,13 @@ export class ConstructorNoFromContext extends Constructor_expressionContext {
 }
 
 
-export class Copy_fromContext extends antlr4.context.ParserRuleContext {
+export class Copy_fromContext extends ParserRuleContext {
 	public _exp!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public FROM(): antlr4.tree.TerminalNode {
+	public FROM(): TerminalNode {
 		return this.getToken(OParser.FROM, 0);
 	}
 	public assign(): AssignContext {
@@ -22201,8 +22251,8 @@ export class Copy_fromContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Argument_assignment_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Argument_assignment_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22260,7 +22310,7 @@ export class ArgumentAssignmentListItemContext extends Argument_assignment_listC
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public COMMA(): antlr4.tree.TerminalNode {
+	public COMMA(): TerminalNode {
 		return this.getToken(OParser.COMMA, 0);
 	}
 	public argument_assignment_list(): Argument_assignment_listContext {
@@ -22282,10 +22332,10 @@ export class ArgumentAssignmentListItemContext extends Argument_assignment_listC
 }
 
 
-export class Argument_assignmentContext extends antlr4.context.ParserRuleContext {
+export class Argument_assignmentContext extends ParserRuleContext {
 	public _name!: Variable_identifierContext;
 	public _exp!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22314,17 +22364,17 @@ export class Argument_assignmentContext extends antlr4.context.ParserRuleContext
 }
 
 
-export class Assign_instance_statementContext extends antlr4.context.ParserRuleContext {
+export class Assign_instance_statementContext extends ParserRuleContext {
 	public _inst!: Assignable_instanceContext;
 	public _exp!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public assign(): AssignContext {
 		return this.getTypedRuleContext(AssignContext, 0) as AssignContext;
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public assignable_instance(): Assignable_instanceContext {
@@ -22349,8 +22399,8 @@ export class Assign_instance_statementContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Child_instanceContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Child_instanceContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22367,7 +22417,7 @@ export class MemberInstanceContext extends Child_instanceContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public variable_identifier(): Variable_identifierContext {
@@ -22390,10 +22440,10 @@ export class ItemInstanceContext extends Child_instanceContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public expression(): ExpressionContext {
@@ -22412,17 +22462,17 @@ export class ItemInstanceContext extends Child_instanceContext {
 }
 
 
-export class Assign_tuple_statementContext extends antlr4.context.ParserRuleContext {
+export class Assign_tuple_statementContext extends ParserRuleContext {
 	public _items!: Variable_identifier_listContext;
 	public _exp!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public assign(): AssignContext {
 		return this.getTypedRuleContext(AssignContext, 0) as AssignContext;
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public variable_identifier_list(): Variable_identifier_listContext {
@@ -22447,8 +22497,8 @@ export class Assign_tuple_statementContext extends antlr4.context.ParserRuleCont
 }
 
 
-export class Type_literalContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Type_literalContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22471,12 +22521,12 @@ export class Type_literalContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Null_literalContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Null_literalContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public NULL(): antlr4.tree.TerminalNode {
+	public NULL(): TerminalNode {
 		return this.getToken(OParser.NULL, 0);
 	}
     public get ruleIndex(): number {
@@ -22495,21 +22545,21 @@ export class Null_literalContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Ws_plusContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Ws_plusContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LF_list(): antlr4.tree.TerminalNode[] {
+	public LF_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LF);
 	}
-	public LF(i: number): antlr4.tree.TerminalNode {
+	public LF(i: number): TerminalNode {
 		return this.getToken(OParser.LF, i);
 	}
-	public WS_list(): antlr4.tree.TerminalNode[] {
+	public WS_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.WS);
 	}
-	public WS(i: number): antlr4.tree.TerminalNode {
+	public WS(i: number): TerminalNode {
 		return this.getToken(OParser.WS, i);
 	}
     public get ruleIndex(): number {
@@ -22528,8 +22578,8 @@ export class Ws_plusContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class ReplContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class ReplContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22558,8 +22608,8 @@ export class ReplContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Declaration_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Declaration_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22581,7 +22631,7 @@ export class FullDeclarationListContext extends Declaration_listContext {
 	public lfs(i: number): LfsContext {
 		return this.getTypedRuleContext(LfsContext, i) as LfsContext;
 	}
-	public EOF(): antlr4.tree.TerminalNode {
+	public EOF(): TerminalNode {
 		return this.getToken(OParser.EOF, 0);
 	}
 	public declarations(): DeclarationsContext {
@@ -22600,8 +22650,8 @@ export class FullDeclarationListContext extends Declaration_listContext {
 }
 
 
-export class DeclarationsContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class DeclarationsContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22633,8 +22683,8 @@ export class DeclarationsContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class DeclarationContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class DeclarationContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22690,20 +22740,20 @@ export class DeclarationContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Annotation_constructorContext extends antlr4.context.ParserRuleContext {
+export class Annotation_constructorContext extends ParserRuleContext {
 	public _name!: Annotation_identifierContext;
 	public _exp!: Annotation_argument_valueContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public annotation_identifier(): Annotation_identifierContext {
 		return this.getTypedRuleContext(Annotation_identifierContext, 0) as Annotation_identifierContext;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public annotation_argument_value(): Annotation_argument_valueContext {
@@ -22715,10 +22765,10 @@ export class Annotation_constructorContext extends antlr4.context.ParserRuleCont
 	public annotation_argument(i: number): Annotation_argumentContext {
 		return this.getTypedRuleContext(Annotation_argumentContext, i) as Annotation_argumentContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -22737,12 +22787,12 @@ export class Annotation_constructorContext extends antlr4.context.ParserRuleCont
 }
 
 
-export class Annotation_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Annotation_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public ARONDBASE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public ARONDBASE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.ARONDBASE_IDENTIFIER, 0);
 	}
     public get ruleIndex(): number {
@@ -22761,14 +22811,14 @@ export class Annotation_identifierContext extends antlr4.context.ParserRuleConte
 }
 
 
-export class Annotation_argumentContext extends antlr4.context.ParserRuleContext {
+export class Annotation_argumentContext extends ParserRuleContext {
 	public _name!: Annotation_argument_nameContext;
 	public _exp!: Annotation_argument_valueContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public EQ(): antlr4.tree.TerminalNode {
+	public EQ(): TerminalNode {
 		return this.getToken(OParser.EQ, 0);
 	}
 	public annotation_argument_name(): Annotation_argument_nameContext {
@@ -22793,18 +22843,18 @@ export class Annotation_argumentContext extends antlr4.context.ParserRuleContext
 }
 
 
-export class Annotation_argument_nameContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Annotation_argument_nameContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
-	public GETTER(): antlr4.tree.TerminalNode {
+	public GETTER(): TerminalNode {
 		return this.getToken(OParser.GETTER, 0);
 	}
-	public SETTER(): antlr4.tree.TerminalNode {
+	public SETTER(): TerminalNode {
 		return this.getToken(OParser.SETTER, 0);
 	}
     public get ruleIndex(): number {
@@ -22823,8 +22873,8 @@ export class Annotation_argument_nameContext extends antlr4.context.ParserRuleCo
 }
 
 
-export class Annotation_argument_valueContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Annotation_argument_valueContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22877,8 +22927,8 @@ export class AnnotationTypeValueContext extends Annotation_argument_valueContext
 }
 
 
-export class Resource_declarationContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Resource_declarationContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22901,8 +22951,8 @@ export class Resource_declarationContext extends antlr4.context.ParserRuleContex
 }
 
 
-export class Enum_declarationContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Enum_declarationContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22928,8 +22978,8 @@ export class Enum_declarationContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Native_symbol_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Native_symbol_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22961,8 +23011,8 @@ export class Native_symbol_listContext extends antlr4.context.ParserRuleContext 
 }
 
 
-export class Category_symbol_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Category_symbol_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22994,8 +23044,8 @@ export class Category_symbol_listContext extends antlr4.context.ParserRuleContex
 }
 
 
-export class Symbol_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Symbol_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -23005,10 +23055,10 @@ export class Symbol_listContext extends antlr4.context.ParserRuleContext {
 	public symbol_identifier(i: number): Symbol_identifierContext {
 		return this.getTypedRuleContext(Symbol_identifierContext, i) as Symbol_identifierContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -23027,8 +23077,8 @@ export class Symbol_listContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Attribute_constraintContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Attribute_constraintContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -23045,7 +23095,7 @@ export class MatchingSetContext extends Attribute_constraintContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public IN(): antlr4.tree.TerminalNode {
+	public IN(): TerminalNode {
 		return this.getToken(OParser.IN, 0);
 	}
 	public set_literal(): Set_literalContext {
@@ -23063,15 +23113,15 @@ export class MatchingSetContext extends Attribute_constraintContext {
 	}
 }
 export class MatchingPatternContext extends Attribute_constraintContext {
-	public _text!: antlr4.Token;
+	public _text!: Token;
 	constructor(parser: OParser, ctx: Attribute_constraintContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public MATCHING(): antlr4.tree.TerminalNode {
+	public MATCHING(): TerminalNode {
 		return this.getToken(OParser.MATCHING, 0);
 	}
-	public TEXT_LITERAL(): antlr4.tree.TerminalNode {
+	public TEXT_LITERAL(): TerminalNode {
 		return this.getToken(OParser.TEXT_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23091,7 +23141,7 @@ export class MatchingListContext extends Attribute_constraintContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public IN(): antlr4.tree.TerminalNode {
+	public IN(): TerminalNode {
 		return this.getToken(OParser.IN, 0);
 	}
 	public list_literal(): List_literalContext {
@@ -23114,7 +23164,7 @@ export class MatchingRangeContext extends Attribute_constraintContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public IN(): antlr4.tree.TerminalNode {
+	public IN(): TerminalNode {
 		return this.getToken(OParser.IN, 0);
 	}
 	public range_literal(): Range_literalContext {
@@ -23137,7 +23187,7 @@ export class MatchingExpressionContext extends Attribute_constraintContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public MATCHING(): antlr4.tree.TerminalNode {
+	public MATCHING(): TerminalNode {
 		return this.getToken(OParser.MATCHING, 0);
 	}
 	public expression(): ExpressionContext {
@@ -23156,18 +23206,18 @@ export class MatchingExpressionContext extends Attribute_constraintContext {
 }
 
 
-export class List_literalContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class List_literalContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
 	public expression_list(): Expression_listContext {
@@ -23189,18 +23239,18 @@ export class List_literalContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Set_literalContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Set_literalContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
 	public expression_list(): Expression_listContext {
@@ -23222,8 +23272,8 @@ export class Set_literalContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Expression_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Expression_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -23233,10 +23283,10 @@ export class Expression_listContext extends antlr4.context.ParserRuleContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -23255,20 +23305,20 @@ export class Expression_listContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Range_literalContext extends antlr4.context.ParserRuleContext {
+export class Range_literalContext extends ParserRuleContext {
 	public _low!: ExpressionContext;
 	public _high!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RANGE(): antlr4.tree.TerminalNode {
+	public RANGE(): TerminalNode {
 		return this.getToken(OParser.RANGE, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -23293,8 +23343,8 @@ export class Range_literalContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class TypedefContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class TypedefContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -23311,13 +23361,13 @@ export class IteratorTypeContext extends TypedefContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public ITERATOR(): antlr4.tree.TerminalNode {
+	public ITERATOR(): TerminalNode {
 		return this.getToken(OParser.ITERATOR, 0);
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
 	public typedef(): TypedefContext {
@@ -23340,7 +23390,7 @@ export class SetTypeContext extends TypedefContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LTGT(): antlr4.tree.TerminalNode {
+	public LTGT(): TerminalNode {
 		return this.getToken(OParser.LTGT, 0);
 	}
 	public typedef(): TypedefContext {
@@ -23363,10 +23413,10 @@ export class ListTypeContext extends TypedefContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public typedef(): TypedefContext {
@@ -23389,7 +23439,7 @@ export class DictTypeContext extends TypedefContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LTCOLONGT(): antlr4.tree.TerminalNode {
+	public LTCOLONGT(): TerminalNode {
 		return this.getToken(OParser.LTCOLONGT, 0);
 	}
 	public typedef(): TypedefContext {
@@ -23412,13 +23462,13 @@ export class CursorTypeContext extends TypedefContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CURSOR(): antlr4.tree.TerminalNode {
+	public CURSOR(): TerminalNode {
 		return this.getToken(OParser.CURSOR, 0);
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
 	public typedef(): TypedefContext {
@@ -23441,13 +23491,13 @@ export class TypeTypeContext extends TypedefContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TYPE(): antlr4.tree.TerminalNode {
+	public TYPE(): TerminalNode {
 		return this.getToken(OParser.TYPE, 0);
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
 	public typedef(): TypedefContext {
@@ -23486,8 +23536,8 @@ export class PrimaryTypeContext extends TypedefContext {
 }
 
 
-export class Primary_typeContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Primary_typeContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -23540,8 +23590,8 @@ export class CategoryTypeContext extends Primary_typeContext {
 }
 
 
-export class Native_typeContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Native_typeContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -23557,7 +23607,7 @@ export class PeriodTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public PERIOD(): antlr4.tree.TerminalNode {
+	public PERIOD(): TerminalNode {
 		return this.getToken(OParser.PERIOD, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23576,7 +23626,7 @@ export class HtmlTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public HTML(): antlr4.tree.TerminalNode {
+	public HTML(): TerminalNode {
 		return this.getToken(OParser.HTML, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23595,7 +23645,7 @@ export class CssTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CSS(): antlr4.tree.TerminalNode {
+	public CSS(): TerminalNode {
 		return this.getToken(OParser.CSS, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23614,7 +23664,7 @@ export class BooleanTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public BOOLEAN(): antlr4.tree.TerminalNode {
+	public BOOLEAN(): TerminalNode {
 		return this.getToken(OParser.BOOLEAN, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23633,7 +23683,7 @@ export class DocumentTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOCUMENT(): antlr4.tree.TerminalNode {
+	public DOCUMENT(): TerminalNode {
 		return this.getToken(OParser.DOCUMENT, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23652,7 +23702,7 @@ export class CharacterTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CHARACTER(): antlr4.tree.TerminalNode {
+	public CHARACTER(): TerminalNode {
 		return this.getToken(OParser.CHARACTER, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23671,7 +23721,7 @@ export class VersionTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public VERSION(): antlr4.tree.TerminalNode {
+	public VERSION(): TerminalNode {
 		return this.getToken(OParser.VERSION, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23690,7 +23740,7 @@ export class TextTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TEXT(): antlr4.tree.TerminalNode {
+	public TEXT(): TerminalNode {
 		return this.getToken(OParser.TEXT, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23709,7 +23759,7 @@ export class ImageTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public IMAGE(): antlr4.tree.TerminalNode {
+	public IMAGE(): TerminalNode {
 		return this.getToken(OParser.IMAGE, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23728,7 +23778,7 @@ export class TimeTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TIME(): antlr4.tree.TerminalNode {
+	public TIME(): TerminalNode {
 		return this.getToken(OParser.TIME, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23747,7 +23797,7 @@ export class IntegerTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public INTEGER(): antlr4.tree.TerminalNode {
+	public INTEGER(): TerminalNode {
 		return this.getToken(OParser.INTEGER, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23766,7 +23816,7 @@ export class DateTimeTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DATETIME(): antlr4.tree.TerminalNode {
+	public DATETIME(): TerminalNode {
 		return this.getToken(OParser.DATETIME, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23785,7 +23835,7 @@ export class BlobTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public BLOB(): antlr4.tree.TerminalNode {
+	public BLOB(): TerminalNode {
 		return this.getToken(OParser.BLOB, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23804,7 +23854,7 @@ export class UUIDTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public UUID(): antlr4.tree.TerminalNode {
+	public UUID(): TerminalNode {
 		return this.getToken(OParser.UUID, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23823,7 +23873,7 @@ export class DecimalTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DECIMAL(): antlr4.tree.TerminalNode {
+	public DECIMAL(): TerminalNode {
 		return this.getToken(OParser.DECIMAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23842,7 +23892,7 @@ export class CodeTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CODE(): antlr4.tree.TerminalNode {
+	public CODE(): TerminalNode {
 		return this.getToken(OParser.CODE, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23861,7 +23911,7 @@ export class DateTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DATE(): antlr4.tree.TerminalNode {
+	public DATE(): TerminalNode {
 		return this.getToken(OParser.DATE, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23880,7 +23930,7 @@ export class DbIdTypeContext extends Native_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DBID(): antlr4.tree.TerminalNode {
+	public DBID(): TerminalNode {
 		return this.getToken(OParser.DBID, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -23896,13 +23946,13 @@ export class DbIdTypeContext extends Native_typeContext {
 }
 
 
-export class Category_typeContext extends antlr4.context.ParserRuleContext {
-	public _t1!: antlr4.Token;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Category_typeContext extends ParserRuleContext {
+	public _t1!: Token;
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public TYPE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public TYPE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.TYPE_IDENTIFIER, 0);
 	}
     public get ruleIndex(): number {
@@ -23921,15 +23971,15 @@ export class Category_typeContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Mutable_category_typeContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Mutable_category_typeContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public category_type(): Category_typeContext {
 		return this.getTypedRuleContext(Category_typeContext, 0) as Category_typeContext;
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
     public get ruleIndex(): number {
@@ -23948,13 +23998,13 @@ export class Mutable_category_typeContext extends antlr4.context.ParserRuleConte
 }
 
 
-export class Code_typeContext extends antlr4.context.ParserRuleContext {
-	public _t1!: antlr4.Token;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Code_typeContext extends ParserRuleContext {
+	public _t1!: Token;
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public CODE(): antlr4.tree.TerminalNode {
+	public CODE(): TerminalNode {
 		return this.getToken(OParser.CODE, 0);
 	}
     public get ruleIndex(): number {
@@ -23973,8 +24023,8 @@ export class Code_typeContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Category_declarationContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Category_declarationContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24047,8 +24097,8 @@ export class SingletonCategoryDeclarationContext extends Category_declarationCon
 }
 
 
-export class Widget_declarationContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Widget_declarationContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24101,8 +24151,8 @@ export class NativeWidgetDeclarationContext extends Widget_declarationContext {
 }
 
 
-export class Type_identifier_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Type_identifier_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24112,10 +24162,10 @@ export class Type_identifier_listContext extends antlr4.context.ParserRuleContex
 	public type_identifier(i: number): Type_identifierContext {
 		return this.getTypedRuleContext(Type_identifierContext, i) as Type_identifierContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -24134,8 +24184,8 @@ export class Type_identifier_listContext extends antlr4.context.ParserRuleContex
 }
 
 
-export class Method_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Method_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24161,8 +24211,8 @@ export class Method_identifierContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Identifier_or_keywordContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Identifier_or_keywordContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24188,12 +24238,12 @@ export class Identifier_or_keywordContext extends antlr4.context.ParserRuleConte
 }
 
 
-export class Nospace_hyphen_identifier_or_keywordContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Nospace_hyphen_identifier_or_keywordContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public MINUS(): antlr4.tree.TerminalNode {
+	public MINUS(): TerminalNode {
 		return this.getToken(OParser.MINUS, 0);
 	}
 	public nospace_identifier_or_keyword(): Nospace_identifier_or_keywordContext {
@@ -24215,8 +24265,8 @@ export class Nospace_hyphen_identifier_or_keywordContext extends antlr4.context.
 }
 
 
-export class Nospace_identifier_or_keywordContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Nospace_identifier_or_keywordContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24239,8 +24289,8 @@ export class Nospace_identifier_or_keywordContext extends antlr4.context.ParserR
 }
 
 
-export class IdentifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class IdentifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24310,24 +24360,24 @@ export class VariableIdentifierContext extends IdentifierContext {
 }
 
 
-export class Member_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Member_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
-	public CATEGORY(): antlr4.tree.TerminalNode {
+	public CATEGORY(): TerminalNode {
 		return this.getToken(OParser.CATEGORY, 0);
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
-	public STORABLE(): antlr4.tree.TerminalNode {
+	public STORABLE(): TerminalNode {
 		return this.getToken(OParser.STORABLE, 0);
 	}
-	public RESOURCE(): antlr4.tree.TerminalNode {
+	public RESOURCE(): TerminalNode {
 		return this.getToken(OParser.RESOURCE, 0);
 	}
     public get ruleIndex(): number {
@@ -24346,18 +24396,18 @@ export class Member_identifierContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Variable_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Variable_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
-	public CATEGORY(): antlr4.tree.TerminalNode {
+	public CATEGORY(): TerminalNode {
 		return this.getToken(OParser.CATEGORY, 0);
 	}
-	public RESOURCE(): antlr4.tree.TerminalNode {
+	public RESOURCE(): TerminalNode {
 		return this.getToken(OParser.RESOURCE, 0);
 	}
     public get ruleIndex(): number {
@@ -24376,18 +24426,18 @@ export class Variable_identifierContext extends antlr4.context.ParserRuleContext
 }
 
 
-export class Attribute_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Attribute_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
-	public STORABLE(): antlr4.tree.TerminalNode {
+	public STORABLE(): TerminalNode {
 		return this.getToken(OParser.STORABLE, 0);
 	}
-	public RESOURCE(): antlr4.tree.TerminalNode {
+	public RESOURCE(): TerminalNode {
 		return this.getToken(OParser.RESOURCE, 0);
 	}
     public get ruleIndex(): number {
@@ -24406,12 +24456,12 @@ export class Attribute_identifierContext extends antlr4.context.ParserRuleContex
 }
 
 
-export class Type_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Type_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public TYPE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public TYPE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.TYPE_IDENTIFIER, 0);
 	}
     public get ruleIndex(): number {
@@ -24430,12 +24480,12 @@ export class Type_identifierContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Symbol_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Symbol_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public SYMBOL_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public SYMBOL_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.SYMBOL_IDENTIFIER, 0);
 	}
     public get ruleIndex(): number {
@@ -24454,8 +24504,8 @@ export class Symbol_identifierContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Argument_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Argument_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24465,10 +24515,10 @@ export class Argument_listContext extends antlr4.context.ParserRuleContext {
 	public argument(i: number): ArgumentContext {
 		return this.getTypedRuleContext(ArgumentContext, i) as ArgumentContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -24487,8 +24537,8 @@ export class Argument_listContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class ArgumentContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class ArgumentContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24508,7 +24558,7 @@ export class OperatorArgumentContext extends ArgumentContext {
 	public operator_argument(): Operator_argumentContext {
 		return this.getTypedRuleContext(Operator_argumentContext, 0) as Operator_argumentContext;
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -24544,8 +24594,8 @@ export class CodeArgumentContext extends ArgumentContext {
 }
 
 
-export class Operator_argumentContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Operator_argumentContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24571,15 +24621,15 @@ export class Operator_argumentContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Named_argumentContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Named_argumentContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public variable_identifier(): Variable_identifierContext {
 		return this.getTypedRuleContext(Variable_identifierContext, 0) as Variable_identifierContext;
 	}
-	public EQ(): antlr4.tree.TerminalNode {
+	public EQ(): TerminalNode {
 		return this.getToken(OParser.EQ, 0);
 	}
 	public literal_expression(): Literal_expressionContext {
@@ -24601,9 +24651,9 @@ export class Named_argumentContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Code_argumentContext extends antlr4.context.ParserRuleContext {
+export class Code_argumentContext extends ParserRuleContext {
 	public _name!: Variable_identifierContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24629,8 +24679,8 @@ export class Code_argumentContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Category_or_any_typeContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Category_or_any_typeContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24656,8 +24706,8 @@ export class Category_or_any_typeContext extends antlr4.context.ParserRuleContex
 }
 
 
-export class Any_typeContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Any_typeContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24676,10 +24726,10 @@ export class AnyListTypeContext extends Any_typeContext {
 	public any_type(): Any_typeContext {
 		return this.getTypedRuleContext(Any_typeContext, 0) as Any_typeContext;
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -24698,7 +24748,7 @@ export class AnyTypeContext extends Any_typeContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public ANY(): antlr4.tree.TerminalNode {
+	public ANY(): TerminalNode {
 		return this.getToken(OParser.ANY, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -24720,10 +24770,10 @@ export class AnyDictTypeContext extends Any_typeContext {
 	public any_type(): Any_typeContext {
 		return this.getTypedRuleContext(Any_typeContext, 0) as Any_typeContext;
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -24739,8 +24789,8 @@ export class AnyDictTypeContext extends Any_typeContext {
 }
 
 
-export class Member_method_declaration_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Member_method_declaration_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24772,8 +24822,8 @@ export class Member_method_declaration_listContext extends antlr4.context.Parser
 }
 
 
-export class Member_method_declarationContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Member_method_declarationContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24826,8 +24876,8 @@ export class Member_method_declarationContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Native_member_method_declaration_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Native_member_method_declaration_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24859,8 +24909,8 @@ export class Native_member_method_declaration_listContext extends antlr4.context
 }
 
 
-export class Native_member_method_declarationContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Native_member_method_declarationContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24907,8 +24957,8 @@ export class Native_member_method_declarationContext extends antlr4.context.Pars
 }
 
 
-export class Native_category_bindingContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Native_category_bindingContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -24925,7 +24975,7 @@ export class Python2CategoryBindingContext extends Native_category_bindingContex
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public PYTHON2(): antlr4.tree.TerminalNode {
+	public PYTHON2(): TerminalNode {
 		return this.getToken(OParser.PYTHON2, 0);
 	}
 	public python_category_binding(): Python_category_bindingContext {
@@ -24948,7 +24998,7 @@ export class Python3CategoryBindingContext extends Native_category_bindingContex
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public PYTHON3(): antlr4.tree.TerminalNode {
+	public PYTHON3(): TerminalNode {
 		return this.getToken(OParser.PYTHON3, 0);
 	}
 	public python_category_binding(): Python_category_bindingContext {
@@ -24971,7 +25021,7 @@ export class JavaCategoryBindingContext extends Native_category_bindingContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public JAVA(): antlr4.tree.TerminalNode {
+	public JAVA(): TerminalNode {
 		return this.getToken(OParser.JAVA, 0);
 	}
 	public java_class_identifier_expression(): Java_class_identifier_expressionContext {
@@ -24994,7 +25044,7 @@ export class CSharpCategoryBindingContext extends Native_category_bindingContext
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CSHARP(): antlr4.tree.TerminalNode {
+	public CSHARP(): TerminalNode {
 		return this.getToken(OParser.CSHARP, 0);
 	}
 	public csharp_identifier_expression(): Csharp_identifier_expressionContext {
@@ -25017,7 +25067,7 @@ export class JavascriptCategoryBindingContext extends Native_category_bindingCon
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public JAVASCRIPT(): antlr4.tree.TerminalNode {
+	public JAVASCRIPT(): TerminalNode {
 		return this.getToken(OParser.JAVASCRIPT, 0);
 	}
 	public javascript_category_binding(): Javascript_category_bindingContext {
@@ -25036,8 +25086,8 @@ export class JavascriptCategoryBindingContext extends Native_category_bindingCon
 }
 
 
-export class Python_category_bindingContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_category_bindingContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25063,18 +25113,18 @@ export class Python_category_bindingContext extends antlr4.context.ParserRuleCon
 }
 
 
-export class Python_moduleContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_moduleContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public FROM(): antlr4.tree.TerminalNode {
+	public FROM(): TerminalNode {
 		return this.getToken(OParser.FROM, 0);
 	}
 	public module_token(): Module_tokenContext {
 		return this.getTypedRuleContext(Module_tokenContext, 0) as Module_tokenContext;
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
 	public python_identifier_list(): Python_identifierContext[] {
@@ -25083,10 +25133,10 @@ export class Python_moduleContext extends antlr4.context.ParserRuleContext {
 	public python_identifier(i: number): Python_identifierContext {
 		return this.getTypedRuleContext(Python_identifierContext, i) as Python_identifierContext;
 	}
-	public DOT_list(): antlr4.tree.TerminalNode[] {
+	public DOT_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.DOT);
 	}
-	public DOT(i: number): antlr4.tree.TerminalNode {
+	public DOT(i: number): TerminalNode {
 		return this.getToken(OParser.DOT, i);
 	}
     public get ruleIndex(): number {
@@ -25105,8 +25155,8 @@ export class Python_moduleContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Javascript_category_bindingContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_category_bindingContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25116,10 +25166,10 @@ export class Javascript_category_bindingContext extends antlr4.context.ParserRul
 	public javascript_identifier(i: number): Javascript_identifierContext {
 		return this.getTypedRuleContext(Javascript_identifierContext, i) as Javascript_identifierContext;
 	}
-	public DOT_list(): antlr4.tree.TerminalNode[] {
+	public DOT_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.DOT);
 	}
-	public DOT(i: number): antlr4.tree.TerminalNode {
+	public DOT(i: number): TerminalNode {
 		return this.getToken(OParser.DOT, i);
 	}
 	public javascript_module(): Javascript_moduleContext {
@@ -25141,18 +25191,18 @@ export class Javascript_category_bindingContext extends antlr4.context.ParserRul
 }
 
 
-export class Javascript_moduleContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_moduleContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public FROM(): antlr4.tree.TerminalNode {
+	public FROM(): TerminalNode {
 		return this.getToken(OParser.FROM, 0);
 	}
 	public module_token(): Module_tokenContext {
 		return this.getTypedRuleContext(Module_tokenContext, 0) as Module_tokenContext;
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
 	public javascript_identifier_list(): Javascript_identifierContext[] {
@@ -25161,13 +25211,13 @@ export class Javascript_moduleContext extends antlr4.context.ParserRuleContext {
 	public javascript_identifier(i: number): Javascript_identifierContext {
 		return this.getTypedRuleContext(Javascript_identifierContext, i) as Javascript_identifierContext;
 	}
-	public SLASH_list(): antlr4.tree.TerminalNode[] {
+	public SLASH_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.SLASH);
 	}
-	public SLASH(i: number): antlr4.tree.TerminalNode {
+	public SLASH(i: number): TerminalNode {
 		return this.getToken(OParser.SLASH, i);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
     public get ruleIndex(): number {
@@ -25186,8 +25236,8 @@ export class Javascript_moduleContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Variable_identifier_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Variable_identifier_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25197,10 +25247,10 @@ export class Variable_identifier_listContext extends antlr4.context.ParserRuleCo
 	public variable_identifier(i: number): Variable_identifierContext {
 		return this.getTypedRuleContext(Variable_identifierContext, i) as Variable_identifierContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -25219,8 +25269,8 @@ export class Variable_identifier_listContext extends antlr4.context.ParserRuleCo
 }
 
 
-export class Attribute_identifier_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Attribute_identifier_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25230,10 +25280,10 @@ export class Attribute_identifier_listContext extends antlr4.context.ParserRuleC
 	public attribute_identifier(i: number): Attribute_identifierContext {
 		return this.getTypedRuleContext(Attribute_identifierContext, i) as Attribute_identifierContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -25252,8 +25302,8 @@ export class Attribute_identifier_listContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Method_declarationContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Method_declarationContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25285,12 +25335,12 @@ export class Method_declarationContext extends antlr4.context.ParserRuleContext 
 }
 
 
-export class Comment_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Comment_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public COMMENT(): antlr4.tree.TerminalNode {
+	public COMMENT(): TerminalNode {
 		return this.getToken(OParser.COMMENT, 0);
 	}
     public get ruleIndex(): number {
@@ -25309,8 +25359,8 @@ export class Comment_statementContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Native_statement_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Native_statement_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25342,8 +25392,8 @@ export class Native_statement_listContext extends antlr4.context.ParserRuleConte
 }
 
 
-export class Native_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Native_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25359,7 +25409,7 @@ export class CSharpNativeStatementContext extends Native_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CSHARP(): antlr4.tree.TerminalNode {
+	public CSHARP(): TerminalNode {
 		return this.getToken(OParser.CSHARP, 0);
 	}
 	public csharp_statement(): Csharp_statementContext {
@@ -25381,7 +25431,7 @@ export class JavaNativeStatementContext extends Native_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public JAVA(): antlr4.tree.TerminalNode {
+	public JAVA(): TerminalNode {
 		return this.getToken(OParser.JAVA, 0);
 	}
 	public java_statement(): Java_statementContext {
@@ -25403,7 +25453,7 @@ export class JavascriptNativeStatementContext extends Native_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public JAVASCRIPT(): antlr4.tree.TerminalNode {
+	public JAVASCRIPT(): TerminalNode {
 		return this.getToken(OParser.JAVASCRIPT, 0);
 	}
 	public javascript_native_statement(): Javascript_native_statementContext {
@@ -25425,7 +25475,7 @@ export class Python2NativeStatementContext extends Native_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public PYTHON2(): antlr4.tree.TerminalNode {
+	public PYTHON2(): TerminalNode {
 		return this.getToken(OParser.PYTHON2, 0);
 	}
 	public python_native_statement(): Python_native_statementContext {
@@ -25447,7 +25497,7 @@ export class Python3NativeStatementContext extends Native_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public PYTHON3(): antlr4.tree.TerminalNode {
+	public PYTHON3(): TerminalNode {
 		return this.getToken(OParser.PYTHON3, 0);
 	}
 	public python_native_statement(): Python_native_statementContext {
@@ -25466,15 +25516,15 @@ export class Python3NativeStatementContext extends Native_statementContext {
 }
 
 
-export class Python_native_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_native_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public python_statement(): Python_statementContext {
 		return this.getTypedRuleContext(Python_statementContext, 0) as Python_statementContext;
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public python_module(): Python_moduleContext {
@@ -25496,15 +25546,15 @@ export class Python_native_statementContext extends antlr4.context.ParserRuleCon
 }
 
 
-export class Javascript_native_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_native_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public javascript_statement(): Javascript_statementContext {
 		return this.getTypedRuleContext(Javascript_statementContext, 0) as Javascript_statementContext;
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public javascript_module(): Javascript_moduleContext {
@@ -25526,8 +25576,8 @@ export class Javascript_native_statementContext extends antlr4.context.ParserRul
 }
 
 
-export class Statement_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Statement_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25559,8 +25609,8 @@ export class Statement_listContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Assertion_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Assertion_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25592,8 +25642,8 @@ export class Assertion_listContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Switch_case_statement_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Switch_case_statement_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25625,8 +25675,8 @@ export class Switch_case_statement_listContext extends antlr4.context.ParserRule
 }
 
 
-export class Catch_statement_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Catch_statement_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25658,8 +25708,8 @@ export class Catch_statement_listContext extends antlr4.context.ParserRuleContex
 }
 
 
-export class Literal_collectionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Literal_collectionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25675,13 +25725,13 @@ export class LiteralListLiteralContext extends Literal_collectionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
 	public literal_list_literal(): Literal_list_literalContext {
 		return this.getTypedRuleContext(Literal_list_literalContext, 0) as Literal_list_literalContext;
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -25702,13 +25752,13 @@ export class LiteralRangeLiteralContext extends Literal_collectionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RANGE(): antlr4.tree.TerminalNode {
+	public RANGE(): TerminalNode {
 		return this.getToken(OParser.RANGE, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public atomic_literal_list(): Atomic_literalContext[] {
@@ -25733,13 +25783,13 @@ export class LiteralSetLiteralContext extends Literal_collectionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
 	public literal_list_literal(): Literal_list_literalContext {
 		return this.getTypedRuleContext(Literal_list_literalContext, 0) as Literal_list_literalContext;
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -25755,8 +25805,8 @@ export class LiteralSetLiteralContext extends Literal_collectionContext {
 }
 
 
-export class Atomic_literalContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Atomic_literalContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -25772,7 +25822,7 @@ export class MinIntegerLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public MIN_INTEGER(): antlr4.tree.TerminalNode {
+	public MIN_INTEGER(): TerminalNode {
 		return this.getToken(OParser.MIN_INTEGER, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -25791,7 +25841,7 @@ export class DateLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DATE_LITERAL(): antlr4.tree.TerminalNode {
+	public DATE_LITERAL(): TerminalNode {
 		return this.getToken(OParser.DATE_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -25829,7 +25879,7 @@ export class BooleanLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public BOOLEAN_LITERAL(): antlr4.tree.TerminalNode {
+	public BOOLEAN_LITERAL(): TerminalNode {
 		return this.getToken(OParser.BOOLEAN_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -25848,7 +25898,7 @@ export class VersionLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public VERSION_LITERAL(): antlr4.tree.TerminalNode {
+	public VERSION_LITERAL(): TerminalNode {
 		return this.getToken(OParser.VERSION_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -25867,7 +25917,7 @@ export class HexadecimalLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public HEXA_LITERAL(): antlr4.tree.TerminalNode {
+	public HEXA_LITERAL(): TerminalNode {
 		return this.getToken(OParser.HEXA_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -25886,7 +25936,7 @@ export class UUIDLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public UUID_LITERAL(): antlr4.tree.TerminalNode {
+	public UUID_LITERAL(): TerminalNode {
 		return this.getToken(OParser.UUID_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -25905,7 +25955,7 @@ export class MaxIntegerLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public MAX_INTEGER(): antlr4.tree.TerminalNode {
+	public MAX_INTEGER(): TerminalNode {
 		return this.getToken(OParser.MAX_INTEGER, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -25943,7 +25993,7 @@ export class DateTimeLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DATETIME_LITERAL(): antlr4.tree.TerminalNode {
+	public DATETIME_LITERAL(): TerminalNode {
 		return this.getToken(OParser.DATETIME_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -25962,7 +26012,7 @@ export class PeriodLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public PERIOD_LITERAL(): antlr4.tree.TerminalNode {
+	public PERIOD_LITERAL(): TerminalNode {
 		return this.getToken(OParser.PERIOD_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -25981,10 +26031,10 @@ export class DecimalLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DECIMAL_LITERAL(): antlr4.tree.TerminalNode {
+	public DECIMAL_LITERAL(): TerminalNode {
 		return this.getToken(OParser.DECIMAL_LITERAL, 0);
 	}
-	public MINUS(): antlr4.tree.TerminalNode {
+	public MINUS(): TerminalNode {
 		return this.getToken(OParser.MINUS, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -26003,7 +26053,7 @@ export class TextLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TEXT_LITERAL(): antlr4.tree.TerminalNode {
+	public TEXT_LITERAL(): TerminalNode {
 		return this.getToken(OParser.TEXT_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -26041,10 +26091,10 @@ export class IntegerLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public INTEGER_LITERAL(): antlr4.tree.TerminalNode {
+	public INTEGER_LITERAL(): TerminalNode {
 		return this.getToken(OParser.INTEGER_LITERAL, 0);
 	}
-	public MINUS(): antlr4.tree.TerminalNode {
+	public MINUS(): TerminalNode {
 		return this.getToken(OParser.MINUS, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -26063,7 +26113,7 @@ export class TimeLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TIME_LITERAL(): antlr4.tree.TerminalNode {
+	public TIME_LITERAL(): TerminalNode {
 		return this.getToken(OParser.TIME_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -26082,7 +26132,7 @@ export class CharacterLiteralContext extends Atomic_literalContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CHAR_LITERAL(): antlr4.tree.TerminalNode {
+	public CHAR_LITERAL(): TerminalNode {
 		return this.getToken(OParser.CHAR_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -26098,8 +26148,8 @@ export class CharacterLiteralContext extends Atomic_literalContext {
 }
 
 
-export class Literal_list_literalContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Literal_list_literalContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26109,10 +26159,10 @@ export class Literal_list_literalContext extends antlr4.context.ParserRuleContex
 	public atomic_literal(i: number): Atomic_literalContext {
 		return this.getTypedRuleContext(Atomic_literalContext, i) as Atomic_literalContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -26131,15 +26181,15 @@ export class Literal_list_literalContext extends antlr4.context.ParserRuleContex
 }
 
 
-export class This_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class This_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public SELF(): antlr4.tree.TerminalNode {
+	public SELF(): TerminalNode {
 		return this.getToken(OParser.SELF, 0);
 	}
-	public THIS(): antlr4.tree.TerminalNode {
+	public THIS(): TerminalNode {
 		return this.getToken(OParser.THIS, 0);
 	}
     public get ruleIndex(): number {
@@ -26158,18 +26208,18 @@ export class This_expressionContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Super_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Super_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public SUPER(): antlr4.tree.TerminalNode {
+	public SUPER(): TerminalNode {
 		return this.getToken(OParser.SUPER, 0);
 	}
 	public category_type(): Category_typeContext {
 		return this.getTypedRuleContext(Category_typeContext, 0) as Category_typeContext;
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
     public get ruleIndex(): number {
@@ -26188,18 +26238,18 @@ export class Super_expressionContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Parenthesis_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Parenthesis_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
     public get ruleIndex(): number {
@@ -26218,8 +26268,8 @@ export class Parenthesis_expressionContext extends antlr4.context.ParserRuleCont
 }
 
 
-export class Literal_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Literal_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26245,8 +26295,8 @@ export class Literal_expressionContext extends antlr4.context.ParserRuleContext 
 }
 
 
-export class Collection_literalContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Collection_literalContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26284,18 +26334,18 @@ export class Collection_literalContext extends antlr4.context.ParserRuleContext 
 }
 
 
-export class Tuple_literalContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Tuple_literalContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
 	public expression_tuple(): Expression_tupleContext {
@@ -26317,27 +26367,27 @@ export class Tuple_literalContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Dict_literalContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Dict_literalContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LTCOLONGT(): antlr4.tree.TerminalNode {
+	public LTCOLONGT(): TerminalNode {
 		return this.getToken(OParser.LTCOLONGT, 0);
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
 	public dict_entry_list(): Dict_entry_listContext {
 		return this.getTypedRuleContext(Dict_entry_listContext, 0) as Dict_entry_listContext;
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
     public get ruleIndex(): number {
@@ -26356,15 +26406,15 @@ export class Dict_literalContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Document_literalContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Document_literalContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public doc_entry_list(): Doc_entry_listContext {
@@ -26386,8 +26436,8 @@ export class Document_literalContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Expression_tupleContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Expression_tupleContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26397,10 +26447,10 @@ export class Expression_tupleContext extends antlr4.context.ParserRuleContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -26419,8 +26469,8 @@ export class Expression_tupleContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Doc_entry_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Doc_entry_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26430,10 +26480,10 @@ export class Doc_entry_listContext extends antlr4.context.ParserRuleContext {
 	public doc_entry(i: number): Doc_entryContext {
 		return this.getTypedRuleContext(Doc_entryContext, i) as Doc_entryContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -26452,14 +26502,14 @@ export class Doc_entry_listContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Doc_entryContext extends antlr4.context.ParserRuleContext {
+export class Doc_entryContext extends ParserRuleContext {
 	public _key!: Doc_keyContext;
 	public _value!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
 	public doc_key(): Doc_keyContext {
@@ -26484,8 +26534,8 @@ export class Doc_entryContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Doc_keyContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Doc_keyContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26517,12 +26567,12 @@ export class DocKeyIdentifierContext extends Doc_keyContext {
 	}
 }
 export class DocKeyTextContext extends Doc_keyContext {
-	public _name!: antlr4.Token;
+	public _name!: Token;
 	constructor(parser: OParser, ctx: Doc_keyContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TEXT_LITERAL(): antlr4.tree.TerminalNode {
+	public TEXT_LITERAL(): TerminalNode {
 		return this.getToken(OParser.TEXT_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -26538,8 +26588,8 @@ export class DocKeyTextContext extends Doc_keyContext {
 }
 
 
-export class Dict_entry_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Dict_entry_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26549,10 +26599,10 @@ export class Dict_entry_listContext extends antlr4.context.ParserRuleContext {
 	public dict_entry(i: number): Dict_entryContext {
 		return this.getTypedRuleContext(Dict_entryContext, i) as Dict_entryContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -26571,14 +26621,14 @@ export class Dict_entry_listContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Dict_entryContext extends antlr4.context.ParserRuleContext {
+export class Dict_entryContext extends ParserRuleContext {
 	public _key!: Dict_keyContext;
 	public _value!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
 	public dict_key(): Dict_keyContext {
@@ -26603,8 +26653,8 @@ export class Dict_entryContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Dict_keyContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Dict_keyContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26636,12 +26686,12 @@ export class DictKeyIdentifierContext extends Dict_keyContext {
 	}
 }
 export class DictKeyTextContext extends Dict_keyContext {
-	public _name!: antlr4.Token;
+	public _name!: Token;
 	constructor(parser: OParser, ctx: Dict_keyContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TEXT_LITERAL(): antlr4.tree.TerminalNode {
+	public TEXT_LITERAL(): TerminalNode {
 		return this.getToken(OParser.TEXT_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -26657,8 +26707,8 @@ export class DictKeyTextContext extends Dict_keyContext {
 }
 
 
-export class Slice_argumentsContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Slice_argumentsContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26676,7 +26726,7 @@ export class SliceFirstAndLastContext extends Slice_argumentsContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
 	public expression_list(): ExpressionContext[] {
@@ -26702,7 +26752,7 @@ export class SliceLastOnlyContext extends Slice_argumentsContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
 	public expression(): ExpressionContext {
@@ -26725,7 +26775,7 @@ export class SliceFirstOnlyContext extends Slice_argumentsContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
 	public expression(): ExpressionContext {
@@ -26744,8 +26794,8 @@ export class SliceFirstOnlyContext extends Slice_argumentsContext {
 }
 
 
-export class Assign_variable_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Assign_variable_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26774,8 +26824,8 @@ export class Assign_variable_statementContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Assignable_instanceContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Assignable_instanceContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26829,8 +26879,8 @@ export class RootInstanceContext extends Assignable_instanceContext {
 }
 
 
-export class Is_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Is_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26846,7 +26896,7 @@ export class IsATypeExpressionContext extends Is_expressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
 	public category_or_any_type(): Category_or_any_typeContext {
@@ -26884,12 +26934,12 @@ export class IsOtherExpressionContext extends Is_expressionContext {
 }
 
 
-export class MetadataContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class MetadataContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
     public get ruleIndex(): number {
@@ -26908,8 +26958,8 @@ export class MetadataContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Arrow_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Arrow_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -26950,13 +27000,13 @@ export class ArrowStatementsBodyContext extends Arrow_expressionContext {
 	public arrow_prefix(): Arrow_prefixContext {
 		return this.getTypedRuleContext(Arrow_prefixContext, 0) as Arrow_prefixContext;
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
 	public statement_list(): Statement_listContext {
 		return this.getTypedRuleContext(Statement_listContext, 0) as Statement_listContext;
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -26972,17 +27022,17 @@ export class ArrowStatementsBodyContext extends Arrow_expressionContext {
 }
 
 
-export class Arrow_prefixContext extends antlr4.context.ParserRuleContext {
+export class Arrow_prefixContext extends ParserRuleContext {
 	public _s1!: Ws_plusContext;
 	public _s2!: Ws_plusContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public arrow_args(): Arrow_argsContext {
 		return this.getTypedRuleContext(Arrow_argsContext, 0) as Arrow_argsContext;
 	}
-	public EGT(): antlr4.tree.TerminalNode {
+	public EGT(): TerminalNode {
 		return this.getToken(OParser.EGT, 0);
 	}
 	public ws_plus_list(): Ws_plusContext[] {
@@ -27007,8 +27057,8 @@ export class Arrow_prefixContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Arrow_argsContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Arrow_argsContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -27024,10 +27074,10 @@ export class ArrowListArgContext extends Arrow_argsContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public variable_identifier_list(): Variable_identifier_listContext {
@@ -27065,8 +27115,8 @@ export class ArrowSingleArgContext extends Arrow_argsContext {
 }
 
 
-export class Sorted_keyContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Sorted_keyContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -27092,19 +27142,19 @@ export class Sorted_keyContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Read_blob_expressionContext extends antlr4.context.ParserRuleContext {
+export class Read_blob_expressionContext extends ParserRuleContext {
 	public _source!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public READ(): antlr4.tree.TerminalNode {
+	public READ(): TerminalNode {
 		return this.getToken(OParser.READ, 0);
 	}
-	public BLOB(): antlr4.tree.TerminalNode {
+	public BLOB(): TerminalNode {
 		return this.getToken(OParser.BLOB, 0);
 	}
-	public FROM(): antlr4.tree.TerminalNode {
+	public FROM(): TerminalNode {
 		return this.getToken(OParser.FROM, 0);
 	}
 	public expression(): ExpressionContext {
@@ -27126,19 +27176,19 @@ export class Read_blob_expressionContext extends antlr4.context.ParserRuleContex
 }
 
 
-export class Read_all_expressionContext extends antlr4.context.ParserRuleContext {
+export class Read_all_expressionContext extends ParserRuleContext {
 	public _source!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public READ(): antlr4.tree.TerminalNode {
+	public READ(): TerminalNode {
 		return this.getToken(OParser.READ, 0);
 	}
-	public ALL(): antlr4.tree.TerminalNode {
+	public ALL(): TerminalNode {
 		return this.getToken(OParser.ALL, 0);
 	}
-	public FROM(): antlr4.tree.TerminalNode {
+	public FROM(): TerminalNode {
 		return this.getToken(OParser.FROM, 0);
 	}
 	public expression(): ExpressionContext {
@@ -27160,19 +27210,19 @@ export class Read_all_expressionContext extends antlr4.context.ParserRuleContext
 }
 
 
-export class Read_one_expressionContext extends antlr4.context.ParserRuleContext {
+export class Read_one_expressionContext extends ParserRuleContext {
 	public _source!: ExpressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public READ(): antlr4.tree.TerminalNode {
+	public READ(): TerminalNode {
 		return this.getToken(OParser.READ, 0);
 	}
-	public ONE(): antlr4.tree.TerminalNode {
+	public ONE(): TerminalNode {
 		return this.getToken(OParser.ONE, 0);
 	}
-	public FROM(): antlr4.tree.TerminalNode {
+	public FROM(): TerminalNode {
 		return this.getToken(OParser.FROM, 0);
 	}
 	public expression(): ExpressionContext {
@@ -27194,8 +27244,8 @@ export class Read_one_expressionContext extends antlr4.context.ParserRuleContext
 }
 
 
-export class Order_by_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Order_by_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -27205,10 +27255,10 @@ export class Order_by_listContext extends antlr4.context.ParserRuleContext {
 	public order_by(i: number): Order_byContext {
 		return this.getTypedRuleContext(Order_byContext, i) as Order_byContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -27227,8 +27277,8 @@ export class Order_by_listContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Order_byContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Order_byContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -27238,16 +27288,16 @@ export class Order_byContext extends antlr4.context.ParserRuleContext {
 	public variable_identifier(i: number): Variable_identifierContext {
 		return this.getTypedRuleContext(Variable_identifierContext, i) as Variable_identifierContext;
 	}
-	public DOT_list(): antlr4.tree.TerminalNode[] {
+	public DOT_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.DOT);
 	}
-	public DOT(i: number): antlr4.tree.TerminalNode {
+	public DOT(i: number): TerminalNode {
 		return this.getToken(OParser.DOT, i);
 	}
-	public ASC(): antlr4.tree.TerminalNode {
+	public ASC(): TerminalNode {
 		return this.getToken(OParser.ASC, 0);
 	}
-	public DESC(): antlr4.tree.TerminalNode {
+	public DESC(): TerminalNode {
 		return this.getToken(OParser.DESC, 0);
 	}
     public get ruleIndex(): number {
@@ -27266,8 +27316,8 @@ export class Order_byContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Include_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Include_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -27277,10 +27327,10 @@ export class Include_listContext extends antlr4.context.ParserRuleContext {
 	public variable_identifier(i: number): Variable_identifierContext {
 		return this.getTypedRuleContext(Variable_identifierContext, i) as Variable_identifierContext;
 	}
-	public COMMA_list(): antlr4.tree.TerminalNode[] {
+	public COMMA_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.COMMA);
 	}
-	public COMMA(i: number): antlr4.tree.TerminalNode {
+	public COMMA(i: number): TerminalNode {
 		return this.getToken(OParser.COMMA, i);
 	}
     public get ruleIndex(): number {
@@ -27299,8 +27349,8 @@ export class Include_listContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class OperatorContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class OperatorContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -27316,7 +27366,7 @@ export class OperatorPlusContext extends OperatorContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public PLUS(): antlr4.tree.TerminalNode {
+	public PLUS(): TerminalNode {
 		return this.getToken(OParser.PLUS, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -27392,7 +27442,7 @@ export class OperatorMinusContext extends OperatorContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public MINUS(): antlr4.tree.TerminalNode {
+	public MINUS(): TerminalNode {
 		return this.getToken(OParser.MINUS, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -27427,351 +27477,351 @@ export class OperatorModuloContext extends OperatorContext {
 }
 
 
-export class KeywordContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class KeywordContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public JAVA(): antlr4.tree.TerminalNode {
+	public JAVA(): TerminalNode {
 		return this.getToken(OParser.JAVA, 0);
 	}
-	public CSHARP(): antlr4.tree.TerminalNode {
+	public CSHARP(): TerminalNode {
 		return this.getToken(OParser.CSHARP, 0);
 	}
-	public PYTHON2(): antlr4.tree.TerminalNode {
+	public PYTHON2(): TerminalNode {
 		return this.getToken(OParser.PYTHON2, 0);
 	}
-	public PYTHON3(): antlr4.tree.TerminalNode {
+	public PYTHON3(): TerminalNode {
 		return this.getToken(OParser.PYTHON3, 0);
 	}
-	public JAVASCRIPT(): antlr4.tree.TerminalNode {
+	public JAVASCRIPT(): TerminalNode {
 		return this.getToken(OParser.JAVASCRIPT, 0);
 	}
-	public SWIFT(): antlr4.tree.TerminalNode {
+	public SWIFT(): TerminalNode {
 		return this.getToken(OParser.SWIFT, 0);
 	}
-	public BOOLEAN(): antlr4.tree.TerminalNode {
+	public BOOLEAN(): TerminalNode {
 		return this.getToken(OParser.BOOLEAN, 0);
 	}
-	public CHARACTER(): antlr4.tree.TerminalNode {
+	public CHARACTER(): TerminalNode {
 		return this.getToken(OParser.CHARACTER, 0);
 	}
-	public TEXT(): antlr4.tree.TerminalNode {
+	public TEXT(): TerminalNode {
 		return this.getToken(OParser.TEXT, 0);
 	}
-	public INTEGER(): antlr4.tree.TerminalNode {
+	public INTEGER(): TerminalNode {
 		return this.getToken(OParser.INTEGER, 0);
 	}
-	public DECIMAL(): antlr4.tree.TerminalNode {
+	public DECIMAL(): TerminalNode {
 		return this.getToken(OParser.DECIMAL, 0);
 	}
-	public DATE(): antlr4.tree.TerminalNode {
+	public DATE(): TerminalNode {
 		return this.getToken(OParser.DATE, 0);
 	}
-	public TIME(): antlr4.tree.TerminalNode {
+	public TIME(): TerminalNode {
 		return this.getToken(OParser.TIME, 0);
 	}
-	public DATETIME(): antlr4.tree.TerminalNode {
+	public DATETIME(): TerminalNode {
 		return this.getToken(OParser.DATETIME, 0);
 	}
-	public PERIOD(): antlr4.tree.TerminalNode {
+	public PERIOD(): TerminalNode {
 		return this.getToken(OParser.PERIOD, 0);
 	}
-	public VERSION(): antlr4.tree.TerminalNode {
+	public VERSION(): TerminalNode {
 		return this.getToken(OParser.VERSION, 0);
 	}
-	public CODE(): antlr4.tree.TerminalNode {
+	public CODE(): TerminalNode {
 		return this.getToken(OParser.CODE, 0);
 	}
-	public DOCUMENT(): antlr4.tree.TerminalNode {
+	public DOCUMENT(): TerminalNode {
 		return this.getToken(OParser.DOCUMENT, 0);
 	}
-	public BLOB(): antlr4.tree.TerminalNode {
+	public BLOB(): TerminalNode {
 		return this.getToken(OParser.BLOB, 0);
 	}
-	public IMAGE(): antlr4.tree.TerminalNode {
+	public IMAGE(): TerminalNode {
 		return this.getToken(OParser.IMAGE, 0);
 	}
-	public DBID(): antlr4.tree.TerminalNode {
+	public DBID(): TerminalNode {
 		return this.getToken(OParser.DBID, 0);
 	}
-	public UUID(): antlr4.tree.TerminalNode {
+	public UUID(): TerminalNode {
 		return this.getToken(OParser.UUID, 0);
 	}
-	public ITERATOR(): antlr4.tree.TerminalNode {
+	public ITERATOR(): TerminalNode {
 		return this.getToken(OParser.ITERATOR, 0);
 	}
-	public CURSOR(): antlr4.tree.TerminalNode {
+	public CURSOR(): TerminalNode {
 		return this.getToken(OParser.CURSOR, 0);
 	}
-	public HTML(): antlr4.tree.TerminalNode {
+	public HTML(): TerminalNode {
 		return this.getToken(OParser.HTML, 0);
 	}
-	public ABSTRACT(): antlr4.tree.TerminalNode {
+	public ABSTRACT(): TerminalNode {
 		return this.getToken(OParser.ABSTRACT, 0);
 	}
-	public ALL(): antlr4.tree.TerminalNode {
+	public ALL(): TerminalNode {
 		return this.getToken(OParser.ALL, 0);
 	}
-	public ALWAYS(): antlr4.tree.TerminalNode {
+	public ALWAYS(): TerminalNode {
 		return this.getToken(OParser.ALWAYS, 0);
 	}
-	public AND(): antlr4.tree.TerminalNode {
+	public AND(): TerminalNode {
 		return this.getToken(OParser.AND, 0);
 	}
-	public ANY(): antlr4.tree.TerminalNode {
+	public ANY(): TerminalNode {
 		return this.getToken(OParser.ANY, 0);
 	}
-	public AS(): antlr4.tree.TerminalNode {
+	public AS(): TerminalNode {
 		return this.getToken(OParser.AS, 0);
 	}
-	public ASC(): antlr4.tree.TerminalNode {
+	public ASC(): TerminalNode {
 		return this.getToken(OParser.ASC, 0);
 	}
-	public ATTR(): antlr4.tree.TerminalNode {
+	public ATTR(): TerminalNode {
 		return this.getToken(OParser.ATTR, 0);
 	}
-	public ATTRIBUTE(): antlr4.tree.TerminalNode {
+	public ATTRIBUTE(): TerminalNode {
 		return this.getToken(OParser.ATTRIBUTE, 0);
 	}
-	public ATTRIBUTES(): antlr4.tree.TerminalNode {
+	public ATTRIBUTES(): TerminalNode {
 		return this.getToken(OParser.ATTRIBUTES, 0);
 	}
-	public BINDINGS(): antlr4.tree.TerminalNode {
+	public BINDINGS(): TerminalNode {
 		return this.getToken(OParser.BINDINGS, 0);
 	}
-	public BREAK(): antlr4.tree.TerminalNode {
+	public BREAK(): TerminalNode {
 		return this.getToken(OParser.BREAK, 0);
 	}
-	public BY(): antlr4.tree.TerminalNode {
+	public BY(): TerminalNode {
 		return this.getToken(OParser.BY, 0);
 	}
-	public CASE(): antlr4.tree.TerminalNode {
+	public CASE(): TerminalNode {
 		return this.getToken(OParser.CASE, 0);
 	}
-	public CATCH(): antlr4.tree.TerminalNode {
+	public CATCH(): TerminalNode {
 		return this.getToken(OParser.CATCH, 0);
 	}
-	public CATEGORY(): antlr4.tree.TerminalNode {
+	public CATEGORY(): TerminalNode {
 		return this.getToken(OParser.CATEGORY, 0);
 	}
-	public CLASS(): antlr4.tree.TerminalNode {
+	public CLASS(): TerminalNode {
 		return this.getToken(OParser.CLASS, 0);
 	}
-	public CONTAINS(): antlr4.tree.TerminalNode {
+	public CONTAINS(): TerminalNode {
 		return this.getToken(OParser.CONTAINS, 0);
 	}
-	public DEF(): antlr4.tree.TerminalNode {
+	public DEF(): TerminalNode {
 		return this.getToken(OParser.DEF, 0);
 	}
-	public DEFAULT(): antlr4.tree.TerminalNode {
+	public DEFAULT(): TerminalNode {
 		return this.getToken(OParser.DEFAULT, 0);
 	}
-	public DEFINE(): antlr4.tree.TerminalNode {
+	public DEFINE(): TerminalNode {
 		return this.getToken(OParser.DEFINE, 0);
 	}
-	public DELETE(): antlr4.tree.TerminalNode {
+	public DELETE(): TerminalNode {
 		return this.getToken(OParser.DELETE, 0);
 	}
-	public DESC(): antlr4.tree.TerminalNode {
+	public DESC(): TerminalNode {
 		return this.getToken(OParser.DESC, 0);
 	}
-	public DO(): antlr4.tree.TerminalNode {
+	public DO(): TerminalNode {
 		return this.getToken(OParser.DO, 0);
 	}
-	public DOING(): antlr4.tree.TerminalNode {
+	public DOING(): TerminalNode {
 		return this.getToken(OParser.DOING, 0);
 	}
-	public EACH(): antlr4.tree.TerminalNode {
+	public EACH(): TerminalNode {
 		return this.getToken(OParser.EACH, 0);
 	}
-	public ELSE(): antlr4.tree.TerminalNode {
+	public ELSE(): TerminalNode {
 		return this.getToken(OParser.ELSE, 0);
 	}
-	public ENUM(): antlr4.tree.TerminalNode {
+	public ENUM(): TerminalNode {
 		return this.getToken(OParser.ENUM, 0);
 	}
-	public ENUMERATED(): antlr4.tree.TerminalNode {
+	public ENUMERATED(): TerminalNode {
 		return this.getToken(OParser.ENUMERATED, 0);
 	}
-	public EXCEPT(): antlr4.tree.TerminalNode {
+	public EXCEPT(): TerminalNode {
 		return this.getToken(OParser.EXCEPT, 0);
 	}
-	public EXECUTE(): antlr4.tree.TerminalNode {
+	public EXECUTE(): TerminalNode {
 		return this.getToken(OParser.EXECUTE, 0);
 	}
-	public EXPECTING(): antlr4.tree.TerminalNode {
+	public EXPECTING(): TerminalNode {
 		return this.getToken(OParser.EXPECTING, 0);
 	}
-	public EXTENDS(): antlr4.tree.TerminalNode {
+	public EXTENDS(): TerminalNode {
 		return this.getToken(OParser.EXTENDS, 0);
 	}
-	public FETCH(): antlr4.tree.TerminalNode {
+	public FETCH(): TerminalNode {
 		return this.getToken(OParser.FETCH, 0);
 	}
-	public FILTERED(): antlr4.tree.TerminalNode {
+	public FILTERED(): TerminalNode {
 		return this.getToken(OParser.FILTERED, 0);
 	}
-	public FINALLY(): antlr4.tree.TerminalNode {
+	public FINALLY(): TerminalNode {
 		return this.getToken(OParser.FINALLY, 0);
 	}
-	public FLUSH(): antlr4.tree.TerminalNode {
+	public FLUSH(): TerminalNode {
 		return this.getToken(OParser.FLUSH, 0);
 	}
-	public FOR(): antlr4.tree.TerminalNode {
+	public FOR(): TerminalNode {
 		return this.getToken(OParser.FOR, 0);
 	}
-	public FROM(): antlr4.tree.TerminalNode {
+	public FROM(): TerminalNode {
 		return this.getToken(OParser.FROM, 0);
 	}
-	public GETTER(): antlr4.tree.TerminalNode {
+	public GETTER(): TerminalNode {
 		return this.getToken(OParser.GETTER, 0);
 	}
-	public HAS(): antlr4.tree.TerminalNode {
+	public HAS(): TerminalNode {
 		return this.getToken(OParser.HAS, 0);
 	}
-	public IF(): antlr4.tree.TerminalNode {
+	public IF(): TerminalNode {
 		return this.getToken(OParser.IF, 0);
 	}
-	public IN(): antlr4.tree.TerminalNode {
+	public IN(): TerminalNode {
 		return this.getToken(OParser.IN, 0);
 	}
-	public INDEX(): antlr4.tree.TerminalNode {
+	public INDEX(): TerminalNode {
 		return this.getToken(OParser.INDEX, 0);
 	}
-	public IS(): antlr4.tree.TerminalNode {
+	public IS(): TerminalNode {
 		return this.getToken(OParser.IS, 0);
 	}
-	public MATCHING(): antlr4.tree.TerminalNode {
+	public MATCHING(): TerminalNode {
 		return this.getToken(OParser.MATCHING, 0);
 	}
-	public METHOD(): antlr4.tree.TerminalNode {
+	public METHOD(): TerminalNode {
 		return this.getToken(OParser.METHOD, 0);
 	}
-	public METHODS(): antlr4.tree.TerminalNode {
+	public METHODS(): TerminalNode {
 		return this.getToken(OParser.METHODS, 0);
 	}
-	public MODULO(): antlr4.tree.TerminalNode {
+	public MODULO(): TerminalNode {
 		return this.getToken(OParser.MODULO, 0);
 	}
-	public MUTABLE(): antlr4.tree.TerminalNode {
+	public MUTABLE(): TerminalNode {
 		return this.getToken(OParser.MUTABLE, 0);
 	}
-	public NATIVE(): antlr4.tree.TerminalNode {
+	public NATIVE(): TerminalNode {
 		return this.getToken(OParser.NATIVE, 0);
 	}
-	public NONE(): antlr4.tree.TerminalNode {
+	public NONE(): TerminalNode {
 		return this.getToken(OParser.NONE, 0);
 	}
-	public NOT(): antlr4.tree.TerminalNode {
+	public NOT(): TerminalNode {
 		return this.getToken(OParser.NOT, 0);
 	}
-	public NOTHING(): antlr4.tree.TerminalNode {
+	public NOTHING(): TerminalNode {
 		return this.getToken(OParser.NOTHING, 0);
 	}
-	public NULL(): antlr4.tree.TerminalNode {
+	public NULL(): TerminalNode {
 		return this.getToken(OParser.NULL, 0);
 	}
-	public ON(): antlr4.tree.TerminalNode {
+	public ON(): TerminalNode {
 		return this.getToken(OParser.ON, 0);
 	}
-	public ONE(): antlr4.tree.TerminalNode {
+	public ONE(): TerminalNode {
 		return this.getToken(OParser.ONE, 0);
 	}
-	public OPERATOR(): antlr4.tree.TerminalNode {
+	public OPERATOR(): TerminalNode {
 		return this.getToken(OParser.OPERATOR, 0);
 	}
-	public OR(): antlr4.tree.TerminalNode {
+	public OR(): TerminalNode {
 		return this.getToken(OParser.OR, 0);
 	}
-	public ORDER(): antlr4.tree.TerminalNode {
+	public ORDER(): TerminalNode {
 		return this.getToken(OParser.ORDER, 0);
 	}
-	public OTHERWISE(): antlr4.tree.TerminalNode {
+	public OTHERWISE(): TerminalNode {
 		return this.getToken(OParser.OTHERWISE, 0);
 	}
-	public PASS(): antlr4.tree.TerminalNode {
+	public PASS(): TerminalNode {
 		return this.getToken(OParser.PASS, 0);
 	}
-	public RAISE(): antlr4.tree.TerminalNode {
+	public RAISE(): TerminalNode {
 		return this.getToken(OParser.RAISE, 0);
 	}
-	public READ(): antlr4.tree.TerminalNode {
+	public READ(): TerminalNode {
 		return this.getToken(OParser.READ, 0);
 	}
-	public RECEIVING(): antlr4.tree.TerminalNode {
+	public RECEIVING(): TerminalNode {
 		return this.getToken(OParser.RECEIVING, 0);
 	}
-	public RESOURCE(): antlr4.tree.TerminalNode {
+	public RESOURCE(): TerminalNode {
 		return this.getToken(OParser.RESOURCE, 0);
 	}
-	public RETURN(): antlr4.tree.TerminalNode {
+	public RETURN(): TerminalNode {
 		return this.getToken(OParser.RETURN, 0);
 	}
-	public RETURNING(): antlr4.tree.TerminalNode {
+	public RETURNING(): TerminalNode {
 		return this.getToken(OParser.RETURNING, 0);
 	}
-	public ROWS(): antlr4.tree.TerminalNode {
+	public ROWS(): TerminalNode {
 		return this.getToken(OParser.ROWS, 0);
 	}
-	public SELF(): antlr4.tree.TerminalNode {
+	public SELF(): TerminalNode {
 		return this.getToken(OParser.SELF, 0);
 	}
-	public SETTER(): antlr4.tree.TerminalNode {
+	public SETTER(): TerminalNode {
 		return this.getToken(OParser.SETTER, 0);
 	}
-	public SINGLETON(): antlr4.tree.TerminalNode {
+	public SINGLETON(): TerminalNode {
 		return this.getToken(OParser.SINGLETON, 0);
 	}
-	public SORTED(): antlr4.tree.TerminalNode {
+	public SORTED(): TerminalNode {
 		return this.getToken(OParser.SORTED, 0);
 	}
-	public SUPER(): antlr4.tree.TerminalNode {
+	public SUPER(): TerminalNode {
 		return this.getToken(OParser.SUPER, 0);
 	}
-	public STORABLE(): antlr4.tree.TerminalNode {
+	public STORABLE(): TerminalNode {
 		return this.getToken(OParser.STORABLE, 0);
 	}
-	public STORE(): antlr4.tree.TerminalNode {
+	public STORE(): TerminalNode {
 		return this.getToken(OParser.STORE, 0);
 	}
-	public SWITCH(): antlr4.tree.TerminalNode {
+	public SWITCH(): TerminalNode {
 		return this.getToken(OParser.SWITCH, 0);
 	}
-	public TEST(): antlr4.tree.TerminalNode {
+	public TEST(): TerminalNode {
 		return this.getToken(OParser.TEST, 0);
 	}
-	public THIS(): antlr4.tree.TerminalNode {
+	public THIS(): TerminalNode {
 		return this.getToken(OParser.THIS, 0);
 	}
-	public THROW(): antlr4.tree.TerminalNode {
+	public THROW(): TerminalNode {
 		return this.getToken(OParser.THROW, 0);
 	}
-	public TO(): antlr4.tree.TerminalNode {
+	public TO(): TerminalNode {
 		return this.getToken(OParser.TO, 0);
 	}
-	public TRY(): antlr4.tree.TerminalNode {
+	public TRY(): TerminalNode {
 		return this.getToken(OParser.TRY, 0);
 	}
-	public VERIFYING(): antlr4.tree.TerminalNode {
+	public VERIFYING(): TerminalNode {
 		return this.getToken(OParser.VERIFYING, 0);
 	}
-	public WIDGET(): antlr4.tree.TerminalNode {
+	public WIDGET(): TerminalNode {
 		return this.getToken(OParser.WIDGET, 0);
 	}
-	public WITH(): antlr4.tree.TerminalNode {
+	public WITH(): TerminalNode {
 		return this.getToken(OParser.WITH, 0);
 	}
-	public WHEN(): antlr4.tree.TerminalNode {
+	public WHEN(): TerminalNode {
 		return this.getToken(OParser.WHEN, 0);
 	}
-	public WHERE(): antlr4.tree.TerminalNode {
+	public WHERE(): TerminalNode {
 		return this.getToken(OParser.WHERE, 0);
 	}
-	public WHILE(): antlr4.tree.TerminalNode {
+	public WHILE(): TerminalNode {
 		return this.getToken(OParser.WHILE, 0);
 	}
-	public WRITE(): antlr4.tree.TerminalNode {
+	public WRITE(): TerminalNode {
 		return this.getToken(OParser.WRITE, 0);
 	}
     public get ruleIndex(): number {
@@ -27790,13 +27840,13 @@ export class KeywordContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class New_tokenContext extends antlr4.context.ParserRuleContext {
-	public _i1!: antlr4.Token;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class New_tokenContext extends ParserRuleContext {
+	public _i1!: Token;
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
     public get ruleIndex(): number {
@@ -27815,13 +27865,13 @@ export class New_tokenContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Key_tokenContext extends antlr4.context.ParserRuleContext {
-	public _i1!: antlr4.Token;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Key_tokenContext extends ParserRuleContext {
+	public _i1!: Token;
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
     public get ruleIndex(): number {
@@ -27840,13 +27890,13 @@ export class Key_tokenContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Module_tokenContext extends antlr4.context.ParserRuleContext {
-	public _i1!: antlr4.Token;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Module_tokenContext extends ParserRuleContext {
+	public _i1!: Token;
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
     public get ruleIndex(): number {
@@ -27865,13 +27915,13 @@ export class Module_tokenContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Value_tokenContext extends antlr4.context.ParserRuleContext {
-	public _i1!: antlr4.Token;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Value_tokenContext extends ParserRuleContext {
+	public _i1!: Token;
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
     public get ruleIndex(): number {
@@ -27890,13 +27940,13 @@ export class Value_tokenContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Symbols_tokenContext extends antlr4.context.ParserRuleContext {
-	public _i1!: antlr4.Token;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Symbols_tokenContext extends ParserRuleContext {
+	public _i1!: Token;
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
     public get ruleIndex(): number {
@@ -27915,12 +27965,12 @@ export class Symbols_tokenContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class AssignContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class AssignContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public EQ(): antlr4.tree.TerminalNode {
+	public EQ(): TerminalNode {
 		return this.getToken(OParser.EQ, 0);
 	}
     public get ruleIndex(): number {
@@ -27939,12 +27989,12 @@ export class AssignContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class MultiplyContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class MultiplyContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public STAR(): antlr4.tree.TerminalNode {
+	public STAR(): TerminalNode {
 		return this.getToken(OParser.STAR, 0);
 	}
     public get ruleIndex(): number {
@@ -27963,12 +28013,12 @@ export class MultiplyContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class DivideContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class DivideContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public SLASH(): antlr4.tree.TerminalNode {
+	public SLASH(): TerminalNode {
 		return this.getToken(OParser.SLASH, 0);
 	}
     public get ruleIndex(): number {
@@ -27987,12 +28037,12 @@ export class DivideContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class IdivideContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class IdivideContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public BSLASH(): antlr4.tree.TerminalNode {
+	public BSLASH(): TerminalNode {
 		return this.getToken(OParser.BSLASH, 0);
 	}
     public get ruleIndex(): number {
@@ -28011,15 +28061,15 @@ export class IdivideContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class ModuloContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class ModuloContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public PERCENT(): antlr4.tree.TerminalNode {
+	public PERCENT(): TerminalNode {
 		return this.getToken(OParser.PERCENT, 0);
 	}
-	public MODULO(): antlr4.tree.TerminalNode {
+	public MODULO(): TerminalNode {
 		return this.getToken(OParser.MODULO, 0);
 	}
     public get ruleIndex(): number {
@@ -28038,8 +28088,8 @@ export class ModuloContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class LfsContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class LfsContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28059,8 +28109,8 @@ export class LfsContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class LfpContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class LfpContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28080,8 +28130,8 @@ export class LfpContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Javascript_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28098,7 +28148,7 @@ export class JavascriptStatementContext extends Javascript_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public javascript_expression(): Javascript_expressionContext {
@@ -28121,10 +28171,10 @@ export class JavascriptReturnStatementContext extends Javascript_statementContex
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public RETURN(): antlr4.tree.TerminalNode {
+	public RETURN(): TerminalNode {
 		return this.getToken(OParser.RETURN, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public javascript_expression(): Javascript_expressionContext {
@@ -28143,8 +28193,8 @@ export class JavascriptReturnStatementContext extends Javascript_statementContex
 }
 
 
-export class Javascript_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28201,8 +28251,8 @@ export class JavascriptPrimaryExpressionContext extends Javascript_expressionCon
 }
 
 
-export class Javascript_primary_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_primary_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28243,8 +28293,8 @@ export class Javascript_primary_expressionContext extends antlr4.context.ParserR
 }
 
 
-export class Javascript_this_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_this_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28267,8 +28317,8 @@ export class Javascript_this_expressionContext extends antlr4.context.ParserRule
 }
 
 
-export class Javascript_new_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_new_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28294,8 +28344,8 @@ export class Javascript_new_expressionContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Javascript_selector_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_selector_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28312,7 +28362,7 @@ export class JavascriptMemberExpressionContext extends Javascript_selector_expre
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public javascript_identifier(): Javascript_identifierContext {
@@ -28355,7 +28405,7 @@ export class JavascriptMethodExpressionContext extends Javascript_selector_expre
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public javascript_method_expression(): Javascript_method_expressionContext {
@@ -28374,17 +28424,17 @@ export class JavascriptMethodExpressionContext extends Javascript_selector_expre
 }
 
 
-export class Javascript_method_expressionContext extends antlr4.context.ParserRuleContext {
+export class Javascript_method_expressionContext extends ParserRuleContext {
 	public _name!: Javascript_identifierContext;
 	public _args!: Javascript_argumentsContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public javascript_identifier(): Javascript_identifierContext {
@@ -28409,8 +28459,8 @@ export class Javascript_method_expressionContext extends antlr4.context.ParserRu
 }
 
 
-export class Javascript_argumentsContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_argumentsContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28448,7 +28498,7 @@ export class JavascriptArgumentListItemContext extends Javascript_argumentsConte
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public COMMA(): antlr4.tree.TerminalNode {
+	public COMMA(): TerminalNode {
 		return this.getToken(OParser.COMMA, 0);
 	}
 	public javascript_arguments(): Javascript_argumentsContext {
@@ -28470,16 +28520,16 @@ export class JavascriptArgumentListItemContext extends Javascript_argumentsConte
 }
 
 
-export class Javascript_item_expressionContext extends antlr4.context.ParserRuleContext {
+export class Javascript_item_expressionContext extends ParserRuleContext {
 	public _exp!: Javascript_expressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public javascript_expression(): Javascript_expressionContext {
@@ -28501,16 +28551,16 @@ export class Javascript_item_expressionContext extends antlr4.context.ParserRule
 }
 
 
-export class Javascript_parenthesis_expressionContext extends antlr4.context.ParserRuleContext {
+export class Javascript_parenthesis_expressionContext extends ParserRuleContext {
 	public _exp!: Javascript_expressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public javascript_expression(): Javascript_expressionContext {
@@ -28532,9 +28582,9 @@ export class Javascript_parenthesis_expressionContext extends antlr4.context.Par
 }
 
 
-export class Javascript_identifier_expressionContext extends antlr4.context.ParserRuleContext {
+export class Javascript_identifier_expressionContext extends ParserRuleContext {
 	public _name!: Javascript_identifierContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28557,8 +28607,8 @@ export class Javascript_identifier_expressionContext extends antlr4.context.Pars
 }
 
 
-export class Javascript_literal_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_literal_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28570,12 +28620,12 @@ export class Javascript_literal_expressionContext extends antlr4.context.ParserR
 	}
 }
 export class JavascriptIntegerLiteralContext extends Javascript_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Javascript_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public INTEGER_LITERAL(): antlr4.tree.TerminalNode {
+	public INTEGER_LITERAL(): TerminalNode {
 		return this.getToken(OParser.INTEGER_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -28590,12 +28640,12 @@ export class JavascriptIntegerLiteralContext extends Javascript_literal_expressi
 	}
 }
 export class JavascriptBooleanLiteralContext extends Javascript_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Javascript_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public BOOLEAN_LITERAL(): antlr4.tree.TerminalNode {
+	public BOOLEAN_LITERAL(): TerminalNode {
 		return this.getToken(OParser.BOOLEAN_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -28610,12 +28660,12 @@ export class JavascriptBooleanLiteralContext extends Javascript_literal_expressi
 	}
 }
 export class JavascriptCharacterLiteralContext extends Javascript_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Javascript_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CHAR_LITERAL(): antlr4.tree.TerminalNode {
+	public CHAR_LITERAL(): TerminalNode {
 		return this.getToken(OParser.CHAR_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -28630,12 +28680,12 @@ export class JavascriptCharacterLiteralContext extends Javascript_literal_expres
 	}
 }
 export class JavascriptTextLiteralContext extends Javascript_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Javascript_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TEXT_LITERAL(): antlr4.tree.TerminalNode {
+	public TEXT_LITERAL(): TerminalNode {
 		return this.getToken(OParser.TEXT_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -28650,12 +28700,12 @@ export class JavascriptTextLiteralContext extends Javascript_literal_expressionC
 	}
 }
 export class JavascriptDecimalLiteralContext extends Javascript_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Javascript_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DECIMAL_LITERAL(): antlr4.tree.TerminalNode {
+	public DECIMAL_LITERAL(): TerminalNode {
 		return this.getToken(OParser.DECIMAL_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -28671,21 +28721,21 @@ export class JavascriptDecimalLiteralContext extends Javascript_literal_expressi
 }
 
 
-export class Javascript_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Javascript_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
-	public SYMBOL_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public SYMBOL_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.SYMBOL_IDENTIFIER, 0);
 	}
-	public DOLLAR_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public DOLLAR_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.DOLLAR_IDENTIFIER, 0);
 	}
-	public TYPE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public TYPE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.TYPE_IDENTIFIER, 0);
 	}
 	public keyword(): KeywordContext {
@@ -28707,8 +28757,8 @@ export class Javascript_identifierContext extends antlr4.context.ParserRuleConte
 }
 
 
-export class Python_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28745,7 +28795,7 @@ export class PythonReturnStatementContext extends Python_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public RETURN(): antlr4.tree.TerminalNode {
+	public RETURN(): TerminalNode {
 		return this.getToken(OParser.RETURN, 0);
 	}
 	public python_expression(): Python_expressionContext {
@@ -28764,8 +28814,8 @@ export class PythonReturnStatementContext extends Python_statementContext {
 }
 
 
-export class Python_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28822,8 +28872,8 @@ export class PythonPrimaryExpressionContext extends Python_expressionContext {
 }
 
 
-export class Python_primary_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_primary_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28936,8 +28986,8 @@ export class PythonGlobalMethodExpressionContext extends Python_primary_expressi
 }
 
 
-export class Python_self_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_self_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28960,8 +29010,8 @@ export class Python_self_expressionContext extends antlr4.context.ParserRuleCont
 }
 
 
-export class Python_selector_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_selector_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -28978,7 +29028,7 @@ export class PythonMethodExpressionContext extends Python_selector_expressionCon
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public python_method_expression(): Python_method_expressionContext {
@@ -29001,10 +29051,10 @@ export class PythonItemExpressionContext extends Python_selector_expressionConte
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public python_expression(): Python_expressionContext {
@@ -29023,17 +29073,17 @@ export class PythonItemExpressionContext extends Python_selector_expressionConte
 }
 
 
-export class Python_method_expressionContext extends antlr4.context.ParserRuleContext {
+export class Python_method_expressionContext extends ParserRuleContext {
 	public _name!: Python_identifierContext;
 	public _args!: Python_argument_listContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public python_identifier(): Python_identifierContext {
@@ -29058,8 +29108,8 @@ export class Python_method_expressionContext extends antlr4.context.ParserRuleCo
 }
 
 
-export class Python_argument_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_argument_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29117,7 +29167,7 @@ export class PythonArgumentListContext extends Python_argument_listContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public COMMA(): antlr4.tree.TerminalNode {
+	public COMMA(): TerminalNode {
 		return this.getToken(OParser.COMMA, 0);
 	}
 	public python_ordinal_argument_list(): Python_ordinal_argument_listContext {
@@ -29139,8 +29189,8 @@ export class PythonArgumentListContext extends Python_argument_listContext {
 }
 
 
-export class Python_ordinal_argument_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_ordinal_argument_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29178,7 +29228,7 @@ export class PythonOrdinalArgumentListItemContext extends Python_ordinal_argumen
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public COMMA(): antlr4.tree.TerminalNode {
+	public COMMA(): TerminalNode {
 		return this.getToken(OParser.COMMA, 0);
 	}
 	public python_ordinal_argument_list(): Python_ordinal_argument_listContext {
@@ -29200,8 +29250,8 @@ export class PythonOrdinalArgumentListItemContext extends Python_ordinal_argumen
 }
 
 
-export class Python_named_argument_listContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_named_argument_listContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29219,7 +29269,7 @@ export class PythonNamedArgumentListContext extends Python_named_argument_listCo
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public EQ(): antlr4.tree.TerminalNode {
+	public EQ(): TerminalNode {
 		return this.getToken(OParser.EQ, 0);
 	}
 	public python_identifier(): Python_identifierContext {
@@ -29247,10 +29297,10 @@ export class PythonNamedArgumentListItemContext extends Python_named_argument_li
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public COMMA(): antlr4.tree.TerminalNode {
+	public COMMA(): TerminalNode {
 		return this.getToken(OParser.COMMA, 0);
 	}
-	public EQ(): antlr4.tree.TerminalNode {
+	public EQ(): TerminalNode {
 		return this.getToken(OParser.EQ, 0);
 	}
 	public python_named_argument_list(): Python_named_argument_listContext {
@@ -29275,16 +29325,16 @@ export class PythonNamedArgumentListItemContext extends Python_named_argument_li
 }
 
 
-export class Python_parenthesis_expressionContext extends antlr4.context.ParserRuleContext {
+export class Python_parenthesis_expressionContext extends ParserRuleContext {
 	public _exp!: Python_expressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public python_expression(): Python_expressionContext {
@@ -29306,8 +29356,8 @@ export class Python_parenthesis_expressionContext extends antlr4.context.ParserR
 }
 
 
-export class Python_identifier_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_identifier_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29325,7 +29375,7 @@ export class PythonChildIdentifierContext extends Python_identifier_expressionCo
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public python_identifier_expression(): Python_identifier_expressionContext {
@@ -29350,7 +29400,7 @@ export class PythonPromptoIdentifierContext extends Python_identifier_expression
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOLLAR_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public DOLLAR_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.DOLLAR_IDENTIFIER, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -29386,8 +29436,8 @@ export class PythonIdentifierContext extends Python_identifier_expressionContext
 }
 
 
-export class Python_literal_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_literal_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29399,12 +29449,12 @@ export class Python_literal_expressionContext extends antlr4.context.ParserRuleC
 	}
 }
 export class PythonIntegerLiteralContext extends Python_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Python_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public INTEGER_LITERAL(): antlr4.tree.TerminalNode {
+	public INTEGER_LITERAL(): TerminalNode {
 		return this.getToken(OParser.INTEGER_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -29419,12 +29469,12 @@ export class PythonIntegerLiteralContext extends Python_literal_expressionContex
 	}
 }
 export class PythonBooleanLiteralContext extends Python_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Python_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public BOOLEAN_LITERAL(): antlr4.tree.TerminalNode {
+	public BOOLEAN_LITERAL(): TerminalNode {
 		return this.getToken(OParser.BOOLEAN_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -29439,12 +29489,12 @@ export class PythonBooleanLiteralContext extends Python_literal_expressionContex
 	}
 }
 export class PythonCharacterLiteralContext extends Python_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Python_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CHAR_LITERAL(): antlr4.tree.TerminalNode {
+	public CHAR_LITERAL(): TerminalNode {
 		return this.getToken(OParser.CHAR_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -29459,12 +29509,12 @@ export class PythonCharacterLiteralContext extends Python_literal_expressionCont
 	}
 }
 export class PythonTextLiteralContext extends Python_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Python_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TEXT_LITERAL(): antlr4.tree.TerminalNode {
+	public TEXT_LITERAL(): TerminalNode {
 		return this.getToken(OParser.TEXT_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -29479,12 +29529,12 @@ export class PythonTextLiteralContext extends Python_literal_expressionContext {
 	}
 }
 export class PythonDecimalLiteralContext extends Python_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Python_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DECIMAL_LITERAL(): antlr4.tree.TerminalNode {
+	public DECIMAL_LITERAL(): TerminalNode {
 		return this.getToken(OParser.DECIMAL_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -29500,21 +29550,21 @@ export class PythonDecimalLiteralContext extends Python_literal_expressionContex
 }
 
 
-export class Python_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Python_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
-	public SYMBOL_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public SYMBOL_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.SYMBOL_IDENTIFIER, 0);
 	}
-	public DOLLAR_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public DOLLAR_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.DOLLAR_IDENTIFIER, 0);
 	}
-	public TYPE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public TYPE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.TYPE_IDENTIFIER, 0);
 	}
 	public keyword(): KeywordContext {
@@ -29536,8 +29586,8 @@ export class Python_identifierContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Java_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Java_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29554,10 +29604,10 @@ export class JavaReturnStatementContext extends Java_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public RETURN(): antlr4.tree.TerminalNode {
+	public RETURN(): TerminalNode {
 		return this.getToken(OParser.RETURN, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public java_expression(): Java_expressionContext {
@@ -29580,7 +29630,7 @@ export class JavaStatementContext extends Java_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public java_expression(): Java_expressionContext {
@@ -29599,8 +29649,8 @@ export class JavaStatementContext extends Java_statementContext {
 }
 
 
-export class Java_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Java_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29657,8 +29707,8 @@ export class JavaPrimaryExpressionContext extends Java_expressionContext {
 }
 
 
-export class Java_primary_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Java_primary_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29693,8 +29743,8 @@ export class Java_primary_expressionContext extends antlr4.context.ParserRuleCon
 }
 
 
-export class Java_this_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Java_this_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29717,8 +29767,8 @@ export class Java_this_expressionContext extends antlr4.context.ParserRuleContex
 }
 
 
-export class Java_new_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Java_new_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29744,8 +29794,8 @@ export class Java_new_expressionContext extends antlr4.context.ParserRuleContext
 }
 
 
-export class Java_selector_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Java_selector_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29782,7 +29832,7 @@ export class JavaMethodExpressionContext extends Java_selector_expressionContext
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public java_method_expression(): Java_method_expressionContext {
@@ -29801,17 +29851,17 @@ export class JavaMethodExpressionContext extends Java_selector_expressionContext
 }
 
 
-export class Java_method_expressionContext extends antlr4.context.ParserRuleContext {
+export class Java_method_expressionContext extends ParserRuleContext {
 	public _name!: Java_identifierContext;
 	public _args!: Java_argumentsContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public java_identifier(): Java_identifierContext {
@@ -29836,8 +29886,8 @@ export class Java_method_expressionContext extends antlr4.context.ParserRuleCont
 }
 
 
-export class Java_argumentsContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Java_argumentsContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29855,7 +29905,7 @@ export class JavaArgumentListItemContext extends Java_argumentsContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public COMMA(): antlr4.tree.TerminalNode {
+	public COMMA(): TerminalNode {
 		return this.getToken(OParser.COMMA, 0);
 	}
 	public java_arguments(): Java_argumentsContext {
@@ -29897,16 +29947,16 @@ export class JavaArgumentListContext extends Java_argumentsContext {
 }
 
 
-export class Java_item_expressionContext extends antlr4.context.ParserRuleContext {
+export class Java_item_expressionContext extends ParserRuleContext {
 	public _exp!: Java_expressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public java_expression(): Java_expressionContext {
@@ -29928,16 +29978,16 @@ export class Java_item_expressionContext extends antlr4.context.ParserRuleContex
 }
 
 
-export class Java_parenthesis_expressionContext extends antlr4.context.ParserRuleContext {
+export class Java_parenthesis_expressionContext extends ParserRuleContext {
 	public _exp!: Java_expressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public java_expression(): Java_expressionContext {
@@ -29959,8 +30009,8 @@ export class Java_parenthesis_expressionContext extends antlr4.context.ParserRul
 }
 
 
-export class Java_identifier_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Java_identifier_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -29998,7 +30048,7 @@ export class JavaChildIdentifierContext extends Java_identifier_expressionContex
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public java_identifier_expression(): Java_identifier_expressionContext {
@@ -30020,8 +30070,8 @@ export class JavaChildIdentifierContext extends Java_identifier_expressionContex
 }
 
 
-export class Java_class_identifier_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Java_class_identifier_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30054,7 +30104,7 @@ export class JavaClassIdentifierContext extends Java_class_identifier_expression
 }
 export class JavaChildClassIdentifierContext extends Java_class_identifier_expressionContext {
 	public _parent!: Java_class_identifier_expressionContext;
-	public _name!: antlr4.Token;
+	public _name!: Token;
 	constructor(parser: OParser, ctx: Java_class_identifier_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
@@ -30062,7 +30112,7 @@ export class JavaChildClassIdentifierContext extends Java_class_identifier_expre
 	public java_class_identifier_expression(): Java_class_identifier_expressionContext {
 		return this.getTypedRuleContext(Java_class_identifier_expressionContext, 0) as Java_class_identifier_expressionContext;
 	}
-	public DOLLAR_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public DOLLAR_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.DOLLAR_IDENTIFIER, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30078,8 +30128,8 @@ export class JavaChildClassIdentifierContext extends Java_class_identifier_expre
 }
 
 
-export class Java_literal_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Java_literal_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30091,12 +30141,12 @@ export class Java_literal_expressionContext extends antlr4.context.ParserRuleCon
 	}
 }
 export class JavaBooleanLiteralContext extends Java_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Java_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public BOOLEAN_LITERAL(): antlr4.tree.TerminalNode {
+	public BOOLEAN_LITERAL(): TerminalNode {
 		return this.getToken(OParser.BOOLEAN_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30111,12 +30161,12 @@ export class JavaBooleanLiteralContext extends Java_literal_expressionContext {
 	}
 }
 export class JavaCharacterLiteralContext extends Java_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Java_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CHAR_LITERAL(): antlr4.tree.TerminalNode {
+	public CHAR_LITERAL(): TerminalNode {
 		return this.getToken(OParser.CHAR_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30131,12 +30181,12 @@ export class JavaCharacterLiteralContext extends Java_literal_expressionContext 
 	}
 }
 export class JavaIntegerLiteralContext extends Java_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Java_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public INTEGER_LITERAL(): antlr4.tree.TerminalNode {
+	public INTEGER_LITERAL(): TerminalNode {
 		return this.getToken(OParser.INTEGER_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30151,12 +30201,12 @@ export class JavaIntegerLiteralContext extends Java_literal_expressionContext {
 	}
 }
 export class JavaTextLiteralContext extends Java_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Java_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TEXT_LITERAL(): antlr4.tree.TerminalNode {
+	public TEXT_LITERAL(): TerminalNode {
 		return this.getToken(OParser.TEXT_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30171,12 +30221,12 @@ export class JavaTextLiteralContext extends Java_literal_expressionContext {
 	}
 }
 export class JavaDecimalLiteralContext extends Java_literal_expressionContext {
-	public _t!: antlr4.Token;
+	public _t!: Token;
 	constructor(parser: OParser, ctx: Java_literal_expressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DECIMAL_LITERAL(): antlr4.tree.TerminalNode {
+	public DECIMAL_LITERAL(): TerminalNode {
 		return this.getToken(OParser.DECIMAL_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30192,21 +30242,21 @@ export class JavaDecimalLiteralContext extends Java_literal_expressionContext {
 }
 
 
-export class Java_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Java_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
-	public SYMBOL_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public SYMBOL_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.SYMBOL_IDENTIFIER, 0);
 	}
-	public DOLLAR_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public DOLLAR_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.DOLLAR_IDENTIFIER, 0);
 	}
-	public TYPE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public TYPE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.TYPE_IDENTIFIER, 0);
 	}
 	public keyword(): KeywordContext {
@@ -30228,8 +30278,8 @@ export class Java_identifierContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Csharp_statementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Csharp_statementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30246,10 +30296,10 @@ export class CSharpReturnStatementContext extends Csharp_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public RETURN(): antlr4.tree.TerminalNode {
+	public RETURN(): TerminalNode {
 		return this.getToken(OParser.RETURN, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public csharp_expression(): Csharp_expressionContext {
@@ -30272,7 +30322,7 @@ export class CSharpStatementContext extends Csharp_statementContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public csharp_expression(): Csharp_expressionContext {
@@ -30291,8 +30341,8 @@ export class CSharpStatementContext extends Csharp_statementContext {
 }
 
 
-export class Csharp_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Csharp_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30349,8 +30399,8 @@ export class CSharpPrimaryExpressionContext extends Csharp_expressionContext {
 }
 
 
-export class Csharp_primary_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Csharp_primary_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30385,8 +30435,8 @@ export class Csharp_primary_expressionContext extends antlr4.context.ParserRuleC
 }
 
 
-export class Csharp_this_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Csharp_this_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30409,8 +30459,8 @@ export class Csharp_this_expressionContext extends antlr4.context.ParserRuleCont
 }
 
 
-export class Csharp_new_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Csharp_new_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30436,8 +30486,8 @@ export class Csharp_new_expressionContext extends antlr4.context.ParserRuleConte
 }
 
 
-export class Csharp_selector_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Csharp_selector_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30454,7 +30504,7 @@ export class CSharpMethodExpressionContext extends Csharp_selector_expressionCon
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public csharp_method_expression(): Csharp_method_expressionContext {
@@ -30493,17 +30543,17 @@ export class CSharpItemExpressionContext extends Csharp_selector_expressionConte
 }
 
 
-export class Csharp_method_expressionContext extends antlr4.context.ParserRuleContext {
+export class Csharp_method_expressionContext extends ParserRuleContext {
 	public _name!: Csharp_identifierContext;
 	public _args!: Csharp_argumentsContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public csharp_identifier(): Csharp_identifierContext {
@@ -30528,8 +30578,8 @@ export class Csharp_method_expressionContext extends antlr4.context.ParserRuleCo
 }
 
 
-export class Csharp_argumentsContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Csharp_argumentsContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30567,7 +30617,7 @@ export class CSharpArgumentListItemContext extends Csharp_argumentsContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public COMMA(): antlr4.tree.TerminalNode {
+	public COMMA(): TerminalNode {
 		return this.getToken(OParser.COMMA, 0);
 	}
 	public csharp_arguments(): Csharp_argumentsContext {
@@ -30589,16 +30639,16 @@ export class CSharpArgumentListItemContext extends Csharp_argumentsContext {
 }
 
 
-export class Csharp_item_expressionContext extends antlr4.context.ParserRuleContext {
+export class Csharp_item_expressionContext extends ParserRuleContext {
 	public _exp!: Csharp_expressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LBRAK(): antlr4.tree.TerminalNode {
+	public LBRAK(): TerminalNode {
 		return this.getToken(OParser.LBRAK, 0);
 	}
-	public RBRAK(): antlr4.tree.TerminalNode {
+	public RBRAK(): TerminalNode {
 		return this.getToken(OParser.RBRAK, 0);
 	}
 	public csharp_expression(): Csharp_expressionContext {
@@ -30620,16 +30670,16 @@ export class Csharp_item_expressionContext extends antlr4.context.ParserRuleCont
 }
 
 
-export class Csharp_parenthesis_expressionContext extends antlr4.context.ParserRuleContext {
+export class Csharp_parenthesis_expressionContext extends ParserRuleContext {
 	public _exp!: Csharp_expressionContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LPAR(): antlr4.tree.TerminalNode {
+	public LPAR(): TerminalNode {
 		return this.getToken(OParser.LPAR, 0);
 	}
-	public RPAR(): antlr4.tree.TerminalNode {
+	public RPAR(): TerminalNode {
 		return this.getToken(OParser.RPAR, 0);
 	}
 	public csharp_expression(): Csharp_expressionContext {
@@ -30651,8 +30701,8 @@ export class Csharp_parenthesis_expressionContext extends antlr4.context.ParserR
 }
 
 
-export class Csharp_identifier_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Csharp_identifier_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30690,7 +30740,7 @@ export class CSharpChildIdentifierContext extends Csharp_identifier_expressionCo
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOT(): antlr4.tree.TerminalNode {
+	public DOT(): TerminalNode {
 		return this.getToken(OParser.DOT, 0);
 	}
 	public csharp_identifier_expression(): Csharp_identifier_expressionContext {
@@ -30715,7 +30765,7 @@ export class CSharpPromptoIdentifierContext extends Csharp_identifier_expression
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DOLLAR_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public DOLLAR_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.DOLLAR_IDENTIFIER, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30731,8 +30781,8 @@ export class CSharpPromptoIdentifierContext extends Csharp_identifier_expression
 }
 
 
-export class Csharp_literal_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Csharp_literal_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30748,7 +30798,7 @@ export class CSharpBooleanLiteralContext extends Csharp_literal_expressionContex
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public BOOLEAN_LITERAL(): antlr4.tree.TerminalNode {
+	public BOOLEAN_LITERAL(): TerminalNode {
 		return this.getToken(OParser.BOOLEAN_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30767,7 +30817,7 @@ export class CSharpIntegerLiteralContext extends Csharp_literal_expressionContex
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public INTEGER_LITERAL(): antlr4.tree.TerminalNode {
+	public INTEGER_LITERAL(): TerminalNode {
 		return this.getToken(OParser.INTEGER_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30786,7 +30836,7 @@ export class CSharpDecimalLiteralContext extends Csharp_literal_expressionContex
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public DECIMAL_LITERAL(): antlr4.tree.TerminalNode {
+	public DECIMAL_LITERAL(): TerminalNode {
 		return this.getToken(OParser.DECIMAL_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30805,7 +30855,7 @@ export class CSharpCharacterLiteralContext extends Csharp_literal_expressionCont
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public CHAR_LITERAL(): antlr4.tree.TerminalNode {
+	public CHAR_LITERAL(): TerminalNode {
 		return this.getToken(OParser.CHAR_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30824,7 +30874,7 @@ export class CSharpTextLiteralContext extends Csharp_literal_expressionContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TEXT_LITERAL(): antlr4.tree.TerminalNode {
+	public TEXT_LITERAL(): TerminalNode {
 		return this.getToken(OParser.TEXT_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -30840,21 +30890,21 @@ export class CSharpTextLiteralContext extends Csharp_literal_expressionContext {
 }
 
 
-export class Csharp_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Csharp_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public VARIABLE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public VARIABLE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.VARIABLE_IDENTIFIER, 0);
 	}
-	public SYMBOL_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public SYMBOL_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.SYMBOL_IDENTIFIER, 0);
 	}
-	public DOLLAR_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public DOLLAR_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.DOLLAR_IDENTIFIER, 0);
 	}
-	public TYPE_IDENTIFIER(): antlr4.tree.TerminalNode {
+	public TYPE_IDENTIFIER(): TerminalNode {
 		return this.getToken(OParser.TYPE_IDENTIFIER, 0);
 	}
 	public keyword(): KeywordContext {
@@ -30876,8 +30926,8 @@ export class Csharp_identifierContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_expressionContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Jsx_expressionContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30903,8 +30953,8 @@ export class Jsx_expressionContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_elementContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Jsx_elementContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -30965,9 +31015,9 @@ export class JsxElementContext extends Jsx_elementContext {
 }
 
 
-export class Jsx_fragmentContext extends antlr4.context.ParserRuleContext {
+export class Jsx_fragmentContext extends ParserRuleContext {
 	public _children_!: Jsx_childrenContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -31002,18 +31052,18 @@ export class Jsx_fragmentContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_fragment_startContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Jsx_fragment_startContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
-	public LTGT(): antlr4.tree.TerminalNode {
+	public LTGT(): TerminalNode {
 		return this.getToken(OParser.LTGT, 0);
 	}
     public get ruleIndex(): number {
@@ -31032,18 +31082,18 @@ export class Jsx_fragment_startContext extends antlr4.context.ParserRuleContext 
 }
 
 
-export class Jsx_fragment_endContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Jsx_fragment_endContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
-	public SLASH(): antlr4.tree.TerminalNode {
+	public SLASH(): TerminalNode {
 		return this.getToken(OParser.SLASH, 0);
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
     public get ruleIndex(): number {
@@ -31062,23 +31112,23 @@ export class Jsx_fragment_endContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_self_closingContext extends antlr4.context.ParserRuleContext {
+export class Jsx_self_closingContext extends ParserRuleContext {
 	public _name!: Jsx_element_nameContext;
 	public _attributes!: Jsx_attributeContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
 	public ws_plus(): Ws_plusContext {
 		return this.getTypedRuleContext(Ws_plusContext, 0) as Ws_plusContext;
 	}
-	public SLASH(): antlr4.tree.TerminalNode {
+	public SLASH(): TerminalNode {
 		return this.getToken(OParser.SLASH, 0);
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
 	public jsx_element_name(): Jsx_element_nameContext {
@@ -31106,20 +31156,20 @@ export class Jsx_self_closingContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_openingContext extends antlr4.context.ParserRuleContext {
+export class Jsx_openingContext extends ParserRuleContext {
 	public _name!: Jsx_element_nameContext;
 	public _attributes!: Jsx_attributeContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
 	public ws_plus(): Ws_plusContext {
 		return this.getTypedRuleContext(Ws_plusContext, 0) as Ws_plusContext;
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
 	public jsx_element_name(): Jsx_element_nameContext {
@@ -31147,19 +31197,19 @@ export class Jsx_openingContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_closingContext extends antlr4.context.ParserRuleContext {
+export class Jsx_closingContext extends ParserRuleContext {
 	public _name!: Jsx_element_nameContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
-	public SLASH(): antlr4.tree.TerminalNode {
+	public SLASH(): TerminalNode {
 		return this.getToken(OParser.SLASH, 0);
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
 	public jsx_element_name(): Jsx_element_nameContext {
@@ -31181,8 +31231,8 @@ export class Jsx_closingContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_element_nameContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Jsx_element_nameContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -31192,10 +31242,10 @@ export class Jsx_element_nameContext extends antlr4.context.ParserRuleContext {
 	public jsx_identifier(i: number): Jsx_identifierContext {
 		return this.getTypedRuleContext(Jsx_identifierContext, i) as Jsx_identifierContext;
 	}
-	public DOT_list(): antlr4.tree.TerminalNode[] {
+	public DOT_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.DOT);
 	}
-	public DOT(i: number): antlr4.tree.TerminalNode {
+	public DOT(i: number): TerminalNode {
 		return this.getToken(OParser.DOT, i);
 	}
     public get ruleIndex(): number {
@@ -31214,8 +31264,8 @@ export class Jsx_element_nameContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Jsx_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -31244,10 +31294,10 @@ export class Jsx_identifierContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_attributeContext extends antlr4.context.ParserRuleContext {
+export class Jsx_attributeContext extends ParserRuleContext {
 	public _name!: Jsx_identifierContext;
 	public _value!: Jsx_attribute_valueContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -31257,7 +31307,7 @@ export class Jsx_attributeContext extends antlr4.context.ParserRuleContext {
 	public jsx_identifier(): Jsx_identifierContext {
 		return this.getTypedRuleContext(Jsx_identifierContext, 0) as Jsx_identifierContext;
 	}
-	public EQ(): antlr4.tree.TerminalNode {
+	public EQ(): TerminalNode {
 		return this.getToken(OParser.EQ, 0);
 	}
 	public jsx_attribute_value(): Jsx_attribute_valueContext {
@@ -31279,8 +31329,8 @@ export class Jsx_attributeContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_attribute_valueContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Jsx_attribute_valueContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -31297,10 +31347,10 @@ export class JsxValueContext extends Jsx_attribute_valueContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public expression(): ExpressionContext {
@@ -31322,7 +31372,7 @@ export class JsxLiteralContext extends Jsx_attribute_valueContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public TEXT_LITERAL(): antlr4.tree.TerminalNode {
+	public TEXT_LITERAL(): TerminalNode {
 		return this.getToken(OParser.TEXT_LITERAL, 0);
 	}
 	public enterRule(listener: OParserListener): void {
@@ -31338,8 +31388,8 @@ export class JsxLiteralContext extends Jsx_attribute_valueContext {
 }
 
 
-export class Jsx_childrenContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Jsx_childrenContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -31365,8 +31415,8 @@ export class Jsx_childrenContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_childContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Jsx_childContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -31423,10 +31473,10 @@ export class JsxCodeContext extends Jsx_childContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public expression(): ExpressionContext {
@@ -31445,8 +31495,8 @@ export class JsxCodeContext extends Jsx_childContext {
 }
 
 
-export class Jsx_textContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Jsx_textContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -31472,24 +31522,24 @@ export class Jsx_textContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Jsx_charContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Jsx_charContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
-	public LT(): antlr4.tree.TerminalNode {
+	public LT(): TerminalNode {
 		return this.getToken(OParser.LT, 0);
 	}
-	public GT(): antlr4.tree.TerminalNode {
+	public GT(): TerminalNode {
 		return this.getToken(OParser.GT, 0);
 	}
-	public JSX_TEXT(): antlr4.tree.TerminalNode {
+	public JSX_TEXT(): TerminalNode {
 		return this.getToken(OParser.JSX_TEXT, 0);
 	}
     public get ruleIndex(): number {
@@ -31508,16 +31558,16 @@ export class Jsx_charContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Css_expressionContext extends antlr4.context.ParserRuleContext {
+export class Css_expressionContext extends ParserRuleContext {
 	public _field!: Css_fieldContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public css_field_list(): Css_fieldContext[] {
@@ -31542,17 +31592,17 @@ export class Css_expressionContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Css_fieldContext extends antlr4.context.ParserRuleContext {
+export class Css_fieldContext extends ParserRuleContext {
 	public _name!: Css_identifierContext;
 	public _values!: Css_valueContext;
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public COLON(): antlr4.tree.TerminalNode {
+	public COLON(): TerminalNode {
 		return this.getToken(OParser.COLON, 0);
 	}
-	public SEMI(): antlr4.tree.TerminalNode {
+	public SEMI(): TerminalNode {
 		return this.getToken(OParser.SEMI, 0);
 	}
 	public css_identifier(): Css_identifierContext {
@@ -31580,15 +31630,15 @@ export class Css_fieldContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Css_identifierContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Css_identifierContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public identifier_or_keyword(): Identifier_or_keywordContext {
 		return this.getTypedRuleContext(Identifier_or_keywordContext, 0) as Identifier_or_keywordContext;
 	}
-	public MINUS(): antlr4.tree.TerminalNode {
+	public MINUS(): TerminalNode {
 		return this.getToken(OParser.MINUS, 0);
 	}
 	public nospace_identifier_or_keyword(): Nospace_identifier_or_keywordContext {
@@ -31619,8 +31669,8 @@ export class Css_identifierContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class Css_valueContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Css_valueContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -31657,10 +31707,10 @@ export class CssValueContext extends Css_valueContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public LCURL(): antlr4.tree.TerminalNode {
+	public LCURL(): TerminalNode {
 		return this.getToken(OParser.LCURL, 0);
 	}
-	public RCURL(): antlr4.tree.TerminalNode {
+	public RCURL(): TerminalNode {
 		return this.getToken(OParser.RCURL, 0);
 	}
 	public expression(): ExpressionContext {
@@ -31679,27 +31729,27 @@ export class CssValueContext extends Css_valueContext {
 }
 
 
-export class Css_textContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: OParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class Css_textContext extends ParserRuleContext {
+	constructor(parser?: OParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public SEMI_list(): antlr4.tree.TerminalNode[] {
+	public SEMI_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.SEMI);
 	}
-	public SEMI(i: number): antlr4.tree.TerminalNode {
+	public SEMI(i: number): TerminalNode {
 		return this.getToken(OParser.SEMI, i);
 	}
-	public LCURL_list(): antlr4.tree.TerminalNode[] {
+	public LCURL_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.LCURL);
 	}
-	public LCURL(i: number): antlr4.tree.TerminalNode {
+	public LCURL(i: number): TerminalNode {
 		return this.getToken(OParser.LCURL, i);
 	}
-	public RCURL_list(): antlr4.tree.TerminalNode[] {
+	public RCURL_list(): TerminalNode[] {
 	    	return this.getTokens(OParser.RCURL);
 	}
-	public RCURL(i: number): antlr4.tree.TerminalNode {
+	public RCURL(i: number): TerminalNode {
 		return this.getToken(OParser.RCURL, i);
 	}
     public get ruleIndex(): number {

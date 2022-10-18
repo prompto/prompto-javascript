@@ -1,6 +1,6 @@
 import List from './List.js';
 import StrictSet from './StrictSet.js';
-import { equalArrays, equalObjects, isANumber, convertToJson, convertToJsonNode } from '../utils/Utils.js';
+import { equalArrays, equalObjects, isANumber, convertToJsonString, convertToJsonNode } from '../utils/Utils.js';
 
 export default function Document(entries) {
     if(entries)
@@ -43,7 +43,7 @@ Document.prototype.toString = function() {
 };
 
 Document.prototype.toJson = function() {
-    return convertToJson(this);
+    return convertToJsonString(this);
 };
 
 Document.prototype.toJsonNode = function() {
