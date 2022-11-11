@@ -1,0 +1,30 @@
+import FetchOneExpression from './FetchOneExpression';
+import { IType } from '../type';
+import { Store } from '../store';
+import { IValue } from '../value';
+import { Context, Transpiler } from "../runtime";
+import { CodeWriter } from "../utils";
+import { IExpression } from "./index";
+import { IdentifierList, OrderByClauseList } from "../grammar";
+import IQuery from "../store/IQuery";
+export default class FetchManyExpression extends FetchOneExpression {
+    first: IExpression | null;
+    last: IExpression | null;
+    orderBy: OrderByClauseList | null;
+    constructor(type: IType | null, first: IExpression | null, last: IExpression | null, predicate: IExpression | null, include: IdentifierList | null, orderBy: OrderByClauseList | null);
+    toDialect(writer: CodeWriter): void;
+    toEDialect(writer: CodeWriter): void;
+    toODialect(writer: CodeWriter): void;
+    toMDialect(writer: CodeWriter): void;
+    check(context: Context): IType;
+    checkPredicate(context: Context): void;
+    checkInclude(context: Context): void;
+    checkOrderBy(context: Context): void;
+    checkSlice(context: Context): void;
+    interpretExpression(context: Context): IValue;
+    buildFetchManyQuery(context: Context, store: Store): IQuery;
+    interpretLimit(context: Context, exp: IExpression | null): number;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    transpileQuery(transpiler: Transpiler): void;
+}

@@ -1,7 +1,8 @@
 import Section from "../parser/Section";
 import { SyntaxError } from '../error';
 import {NullType, VoidType, BooleanType, TextType, EnumeratedNativeType, MethodType} from './index';
-import {CodeWriter, convertToJsonString, convertToJsonNode} from '../utils';
+import {CodeWriter} from '../utils';
+import {convertToJsonString, convertToJsonNode} from '../intrinsic';
 import IType from "./IType";
 import {CmpOp, Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";

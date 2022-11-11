@@ -7,11 +7,12 @@ import {
     IMethodDeclaration, OperatorMethodDeclaration, AttributeDeclaration
 } from '../declaration'
 import {Context, MethodDeclarationMap, Transpiler} from '../runtime'
-import $Root from '../intrinsic/$Root.js'
+import { $Root } from '../intrinsic/$Root.js'
 import {ConcreteInstance, Instance} from '../value'
 import {CategoryType, IType} from '../type'
 import { $DataStore } from '../store'
-import {CodeWriter, equalArrays} from "../utils";
+import {CodeWriter} from "../utils";
+import {equalArrays} from "../intrinsic";
 import {Identifier, IdentifierList, Operator} from "../grammar";
 import {Section} from "../parser";
 import BaseDeclaration from "./BaseDeclaration";

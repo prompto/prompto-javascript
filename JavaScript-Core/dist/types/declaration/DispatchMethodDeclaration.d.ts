@@ -1,0 +1,30 @@
+import BaseMethodDeclaration from './BaseMethodDeclaration';
+import { StrictSet } from '../intrinsic';
+import { IParameter, ParameterList } from '../param';
+import { Context, Transpiler } from "../runtime";
+import { MethodCall } from "../statement";
+import { IMethodDeclaration } from "./index";
+import { IType } from "../type";
+import { IValue } from "../value";
+import { CodeWriter } from "../utils";
+export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
+    context: Context;
+    methodCall: MethodCall;
+    declaration: IMethodDeclaration;
+    declarations: IMethodDeclaration[];
+    constructor(context: Context, methodCall: MethodCall, declaration: IMethodDeclaration, declarations: IMethodDeclaration[]);
+    getTranspiledName(context: Context): string;
+    transpile(transpiler: Transpiler): void;
+    transpileDispatch(transpiler: Transpiler): void;
+    collectCommonParams(): StrictSet<IParameter>;
+    transpileDispatchCall(transpiler: Transpiler, declaration: IMethodDeclaration): void;
+    transpileTest(transpiler: Transpiler, common: StrictSet<IParameter>, declaration: IMethodDeclaration): void;
+    findCorrespondingParameter(context: Context, params: ParameterList, common: StrictSet<IParameter>, incoming: IParameter): IParameter;
+    check(context: Context, isStart: boolean): IType;
+    checkChild(context: Context): IType;
+    declare(transpiler: Transpiler): void;
+    interpret(context: Context): IValue | null;
+    toEDialect(writer: CodeWriter): void;
+    toMDialect(writer: CodeWriter): void;
+    toODialect(writer: CodeWriter): void;
+}

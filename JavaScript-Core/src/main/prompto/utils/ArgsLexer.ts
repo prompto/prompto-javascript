@@ -1,14 +1,22 @@
 // Generated from ArgsLexer.g4 by ANTLR 4.11.2-SNAPSHOT
 
-import { default as antlr4 } from 'antlr4';
+import {
+	ATN,
+	ATNDeserializer,
+	CharStream, DFA,
+	Lexer,
+	LexerATNSimulator,
+	PredictionContextCache,
+	Token
+} from 'antlr4';
 
-export default class ArgsLexer extends antlr4.Lexer {
+export default class ArgsLexer extends Lexer {
 	public static readonly STRING = 1;
 	public static readonly EQUALS = 2;
 	public static readonly DASH = 3;
 	public static readonly WS = 4;
 	public static readonly ELEMENT = 5;
-	public static readonly EOF = antlr4.Token.EOF;
+	public static readonly EOF = Token.EOF;
 
 	// tslint:disable:no-trailing-whitespace
 	public static readonly channelNames: string[] = [
@@ -27,9 +35,9 @@ export default class ArgsLexer extends antlr4.Lexer {
 	];
 
 
-	constructor(input: antlr4.CharStream) {
+	constructor(input: CharStream) {
 		super(input);
-		this._interp = new antlr4.atn.LexerATNSimulator(this, ArgsLexer._ATN, ArgsLexer.DecisionsToDFA, new antlr4.atn.PredictionContextCache());
+		this._interp = new LexerATNSimulator(this, ArgsLexer._ATN, ArgsLexer.DecisionsToDFA, new PredictionContextCache());
 	}
 
 	public get grammarFileName(): string { return "ArgsLexer.g4"; }
@@ -62,15 +70,15 @@ export default class ArgsLexer extends antlr4.Lexer {
 	44,1,0,0,0,44,42,1,0,0,0,44,45,1,0,0,0,45,12,1,0,0,0,5,0,16,18,31,44,1,
 	6,0,0];
 
-	private static __ATN: antlr4.atn.ATN;
-	public static get _ATN(): antlr4.atn.ATN {
+	private static __ATN: ATN;
+	public static get _ATN(): ATN {
 		if (!ArgsLexer.__ATN) {
-			ArgsLexer.__ATN = new antlr4.atn.ATNDeserializer().deserialize(ArgsLexer._serializedATN);
+			ArgsLexer.__ATN = new ATNDeserializer().deserialize(ArgsLexer._serializedATN);
 		}
 
 		return ArgsLexer.__ATN;
 	}
 
 
-	static DecisionsToDFA = ArgsLexer._ATN.decisionToState.map( (ds, index) => new antlr4.dfa.DFA(ds, index) );
+	static DecisionsToDFA = ArgsLexer._ATN.decisionToState.map( (ds, index) => new DFA(ds, index) );
 }

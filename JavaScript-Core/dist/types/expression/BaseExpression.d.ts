@@ -1,0 +1,32 @@
+import Section from '../parser/Section';
+import { CodeWriter, IWritable } from "../utils";
+import { Context, Transpiler } from "../runtime";
+import { IType, MethodType } from "../type";
+import { IValue } from "../value";
+import { AttributeDeclaration } from "../declaration";
+import { IExpression } from "./index";
+import { Identifier } from "../grammar";
+export default abstract class BaseExpression extends Section implements IExpression, IWritable {
+    equals(other: any): boolean;
+    asSection(): Section;
+    isPredicate(): boolean;
+    isAssertion(): boolean;
+    toEDialect(writer: CodeWriter): void;
+    toMDialect(writer: CodeWriter): void;
+    toODialect(writer: CodeWriter): void;
+    toDialect(writer: CodeWriter): void;
+    parentToDialect(writer: CodeWriter): void;
+    check(context: Context): IType;
+    checkReference(context: Context): IType | null;
+    checkAssignItem(context: Context, section: Section, itemType: IType, valueType: IType): IType;
+    checkAssignMember(context: Context, section: Section, member: Identifier, valueType: IType): IType;
+    checkAttribute(context: Context): AttributeDeclaration | null;
+    interpretExpression(context: Context): IValue;
+    interpretReference(context: Context): IValue;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    transpileReference(transpiler: Transpiler, method: MethodType): void;
+    declareParent(transpiler: Transpiler): void;
+    transpileParent(transpiler: Transpiler): void;
+    transpileAssignParent(transpiler: Transpiler): void;
+}

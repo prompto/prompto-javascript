@@ -3,9 +3,8 @@ import {PeriodValue, IntegerValue, TextValue, IValue} from './index'
 import {TimeType} from '../type'
 import {SyntaxError} from '../error'
 import {Context} from "../runtime";
-import {LocalTime} from "../intrinsic";
+import {LocalTime, equalObjects} from "../intrinsic";
 import {Identifier} from "../grammar";
-import {equalObjects} from "../utils";
 import {JsonNode, JsonParent} from "../json";
 
 export default class TimeValue extends BaseValue<LocalTime> {

@@ -15,4 +15,4 @@ export { default as Tuple } from './Tuple';
 export { default as UUID } from './UUID';
 export { default as Version } from './Version';
 export { default as Type } from './Type';
-//# sourceMappingURL=index.js.map
+export * from './Utils';

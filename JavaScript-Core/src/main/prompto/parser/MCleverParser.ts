@@ -1,6 +1,6 @@
-import antlr4, {BufferedTokenStream, CharStream, Lexer} from 'antlr4';
-import MParser from './MParser.js'
-import MPromptoBuilder from './MPromptoBuilder.js'
+import {BufferedTokenStream, CharStream, Lexer, ParserRuleContext, ParseTree, ParseTreeWalker} from 'antlr4';
+import MParser from './MParser'
+import MPromptoBuilder from './MPromptoBuilder'
 import {createParserInput} from "./ParserUtils";
 import {MIndentingLexer} from "./index";
 import {DeclarationList, IDeclaration} from "../declaration";
@@ -41,13 +41,13 @@ export default class MCleverParser extends MParser {
 		return this.doParse<IType>(() => this.category_or_any_type(), false);
 	}
 
-	doParse<T>(rule: () => antlr4.tree.ParseTree, addLF: boolean) {
+	doParse<T>(rule: () => ParseTree, addLF: boolean) {
 		const stream = this.getTokenStream() as BufferedTokenStream;
 		const lexer = stream.tokenSource as MIndentingLexer;
 		lexer.addLF = addLF;
-		const tree = (rule.bind(this) as () => antlr4.context.ParserRuleContext)();
+		const tree = (rule.bind(this) as () => ParserRuleContext)();
 		const builder = new MPromptoBuilder(this);
-		const walker = new antlr4.tree.ParseTreeWalker();
+		const walker = new ParseTreeWalker();
 		walker.walk(builder, tree);
 		return builder.getNodeValue<T>(tree);
 	}

@@ -11,7 +11,8 @@ import {
     NativeCategoryDeclaration,
     CategoryDeclaration
 } from '../declaration'
-import {CodeWriter, getTypeName} from '../utils'
+import {getTypeName} from '../intrinsic'
+import {CodeWriter} from '../utils'
 import {Context, Transpiler} from "../runtime";
 import {DocumentValue, Instance, NullValue, IValue} from "../value";
 

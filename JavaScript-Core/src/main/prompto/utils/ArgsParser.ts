@@ -1,17 +1,26 @@
 // Generated from ArgsParser.g4 by ANTLR 4.11.2-SNAPSHOT
 
-import { default as antlr4 } from 'antlr4';
+import {
+	ATN,
+	ATNDeserializer, DFA, FailedPredicateException,
+	NoViableAltException,
+	Parser, ParserATNSimulator,
+	ParserRuleContext,
+	PredictionContextCache, RecognitionException, TerminalNode,
+	Token,
+	TokenStream
+} from 'antlr4';
 import ArgsParserListener from "./ArgsParserListener.js";
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
 type int = number;
 
-export default class ArgsParser extends antlr4.Parser {
+export default class ArgsParser extends Parser {
 	public static readonly STRING = 1;
 	public static readonly EQUALS = 2;
 	public static readonly DASH = 3;
 	public static readonly WS = 4;
 	public static readonly ELEMENT = 5;
-	public static readonly EOF = antlr4.Token.EOF;
+	public static readonly EOF = Token.EOF;
 	public static readonly RULE_parse = 0;
 	public static readonly RULE_entry = 1;
 	public static readonly RULE_key = 2;
@@ -29,13 +38,13 @@ export default class ArgsParser extends antlr4.Parser {
 	public get ruleNames(): string[] { return ArgsParser.ruleNames; }
 	public get serializedATN(): number[] { return ArgsParser._serializedATN; }
 
-	protected createFailedPredicateException(predicate?: string, message?: string): antlr4.error.FailedPredicateException {
-		return new antlr4.error.FailedPredicateException(this, predicate, message);
+	protected createFailedPredicateException(predicate?: string, message?: string): FailedPredicateException {
+		return new FailedPredicateException(this, predicate, message);
 	}
 
-	constructor(input: antlr4.TokenStream) {
+	constructor(input: TokenStream) {
 		super(input);
-		this._interp = new antlr4.atn.ParserATNSimulator(this, ArgsParser._ATN, ArgsParser.DecisionsToDFA, new antlr4.atn.PredictionContextCache());
+		this._interp = new ParserATNSimulator(this, ArgsParser._ATN, ArgsParser.DecisionsToDFA, new PredictionContextCache());
 	}
 	// @RuleVersion(0)
 	public parse(): ParseContext {
@@ -62,7 +71,7 @@ export default class ArgsParser extends antlr4.Parser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -102,7 +111,7 @@ export default class ArgsParser extends antlr4.Parser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -127,7 +136,7 @@ export default class ArgsParser extends antlr4.Parser {
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -165,11 +174,11 @@ export default class ArgsParser extends antlr4.Parser {
 				}
 				break;
 			default:
-				throw new antlr4.error.NoViableAltException(this);
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
-			if (re instanceof antlr4.error.RecognitionException) {
+			if (re instanceof RecognitionException) {
 				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
@@ -192,23 +201,23 @@ export default class ArgsParser extends antlr4.Parser {
 	2,0,0,19,20,3,6,3,0,20,3,1,0,0,0,21,22,5,5,0,0,22,5,1,0,0,0,23,26,5,5,0,
 	0,24,26,5,1,0,0,25,23,1,0,0,0,25,24,1,0,0,0,26,7,1,0,0,0,3,11,15,25];
 
-	private static __ATN: antlr4.atn.ATN;
-	public static get _ATN(): antlr4.atn.ATN {
+	private static __ATN: ATN;
+	public static get _ATN(): ATN {
 		if (!ArgsParser.__ATN) {
-			ArgsParser.__ATN = new antlr4.atn.ATNDeserializer().deserialize(ArgsParser._serializedATN);
+			ArgsParser.__ATN = new ATNDeserializer().deserialize(ArgsParser._serializedATN);
 		}
 
 		return ArgsParser.__ATN;
 	}
 
 
-	static DecisionsToDFA = ArgsParser._ATN.decisionToState.map( (ds, index) => new antlr4.dfa.DFA(ds, index) );
+	static DecisionsToDFA = ArgsParser._ATN.decisionToState.map( (ds, index) => new DFA(ds, index) );
 
 }
 
-export class ParseContext extends antlr4.context.ParserRuleContext {
+export class ParseContext extends ParserRuleContext {
 	public _e!: EntryContext;
-	constructor(parser?: ArgsParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: ArgsParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -234,14 +243,14 @@ export class ParseContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class EntryContext extends antlr4.context.ParserRuleContext {
+export class EntryContext extends ParserRuleContext {
 	public _k!: KeyContext;
 	public _v!: ValueContext;
-	constructor(parser?: ArgsParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+	constructor(parser?: ArgsParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public EQUALS(): antlr4.tree.TerminalNode {
+	public EQUALS(): TerminalNode {
 		return this.getToken(ArgsParser.EQUALS, 0);
 	}
 	public key(): KeyContext {
@@ -250,7 +259,7 @@ export class EntryContext extends antlr4.context.ParserRuleContext {
 	public value(): ValueContext {
 		return this.getTypedRuleContext(ValueContext, 0) as ValueContext;
 	}
-	public DASH(): antlr4.tree.TerminalNode {
+	public DASH(): TerminalNode {
 		return this.getToken(ArgsParser.DASH, 0);
 	}
     public get ruleIndex(): number {
@@ -269,12 +278,12 @@ export class EntryContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class KeyContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: ArgsParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class KeyContext extends ParserRuleContext {
+	constructor(parser?: ArgsParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public ELEMENT(): antlr4.tree.TerminalNode {
+	public ELEMENT(): TerminalNode {
 		return this.getToken(ArgsParser.ELEMENT, 0);
 	}
     public get ruleIndex(): number {
@@ -293,8 +302,8 @@ export class KeyContext extends antlr4.context.ParserRuleContext {
 }
 
 
-export class ValueContext extends antlr4.context.ParserRuleContext {
-	constructor(parser?: ArgsParser, parent?: antlr4.context.ParserRuleContext, invokingState?: number) {
+export class ValueContext extends ParserRuleContext {
+	constructor(parser?: ArgsParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -310,7 +319,7 @@ export class ELEMENTContext extends ValueContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public ELEMENT(): antlr4.tree.TerminalNode {
+	public ELEMENT(): TerminalNode {
 		return this.getToken(ArgsParser.ELEMENT, 0);
 	}
 	public enterRule(listener: ArgsParserListener): void {
@@ -329,7 +338,7 @@ export class STRINGContext extends ValueContext {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public STRING(): antlr4.tree.TerminalNode {
+	public STRING(): TerminalNode {
 		return this.getToken(ArgsParser.STRING, 0);
 	}
 	public enterRule(listener: ArgsParserListener): void {

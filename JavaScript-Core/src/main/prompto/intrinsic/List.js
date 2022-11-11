@@ -1,6 +1,8 @@
+// noinspection JSUnusedGlobalSymbols
+
 import StrictSet from './StrictSet.js';
 import NotMutableError from '../error/NotMutableError.js';
-import { equalObjects, convertToJsonString, convertToJsonNode } from '../../../main/prompto/utils/Utils.ts';
+import { equalObjects, convertToJsonString, convertToJsonNode } from './Utils.js';
 
 export default function List(mutable, items) {
     Array.call(this);

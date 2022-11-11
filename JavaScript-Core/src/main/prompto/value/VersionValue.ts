@@ -2,10 +2,9 @@ import BaseValue from './BaseValue'
 import {VersionType} from '../type'
 import {SyntaxError} from '../error'
 import {IntegerValue, TextValue} from "../value";
-import {Version} from "../intrinsic";
+import {Version, equalObjects} from "../intrinsic";
 import {Context} from "../runtime";
 import IValue from "./IValue";
-import {equalObjects} from "../utils";
 import {Identifier} from "../grammar";
 
 export default class VersionValue extends BaseValue<Version> {

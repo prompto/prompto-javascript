@@ -1,5 +1,5 @@
 import Document from './Document.js';
-import { utf8BufferToString, stringToUtf8Buffer } from '../../../main/prompto/utils/Utils.ts';
+import { utf8BufferToString, stringToUtf8Buffer } from './Utils.js';
 
 export default function BlobRef() {
     this.zipped = null;

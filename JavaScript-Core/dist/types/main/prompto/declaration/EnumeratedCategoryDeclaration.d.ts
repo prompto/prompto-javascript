@@ -1,0 +1,32 @@
+import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration';
+import { EnumeratedCategoryType, IType } from '../type';
+import { CategorySymbolList, Identifier, IdentifierList } from '../grammar';
+import { CategorySymbol } from "../expression";
+import { Context, ITranspilable, Transpiler } from "../runtime";
+import { IEnumerationInfo } from "../runtime/Catalog";
+import { CodeWriter } from "../utils";
+export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
+    symbols: CategorySymbolList;
+    constructor(id: Identifier, attrs: IdentifierList, derived: Identifier | null, symbols: CategorySymbolList | null);
+    toDeclarationInfo(): IEnumerationInfo;
+    getDeclarationType(): string;
+    getSymbolById(id: Identifier): CategorySymbol | null;
+    getSymbolByName(name: string): CategorySymbol | null;
+    unregister(context: Context): void;
+    getLocalAttributes(): IdentifierList;
+    hasAttribute(context: Context, id: Identifier): boolean;
+    setSymbols(symbols: CategorySymbolList | null): void;
+    register(context: Context): void;
+    check(context: Context): IType;
+    getType(context: Context): EnumeratedCategoryType;
+    toODialect(writer: CodeWriter): void;
+    toEDialect(writer: CodeWriter): void;
+    toMDialect(writer: CodeWriter): void;
+    isUserError(context: Context): boolean;
+    ensureDeclarationOrder(context: Context, list: ITranspilable[], set: Set<ITranspilable>): void;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    transpileUserError(transpiler: Transpiler): void;
+    transpileSymbols(transpiler: Transpiler): void;
+    transpileEnumerated(transpiler: Transpiler): void;
+}

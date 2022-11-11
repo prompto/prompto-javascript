@@ -1,11 +1,10 @@
 import ContainerType from './ContainerType'
 import {IntegerType, BooleanType, VoidType, IterableType} from '../type'
 import { Identifier } from '../grammar'
-import { List, StrictSet } from '../intrinsic'
+import { List, StrictSet, equalObjects, multiplyArray } from '../intrinsic'
 import {IValue, ListValue, NullValue, SetValue} from '../value'
 import { JoinListMethodDeclaration } from '../builtins/ContainerTypeBuiltins';
 import { IndexOfMethodDeclaration, RemoveItemMethodDeclaration, RemoveValueMethodDeclaration, AddValueMethodDeclaration, InsertValueMethodDeclaration } from '../builtins/ListTypeBuiltins';
-import {equalObjects, multiplyArray} from '../utils'
 import ToSetMethodDeclaration from '../builtins/ToSetMethodDeclaration'
 import IType from "./IType";
 import {TypeFamily} from "../store";

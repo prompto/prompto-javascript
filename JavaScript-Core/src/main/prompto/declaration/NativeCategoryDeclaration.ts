@@ -1,10 +1,10 @@
 import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration';
-import {CodeWriter, getTypeName} from '../utils'
+import {CodeWriter} from '../utils'
 import { NativeInstance } from '../value'
 import { JavaScriptNativeCategoryBinding } from '../javascript'
 import { CategoryType } from '../type'
 import { SyntaxError } from '../error'
-import { Any } from '../intrinsic';
+import { Any, getTypeName } from '../intrinsic';
 import {Context, Transpiler} from "../runtime";
 import {Identifier, IdentifierList, NativeCategoryBindingList} from "../grammar";
 import {IMethodDeclaration} from "./index";

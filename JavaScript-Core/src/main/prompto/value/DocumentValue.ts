@@ -1,9 +1,8 @@
 import BaseValue from './BaseValue'
 import { IValue, IntegerValue, NullValue, TextValue, SetValue, ListValue } from './index'
 import { DocumentType, AnyType, TextType } from '../type'
-import { Document, StrictSet } from '../intrinsic'
+import { Document, StrictSet, equalObjects } from '../intrinsic'
 import { SyntaxError } from '../error'
-import { equalObjects } from '../utils'
 import {JsonNode, JsonObject, JsonParent} from '../json'
 import {Context, Transpiler} from '../runtime'
 import {Identifier} from "../grammar";

@@ -1,5 +1,5 @@
 import List from './List.js';
-import { convertToJsonString, convertToJsonNode } from '../../../main/prompto/utils/Utils.ts';
+import { convertToJsonString, convertToJsonNode } from './Utils.js';
 
 export default function StrictSet(values) {
     this.set = new Set(values);

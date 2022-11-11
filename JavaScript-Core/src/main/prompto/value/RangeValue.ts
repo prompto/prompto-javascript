@@ -5,7 +5,6 @@ import {IType, RangeType} from '../type'
 import {Identifier} from "../grammar";
 import {Context} from "../runtime";
 import {IIterable, IIterator} from "../intrinsic";
-import {context} from "../../../../../../../antlr4/ericvergnaud/antlr4/runtime/JavaScript";
 
 export interface Limits<T extends IValue> {
     low: T;

@@ -15,7 +15,8 @@ import {
     CategoryType, IType, VoidType
 } from '../type'
 import {NullValue, BooleanValue, IValue, TypeValue, Instance, Container, TextValue} from '../value'
-import { CodeWriter, removeAccents, isAMethod, isInstanceOf } from '../utils'
+import { removeAccents, isAMethod, isInstanceOf } from '../intrinsic'
+import { CodeWriter } from '../utils'
 import { SyntaxError } from '../error'
 import BaseValue from "../value/BaseValue";
 import {TestMethodDeclaration} from "../declaration";

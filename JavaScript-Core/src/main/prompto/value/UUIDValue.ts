@@ -1,8 +1,7 @@
 import BaseValue from './BaseValue'
 import { TextValue } from '../value'
-import { UUID } from '../intrinsic'
+import { UUID, equalObjects } from '../intrinsic'
 import { UUIDType } from '../type'
-import {equalObjects} from "../utils";
 import {Context} from "../runtime";
 
 export default class UUIDValue extends BaseValue<UUID> {

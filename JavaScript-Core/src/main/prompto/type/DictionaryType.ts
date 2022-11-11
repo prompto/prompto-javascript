@@ -7,7 +7,7 @@ import {
     RemoveKeyMethodDeclaration,
     RemoveValueMethodDeclaration
 } from "../builtins/DictionaryTypeBuiltins";
-import {convertToJsonString, convertToJsonNode, equalObjects} from "../utils";
+import {convertToJsonString, convertToJsonNode, equalObjects} from "../intrinsic";
 import IType from "./IType";
 import {TypeFamily} from "../store";
 import {Context, Transpiler} from "../runtime";

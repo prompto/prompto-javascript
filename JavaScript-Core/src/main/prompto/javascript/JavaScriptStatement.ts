@@ -1,11 +1,11 @@
 import {JavaScriptClassType, JavaScriptExpression, JavaScriptModule} from './index'
 import {AnyType, IType, VoidType} from '../type'
 import { Identifier } from '../grammar'
-import {CodeWriter, getTypeName} from '../utils'
+import {getTypeName} from '../intrinsic'
+import {CodeWriter} from '../utils'
 import { $DataStore } from '../store'
-import {Context, Transpiler} from "../runtime";
+import {Context, Transpiler, ITranspilable} from "../runtime";
 import {IValue} from "../value";
-import {ITranspilable}  from "../runtime";
 
 export default class JavaScriptStatement {
 

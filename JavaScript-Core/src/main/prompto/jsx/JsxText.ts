@@ -1,5 +1,5 @@
 import {IType, TextType} from '../type'
-import HtmlEntities from 'html-entities'
+import * as HtmlEntities from 'html-entities'
 import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
 import IJsxExpression from "./IJsxExpression";

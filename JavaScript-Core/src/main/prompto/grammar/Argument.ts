@@ -4,7 +4,8 @@ import {MethodType, CategoryType, VoidType, IType} from '../type'
 import {ContextualExpression, Instance} from '../value'
 import { SyntaxError } from '../error'
 import {IParameter} from "../param";
-import {CodeWriter, equalObjects} from "../utils";
+import {equalObjects} from "../intrinsic";
+import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
 import {IMethodDeclaration} from "../declaration";
 import {Identifier} from "./index";

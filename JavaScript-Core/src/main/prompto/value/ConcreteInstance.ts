@@ -19,7 +19,7 @@ import {
 } from '../declaration'
 import { SyntaxError, NotStorableError, NotMutableError } from '../error'
 import {JsonNode} from "../json";
-import {equalMaps} from "../utils/Utils";
+import {equalMaps} from "../intrinsic/Utils";
 
 export default class ConcreteInstance extends Instance<Map<string, IValue>> {
 

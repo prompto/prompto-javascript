@@ -1,0 +1,32 @@
+import IDeclaration from "./IDeclaration";
+import Section from '../parser/Section';
+import { Annotation, Identifier } from "../grammar";
+import { CommentStatement } from "../statement";
+import { Context, Transpiler } from "../runtime";
+import { CodeWriter } from "../utils";
+import AbstractParser from "../parser/AbstractParser";
+import { IType } from "../type";
+import { IDeclarationInfo } from "../runtime/Catalog";
+export default abstract class BaseDeclaration extends Section implements IDeclaration {
+    id: Identifier;
+    declaring: boolean;
+    comments: CommentStatement[] | null;
+    annotations: Annotation[] | null;
+    constructor(id: Identifier);
+    abstract check(context: Context, isStart?: boolean): void;
+    abstract getType(context: Context): IType;
+    abstract getDeclarationType(): string;
+    abstract declare(transpiler: Transpiler): void;
+    abstract transpile(transpiler: Transpiler): void;
+    getId(): Identifier;
+    get name(): string;
+    locateSectionAtLine(line: number): Section | null;
+    unregister(context: Context): void;
+    getAllAnnotations(context: Context): Annotation[];
+    toDialect(writer: CodeWriter): void;
+    fetchBody(parser: AbstractParser): string;
+    abstract toEDialect(writer: CodeWriter): void;
+    abstract toODialect(writer: CodeWriter): void;
+    abstract toMDialect(writer: CodeWriter): void;
+    abstract toDeclarationInfo(context: Context): IDeclarationInfo;
+}

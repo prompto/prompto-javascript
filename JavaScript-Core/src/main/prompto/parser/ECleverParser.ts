@@ -1,4 +1,4 @@
-import antlr4 from 'antlr4';
+import {ParserRuleContext, ParseTree, ParseTreeWalker} from 'antlr4';
 import { CharStream, BufferedTokenStream, Lexer } from 'antlr4';
 import EParser from './EParser';
 import EIndentingLexer from './EIndentingLexer';
@@ -42,13 +42,13 @@ export default class ECleverParser extends EParser {
 		return this.doParse<IType>(() => this.category_or_any_type(), false);
 	}
 
-	doParse<T>(rule: () => antlr4.tree.ParseTree, addLF: boolean) {
+	doParse<T>(rule: () => ParseTree, addLF: boolean) {
 		const stream = this.getTokenStream() as BufferedTokenStream;
 		const lexer = stream.tokenSource as EIndentingLexer;
 		lexer.addLF = addLF;
-		const tree = (rule.bind(this) as () => antlr4.context.ParserRuleContext)();
+		const tree = (rule.bind(this) as () => ParserRuleContext)();
 		const builder = new EPromptoBuilder(this);
-		const walker = new antlr4.tree.ParseTreeWalker();
+		const walker = new ParseTreeWalker();
 		walker.walk(builder, tree);
 		return builder.getNodeValue<T>(tree);
 	}

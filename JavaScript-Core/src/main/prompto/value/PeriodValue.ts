@@ -2,10 +2,9 @@ import BaseValue from "./BaseValue";
 import {IntegerValue, IValue, TextValue} from './index'
 import { SyntaxError } from '../error'
 import { PeriodType } from '../type'
-import {Period} from "../intrinsic";
+import {Period, equalObjects} from "../intrinsic";
 import {Context} from "../runtime";
 import {Identifier} from "../grammar";
-import {equalObjects} from "../utils";
 
 
 export default class PeriodValue extends BaseValue<Period> {

@@ -2,7 +2,7 @@ import BaseValue from "./BaseValue";
 import { IntegerValue } from './index'
 import { SyntaxError, DivideByZeroError } from '../error'
 import { DecimalType} from '../type'
-import { decimalToString } from '../utils'
+import { decimalToString } from '../intrinsic'
 import IValue from "./IValue";
 import {Context} from "../runtime";
 import {JsonParent} from "../json";

@@ -4,7 +4,8 @@ import {Context, Transpiler, Variable} from '../runtime'
 import { SyntaxError } from '../error'
 import {Identifier} from "../grammar";
 import {IExpression} from "../expression";
-import {CodeWriter, equalObjects} from "../utils";
+import {equalObjects} from "../intrinsic";
+import {CodeWriter} from "../utils";
 import {IValue} from "../value";
 
 export default class AssignVariableStatement extends SimpleStatement {

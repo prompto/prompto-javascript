@@ -2,12 +2,11 @@ import BaseValue from './BaseValue'
 import {IntegerValue, CharacterValue, DbIdValue} from '../value'
 import { TextType } from '../type'
 import { SyntaxError, IndexOutOfRangeError, InvalidDataError } from '../error'
-import { removeAccents } from '../utils'
 import {Context} from "../runtime";
 import IValue from "./IValue";
 import {Identifier} from "../grammar";
 import {JsonParent} from "../json";
-import {IIterator} from "../intrinsic";
+import {IIterator, removeAccents} from "../intrinsic";
 
 export default class TextValue extends BaseValue<string> {
 

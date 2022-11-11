@@ -2,11 +2,10 @@ import BaseValue from "./BaseValue";
 import {PeriodValue, DateValue, TextValue, TimeValue, IntegerValue, IValue} from './index'
 import { DateTimeType } from '../type'
 import { SyntaxError } from '../error'
-import {DateTime} from "../intrinsic";
+import {DateTime, equalObjects} from "../intrinsic";
 import {Context} from "../runtime";
 import {Identifier} from "../grammar";
 import {JsonNode, JsonParent} from "../json";
-import {equalObjects} from "../utils";
 
 export default class DateTimeValue extends BaseValue<DateTime> {
   

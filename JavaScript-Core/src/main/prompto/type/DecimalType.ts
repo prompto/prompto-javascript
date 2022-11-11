@@ -2,7 +2,7 @@ import NativeType from './NativeType'
 import { IntegerType, BooleanType } from './index'
 import {CmpOp, Identifier} from '../grammar'
 import {DecimalValue, IValue} from '../value'
-import { isADecimal } from '../utils'
+import { isADecimal } from '../intrinsic'
 import {TypeFamily} from "../store";
 import {Context, Transpiler} from "../runtime";
 import IType from "./IType";

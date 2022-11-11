@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import DateTime from "../../../main/prompto/intrinsic/DateTime.js";
+import {DateTime} from "../../../main/prompto";
 
 it('DateWithTZWithNoTZ', () => {
     const s = "2014-10-10T13:18:22.000";

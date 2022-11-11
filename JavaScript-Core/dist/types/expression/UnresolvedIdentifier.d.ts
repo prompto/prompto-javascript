@@ -1,0 +1,38 @@
+import BaseExpression from './BaseExpression';
+import { IExpression, IPredicate } from './index';
+import { IType, MethodType } from '../type';
+import { Identifier } from "../grammar";
+import { CodeWriter } from "../utils";
+import { Context, Transpiler } from "../runtime";
+import { IValue } from "../value";
+import { IQueryBuilder } from "../store";
+export default class UnresolvedIdentifier extends BaseExpression implements IPredicate {
+    id: Identifier;
+    resolved?: IExpression;
+    constructor(id: Identifier);
+    get name(): string;
+    toString(): string;
+    toDialect(writer: CodeWriter): void;
+    check(context: Context): IType;
+    checkReference(context: Context): IType | null;
+    checkAttribute(context: Context): import("../declaration").AttributeDeclaration;
+    checkMember(context: Context): IType;
+    interpretExpression(context: Context): IValue;
+    interpretReference(context: Context): IValue;
+    checkQuery(context: Context): IType;
+    interpretQuery(context: Context, builder: IQueryBuilder): void;
+    declareQuery(transpiler: Transpiler): void;
+    transpileQuery(transpiler: Transpiler, builderName: string): void;
+    resolveAndCheck(context: Context, forMember: boolean): IType;
+    resolve(context: Context, forMember?: boolean, updateSelectorParent?: boolean): IExpression;
+    doResolve(context: Context, forMember: boolean, updateSelectorParent: boolean): IExpression;
+    resolveTypeOrConstructor(context: Context, forMember: boolean): IExpression | undefined;
+    resolveInstance(context: Context): IExpression | undefined;
+    resolveMethodCall(context: Context, updateSelectorParent: boolean): IExpression | undefined;
+    resolveConstructor(context: Context): IExpression | undefined;
+    resolveType(context: Context): IExpression | undefined;
+    resolveSymbol(context: Context): IExpression | undefined;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    transpileReference(transpiler: Transpiler, method: MethodType): void;
+}

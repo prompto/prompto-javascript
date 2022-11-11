@@ -3,7 +3,7 @@ import {CharacterType, IntegerType, BooleanType, DecimalType, VoidType} from './
 import {IValue, TextValue} from '../value'
 import {CmpOp, Identifier} from '../grammar'
 import { TypeFamily } from '../store'
-import { isAText } from '../utils'
+import { isAText } from '../intrinsic'
 import { StartsWithMethodDeclaration, EndsWithMethodDeclaration, IndexOfMethodDeclaration,
     ReplaceMethodDeclaration, ReplaceAllMethodDeclaration, TrimMethodDeclaration, SplitMethodDeclaration,
     ToCapitalizedMethodDeclaration, ToLowerCaseMethodDeclaration, ToUpperCaseMethodDeclaration } from '../builtins/TextTypeBuiltins'

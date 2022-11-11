@@ -1,4 +1,4 @@
-import antlr4 from 'antlr4';
+import {ErrorListener, RecognitionException, Token} from 'antlr4';
 import IProblem from "./IProblem";
 import {Section} from "../parser";
 import ProblemType from "./ProblemType";
@@ -8,9 +8,9 @@ import {MethodCall} from "../statement";
 import {IExpression} from "../expression";
 import {IType} from "../type";
 import BaseType from "../type/BaseType";
-import {isASet} from "../utils";
+import {isASet} from "../intrinsic";
 
-export default class ProblemListener extends antlr4.error.ErrorListener<antlr4.Token> {
+export default class ProblemListener extends ErrorListener<Token> {
 
     problems: IProblem[] = [];
 
@@ -52,7 +52,7 @@ export default class ProblemListener extends antlr4.error.ErrorListener<antlr4.T
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    syntaxError(recognizer: AbstractParser, offendingSymbol: antlr4.Token, line: number, column: number, msg: string, e?: antlr4.error.RecognitionException): void {
+    syntaxError(recognizer: AbstractParser, offendingSymbol: Token, line: number, column: number, msg: string, e?: RecognitionException): void {
         const problem = {
                 type: ProblemType.ERROR,
                 message: msg,

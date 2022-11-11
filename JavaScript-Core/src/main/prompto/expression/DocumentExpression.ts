@@ -7,6 +7,7 @@ import { ECleverParser } from "../parser"
 import {IExpression} from "./index";
 import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
+import {JsonNode} from "../json";
 
 export default class DocumentExpression extends BaseExpression {
 
@@ -69,13 +70,13 @@ export default class DocumentExpression extends BaseExpression {
             if (!field)
                 throw new Error("Expecting a 'type' field!");
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const type = new ECleverParser(field).parse_standalone_type() as IType;
+            const type = new ECleverParser(field as unknown as string).parse_standalone_type() as IType;
             if (type != DocumentType.instance)
                 throw new Error("Expecting a DocumentValue type!");
             field = value!["value" as keyof typeof value] || null;
             if (!field)
                 throw new Error("Expecting a 'value' field!");
-            return (type as DocumentType).readJSONValue(context, field, parts);
+            return (type as DocumentType).readJSONValue(context, field as unknown as string, parts);
         } catch (e) {
             throw new ReadWriteError((e as Error).message);
         }

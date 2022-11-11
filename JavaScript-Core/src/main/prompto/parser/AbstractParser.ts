@@ -1,7 +1,7 @@
 /* do NOT delete this file, it is NOT generated */
 /* it has to be located in the generated folder */
 /* to work around jest resolver issues */
-import antlr4 from 'antlr4';
+import {ErrorListener} from 'antlr4';
 import { Token, TokenStream, CommonTokenStream, Parser } from 'antlr4';
 
 export default class AbstractParser extends Parser {
@@ -81,10 +81,10 @@ export default class AbstractParser extends Parser {
 		bts.tokenSource.removeErrorListeners(); // lexer
 	}
 
-	addErrorListener(listener: antlr4.error.ErrorListener<Token>): void {
+	addErrorListener(listener: ErrorListener<Token>): void {
 		super.addErrorListener(listener);
 		const bts = this.getTokenStream() as CommonTokenStream;
-		bts.tokenSource.addErrorListener(listener as unknown as antlr4.error.ErrorListener<number>); // lexer
+		bts.tokenSource.addErrorListener(listener as unknown as ErrorListener<number>); // lexer
 	}
 
 	equalToken(): number {

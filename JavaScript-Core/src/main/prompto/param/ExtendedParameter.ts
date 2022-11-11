@@ -2,7 +2,8 @@ import CategoryParameter from './CategoryParameter'
 import { AttributeDeclaration, ConcreteCategoryDeclaration } from '../declaration'
 import {Identifier, IdentifierList} from '../grammar'
 import { SyntaxError } from '../error'
-import {equalObjects, equalArrays, CodeWriter} from '../utils'
+import {CodeWriter} from '../utils'
+import {equalObjects, equalArrays} from '../intrinsic'
 import {IType} from "../type";
 import {IParameter} from "./index";
 import {Context} from "../runtime";

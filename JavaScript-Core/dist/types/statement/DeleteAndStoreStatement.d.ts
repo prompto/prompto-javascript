@@ -1,0 +1,35 @@
+import BaseStatement from './BaseStatement';
+import { Section } from '../parser';
+import { IType } from '../type';
+import { IValue } from '../value';
+import { IStorable } from '../store';
+import { StatementList } from "../statement";
+import { ExpressionList, IExpression } from "../expression";
+import { CodeWriter } from "../utils";
+import { Context, Transpiler } from "../runtime";
+export default class DeleteAndStoreStatement extends BaseStatement {
+    toDel: ExpressionList | null;
+    toAdd: ExpressionList | null;
+    meta: IExpression | null;
+    andThen?: StatementList;
+    constructor(toDel: ExpressionList | null, toAdd: ExpressionList | null, meta: IExpression | null, andThen?: StatementList);
+    locateSectionAtLine(line: number): Section | null;
+    isSimple(): boolean;
+    toDialect(writer: CodeWriter): void;
+    toString(): string;
+    equals(other: any): boolean;
+    check(context: Context): IType;
+    checkDeletables(context: Context): void;
+    checkStorables(context: Context): void;
+    checkStorable(context: Context, exp: IExpression): void;
+    checkAndThen(context: Context): void;
+    interpretStatement(context: Context): IValue | null;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    transpileIdsToDelete(transpiler: Transpiler): void;
+    transpileStorablesToAdd(transpiler: Transpiler): void;
+    transpileMetadata(transpiler: Transpiler): void;
+    transpileFuture(transpiler: Transpiler): void;
+    getIdsToDelete(context: Context): any[] | null;
+    getStorablesToAdd(context: Context): IStorable[] | null;
+}

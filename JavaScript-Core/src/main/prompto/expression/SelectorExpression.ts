@@ -65,7 +65,7 @@ export default class SelectorExpression extends SelectorBase {
         if (li && !(li instanceof IntegerValue)) {
             throw new SyntaxError("Illegal slice value type: " + li.toString());
         }
-        return sliceable.slice(fi, li);
+        return sliceable.slice(fi as IntegerValue, li as IntegerValue);
     }
 
     declare(transpiler: Transpiler): void {

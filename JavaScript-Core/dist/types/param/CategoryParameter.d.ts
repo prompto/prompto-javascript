@@ -1,0 +1,33 @@
+import { IType } from '../type';
+import { CodeWriter } from '../utils';
+import { ContextualExpression, ArrowValue } from '../value';
+import { IExpression } from '../expression';
+import BaseParameter from "./BaseParameter";
+import { Identifier } from "../grammar";
+import { Dialect } from "../parser";
+import { Context, Transpiler } from "../runtime";
+import { IParameter } from "./index";
+import { AbstractMethodDeclaration } from "../declaration";
+export default class CategoryParameter extends BaseParameter {
+    type: IType;
+    resolved?: IType;
+    constructor(id: Identifier, mutable: boolean, type: IType, defaultExpression?: IExpression);
+    getProto(): string;
+    getSignature(dialect: Dialect): string;
+    getTranspiledName(context: Context): string;
+    equals(other: IParameter): boolean;
+    checkValue(context: Context, expression: IExpression): import("../value").IValue;
+    checkArrowValue(context: Context, expression: ContextualExpression): ArrowValue;
+    getAbstractMethodDeclaration(context: Context): AbstractMethodDeclaration | null;
+    checkSimpleValue(context: Context, expression: IExpression): import("../value").IValue;
+    transpileCall(transpiler: Transpiler, expression: IExpression): void;
+    transpileArrowExpressionCall(transpiler: Transpiler, expression: IExpression): boolean;
+    register(context: Context): void;
+    check(context: Context): IType;
+    resolve(context: Context): IType;
+    declare(transpiler: Transpiler): void;
+    getType(context?: Context): IType;
+    toEDialect(writer: CodeWriter): void;
+    toODialect(writer: CodeWriter): void;
+    toMDialect(writer: CodeWriter): void;
+}

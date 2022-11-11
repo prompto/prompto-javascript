@@ -1,0 +1,31 @@
+import BaseDeclaration from './BaseDeclaration';
+import { AttributeInfo } from '../store';
+import { IType } from '../type';
+import { Context, Transpiler } from '../runtime';
+import { Identifier, IdentifierList } from "../grammar";
+import { IConstraint } from "../constraint";
+import { CodeWriter } from "../utils";
+import { IExpression } from "../expression";
+import { IValue } from "../value";
+import { IAttributeInfo } from "../runtime/Catalog";
+export default class AttributeDeclaration extends BaseDeclaration {
+    type: IType;
+    constraint: IConstraint | null;
+    indexTypes: IdentifierList | null;
+    storable: boolean;
+    constructor(id: Identifier, type: IType, constraint: IConstraint | null, indexTypes: IdentifierList | null);
+    getDeclarationType(): string;
+    toDeclarationInfo(): IAttributeInfo;
+    getType(context?: Context): IType;
+    toString(): string;
+    toDialect(writer: CodeWriter): void;
+    toEDialect(writer: CodeWriter): void;
+    toODialect(writer: CodeWriter): void;
+    toMDialect(writer: CodeWriter): void;
+    register(context: Context): void;
+    check(context: Context): IType;
+    checkValue(context: Context, expression: IExpression): IValue;
+    getAttributeInfo(): AttributeInfo;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+}

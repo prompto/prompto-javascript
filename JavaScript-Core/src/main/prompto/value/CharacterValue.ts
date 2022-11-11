@@ -2,7 +2,7 @@ import BaseValue from "./BaseValue";
 import { IntegerValue, TextValue } from '../value'
 import { SyntaxError } from '../error'
 import { CharacterType } from '../type'
-import { removeAccents } from '../utils'
+import { removeAccents } from '../intrinsic'
 import {Context} from "../runtime";
 import {Identifier} from "../grammar";
 import IValue from "./IValue";

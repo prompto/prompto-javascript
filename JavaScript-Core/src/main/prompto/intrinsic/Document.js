@@ -1,6 +1,6 @@
 import List from './List.js';
 import StrictSet from './StrictSet.js';
-import { equalArrays, equalObjects, isANumber, convertToJsonString, convertToJsonNode } from '../utils/Utils.js';
+import { equalArrays, equalObjects, isANumber, convertToJsonString, convertToJsonNode } from './Utils.js';
 
 export default function Document(entries) {
     if(entries)

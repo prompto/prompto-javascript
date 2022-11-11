@@ -1,4 +1,4 @@
-import antlr4 from 'antlr4';
+import {CharStream, CommonTokenStream, ParseTreeWalker, RuleContext} from 'antlr4';
 import ArgsLexer from './ArgsLexer';
 import ArgsParser, {ELEMENTContext, EntryContext, KeyContext, STRINGContext} from './ArgsParser';
 import ArgsParserListener from './ArgsParserListener';
@@ -6,7 +6,7 @@ import ArgsParserListener from './ArgsParserListener';
 class CmdLineBuilder extends ArgsParserListener {
 
     args = new Map<string, string>();
-    values = new Map<antlr4.context.RuleContext, string>();
+    values = new Map<RuleContext, string>();
 
     getCmdLineArgs() {
         return this.args;
@@ -38,13 +38,13 @@ export default class CmdLineParser {
         if (!input) {
             input = "";
         }
-        const stream = new antlr4.CharStream(input);
+        const stream = new CharStream(input);
         const lexer = new ArgsLexer(stream);
-        const tokens = new antlr4.CommonTokenStream(lexer);
+        const tokens = new CommonTokenStream(lexer);
         const parser = new ArgsParser(tokens);
         const tree = parser.parse();
         const builder = new CmdLineBuilder();
-        const walker = new antlr4.tree.ParseTreeWalker();
+        const walker = new ParseTreeWalker();
         walker.walk(builder, tree);
         return builder.getCmdLineArgs();
     }

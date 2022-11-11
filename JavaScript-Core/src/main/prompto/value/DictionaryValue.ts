@@ -1,12 +1,11 @@
 import BaseValue from './BaseValue'
 import {TextValue, IntegerValue, SetValue, NullValue, ListValue, IValue} from './index'
 import {AnyType, DictionaryType, IType, TextType} from '../type'
-import {Dictionary, IIterator} from '../intrinsic'
+import {Dictionary, IIterator, equalObjects} from '../intrinsic'
 import { SyntaxError } from '../error'
 import {Context} from "../runtime";
 import {Identifier} from "../grammar";
 import {JsonNode} from "../json";
-import {equalObjects} from "../utils";
 import {KVP} from "../intrinsic/Dictionary";
 
 export default class DictionaryValue extends BaseValue<Dictionary<TextValue, IValue>> {

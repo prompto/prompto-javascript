@@ -1,5 +1,6 @@
 import {MethodType, IType} from '../type'
-import {CodeWriter, equalObjects} from '../utils'
+import {CodeWriter} from '../utils'
+import {equalObjects} from '../intrinsic'
 import { SyntaxError } from '../error'
 import { ContextualExpression, ArrowValue } from '../value'
 import {ArrowExpression, IExpression} from '../expression'

@@ -18,10 +18,10 @@ import { Operator, Identifier, Argument, ArgumentList } from '../grammar'
 import {Context, MethodDeclarationMap, MethodFinder, Score, Transpiler} from '../runtime'
 import { MethodCall } from '../statement'
 import {$DataStore, IStored, TypeFamily} from '../store'
-import {CodeWriter, compareValues, convertToJsonNode, convertToJsonString} from '../utils'
+import {CodeWriter} from '../utils'
 import { SyntaxError } from '../error'
 import { Section } from '../parser'
-import { Any } from '../intrinsic'
+import { Any, compareValues, convertToJsonNode, convertToJsonString } from '../intrinsic'
 import { Category } from '../intrinsic/$Root.js'
 import {ConcreteInstance, Instance, IValue} from "../value";
 import IType from "./IType";

@@ -1,4 +1,5 @@
 function isNodeJs() {
+    // @ts-ignore
     return typeof window == 'undefined' && typeof importScripts == 'undefined';
 }
 

@@ -12,6 +12,7 @@ import {Instance, TextValue, IValue} from "../value";
 import {CategoryDeclaration, IDeclaration, IMethodDeclaration} from "./index";
 import {IParameter, ParameterList} from "../param";
 
+declare const importScripts: any;
 const isNodeJs = typeof window == 'undefined' && typeof importScripts == 'undefined';
 
 export default class TestMethodDeclaration extends BaseDeclaration implements IMethodDeclaration {

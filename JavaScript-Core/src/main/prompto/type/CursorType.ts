@@ -5,7 +5,7 @@ import {Context, Transpiler, Variable} from '../runtime'
 import ToListMethodDeclaration from '../builtins/ToListMethodDeclaration'
 import IType from "./IType";
 import {TypeFamily} from "../store";
-import {equalObjects} from "../utils";
+import {equalObjects} from "../intrinsic";
 import {Section} from "../parser";
 import {IExpression} from "../expression";
 import {IMethodDeclaration} from "../declaration";

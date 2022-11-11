@@ -1,8 +1,8 @@
-import antlr4, {CharStream, CommonTokenStream, FileStream, Lexer} from 'antlr4';
+import {CharStream, CommonTokenStream, FileStream, Lexer, ParserRuleContext} from 'antlr4';
 import {fileExists} from "../utils";
 import EIndentingLexer from "./EIndentingLexer";
 
-export function getFullText(ctx: antlr4.context.ParserRuleContext): string {
+export function getFullText(ctx: ParserRuleContext): string {
     const start = ctx.start;
     const stop = ctx.stop;
     if(start && start.start >= 0 && stop && stop.stop >= 0)

@@ -1,18 +1,18 @@
-import antlr4 from 'antlr4';
+import {ATN, Interval, IntervalSet, Lexer, ParseTree, RuleContext} from 'antlr4';
 import { AnnotationProcessors } from "../processor";
 import NodeLocator from "./NodeLocator";
 import AbstractParser from "../parser/AbstractParser";
 import Caret from "./Caret";
 import {Context} from "../runtime";
 
-export default abstract class BaseSuggester<T extends antlr4.Lexer> {
+export default abstract class BaseSuggester<T extends Lexer> {
 
-    atn: antlr4.atn.ATN;
-    tree: antlr4.tree.ParseTree;
+    atn: ATN;
+    tree: ParseTree;
     literalNames: string[];
     symbolicNames: string[];
 
-    constructor(lexerClass: T, parser: AbstractParser,  tree: antlr4.tree.ParseTree) {
+    constructor(lexerClass: T, parser: AbstractParser,  tree: ParseTree) {
         this.atn = parser._interp.atn;
         this.tree = tree;
         this.literalNames = lexerClass["literalNames" as keyof typeof lexerClass] as string[];
@@ -71,19 +71,19 @@ export default abstract class BaseSuggester<T extends antlr4.Lexer> {
         return symName && (symName.endsWith("_LITERAL") || symName.endsWith("_IDENTIFIER"));
     }
 
-    flattenTokenIntervals(intervals: antlr4.misc.Interval[]): number[] {
+    flattenTokenIntervals(intervals: Interval[]): number[] {
         return intervals.map(i => this.intervalToTokenArray(i))
                         .flatMap(n => n);
     }
 
-    intervalToTokenArray(interval: antlr4.misc.Interval): number[] {
+    intervalToTokenArray(interval: Interval): number[] {
         const result = [];
         for(let t = interval.start; t < interval.stop; t++)
             result.push(t);
         return result;
     }
 
-    expectedTokenIntervalsAfter(node: antlr4.context.RuleContext): antlr4.misc.IntervalSet {
+    expectedTokenIntervalsAfter(node: RuleContext): IntervalSet {
         let stateNumber = node.invokingState;
         if(stateNumber == -1)
             stateNumber = this.getStartState();

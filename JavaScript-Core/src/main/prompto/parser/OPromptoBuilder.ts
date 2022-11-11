@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import antlr4, {Token, TokenStream} from 'antlr4';
+import {Interval, ParserRuleContext, Token, TokenStream} from 'antlr4';
 import OParserListener from './OParserListener';
 import OCleverParser from './OCleverParser';
 import {Dialect, OParser, OLexer, Section} from "./index";
@@ -702,7 +702,7 @@ export default class OPromptoBuilder extends OParserListener {
         this.nextNodeId = 0;
     }
 
-    setNodeValue(node: antlr4.context.ParserRuleContext, value: object | null) {
+    setNodeValue(node: ParserRuleContext, value: object | null) {
         if(value == null)
             return;
         const indexedNode = node as IndexedNode;
@@ -717,7 +717,7 @@ export default class OPromptoBuilder extends OParserListener {
         }
     }
 
-    getNodeValue<T>(node: antlr4.context.ParserRuleContext): T | null {
+    getNodeValue<T>(node: ParserRuleContext): T | null {
         const indexedNode = node as IndexedNode;
         const id = indexedNode == null ? undefined : indexedNode.__id;
         if (id == undefined)
@@ -747,18 +747,18 @@ export default class OPromptoBuilder extends OParserListener {
             return hidden.map(token => token.text).join("");
     }
 
-    readAnnotations(ctxs: antlr4.context.ParserRuleContext[]): Annotation[] | null {
+    readAnnotations(ctxs: ParserRuleContext[]): Annotation[] | null {
         const annotations = ctxs.map(csc => this.getNodeValue<Annotation>(csc)!, this);
         return (annotations.length == 0) ? null : annotations;
     }
 
-    readComments(ctxs: antlr4.context.ParserRuleContext[]): CommentStatement[] | null {
+    readComments(ctxs: ParserRuleContext[]): CommentStatement[] | null {
         const comments = ctxs.map(csc => this.getNodeValue<CommentStatement>(csc)!, this);
         return (comments.length == 0) ? null : comments;
     }
 
 
-    buildSection(node: antlr4.context.ParserRuleContext, section: Section) {
+    buildSection(node: ParserRuleContext, section: Section) {
         if(!section.dialect) {
             const first = this.findFirstValidToken(node.start.tokenIndex, section instanceof JsxText);
             const last = this.findLastValidToken(node.stop!.tokenIndex, section instanceof JsxText);
@@ -850,7 +850,7 @@ export default class OPromptoBuilder extends OParserListener {
 
 
     exitMethod_expression = (ctx: Method_expressionContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
 
@@ -1056,7 +1056,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitLiteral_expression = (ctx: Literal_expressionContext) => {
-        const exp = this.getNodeValue<BaseExpression>(ctx.getChild(0) as antlr4.context.ParserRuleContext);
+        const exp = this.getNodeValue<BaseExpression>(ctx.getChild(0) as ParserRuleContext);
         this.setNodeValue(ctx, exp);
     }
 
@@ -1459,7 +1459,7 @@ export default class OPromptoBuilder extends OParserListener {
         const comments = this.readComments(ctx.comment_statement_list());
         const annotations = this.readAnnotations(ctx.annotation_constructor_list());
         const ctx_ = ctx.children![ctx.getChildCount() - 1];
-        const decl = this.getNodeValue<IDeclaration>(ctx_ as antlr4.context.ParserRuleContext);
+        const decl = this.getNodeValue<IDeclaration>(ctx_ as ParserRuleContext);
         if (decl) {
             decl.comments = comments;
             decl.annotations = annotations;
@@ -1501,7 +1501,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitMethod_declaration = (ctx: Method_declarationContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitMethodCallStatement = (ctx: MethodCallStatementContext) => {
@@ -1509,7 +1509,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitMethod_identifier = (ctx: Method_identifierContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitConstructorFrom = (ctx: ConstructorFromContext) => {
@@ -1619,7 +1619,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitJavascript_primary_expression = (ctx: Javascript_primary_expressionContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitJavascript_this_expression = (ctx: Javascript_this_expressionContext) => {
@@ -1703,7 +1703,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitJava_primary_expression = (ctx: Java_primary_expressionContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitJava_item_expression = (ctx: Java_item_expressionContext) => {
@@ -1829,7 +1829,7 @@ export default class OPromptoBuilder extends OParserListener {
     exitDeclaration = (ctx: DeclarationContext) => {
         const comments = this.readComments(ctx.comment_statement_list());
         const annotations = this.readAnnotations(ctx.annotation_constructor_list());
-        const ctx_ = ctx.children![ctx.getChildCount() - 1] as antlr4.context.ParserRuleContext;
+        const ctx_ = ctx.children![ctx.getChildCount() - 1] as ParserRuleContext;
         const decl = this.getNodeValue<IDeclaration>(ctx_);
         if (decl) {
             decl.comments = comments;
@@ -2132,7 +2132,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitCollection_literal = (ctx: Collection_literalContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitCollectionSwitchCase = (ctx: CollectionSwitchCaseContext) => {
@@ -2272,7 +2272,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitOperator_argument = (ctx: Operator_argumentContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitOperatorArgument = (ctx: OperatorArgumentContext) => {
@@ -2310,7 +2310,7 @@ export default class OPromptoBuilder extends OParserListener {
     exitNative_member_method_declaration = (ctx: Native_member_method_declarationContext) => {
         const comments = this.readComments(ctx.comment_statement_list());
         const annotations = this.readAnnotations(ctx.annotation_constructor_list());
-        const ctx_ = ctx.children![ctx.getChildCount() - 1] as antlr4.context.ParserRuleContext;
+        const ctx_ = ctx.children![ctx.getChildCount() - 1] as ParserRuleContext;
         const decl = this.getNodeValue<IMethodDeclaration>(ctx_);
         if (decl) {
             decl.comments = comments;
@@ -2438,7 +2438,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitSorted_key = (ctx: Sorted_keyContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitDocument_expression = (ctx: Document_expressionContext) => {
@@ -2544,7 +2544,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitCategory_or_any_type = (ctx: Category_or_any_typeContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitCategory_symbol = (ctx: Category_symbolContext) => {
@@ -2567,7 +2567,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitEnum_declaration = (ctx: Enum_declarationContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitRead_all_expression = (ctx: Read_all_expressionContext) => {
@@ -2596,7 +2596,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitRepl = (ctx: ReplContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitWith_singleton_statement = (ctx: With_singleton_statementContext) => {
@@ -2748,7 +2748,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitCsharp_primary_expression = (ctx: Csharp_primary_expressionContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitCsharp_this_expression = (ctx: Csharp_this_expressionContext) => {
@@ -3040,7 +3040,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitJsx_expression = (ctx: Jsx_expressionContext) => {
-        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as antlr4.context.ParserRuleContext));
+        this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0) as ParserRuleContext));
     }
 
     exitJsx_identifier = (ctx: Jsx_identifierContext) => {
@@ -3095,7 +3095,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
     exitCssText = (ctx: CssTextContext) => {
-        const text = this.input.getText(new antlr4.misc.Interval(ctx._text.start, ctx._text.stop));
+        const text = this.input.getText(new Interval(ctx._text.start, ctx._text.stop));
         this.setNodeValue(ctx, new CssText(text));
     }
 

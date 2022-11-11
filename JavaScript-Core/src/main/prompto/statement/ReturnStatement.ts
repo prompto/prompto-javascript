@@ -3,7 +3,8 @@ import {IType, VoidType} from '../type'
 import {IValue, NullValue} from '../value'
 import {Context, Transpiler, VoidResult} from '../runtime'
 import {IExpression} from "../expression";
-import {CodeWriter, equalObjects} from "../utils";
+import {equalObjects} from "../intrinsic";
+import {CodeWriter} from "../utils";
 
 export default class ReturnStatement extends SimpleStatement {
 

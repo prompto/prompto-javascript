@@ -6,4 +6,3 @@ export default function initAll() {
     JavaScriptClassType.init();
     AnnotationProcessors.init();
 }
-//# sourceMappingURL=init.js.map

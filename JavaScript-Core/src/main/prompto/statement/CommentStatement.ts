@@ -1,6 +1,6 @@
 import BaseStatement from './BaseStatement'
 import {IType, VoidType} from '../type'
-import { Dialect } from '../parser'
+import {Dialect, Section} from '../parser'
 import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
 import {IValue} from "../value";
@@ -24,7 +24,7 @@ export default class CommentStatement extends BaseStatement {
         this.text = text;
     }
 
-    locateSectionAtLine(line: number) {
+    locateSectionAtLine(line: number): Section | null {
         return null;
     }
 

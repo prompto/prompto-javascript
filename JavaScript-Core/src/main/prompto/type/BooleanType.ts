@@ -1,7 +1,7 @@
 import NativeType from './NativeType'
 import { Identifier } from '../grammar'
 import { BooleanValue } from '../value'
-import { isABoolean } from '../utils'
+import { isABoolean } from '../intrinsic'
 import { TypeFamily } from '../store'
 import {Context, Transpiler} from "../runtime";
 import {Section} from "../parser";

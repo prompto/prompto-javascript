@@ -6,7 +6,8 @@ import {$DataStore, IAuditMetadata, IStorable} from '../store'
 import { StatementList } from "../statement";
 import Document from '../intrinsic/Document.js';
 import {ExpressionList, IExpression} from "../expression";
-import {CodeWriter, equalArrays} from "../utils";
+import {equalArrays} from "../intrinsic";
+import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
 import {Identifier} from "../grammar";
 export default class DeleteAndStoreStatement extends BaseStatement {

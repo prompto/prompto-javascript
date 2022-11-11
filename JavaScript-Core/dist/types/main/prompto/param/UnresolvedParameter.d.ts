@@ -1,0 +1,32 @@
+import { IType } from '../type';
+import { IParameter } from '../param';
+import { Context, Transpiler } from '../runtime';
+import { CodeWriter } from "../utils";
+import { Identifier } from "../grammar";
+import BaseParameter from "./BaseParameter";
+import { Dialect } from "../parser";
+import { IExpression } from "../expression";
+import { IValue } from "../value";
+export default class UnresolvedParameter extends BaseParameter {
+    resolved?: IParameter;
+    constructor(id: Identifier);
+    get name(): string;
+    setMutable(mutable: boolean): void;
+    getTranspiledName(context: Context): string;
+    toDialect(writer: CodeWriter): void;
+    check(context: Context): IType;
+    getProto(): string;
+    getSignature(dialect: Dialect): string;
+    getType(context: Context): IType;
+    register(context: Context): void;
+    checkValue(context: Context, expression: IExpression): IValue;
+    resolveAndCheck(context: Context): IType;
+    resolve(context: Context): void;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    transpileCall(transpiler: Transpiler, expression: IExpression): void;
+    equals(other: IParameter): boolean;
+    toEDialect(writer: CodeWriter): void;
+    toMDialect(writer: CodeWriter): void;
+    toODialect(writer: CodeWriter): void;
+}

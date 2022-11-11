@@ -1,0 +1,38 @@
+import { IDeclaration, IMethodDeclaration } from "../declaration";
+import { Annotation, Identifier } from "../grammar";
+import { CommentStatement } from "../statement";
+import { Context } from "./Context";
+import { IType } from "../type";
+import { IDeclarationInfo } from "./Catalog";
+import { CodeWriter } from "../utils";
+import { Transpiler } from "./index";
+import { ProblemListener } from "../problem";
+export default class MethodDeclarationMap implements IDeclaration {
+    annotations: Annotation[] | null;
+    comments: CommentStatement[] | null;
+    id: Identifier;
+    protos: Map<string, IMethodDeclaration>;
+    constructor(id: Identifier);
+    get name(): string;
+    getDeclarationType(): string;
+    declare(transpiler: Transpiler): void;
+    getType(context: Context): IType;
+    toDeclarationInfo(): IDeclarationInfo;
+    toDialect(writer: CodeWriter): void;
+    toEDialect(writer: CodeWriter): void;
+    toODialect(writer: CodeWriter): void;
+    toMDialect(writer: CodeWriter): void;
+    transpile(transpiler: Transpiler): void;
+    register(context: Context): void;
+    unregister(context: Context): void;
+    check(context: Context): IType;
+    registerOrReplaceProto(method: IMethodDeclaration): void;
+    registerProto(method: IMethodDeclaration, problemListener: ProblemListener, override: boolean): void;
+    unregisterProto(proto: string): boolean;
+    hasProto(proto: string): boolean;
+    registerIfMissing(method: IMethodDeclaration): void;
+    getFirst(): IMethodDeclaration | null;
+    getAll(): IMethodDeclaration[];
+    isEmpty(): boolean;
+    size(): number;
+}

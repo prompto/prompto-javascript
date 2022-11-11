@@ -1,0 +1,32 @@
+import BaseExpression from './BaseExpression';
+import { Dialect } from '../parser';
+import { IValue } from '../value';
+import { CodeWriter } from '../utils';
+import { IAssertion, IExpression, IPredicate } from "./index";
+import { Context, Transpiler } from "../runtime";
+import { IType } from "../type";
+import { TestMethodDeclaration } from "../declaration";
+import { IQueryBuilder } from "../store";
+export default class OrExpression extends BaseExpression implements IPredicate, IAssertion {
+    left: IExpression;
+    right: IExpression;
+    constructor(left: IExpression, right: IExpression);
+    toString(): string;
+    toDialect(writer: CodeWriter): void;
+    operatorToDialect(dialect: Dialect): " or " | " || ";
+    toEDialect(writer: CodeWriter): void;
+    toODialect(writer: CodeWriter): void;
+    toMDialect(writer: CodeWriter): void;
+    check(context: Context): IType;
+    checkQuery(context: Context): void;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    interpretExpression(context: Context): IValue;
+    interpretAssert(context: Context, test: TestMethodDeclaration): boolean;
+    getExpected(context: Context, dialect: Dialect, escapeMode: number): string;
+    transpileFound(transpiler: Transpiler, dialect: Dialect): void;
+    interpretQuery(context: Context, query: IQueryBuilder): void;
+    declareQuery(transpiler: Transpiler): void;
+    transpileQuery(transpiler: Transpiler, builderName: string): void;
+    checkAssert(context: Context): Context;
+}

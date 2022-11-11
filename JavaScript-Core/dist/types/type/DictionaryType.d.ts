@@ -1,0 +1,35 @@
+import ContainerType from './ContainerType';
+import { Identifier } from '../grammar';
+import IType from "./IType";
+import { Context, Transpiler } from "../runtime";
+import { Section } from "../parser";
+import { IExpression } from "../expression";
+import { IMethodDeclaration } from "../declaration";
+export default class DictionaryType extends ContainerType {
+    constructor(itemType: IType);
+    withItemType(itemType: IType): IType;
+    getTranspiledName(context: Context): string;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    isAssignableFrom(context: Context, other: IType): boolean;
+    equals(obj: any): boolean;
+    checkAdd(context: Context, section: Section, other: IType, tryReverse: boolean): IType;
+    declareAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void;
+    transpileAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void;
+    checkContains(context: Context, section: Section, other: IType): IType;
+    declareContains(transpiler: Transpiler, other: IType, container: IExpression, item: IExpression): void;
+    transpileContains(transpiler: Transpiler, other: IType, container: IExpression, item: IExpression): void;
+    checkHasAllOrAny(context: Context, section: Section, other: IType): IType;
+    declareHasAllOrAny(transpiler: Transpiler, other: IType, container: IExpression, items: IExpression): void;
+    transpileHasAllValue(transpiler: Transpiler, other: IType, container: IExpression, items: IExpression): void;
+    transpileHasAnyValue(transpiler: Transpiler, other: IType, container: IExpression, items: IExpression): void;
+    checkItem(context: Context, section: Section, other: IType): IType;
+    declareItem(transpiler: Transpiler, itemType: IType): void;
+    transpileItem(transpiler: Transpiler, itemType: IType, item: IExpression): void;
+    transpileAssignItemValue(transpiler: Transpiler, item: IExpression, expression: IExpression): void;
+    checkIterator(context: Context, section: Section, source: IExpression): IType;
+    checkMember(context: Context, section: Section, id: Identifier): IType;
+    declareMember(transpiler: Transpiler, member: Identifier): void;
+    transpileMember(transpiler: Transpiler, member: Identifier): void;
+    getMemberMethods(context: Context, id: Identifier): Set<IMethodDeclaration>;
+}

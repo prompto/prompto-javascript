@@ -1,0 +1,30 @@
+import NativeType from './NativeType';
+import { Identifier } from '../grammar';
+import { IValue } from '../value';
+import { Context, Transpiler } from "../runtime";
+import IType from "./IType";
+import { Section } from "../parser";
+import { IExpression } from "../expression";
+export default class PeriodType extends NativeType {
+    static instance: PeriodType;
+    constructor();
+    convertJavaScriptValueToPromptoValue(context: Context, value: any, returnType: IType | null): IValue;
+    checkAdd(context: Context, section: Section, other: IType, tryReverse: boolean): IType;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    declareAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void;
+    transpileAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void;
+    checkSubtract(context: Context, section: Section, other: IType): IType;
+    declareSubtract(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void;
+    transpileSubtract(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void;
+    checkMultiply(context: Context, section: Section, other: IType, tryReverse: boolean): IType;
+    declareMultiply(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void;
+    transpileMultiply(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void;
+    checkMinus(context: Context, section: Section): IType;
+    declareMinus(transpiler: Transpiler): void;
+    transpileMinus(transpiler: Transpiler, exp: IExpression): void;
+    checkMember(context: Context, section: Section, id: Identifier): IType;
+    declareMember(transpiler: Transpiler, member: Identifier): void;
+    transpileMember(transpiler: Transpiler, id: Identifier): void;
+    transpileJsxCode(transpiler: Transpiler, expression: IExpression): void;
+}

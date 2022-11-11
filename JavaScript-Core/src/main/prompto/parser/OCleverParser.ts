@@ -1,4 +1,4 @@
-import antlr4 from 'antlr4';
+import {ParserRuleContext, ParseTree, ParseTreeWalker} from 'antlr4';
 import { CharStream, Lexer } from 'antlr4';
 import {IStatement} from "../statement";
 import {DeclarationList, IDeclaration} from "../declaration";
@@ -45,10 +45,10 @@ export default class OCleverParser extends OParser {
 		return this.doParse<DocumentLiteral>(() => this.document_literal(), false);
 	}
 
-	doParse<T>(rule: () => antlr4.tree.ParseTree, addLF: boolean) {
-		const tree = (rule.bind(this) as () => antlr4.context.ParserRuleContext)();
+	doParse<T>(rule: () => ParseTree, addLF: boolean) {
+		const tree = (rule.bind(this) as () => ParserRuleContext)();
 		const builder = new OPromptoBuilder(this);
-		const walker = new antlr4.tree.ParseTreeWalker();
+		const walker = new ParseTreeWalker();
 		walker.walk(builder, tree);
 		return builder.getNodeValue<T>(tree);
 	}

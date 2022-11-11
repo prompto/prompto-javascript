@@ -1,0 +1,38 @@
+import BaseMethodDeclaration from './BaseMethodDeclaration';
+import { ParameterList, ValueCodeParameter } from '../param';
+import { StatementList } from '../statement';
+import { IType } from '../type';
+import { Context, Transpiler } from '../runtime';
+import { Identifier } from "../grammar";
+import { Section } from "../parser";
+import { IValue } from "../value";
+import { CodeWriter } from "../utils";
+export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
+    statements: StatementList;
+    beingChecked: boolean;
+    codeParameters?: Map<string, ValueCodeParameter>;
+    constructor(id: Identifier, params: ParameterList | null, returnType: IType | null, statements: StatementList);
+    locateSectionAtLine(line: number): Section | null;
+    check(context: Context, isStart: boolean): IType;
+    canBeChecked(context: Context, isStart: boolean): boolean;
+    isTemplate(): boolean;
+    recursiveCheck(context: Context, isStart: boolean): IType;
+    fullCheck(context: Context, isStart: boolean): IType;
+    checkChild(context: Context): IType;
+    checkSingletonInitialize(context: Context): void;
+    checkSingletonInitializeParameters(context: Context): void;
+    checkSingletonInitializeContext(context: Context): void;
+    checkStatements(context: Context): IType;
+    interpret(context: Context): IValue | null;
+    toDialect(writer: CodeWriter): void;
+    isEligibleAsMain(): boolean;
+    toMDialect(writer: CodeWriter): void;
+    toEDialect(writer: CodeWriter): void;
+    toODialect(writer: CodeWriter): void;
+    declare(transpiler: Transpiler): void;
+    doDeclare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    declareChild(transpiler: Transpiler): void;
+    registerCodeArguments(context: Context): void;
+    fullDeclare(transpiler: Transpiler, id: Identifier): void;
+}

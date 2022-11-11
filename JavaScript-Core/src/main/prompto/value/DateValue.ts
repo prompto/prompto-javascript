@@ -2,11 +2,10 @@ import BaseValue from "./BaseValue";
 import {TimeValue, PeriodValue, IntegerValue, DateTimeValue, TextValue, IValue} from './index'
 import { DateType} from '../type'
 import { SyntaxError } from '../error'
-import {LocalDate} from "../intrinsic";
+import {LocalDate, equalObjects} from "../intrinsic";
 import {Context} from "../runtime";
 import {Identifier} from "../grammar";
 import {JsonNode, JsonParent} from "../json";
-import {equalObjects} from "../utils";
 
 export default class DateValue extends BaseValue<LocalDate> {
   

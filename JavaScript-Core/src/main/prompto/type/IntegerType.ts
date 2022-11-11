@@ -3,8 +3,7 @@ import {DecimalType, TextType, BooleanType, CharacterType, RangeType, ListType, 
 import {CmpOp, Identifier} from '../grammar'
 import {IntegerValue, IntegerRangeValue, IValue} from '../value'
 import { FormatMethodDeclaration } from '../builtins/IntegerTypeBuiltins'
-import { isAnInteger } from '../utils'
-import {Range, IntegerRange} from '../intrinsic'
+import {Range, IntegerRange, isAnInteger} from '../intrinsic'
 import {TypeFamily} from "../store";
 import {Context, Transpiler} from "../runtime";
 import {Section} from "../parser";

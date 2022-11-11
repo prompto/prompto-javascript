@@ -1,4 +1,4 @@
-import { convertToJsonString, convertToJsonNode, equalArrays } from '../utils/Utils.ts';
+import { convertToJsonString, convertToJsonNode, equalArrays } from './Utils.js';
 import NotMutableError from '../error/NotMutableError.js';
 import Document from './Document.js';
 
@@ -158,7 +158,7 @@ $Root.prototype.toDocument = function() {
 };
 
 $Root.prototype.toJson = function() {
-    return convertToJson(this);
+    return convertToJsonString(this);
 };
 
 $Root.prototype.toJsonNode = function() {

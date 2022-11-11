@@ -6,16 +6,17 @@ import {Context, MethodDeclarationMap, Transpiler} from '../runtime'
 import { MethodCall } from '../statement'
 import {DocumentValue, NullValue, IntegerValue, DecimalValue, TextValue, IValue, BooleanValue} from '../value'
 import { TextLiteral } from '../literal'
-import {equalArrays, compareValues, isANumber, convertToJsonString, convertToJsonNode} from '../utils'
-import JavaScriptClassType from "../javascript/JavaScriptClassType.js";
-import StrictSet from '../intrinsic/StrictSet.js';
-import List from '../intrinsic/List.js';
-import Document from '../intrinsic/Document.js';
+import {equalArrays, compareValues, isANumber, convertToJsonString, convertToJsonNode} from '../intrinsic/Utils'
+import JavaScriptClassType from "../javascript/JavaScriptClassType";
 import {TypeFamily} from "../store";
 import IType from "./IType";
 import {Section} from "../parser";
 import {JsonNode} from "../json";
 import {IMethodDeclaration} from "../declaration";
+
+import StrictSet from '../intrinsic/StrictSet.js';
+import List from '../intrinsic/List.js';
+import Document from '../intrinsic/Document.js';
 
 export default class DocumentType extends NativeType {
 

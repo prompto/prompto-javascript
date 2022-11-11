@@ -1,0 +1,31 @@
+import BaseExpression from './BaseExpression';
+import { CmpOp } from '../grammar';
+import { MatchOp, IQueryBuilder } from '../store';
+import { BooleanValue, IValue } from '../value';
+import { CodeWriter } from '../utils';
+import { IExpression } from "./index";
+import { Context, Transpiler } from "../runtime";
+import { IType } from "../type";
+import { TestMethodDeclaration } from "../declaration";
+import { Dialect } from "../parser";
+export default class CompareExpression extends BaseExpression {
+    left: IExpression;
+    operator: CmpOp;
+    right: IExpression;
+    constructor(left: IExpression, operator: CmpOp, right: IExpression);
+    toString(): string;
+    toDialect(writer: CodeWriter): void;
+    check(context: Context): IType;
+    checkOperator(context: Context, lt: IType, rt: IType): IType;
+    interpretExpression(context: Context): IValue;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    compare(context: Context, lval: IValue, rval: IValue): BooleanValue;
+    interpretAssert(context: Context, test: TestMethodDeclaration): boolean;
+    getExpected(context: Context, dialect: Dialect, escapeMode: number): string;
+    transpileFound(transpiler: Transpiler, dialect: Dialect): void;
+    checkQuery(context: Context): IType;
+    interpretQuery(context: Context, query: IQueryBuilder): void;
+    transpileQuery(transpiler: Transpiler, builderName: string): void;
+    getMatchOp(): MatchOp;
+}

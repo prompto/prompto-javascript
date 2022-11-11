@@ -1,0 +1,32 @@
+import { CodeWriter } from '../utils';
+import { IType } from '../type';
+import { Section } from '../parser';
+import { Identifier } from "../grammar";
+import { JsxProperty } from "./index";
+import { Context, Transpiler } from "../runtime";
+import { PropertyMap } from "../property";
+import IJsxExpression from "./IJsxExpression";
+export default abstract class JsxElementBase extends Section implements IJsxExpression {
+    id: Identifier;
+    properties: JsxProperty[];
+    constructor(id: Identifier, properties: JsxProperty[]);
+    abstract toDialect(writer: CodeWriter): void;
+    get name(): string;
+    check(context: Context): IType;
+    isHtmlTag(): boolean;
+    checkHtmlTag(context: Context): void;
+    checkWidgetTag(context: Context): void;
+    checkConstructable(context: Context): void;
+    getPropertyMap(context: Context): PropertyMap;
+    getWidgetPropertyMap(context: Context): PropertyMap;
+    static getHtmlPropertyMap(context: Context, tagName?: string): PropertyMap | null;
+    checkWidgetProperties(context: Context, propertyMap: PropertyMap): void;
+    checkWidgetProperty(context: Context, propertyMap: PropertyMap, jsxProp: JsxProperty): void;
+    declare(transpiler: Transpiler): void;
+    declareProperty(transpiler: Transpiler, propertyMap: PropertyMap, jsxProp: JsxProperty): void;
+    declareChildren(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    transpileProperty(transpiler: Transpiler, propertyMap: PropertyMap, jsxProp: JsxProperty): void;
+    transpileChildren(transpiler: Transpiler): void;
+    static set_HTML_TEST_MODE(mode: boolean): void;
+}

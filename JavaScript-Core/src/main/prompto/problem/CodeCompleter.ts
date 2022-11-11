@@ -1,21 +1,21 @@
-import antlr4 from 'antlr4';
+import {NoViableAltException, RecognitionException, Token} from 'antlr4';
 import ProblemListener from './ProblemListener'
 import ISuggestion from "./ISuggestion";
-import {integerRange} from "../utils/Utils";
+import {integerRange} from "../../../main/prompto/intrinsic/Utils";
 import AbstractParser from "../parser/AbstractParser";
 
 export default class CodeCompleter extends ProblemListener {
 
     suggestions: ISuggestion[];
 
-    syntaxError(recognizer: AbstractParser, offendingSymbol: antlr4.Token, line: number, column: number, msg: string, e: antlr4.error.RecognitionException) {
-        if (e instanceof antlr4.error.NoViableAltException) {
+    syntaxError(recognizer: AbstractParser, offendingSymbol: Token, line: number, column: number, msg: string, e: RecognitionException) {
+        if (e instanceof NoViableAltException) {
             this.noViableAltError(recognizer, offendingSymbol, line, column, msg, e);
         } else
             super.syntaxError(recognizer, offendingSymbol, line, column, msg, e);
     }
 
-    noViableAltError(recognizer: AbstractParser, offendingSymbol: antlr4.Token, line: number, column: number, msg: string, e: antlr4.error.NoViableAltException) {
+    noViableAltError(recognizer: AbstractParser, offendingSymbol: Token, line: number, column: number, msg: string, e: NoViableAltException) {
         const literalNames: string[] = recognizer["literalNames" as keyof typeof recognizer] as string[];
         const symbolicNames: string[] = recognizer["symbolicNames" as keyof typeof recognizer] as string[];
         this.suggestions = e.deadEndConfigs.configs

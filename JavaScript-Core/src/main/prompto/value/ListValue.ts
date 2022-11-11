@@ -3,7 +3,7 @@ import {NullValue, SetValue, IntegerValue, IValue} from './index'
 import { SyntaxError } from '../error'
 import {ListType, IType} from '../type'
 import { List } from '../intrinsic'
-import { multiplyArray } from '../utils/Utils'
+import { multiplyArray } from '../intrinsic/Utils'
 import { StrictSet } from '../intrinsic'
 import {IStorable} from "../store";
 import {Context} from "../runtime";

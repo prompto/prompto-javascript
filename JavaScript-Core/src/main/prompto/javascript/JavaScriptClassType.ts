@@ -8,9 +8,8 @@ import {
 } from '../type'
 import { ListValue, DocumentValue, IValue, IteratorValue } from '../value'
 import { Identifier } from '../grammar'
-import { getTypeName } from '../utils'
 import { InternalError } from '../error'
-import {LocalTime, LocalDate, DateTime, Period, UUID, Version, IIterator} from '../intrinsic'
+import {LocalTime, LocalDate, DateTime, Period, UUID, Version, IIterator, getTypeName} from '../intrinsic'
 import {Context} from "../runtime";
 import BaseValue from "../value/BaseValue";
 

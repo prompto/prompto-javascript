@@ -2,12 +2,11 @@ import ContainerType from './ContainerType'
 import {ListType, IntegerType, BooleanType, IterableType} from './index'
 import { Identifier } from '../grammar'
 import { JoinSetMethodDeclaration } from '../builtins/ContainerTypeBuiltins'
-import { List, StrictSet } from "../intrinsic";
+import { List, StrictSet, equalObjects } from "../intrinsic";
 import ToListMethodDeclaration from "../builtins/ToListMethodDeclaration";
 import IType from "./IType";
 import {TypeFamily} from "../store";
 import {Context, Transpiler} from "../runtime";
-import {equalObjects} from "../utils";
 import {Section} from "../parser";
 import {IExpression, PredicateExpression} from "../expression";
 import {IMethodDeclaration} from "../declaration";

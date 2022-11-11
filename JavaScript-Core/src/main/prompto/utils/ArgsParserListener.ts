@@ -1,6 +1,6 @@
 // Generated from ArgsParser.g4 by ANTLR 4.11.2-SNAPSHOT
 
-import { default as antlr4 } from 'antlr4';
+import {ParseTreeListener} from 'antlr4';
 
 
 import { ParseContext } from "./ArgsParser.js";
@@ -14,7 +14,7 @@ import { STRINGContext } from "./ArgsParser.js";
  * This interface defines a complete listener for a parse tree produced by
  * `ArgsParser`.
  */
-export default class ArgsParserListener extends antlr4.tree.ParseTreeListener {
+export default class ArgsParserListener extends ParseTreeListener {
 	/**
 	 * Enter a parse tree produced by `ArgsParser.parse`.
 	 * @param ctx the parse tree

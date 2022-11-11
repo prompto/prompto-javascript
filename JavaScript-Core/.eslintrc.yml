@@ -1,5 +1,5 @@
 env:
-  browser: false
+  browser: true
   node: true
   es2016: true
   amd: true

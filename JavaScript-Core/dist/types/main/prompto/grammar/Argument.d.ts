@@ -1,0 +1,38 @@
+import Section from '../parser/Section';
+import { IExpression } from '../expression';
+import { IType } from '../type';
+import { IParameter } from "../param";
+import { CodeWriter } from "../utils";
+import { Context, Transpiler } from "../runtime";
+import { IMethodDeclaration } from "../declaration";
+import { Identifier } from "./index";
+export default class Argument extends Section {
+    parameter: IParameter | null;
+    _expression: IExpression | null;
+    constructor(parameter: IParameter | null, expression: IExpression | null);
+    get id(): Identifier | null;
+    get name(): string | null;
+    get expression(): IExpression;
+    set expression(expression: IExpression);
+    toDialect(writer: CodeWriter): void;
+    toODialect(writer: CodeWriter): void;
+    toMDialect(writer: CodeWriter): void;
+    toEDialect(writer: CodeWriter): void;
+    declare(transpiler: Transpiler, methodDeclaration: IMethodDeclaration | null): void;
+    declareArrowExpression(transpiler: Transpiler, methodDeclaration: IMethodDeclaration | null): boolean;
+    transpile(transpiler: Transpiler, methodDeclaration?: IMethodDeclaration): void;
+    transpileArrowExpression(transpiler: Transpiler, methodDeclaration?: IMethodDeclaration): boolean;
+    toString(): string;
+    equals(obj: any): boolean;
+    check(context: Context): void;
+    checkParameterOnly(context: Context): void;
+    checkParameterAndExpression(context: Context): void;
+    toSection(): Section | IExpression | IParameter;
+    findParameter(methodDeclaration: IMethodDeclaration): IParameter;
+    resolve(context: Context, methodDeclaration: IMethodDeclaration, checkInstance?: boolean, allowDerived?: boolean): IExpression;
+    resolve_(context: Context, parameter: IParameter, checkInstance?: boolean, allowDerived?: boolean): IExpression;
+    makeAssignment(context: Context, methodDeclaration: IMethodDeclaration): void;
+    checkActualType(context: Context, requiredType: IType, checkInstance: boolean): IType | null;
+    static isArrowExpression(expression: IExpression): boolean;
+    static checkArrowExpression(context: Context, section: Section, requiredType: IType, expression: IExpression): IType;
+}

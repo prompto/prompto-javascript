@@ -1,4 +1,5 @@
-import { CodeWriter, isCharacterUpperCase} from '../utils'
+import {CodeWriter} from '../utils'
+import {isCharacterUpperCase} from '../intrinsic'
 import {JsxType, AnyType, IType} from '../type'
 import {OCleverParser, Section} from '../parser'
 import {TypeLiteral} from '../literal'

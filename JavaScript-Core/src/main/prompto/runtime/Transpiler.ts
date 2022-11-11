@@ -2,11 +2,13 @@
 // noinspection TypeScriptUnresolvedVariable
 
 import {CategoryDeclaration} from '../declaration'
-import { StrictSet, List } from '../intrinsic';
-import { equalObjects } from '../utils'
+import { StrictSet, List, equalObjects } from '../intrinsic';
 import {Context} from "./Context";
 import {CategoryType} from "../type";
 import ITranspilable from '../runtime/ITranspilable';
+
+declare const importScripts: any;
+const isNodeJs = typeof window == 'undefined' && typeof importScripts == 'undefined';
 
 const coreNodeClasses = new Set<string>(["Socket"]);
 
@@ -487,7 +489,6 @@ const ObjectUtils = {
 }
 
 function print(msg: string): void {
-    const isNodeJs = typeof window == 'undefined' && typeof importScripts == 'undefined';
     if(isNodeJs)
         process.stdout.write(msg);
     else

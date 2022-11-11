@@ -1,9 +1,9 @@
 import BaseExpression from './BaseExpression'
 import {BlobType, IType} from '../type'
-import { BlobRef, Document } from '../intrinsic'
+import {getUtf8CharLength, utf8BufferToString, stringToUtf8Buffer, BlobRef, Document} from '../intrinsic'
 import {BlobValue, IValue} from '../value'
-import { ReadWriteError } from '../error'
-import {getUtf8CharLength, utf8BufferToString, stringToUtf8Buffer, CodeWriter} from '../utils'
+import {ReadWriteError} from '../error'
+import {CodeWriter} from '../utils'
 import {IExpression} from "./index";
 import {Context, Transpiler} from "../runtime";
 import {JsonNode} from "../json";

@@ -412,6 +412,10 @@ export class Context {
             return null;
     }
 
+    getRegisteredInstanceByName(name: string): NamedInstance | null {
+        return this.getRegisteredInstance(new Identifier(name));
+    }
+
     getRegisteredInstance(id: Identifier): NamedInstance | null {
         const context = this.contextForValue(id);
         return context == null ? null : context.readRegisteredInstance(id);

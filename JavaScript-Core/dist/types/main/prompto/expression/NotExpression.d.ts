@@ -1,0 +1,31 @@
+import BaseExpression from './BaseExpression';
+import { Dialect } from '../parser';
+import { IType } from '../type';
+import { IValue } from '../value';
+import { CodeWriter } from '../utils';
+import { IAssertion, IExpression, IPredicate } from "./index";
+import { Context, Transpiler } from "../runtime";
+import { TestMethodDeclaration } from "../declaration";
+import { IQueryBuilder } from "../store";
+export default class NotExpression extends BaseExpression implements IPredicate, IAssertion {
+    expression: IExpression;
+    constructor(expression: IExpression);
+    toString(): string;
+    operatorToDialect(dialect: Dialect): "not " | "! ";
+    toDialect(writer: CodeWriter): void;
+    toEDialect(writer: CodeWriter): void;
+    toMDialect(writer: CodeWriter): void;
+    toODialect(writer: CodeWriter): void;
+    check(context: Context): IType;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+    interpretExpression(context: Context): IValue;
+    interpretAssert(context: Context, test: TestMethodDeclaration): boolean;
+    checkQuery(context: Context): void;
+    interpretQuery(context: Context, query: IQueryBuilder): void;
+    declareQuery(transpiler: Transpiler): void;
+    transpileQuery(transpiler: Transpiler, builderName: string): void;
+    getExpected(context: Context, dialect: Dialect, escapeMode: number): string;
+    transpileFound(transpiler: Transpiler, dialect: Dialect): void;
+    checkAssert(context: Context): Context;
+}

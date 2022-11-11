@@ -1,0 +1,38 @@
+import Section from '../parser/Section';
+import { IExpression } from "../expression";
+import { CodeWriter } from "../utils";
+import { Context, Transpiler } from "../runtime";
+import { IType, MethodType } from "../type";
+import { IValue } from "../value";
+import { Dialect } from "../parser";
+import { AttributeDeclaration, TestMethodDeclaration } from "../declaration";
+import { Identifier } from '../grammar';
+export default abstract class Literal<T extends IValue> extends Section implements IExpression {
+    text: string;
+    value: T;
+    constructor(text: string, value: T);
+    equals(other: any): boolean;
+    asSection(): Section;
+    checkAssignItem(context: Context, section: Section, itemType: IType, valueType: IType): IType;
+    checkAssignMember(context: Context, section: Section, member: Identifier, valueType: IType): IType;
+    interpretReference(context: Context): IValue;
+    transpileReference(transpiler: Transpiler, method: MethodType): void;
+    transpileAssignParent(transpiler: Transpiler): unknown;
+    isPredicate(): boolean;
+    isAssertion(): boolean;
+    toDialect(writer: CodeWriter): void;
+    parentToDialect(writer: CodeWriter): void;
+    escapedText(escapeMode: number): string;
+    toString(): string;
+    checkReference(context: Context): IType;
+    abstract check(context: Context): IType;
+    checkAttribute(context: Context): AttributeDeclaration | null;
+    abstract declare(transpiler: Transpiler): void;
+    abstract transpile(transpiler: Transpiler): void;
+    declareParent(transpiler: Transpiler): void;
+    transpileParent(transpiler: Transpiler): void;
+    interpretExpression(context: Context): IValue;
+    getExpected(context: Context, dialect: Dialect, escapeMode: number): string;
+    interpretAssert(context: Context, method: TestMethodDeclaration): boolean;
+    transpileFound(transpiler: Transpiler, dialect: Dialect): void;
+}
