@@ -34,9 +34,9 @@ export default class ContextualExpression extends Value {
         transpiler.flush();
     }
 
-    transpileReference(transpiler, method) {
+    transpileMethodReference(transpiler, method) {
         transpiler = transpiler.newChildTranspiler(this.calling);
-        this.expression.transpileReference(transpiler, method);
+        this.expression.transpileMethodReference(transpiler, method);
         transpiler.flush();
     }
 

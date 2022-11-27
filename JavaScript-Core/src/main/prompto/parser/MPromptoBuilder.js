@@ -855,7 +855,13 @@ export default class MPromptoBuilder extends MParserListener {
     }
 
 
-    exitMethodSelector(ctx) {
+    exitMethodRefSelector(ctx) {
+        const name = this.getNodeValue(ctx.name);
+        this.setNodeValue(ctx, new expression.MethodSelector(null, name));
+    }
+
+
+    exitMethodCallSelector(ctx) {
         const call = this.getNodeValue(ctx.method);
         if (call.callable instanceof expression.UnresolvedIdentifier) {
             const callable = new expression.UnresolvedSelector(null, call.callable.id);
@@ -992,8 +998,7 @@ export default class MPromptoBuilder extends MParserListener {
 
 
     exitMethod_identifier(ctx) {
-        const value = this.getNodeValue(ctx.getChild(0));
-        this.setNodeValue(ctx, value);
+        this.setNodeValue(ctx, new grammar.Identifier(ctx.getText()));
     }
 
 

@@ -10,7 +10,7 @@ export default class JsxLiteral {
         return TextType.instance;
     }
 
-    checkProto(context, proto) {
+    checkMethodReference(context, method) {
         return VoidType.instance;
     }
 

@@ -178,8 +178,8 @@ export default class CategoryDeclaration extends BaseDeclaration {
         let annotations = [];
         if (this.derivedFrom) {
             this.derivedFrom.forEach(name => {
-                const decl = context.getRegisteredDeclaration(name);
-                if (decl instanceof CategoryDeclaration) {
+                const decl = context.getTypedDeclaration(CategoryDeclaration, name);
+                if (decl) {
                     annotations = annotations.concat(decl.getAllAnnotations(context));
                 }
             }, this);

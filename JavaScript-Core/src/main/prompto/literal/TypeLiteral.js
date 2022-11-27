@@ -43,6 +43,10 @@ export default class TypeLiteral extends Literal {
         return false;
     }
 
+    transpileMethodReference(transpiler, method) {
+        this.value.transpile(transpiler);
+    }
+
     declareParent(transpiler) {
         this.value.declare(transpiler);
     }

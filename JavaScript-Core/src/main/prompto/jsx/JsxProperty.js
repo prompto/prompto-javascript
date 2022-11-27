@@ -17,21 +17,11 @@ export default class JsxProperty extends Section {
             return BooleanType.instance; // a value-less property is treated as a boolean flag
     }
 
-    checkProto(context, proto) {
+    checkMethodReference(context, method) {
         if(this.value!=null)
-            return this.value.checkProto(context, proto);
+            return this.value.checkMethodReference(context, method);
         else
             return VoidType.instance; // force failure
-    }
-
-    declareProto(transpiler, proto) {
-        if(this.value!=null)
-            this.value.declareProto(transpiler, proto);
-    }
-
-    transpileProto(transpiler, proto) {
-        if(this.value!=null)
-            this.value.transpileProto(transpiler, proto);
     }
 
     toDialect(writer) {
@@ -51,16 +41,35 @@ export default class JsxProperty extends Section {
             this.value.declare(transpiler);
     }
 
+    declareMethodReference(transpiler, method) {
+        if(this.value!=null)
+            this.value.declareMethodReference(transpiler, method);
+    }
+
     transpile(transpiler) {
-        let name = this.id.name;
-        if(name.indexOf('-')>=0)
-            name = '"' + name + '"';
-        transpiler.append(name);
-        transpiler.append(": ");
+        this.transpileName(transpiler);
         if(this.value!=null)
             this.value.transpile(transpiler);
         else
             transpiler.append("null");
     }
+
+    transpileName(transpiler) {
+        let name = this.id.name;
+        if(name.indexOf('-')>=0)
+            name = '"' + name + '"';
+        transpiler.append(name);
+        transpiler.append(": ");
+    }
+
+    transpileMethodReference(transpiler, method) {
+        this.transpileName(transpiler);
+        if(this.value!=null)
+            this.value.transpileMethodReference(transpiler, method);
+        else
+            transpiler.append("null");
+    }
+
+
 }
 

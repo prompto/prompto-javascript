@@ -5,7 +5,7 @@ import { AttributeParameter } from '../param/index.js'
 import { CategoryType, DocumentType, VoidType } from '../type/index.js'
 import { NotMutableError } from '../error/index.js'
 import { Dialect } from '../parser/index.js'
-import { ConcreteWidgetDeclaration, NativeWidgetDeclaration, NativeCategoryDeclaration } from '../declaration/index.js'
+import { CategoryDeclaration, ConcreteWidgetDeclaration, NativeWidgetDeclaration, NativeCategoryDeclaration } from '../declaration/index.js'
 import { getTypeName } from '../utils/index.js'
 
 export default class ConstructorExpression extends Expression {
@@ -73,7 +73,7 @@ export default class ConstructorExpression extends Expression {
 
     check(context) {
         // need to update type, since it was arbitrarily set to CategoryType
-        const decl = context.getRegisteredDeclaration(this.type.id);
+        const decl = context.getTypedDeclaration(CategoryDeclaration, this.type.id);
         if (decl == null) {
             context.problemListener.reportUnknownCategory(this.type.id, this.type.name);
             return VoidType.instance;

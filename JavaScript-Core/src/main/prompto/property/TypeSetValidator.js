@@ -21,7 +21,7 @@ export default class TypeSetValidator extends PropertyValidator {
     validate(context, jsxProp) {
         const actual = jsxProp.check(context);
         if (Array.from(this.types).some(type => {
-                const local = type instanceof MethodType ? jsxProp.checkProto(context, type) : actual;
+                const local = type instanceof MethodType ? jsxProp.checkMethodReference(context, type) : actual;
                 return type.isAssignableFrom(context, local)
             }, this))
             return true;

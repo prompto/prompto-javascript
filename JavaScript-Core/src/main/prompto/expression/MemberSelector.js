@@ -87,7 +87,7 @@ export default class MemberSelector extends SelectorExpression {
         return false;
     }
 
-    transpileReference(transpiler, method) {
+    transpileMethodReference(transpiler, method) {
         const parent = this.resolveParent(transpiler.context);
         parent.transpileParent(transpiler);
         transpiler.append(".");

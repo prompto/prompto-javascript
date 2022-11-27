@@ -77,7 +77,7 @@ export default class CategoryParameter extends Parameter {
             if(expression instanceof ArrowExpression)
                 this.resolved.transpileArrowExpression(transpiler, expression);
             else
-                expression.transpileReference(transpiler, this.resolved);
+                expression.transpileMethodReference(transpiler, this.resolved);
             return true;
         }
         return false;

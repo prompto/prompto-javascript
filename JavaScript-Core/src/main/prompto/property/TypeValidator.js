@@ -18,7 +18,7 @@ export default class TypeValidator extends PropertyValidator {
     }
 
     validate(context, jsxProp) {
-        const actual = this.type instanceof MethodType ? jsxProp.checkProto(context, this.type) : jsxProp.check(context);
+        const actual = this.type instanceof MethodType ? jsxProp.checkMethodReference(context, this.type) : jsxProp.check(context);
         if(this.type.isAssignableFrom(context, actual.anyfy()))
             return true;
         else {
@@ -30,14 +30,14 @@ export default class TypeValidator extends PropertyValidator {
 
     declare(transpiler, jsxProp) {
         if(this.type instanceof MethodType)
-            jsxProp.declareProto(transpiler, this.type);
+            jsxProp.declareMethodReference(transpiler, this.type);
         else
             jsxProp.declare(transpiler);
     }
 
     transpile(transpiler, jsxProp) {
         if(this.type instanceof MethodType)
-            jsxProp.transpileProto(transpiler, this.type);
+            jsxProp.transpileMethodReference(transpiler, this.type);
         else
             jsxProp.transpile(transpiler);
     }

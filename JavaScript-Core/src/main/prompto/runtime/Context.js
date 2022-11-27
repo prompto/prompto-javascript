@@ -289,11 +289,17 @@ class Context {
     }
 
     getTypedDeclaration(klass, id) {
-        const decl = this.getRegisteredDeclaration(id);
-        if(decl==null || !klass.prototype.isPrototypeOf(decl))
+        // resolve upwards, since local names override global ones
+        const actual = this.declarations[id.name] || null;
+        if(actual!==null && klass.prototype.isPrototypeOf(actual)) {
+            return actual;
+        } else if(this.parent!==null) {
+            return this.parent.getTypedDeclaration(klass, id);
+        } else if(this.globals!==this) {
+            return this.globals.getTypedDeclaration(klass, id);
+        } else {
             return null;
-        else
-            return decl;
+        }
     }
 
     getLocalDeclaration(name) {
@@ -585,6 +591,16 @@ class InstanceContext extends Context {
 
     getClosestInstanceContext() {
         return this;
+    }
+
+    getRegisteredDeclaration(id) {
+        const decl = this.getDeclaration();
+        if(decl) {
+            const methodsMap = decl.getMemberMethods(this, id);
+            if(methodsMap && !methodsMap.isEmpty())
+                return methodsMap;
+        }
+        return super.getRegisteredDeclaration(id);
     }
 
     getRegistered(id) {

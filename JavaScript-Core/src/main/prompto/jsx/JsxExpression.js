@@ -1,6 +1,6 @@
 import IJsxExpression from './IJsxExpression.js'
 import { ArrowExpression } from '../expression/index.js'
-import { Literal } from '../literal/index.js'
+import { Literal, TypeLiteral } from '../literal/index.js'
 import { VoidType } from '../type/index.js'
 
 export default class JsxExpression extends IJsxExpression {
@@ -14,27 +14,29 @@ export default class JsxExpression extends IJsxExpression {
         return this.expression ? this.expression.check(context) : VoidType.instance;
     }
 
-    checkProto(context, proto) {
+    checkMethodReference(context, method) {
         if(this.expression instanceof ArrowExpression)
-            return proto.checkArrowExpression(context, this.expression);
+            return method.checkArrowExpression(context, this.expression);
+        else if(this.expression instanceof TypeLiteral)
+            return this.expression.value.resolve(context, null);
         else if(this.expression)
             return this.expression.check(context);
         else
             return VoidType.instance;
     }
 
-    declareProto(transpiler, proto) {
+    declareMethodReference(transpiler, proto) {
         if(this.expression instanceof ArrowExpression)
             return proto.declareArrowExpression(transpiler, this.expression);
         else if(this.expression)
             return this.expression.declare(transpiler);
     }
 
-    transpileProto(transpiler, proto) {
+    transpileMethodReference(transpiler, method) {
         if(this.expression instanceof ArrowExpression)
-            return proto.transpileArrowExpression(transpiler, this.expression);
+            return method.transpileArrowExpression(transpiler, this.expression);
         else if(this.expression)
-            return this.expression.transpile(transpiler);
+            return this.expression.transpileMethodReference(transpiler, method);
     }
 
     isLiteral() {

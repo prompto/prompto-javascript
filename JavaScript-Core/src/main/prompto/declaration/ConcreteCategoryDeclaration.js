@@ -225,8 +225,8 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     collectInheritedMemberMethod(ancestor, context, result, allowAbstract) {
-        const decl = context.getRegisteredDeclaration(ancestor);
-        if(decl === null || !(decl instanceof ConcreteCategoryDeclaration))
+        const decl = context.getTypedDeclaration(CategoryDeclaration, ancestor);
+        if(!decl)
             return;
         decl.registerMethods(context);
         decl.collectMemberMethods(context, result, allowAbstract);

@@ -1,6 +1,7 @@
 import MemberSelector from './MemberSelector.js'
 import { CategorySymbol } from './index.js'
 import { Identifier } from '../grammar/index.js'
+import { Dialect } from '../parser/index.js'
 import { CategoryType, TypeType } from '../type/index.js'
 import { NullValue, TypeValue, ConcreteInstance, NativeInstance } from '../value/index.js'
 import { SingletonCategoryDeclaration } from '../declaration/index.js'
@@ -13,7 +14,11 @@ export default class MethodSelector extends MemberSelector {
         super(parent, id);
     }
 
-    toDialect(writer) {
+    toDialect(writer, asRef) {
+        if(typeof asRef == "undefined")
+            asRef = true;
+        if(asRef && writer.dialect === Dialect.E)
+            writer.append("Method: ");
         if(this.parent==null)
             writer.append(this.name);
         else

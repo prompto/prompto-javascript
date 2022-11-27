@@ -51,6 +51,10 @@ export default class Literal extends Section {
         this.transpile(transpiler);
     }
 
+    transpileMethodReference(transpiler, method) {
+        this.transpile(transpiler);
+    }
+
     getValue() {
         return this.value;
     }

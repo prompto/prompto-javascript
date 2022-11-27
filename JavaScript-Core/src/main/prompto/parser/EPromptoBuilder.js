@@ -695,6 +695,10 @@ export default class EPromptoBuilder extends EParserListener {
         this.setNodeValue(ctx, new expression.UnresolvedSelector(null, name));
     }
 
+    exitMethodSelector(ctx) {
+        const name = this.getNodeValue(ctx.name);
+        this.setNodeValue(ctx, new expression.UnresolvedSelector(null, name));
+    }
 
     exitItemSelector(ctx) {
         const exp = this.getNodeValue(ctx.exp);
@@ -990,8 +994,7 @@ export default class EPromptoBuilder extends EParserListener {
 
 
     exitMethod_identifier(ctx) {
-        const value = this.getNodeValue(ctx.getChild(0));
-        this.setNodeValue(ctx, value);
+        this.setNodeValue(ctx, new grammar.Identifier(ctx.getText()));
     }
 
     exitConstructorFrom(ctx) {

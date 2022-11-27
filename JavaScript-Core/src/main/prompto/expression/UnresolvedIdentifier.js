@@ -224,10 +224,10 @@ export default class UnresolvedIdentifier extends Expression {
         this.resolved.transpile(transpiler);
     }
 
-    transpileReference(transpiler, method) {
+    transpileMethodReference(transpiler, method) {
         if(this.resolved==null) {
             this.resolveAndCheck(transpiler.context, false);
         }
-        return this.resolved.transpileReference(transpiler, method);
+        return this.resolved.transpileMethodReference(transpiler, method);
     }
 }

@@ -24,7 +24,7 @@ export default class MethodCall extends SimpleStatement {
     toDialect(writer) {
         if (this.requiresInvoke(writer))
             writer.append("invoke: ");
-        this.selector.toDialect(writer);
+        this.selector.toDialect(writer, false);
         if (this.args != null)
             this.args.toDialect(writer);
         else if (writer.dialect !== Dialect.E)
@@ -211,7 +211,7 @@ export default class MethodCall extends SimpleStatement {
         this.doTranspile(transpiler, false);
     }
 
-    transpileReference(transpiler, method) {
+    transpileMethodReference(transpiler, method) {
         this.doTranspile(transpiler, true);
     }
 
