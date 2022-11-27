@@ -74,6 +74,22 @@ test('Transpiled LiteralAttribute', () => {
 	checkTranspiledOutput('jsx/literalAttribute.poc');
 });
 
+test('Interpreted MethodCall', () => {
+	checkInterpretedOutput('jsx/methodCall.poc');
+});
+
+test('Transpiled MethodCall', () => {
+	checkTranspiledOutput('jsx/methodCall.poc');
+});
+
+test('Interpreted MethodRef', () => {
+	checkInterpretedOutput('jsx/methodRef.poc');
+});
+
+test('Transpiled MethodRef', () => {
+	checkTranspiledOutput('jsx/methodRef.poc');
+});
+
 test('Interpreted NonAsciiTextElement', () => {
 	checkInterpretedOutput('jsx/nonAsciiTextElement.poc');
 });
@@ -104,5 +120,29 @@ test('Interpreted TextElement', () => {
 
 test('Transpiled TextElement', () => {
 	checkTranspiledOutput('jsx/textElement.poc');
+});
+
+test('Interpreted ThisLowerMethodRef', () => {
+	checkInterpretedOutput('jsx/thisLowerMethodRef.poc');
+});
+
+test('Transpiled ThisLowerMethodRef', () => {
+	checkTranspiledOutput('jsx/thisLowerMethodRef.poc');
+});
+
+test('Interpreted ThisMethodCall', () => {
+	checkInterpretedOutput('jsx/thisMethodCall.poc');
+});
+
+test('Transpiled ThisMethodCall', () => {
+	checkTranspiledOutput('jsx/thisMethodCall.poc');
+});
+
+test('Interpreted ThisUpperMethodRef', () => {
+	checkInterpretedOutput('jsx/thisUpperMethodRef.poc');
+});
+
+test('Transpiled ThisUpperMethodRef', () => {
+	checkTranspiledOutput('jsx/thisUpperMethodRef.poc');
 });
 

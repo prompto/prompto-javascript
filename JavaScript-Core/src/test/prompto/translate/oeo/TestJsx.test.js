@@ -36,6 +36,14 @@ test('LiteralAttribute', () => {
 	compareResourceOEO('jsx/literalAttribute.poc');
 });
 
+test('MethodCall', () => {
+	compareResourceOEO('jsx/methodCall.poc');
+});
+
+test('MethodRef', () => {
+	compareResourceOEO('jsx/methodRef.poc');
+});
+
 test('NonAsciiTextElement', () => {
 	compareResourceOEO('jsx/nonAsciiTextElement.poc');
 });
@@ -50,5 +58,17 @@ test('SelfClosingEmptyAttribute', () => {
 
 test('TextElement', () => {
 	compareResourceOEO('jsx/textElement.poc');
+});
+
+test('ThisLowerMethodRef', () => {
+	compareResourceOEO('jsx/thisLowerMethodRef.poc');
+});
+
+test('ThisMethodCall', () => {
+	compareResourceOEO('jsx/thisMethodCall.poc');
+});
+
+test('ThisUpperMethodRef', () => {
+	compareResourceOEO('jsx/thisUpperMethodRef.poc');
 });
 
