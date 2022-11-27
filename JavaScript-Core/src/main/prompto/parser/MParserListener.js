@@ -1040,12 +1040,21 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by MParser#MethodSelector.
-	enterMethodSelector(ctx) {
+	// Enter a parse tree produced by MParser#MethodRefSelector.
+	enterMethodRefSelector(ctx) {
 	}
 
-	// Exit a parse tree produced by MParser#MethodSelector.
-	exitMethodSelector(ctx) {
+	// Exit a parse tree produced by MParser#MethodRefSelector.
+	exitMethodRefSelector(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MethodCallSelector.
+	enterMethodCallSelector(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MethodCallSelector.
+	exitMethodCallSelector(ctx) {
 	}
 
 
@@ -1877,15 +1886,6 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by MParser#method_identifier.
-	enterMethod_identifier(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#method_identifier.
-	exitMethod_identifier(ctx) {
-	}
-
-
 	// Enter a parse tree produced by MParser#identifier_or_keyword.
 	enterIdentifier_or_keyword(ctx) {
 	}
@@ -1946,6 +1946,15 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by MParser#member_identifier.
 	exitMember_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#method_identifier.
+	enterMethod_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#method_identifier.
+	exitMethod_identifier(ctx) {
 	}
 
 

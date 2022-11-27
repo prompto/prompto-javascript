@@ -1175,6 +1175,15 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by EParser#MethodSelector.
+	enterMethodSelector(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#MethodSelector.
+	exitMethodSelector(ctx) {
+	}
+
+
 	// Enter a parse tree produced by EParser#SliceSelector.
 	enterSliceSelector(ctx) {
 	}
@@ -2030,15 +2039,6 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by EParser#method_identifier.
-	enterMethod_identifier(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#method_identifier.
-	exitMethod_identifier(ctx) {
-	}
-
-
 	// Enter a parse tree produced by EParser#identifier_or_keyword.
 	enterIdentifier_or_keyword(ctx) {
 	}
@@ -2099,6 +2099,15 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by EParser#member_identifier.
 	exitMember_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#method_identifier.
+	enterMethod_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#method_identifier.
+	exitMethod_identifier(ctx) {
 	}
 
 
